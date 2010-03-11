@@ -10,28 +10,33 @@
 	jsio.path.common = 'lib/fin/js'
 	jsio.path.ui = 'js/'
 	jsio.path.tasks = 'js/'
+	jsio.path.views = 'js/'
 
-	jsio('import browser.fin as fin')
+	jsio('import browser.fin')
+	window.fin = browser.fin// make fin globally accesible
+
+	jsio('import views.ListView')
+	fin.registerView('List', views.ListView)
 
 	jsio('import tasks.LoginManager')
 	jsio('import tasks.panels.LabelsPanel')
 	jsio('import tasks.panels.ListPanel')
 	jsio('import tasks.panels.ItemPanel')
+	
+	window.gBody = document.body
+	window.gIsConnected = false
+	window.gUser = 'marcus@meebo-inc.com'
 
-	var gBody = document.body
-	var gIsConnected = false
-	var gUser = 'marcus@meebo-inc.com'
-
-	var gLoginManager = new tasks.LoginManager()
+	window.gLoginManager = new tasks.LoginManager()
 	// gLoginManager.appendTo(gBody)
 	// gLoginManager.subscribe('Submit', function(email, password){
 	// 	gUser = email
 	// 	testLoggedIn()
 	// })
 	
-	var gLabelsPanel = new tasks.panels.LabelsPanel()
-	var gListPanel = new tasks.panels.ListPanel()
-	var gItemPanel = new tasks.panels.ItemPanel()
+	window.gLabelsPanel = new tasks.panels.LabelsPanel()
+	window.gListPanel = new tasks.panels.ListPanel()
+	window.gItemPanel = new tasks.panels.ItemPanel()
 
 	fin.connect(function(){
 		gIsConnected = true

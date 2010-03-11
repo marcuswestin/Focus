@@ -14,7 +14,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this.loadList = function(listId) {
-		if (this._itemSet) { this._itemSet.release() }
+		// TODO We need to release the item set here
 		
 		this._itemSet = fin.getItemSet(
 			listId == 'my_tasks' 	? { owner: gUser } :

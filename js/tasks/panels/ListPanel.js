@@ -35,6 +35,6 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this._onClickItem = function(itemId) {
-		
+		gItemPanel.setItem(itemId)
 	}
 })

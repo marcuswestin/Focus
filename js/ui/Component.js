@@ -80,8 +80,7 @@ exports = Class(common.Publisher, function(supr) {
 		// Is removeEvent going to work properly when we wrap the handler in another function?
 		function normalizeEvent(e) {
 			e = e || event
-			if (!e.target) { e.target = e.srcElement }
-			var eventObj = { key: e.keyCode, metaKey: e.metaKey }
+			var eventObj = { key: e.keyCode, metaKey: e.metaKey, target: e.target || e.srcElement }
 			eventObj.cancel = function() {
 				if (e.preventDefault) { e.preventDefault() }
 				else { e.returnValue = false }
@@ -113,6 +112,26 @@ exports = Class(common.Publisher, function(supr) {
 			return true
 		} else if (element.detachEvent) {
 			return element.detachEvent("on"+eventName, handler)
+		}
+	}
+	
+	this._delegateOn = function(eventName, element, handler) {
+		if (arguments.length == 2) {
+			handler = element
+			element = this._element
+		}
+		this._on(eventName, element, bind(this, '_onDelegatedEvent', handler))
+	}
+	
+	this._onDelegatedEvent = function(handler, e) {
+		var target = e.target
+		while(target) {
+			if (!target.delegateId) {
+				target = target.parentNode
+				continue
+			}
+			handler(target.delegateId)
+			return
 		}
 	}
 	

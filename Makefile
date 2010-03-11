@@ -6,9 +6,11 @@
 
 deps: lib/fin
 
+run-dbs:
+	make -C lib/fin run-couchdbx &
+	redis-server
+
 run:
-	make -C lib/fin run-couchdbx
-	sleep 2
 	cd lib/fin/js/server; node run_server.js
 
 clean:

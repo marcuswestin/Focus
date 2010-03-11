@@ -39,8 +39,8 @@ exports = Class(browser.UIComponent, function(supr) {
 	
 	this.sizeLabel = function() {
 		var textSize = dimensions.getSize(this._labelText);
-		dom.setStyle(this._labelEl, { width: 8, height: textSize.width + 18 }) // rotated by 90 deg
-		dom.setStyle(this._labelText, { right: (-textSize.width / 2) + 10, top: textSize.width / 2 })
+		this.layout(this._labelEl, { width: 8, height: textSize.width + 18 }) // rotated by 90 deg
+		this.layout(this._labelText, { right: (-textSize.width / 2) + 10, top: textSize.width / 2 })
 	}
 
 	this.layout = function(layout) {
@@ -49,10 +49,10 @@ exports = Class(browser.UIComponent, function(supr) {
 		layout.width = typeof layout.width == 'undefined' ? this._layout.width : layout.width;
 		layout.height = typeof layout.height == 'undefined' ? this._layout.height : layout.height;
 		this._layout = layout;
-		dom.setStyle(this._element, { left: layout.left, top: layout.top, 
-			width: layout.width, height: layout.height });
-		dom.setStyle(this._content, { width: layout.width - this._contentMargin * 2, 
-			height: layout.height - this._contentMargin * 2, margin: this._contentMargin });
+		supr(this, 'layout', [{ left: layout.left, top: layout.top, 
+			width: layout.width, height: layout.height }]);
+		supr(this, 'layout', [{ width: layout.width - this._contentMargin * 2, 
+			height: layout.height - this._contentMargin * 2, margin: this._contentMargin }]);
 		if (this.hasFocus()) {
 			browser.itemFocus.layout();
 		}

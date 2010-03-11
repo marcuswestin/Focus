@@ -27,9 +27,9 @@ exports = Singleton(function(){
 		this._onMutationCallback = onMutationCallback;
 		this._onHideCallback = onHideCallback;
 		
-		this._input.style.fontSize = browser.dom.getStyle(view.getElement(), 'font-size');
-		this._input.style.fontFamily = browser.dom.getStyle(view.getElement(), 'font-family');
-		this._input.style.fontWeight = browser.dom.getStyle(view.getElement(), 'font-weight');
+		this._input.style.fontSize = this._getStyle(view, 'font-size');
+		this._input.style.fontFamily = this._getStyle(view, 'font-family');
+		this._input.style.fontWeight = this._getStyle(view, 'font-weight');
 		
 		view.subscribe('Resize', bind(this, '_layout'))
 		this._layout();
@@ -40,6 +40,15 @@ exports = Singleton(function(){
 		}
 		
 		this._keystrokeHandler = browser.keystrokeManager.requestFocus(bind(this, 'onKeyPress'), true);
+	}
+	
+	this._getStyle = function(view) {
+		var el = view.getElement()
+		if (el.currentStyle) {
+			return el.currentStyle[styleProp];
+		} else if (window.getComputedStyle) {
+			return document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+		}
 	}
 	
 	this._layout = function() {

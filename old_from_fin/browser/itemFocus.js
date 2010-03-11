@@ -55,12 +55,12 @@ exports = Singleton(browser.UIComponent, function() {
 		dim.left -= focusPadding;
 		dim.top -= focusPadding;
 
-		dom.setStyle(this._top, { top: dim.top - borderWidth, left: dim.left - borderWidth, 
+		this.layout(this._top, { top: dim.top - borderWidth, left: dim.left - borderWidth, 
 			width: dim.width + borderWidth });
-		dom.setStyle(this._bottom, { top: dim.top + dim.height, left: dim.left - borderWidth, 
+		this.layout(this._bottom, { top: dim.top + dim.height, left: dim.left - borderWidth, 
 			width: dim.width + borderWidth });
-		dom.setStyle(this._left, { top: dim.top, left: dim.left - borderWidth, height: dim.height });
-		dom.setStyle(this._right, { top: dim.top - borderWidth, left: dim.left + dim.width, 
+		this.layout(this._left, { top: dim.top, left: dim.left - borderWidth, height: dim.height });
+		this.layout(this._right, { top: dim.top - borderWidth, left: dim.left + dim.width, 
 			height: dim.height });
 	}
 })

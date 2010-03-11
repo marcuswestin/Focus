@@ -119,7 +119,7 @@ exports = Singleton(browser.UIComponent, function(supr) {
 	this.setOffset = function(offset) { this._offset = offset; }
 
 	this.layout = function(size) {
-		dom.setStyle(this._element, size);
+		supr(this, 'layout', size)
 		for (var i = 0, panel; panel = this._panelsByIndex[i]; i++) {
 			panel.layout({ height: this._element.offsetHeight - 50 });
 		}

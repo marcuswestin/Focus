@@ -48,11 +48,11 @@ exports = Singleton(browser.UIComponent, function(supr) {
 	}
 	
 	this.onWindowResize = function(size) {
-		dom.setStyle(this._underlay, size);
+		this.layout(this._underlay, size);
 		var contentSize = dimensions.getSize(this._content.firstChild);
-		dom.setStyle(this._content, { left: (size.width / 2) - (contentSize.width / 2),
+		this.layout(this._content, { left: (size.width / 2) - (contentSize.width / 2),
 			top: (size.height / 2) - (contentSize.height / 2) - barSize });
-		dom.setStyle(this._closeButton, { left: (size.width / 2) + (contentSize.width / 2) - 7,
+		this.layout(this._closeButton, { left: (size.width / 2) + (contentSize.width / 2) - 7,
 			top: (size.height / 2) - (contentSize.height / 2) - barSize + 7 });
 	}
 })

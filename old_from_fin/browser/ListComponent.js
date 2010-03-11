@@ -57,7 +57,7 @@ exports = Class(function(supr){
 	this._selectItem = function(item, e) { 
 		if (this._selectedItem) { this._selectedItem.removeClassName('selected'); }
 		if (!item) { return; }
-		if (e) { events.cancel(e); }
+		if (e) { e.cancel(); }
 		this._selectedItem = item;
 		item.addClassName('selected');
 

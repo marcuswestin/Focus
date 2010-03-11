@@ -2,14 +2,11 @@ jsio('from common.javascript import Singleton, bind');
 
 jsio('import browser.dimensions as dimensions');
 jsio('import browser.dom as dom');
-jsio('import browser.css as css');
 jsio('import browser.events as events');
 
 jsio('import browser.resizeManager');
 
 jsio('import browser.UIComponent');
-
-css.loadStyles(jsio.__path);
 
 exports = Singleton(browser.UIComponent, function(supr) {
 	

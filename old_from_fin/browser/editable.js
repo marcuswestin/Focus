@@ -76,7 +76,7 @@ exports = Singleton(function(){
 		
 		if (e.keyCode == events.keyCodes['enter'] && !browser.keystrokeManager.shiftIsDown()) {
 			this._input.blur();
-			events.cancel(e);
+			e.cancel();
 			return;
 		} else if (e.keyCode == events.keyCodes['backspace']) {
 			if (selectionLength) {

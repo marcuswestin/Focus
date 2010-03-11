@@ -24,5 +24,21 @@
 		gLoginManager.onConnected()
 	})
 </script>
+
+<body>
+<script type="text/javascript">
+  return;
+
+	Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
+	(function(q){
+		var args = arguments;
+		if (!document.body){return setTimeout(function(){args.callee.apply(this,args)},100);}
+		var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');
+		m.id='meebo';m.style.display='none';m.innerHTML='<iframe id="meebo-iframe"></iframe>';
+		s.src='http'+(q.https?'s':'')+'://'+(q.stage?'stage-':'')+'cim.meebo.com/cim/cim.php?network='+q.network;
+		b.insertBefore(s,b.firstChild);
+	})({network:'everywhere',stage:false});
+	Meebo('domReady')
+</script>
 </body>
 </html>

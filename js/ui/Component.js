@@ -9,7 +9,7 @@ exports = Class(common.Publisher, function(supr) {
 	this.getElement = function() {
 		if (!this._element) { 
 			this._element = document.createElement(this._domType)
-			if (this._className) { this._addClassName(this._className) }
+			if (this._className) { this.addClassName(this._className) }
 			this._createContent()
 		}
 		return this._element
@@ -20,7 +20,7 @@ exports = Class(common.Publisher, function(supr) {
 	this.show = function() { this.getElement().style.display = 'block'; }
 	this.hide = function() { this.getElement().style.display = 'none'; }
 	
-	this.appendTo = function(element) { element.appendChild(this.getElement()); }
+	this.appendTo = function(element) { element.appendChild(this.getElement()); return this }
 	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild); }
 	this.remove = function() { 
 		if (!this._element || !this._element.parentNode) { return } 
@@ -44,14 +44,14 @@ exports = Class(common.Publisher, function(supr) {
  * Class names *
  ***************/
 
-	this._addClassName = function(className) { 
+	this.addClassName = function(className) { 
 		var element = this._element
 		if (!(' ' + element.className + ' ').match(' ' + className + ' ')) {
 			element.className += ' ' + className + ' ';
 		}
 	}
 	
-	this._removeClassName = function(className) { 
+	this.removeClassName = function(className) { 
 		var element = this._element
 		className += ' ';
 		var current = element.className;

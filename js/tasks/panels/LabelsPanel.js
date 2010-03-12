@@ -4,8 +4,8 @@ jsio('import tasks.panels.Panel')
 exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._className += ' LabelsPanel'
-	this._width = 180
-	this._left = 0
+	this._width = 150
+	this._left = -8
 	
 	this._createContent = function() {
 		supr(this, '_createContent')

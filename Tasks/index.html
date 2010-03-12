@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title>Tasks</title>
+	<link rel="stylesheet" href="../fan.css" type="text/css">
+	<link rel="stylesheet" href="Tasks.css" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../lib/fin/lib/js.io/packages/jsio.js"></script>
+<script>
+	jsio.path.browser = '../lib/fin/js'
+	jsio.path.common = '../lib/fin/js'
+	jsio.path.ui = '../js/'
+	jsio.path.tasks = '../js/'
+	jsio.path.views = '../js/'
+	
+	Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
+	Meebo('domReady')
+	
+	jsio('import browser.fin')
+	window.fin = browser.fin // make fin globally accesible
+
+	jsio('import views.ListView')
+	fin.registerView('List', views.ListView)
+
+	jsio('import tasks.LoginManager')
+	jsio('import tasks.panels.LabelsPanel')
+	jsio('import tasks.panels.ListPanel')
+	jsio('import tasks.panels.ItemPanel')
+	jsio('import ui.overlay')
+	
+	
+	fin.connect(function(){
+		window.gBody = document.body
+		window.gUser = null
+
+		window.gLoginManager = new tasks.LoginManager()
+		
+		window.gLabelsPanel = new tasks.panels.LabelsPanel()
+		window.gListPanel = new tasks.panels.ListPanel()
+		window.gItemPanel = new tasks.panels.ItemPanel()
+		
+		ui.overlay.show(gLoginManager.getElement())
+		gLoginManager.subscribe('Login', function(email, password){
+			fin.exists(email, function(userExists) {
+				if (!userExists) { return }
+				gUser = fin.getItem(email)
+				openApp()
+			})
+		})
+		gLoginManager.subscribe('Create', function(email, password){
+			fin.exists(email, function(alreadyExists) {
+				if (alreadyExists) { return }
+				var userItem = fin.getItem(email, function() {
+					gUser = userItem // user item has now been loaded
+					userItem.setProperty('labels', ['my_tasks', 'something', 'milestones'])
+					openApp()
+				})
+			})
+		})
+	})
+	
+	function openApp() {
+		ui.overlay.remove()
+		gLabelsPanel.appendTo(gBody)
+		gListPanel.appendTo(gBody)
+		gItemPanel.appendTo(gBody)
+		
+		initMeebo({network:'everywhere',stage:false})
+	}
+	
+	function initMeebo(q) {
+		return
+		var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');
+		m.id='meebo';m.style.display='none';m.innerHTML='<iframe id="meebo-iframe"></iframe>';
+		s.src='http'+(q.https?'s':'')+'://'+(q.stage?'stage-':'')+'cim.meebo.com/cim/cim.php?network='+q.network;
+		b.insertBefore(s,b.firstChild);
+	}
+</script>
+
+<body>
+</body>
+</html>

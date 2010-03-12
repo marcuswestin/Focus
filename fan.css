@@ -1,0 +1,53 @@
+body, html {
+	font-family: arial,sans-serif;
+	overflow: hidden;
+	color: #222222;
+}
+
+/*********
+ * Links *
+ *********/
+.Link {
+	text-decoration: underline;
+	color: #559;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+/*********
+ * Inputs *
+ *********/
+.Input {
+	padding: 2px 3px;
+}
+.Input.defaultValue {
+	font-style: italic;
+	color: #333;
+}
+
+/***********
+ * Overlay *
+ ***********/
+.Overlay {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+}
+.Overlay .underlay {
+	background-color: #333;
+	opacity: .89;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+.Overlay .content {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border: 8px solid #ddd;
+	background-color: #ddd;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}

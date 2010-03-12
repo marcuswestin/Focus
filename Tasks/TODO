@@ -1,0 +1,30 @@
+=== P1 =====
+
+Give new users useful labels
+	My tasks - sorted by priority
+	My projects - sorted by due date
+	Users - sorted alphabetically by name
+	Projects - sorted by due date
+	Floaters - sorted by priority
+
+Add button for creating a new task
+Add button for creating a new project
+
+Create view for tasks
+	Title
+	Priority
+	Description
+	Repro
+	Discussion
+
+Create view for projects
+	Name
+	Date
+	Participants - button to join/leave project
+	Number of bugs
+	Burn down chart
+
+=== P3 ====
+
+Make buttons look better - http://sexybuttons.googlecode.com/svn/trunk/index.html#
+

@@ -1,0 +1,56 @@
+/*****************
+ * Login Manager *
+ *****************/
+
+.LoginManager {
+	width: 250px;
+	height: 90px;
+}
+.LoginManager .inputs {
+	display: block;
+	width: 200px;
+	margin: 20px auto;
+}
+.LoginManager .inputs .Input {
+	width: 100%;
+	margin-top: 2px;
+}
+.LoginManager .Button {
+	position: absolute;
+	bottom: 3px;
+	right: 5px;
+}
+.LoginManager .Link {
+	position: absolute;
+	bottom: 8px;
+	left: 5px;
+}
+
+/**********
+ * Panels *
+ **********/
+
+.Panel {
+	position: absolute;
+	border: 1px solid #888;
+	background-color: #aaa;
+	top: 50px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.Panel .content {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	border: 1px solid #888;
+	background: #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 7px;
+	padding: 10px;
+}
+
+.LabelsPanel .item {
+	cursor: pointer;
+	text-decoration: underline;
+}

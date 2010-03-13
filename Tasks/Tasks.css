@@ -50,7 +50,17 @@
 	padding: 10px;
 }
 
+/* Labels Panel */
 .LabelsPanel .item {
 	cursor: pointer;
+}
+.LabelsPanel .item.selected {
 	text-decoration: underline;
+}
+
+/* List Panel */
+.ListPanel .Button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }

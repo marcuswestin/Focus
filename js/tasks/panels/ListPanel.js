@@ -1,40 +1,41 @@
 jsio('from common.javascript import Class')
 jsio('import tasks.panels.Panel')
 jsio('import ui.ClickableList')
+jsio('import ui.Button')
 
 exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ListPanel'
-	this._width = 200
-	this._left = 200
+	this._width = 260
+	this._left = 150
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
-		this._content.innerHTML = 'List'
+		this._createButton = new ui.Button()
+		this.hide()
 	}
 	
-	this.loadList = function(listId) {
-		// TODO We need to release the item set here
+	this.loadList = function(itemType, listView) {
+		this._itemType = itemType
+		this._createButton.setText('Create new ' + itemType)
+		this._createButton.subscribe('Click', bind(this, '_createItem'))
+		this._createButton.appendTo(this._element)
 		
-		this._itemSet = fin.getItemSet(
-			listId == 'my_tasks' 	? { owner: gUser } :
-			listId == 'milestones' 	? { type: 'milestone'} :
-			listId == 'users' 		? { type: 'user' }
-			: null)
+		this._content.innerHTML = ''
+		listView.appendTo(this._content)
+		listView.subscribe('Click', bind(this, '_onItemClick'))
 		
-		this._itemSet.addDependant(bind(this, '_onListChange'))
+		// TODO We need to release the odld item set
+		this.show()
 	}
 	
-	this._onListChange = function(mutation) {
-		this._itemSet.getItems(bind(this, function(items) {
-			var list = new ui.ClickableList()
-			list.subscribe('Click', bind(this, '_onClickItem'))
-			this._content.appendChild(list.getElement())
-			list.setItems(items)
+	this._createItem = function() {
+		fin.createItem({ type: this._itemType, user: gUser.getId() }, bind(this, function(item) {
+			console.log("CREATED", arguments)
 		}))
 	}
 	
-	this._onClickItem = function(itemId) {
+	this._onItemClick = function(itemId) {
 		gItemPanel.setItem(itemId)
 	}
 })

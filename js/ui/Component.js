@@ -44,15 +44,21 @@ exports = Class(common.Publisher, function(supr) {
  * Class names *
  ***************/
 
-	this.addClassName = function(className) { 
-		var element = this._element
+	this.addClassName = function(element, className) { 
+		if (arguments.length == 1) {
+			className = element
+			element = this._element
+		}
 		if (!(' ' + element.className + ' ').match(' ' + className + ' ')) {
 			element.className += ' ' + className + ' ';
 		}
 	}
 	
-	this.removeClassName = function(className) { 
-		var element = this._element
+	this.removeClassName = function(element, className) { 
+		if (arguments.length == 1) {
+			className = element
+			element = this._element
+		}
 		className += ' ';
 		var current = element.className;
 		var index = current.indexOf(className);
@@ -61,7 +67,11 @@ exports = Class(common.Publisher, function(supr) {
 		}
 	}
 	
-	this._hasClassName = function(className) {
+	this._hasClassName = function(element, className) {
+		if (arguments.length == 1) {
+			className = element
+			element = this._element
+		}
 		return !!this._element.className.match(' ' + className + ' ');
 	}
 	
@@ -130,7 +140,7 @@ exports = Class(common.Publisher, function(supr) {
 				target = target.parentNode
 				continue
 			}
-			handler(target.delegateId)
+			handler(target.delegateId, target)
 			return
 		}
 	}

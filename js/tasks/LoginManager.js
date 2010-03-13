@@ -33,7 +33,6 @@ exports = Class(ui.Component, function(supr) {
 		// // while developing
 		this._email._element.value = 'marcus@meebo-inc.com'
 		this._password._element.value = '123123'
-		setTimeout(bind(this, '_submit'), 100)
 	}
 	
 	this.focus = function() { this._email.focus() }

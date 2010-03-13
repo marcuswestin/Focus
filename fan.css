@@ -8,8 +8,8 @@ body, html {
  * Links *
  *********/
 .Link {
-	text-decoration: underline;
 	color: #559;
+	text-decoration: underline;
 	font-size: 11px;
 	cursor: pointer;
 }

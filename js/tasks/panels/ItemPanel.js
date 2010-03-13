@@ -36,7 +36,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._loadTemplate = function(itemType, callback) {
 		if (this._templates[itemType]) { 
-			callback(itemType)
+			callback(this._templates[itemType])
 			return
 		}
 		browser.xhr.get('templates/' + itemType + '.html', bind(this, function(template) {

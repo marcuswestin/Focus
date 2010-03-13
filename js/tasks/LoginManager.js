@@ -52,7 +52,7 @@ exports = Class(ui.Component, function(supr) {
 	}
 	
 	this._onKeyDown = function(e) {
-		if (e.key != this.keys['enter']) { return }
+		if (e.keyCode != this.keys['enter']) { return }
 		this._submit()
 	}
 	

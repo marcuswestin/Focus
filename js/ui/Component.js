@@ -80,23 +80,24 @@ exports = Class(common.Publisher, function(supr) {
  **********/
 
 	// this._on('click', function(e){})
-	// this._on('click', element, function(e){})
-	this._on = function(eventName, element, handler) {
+	// this._on(element, 'click', function(e){})
+	this._on = function(element, eventName, handler) {
 		if (arguments.length == 2) { 
-			handler = element
+			handler = eventName
+			eventName = element
 			element = this._element
 		}
 		
 		// Is removeEvent going to work properly when we wrap the handler in another function?
 		function normalizeEvent(e) {
 			e = e || event
-			var eventObj = { key: e.keyCode, metaKey: e.metaKey, target: e.target || e.srcElement }
+			var eventObj = { keyCode: e.keyCode, metaKey: e.metaKey, target: e.target || e.srcElement }
 			eventObj.cancel = function() {
 				if (e.preventDefault) { e.preventDefault() }
 				else { e.returnValue = false }
 			}
 			if (e.type == 'keypress') {
-				eventObj.charCode = (eventObj.charCode == 13 && eventObj.key == 13) 
+				eventObj.charCode = (eventObj.charCode == 13 && eventObj.keyCode == 13) 
 					? 0 // in Webkit, return gives a charCode as well as a keyCode. Should only be a keyCode
 					: e.charCode
 			}
@@ -112,25 +113,26 @@ exports = Class(common.Publisher, function(supr) {
 	}
 
 	// I don't think this code works...
-	this._removeOn = function(eventName, element, handler) {
-		if (arguments.length == 2) {
-			handler = element
-			element = this._element
-		}
-		if (element.removeEventListener) {
-			element.removeEventListener(eventName, handler, false)
-			return true
-		} else if (element.detachEvent) {
-			return element.detachEvent("on"+eventName, handler)
-		}
-	}
+	// this._removeOn = function(element, eventName, handler) {
+	// 	if (arguments.length == 2) {
+	// 		handler = element
+	// 		element = this._element
+	// 	}
+	// 	if (element.removeEventListener) {
+	// 		element.removeEventListener(eventName, handler, false)
+	// 		return true
+	// 	} else if (element.detachEvent) {
+	// 		return element.detachEvent("on"+eventName, handler)
+	// 	}
+	// }
 	
-	this._delegateOn = function(eventName, element, handler) {
+	this._delegateOn = function(element, eventName, handler) {
 		if (arguments.length == 2) {
-			handler = element
+			handler = eventName
+			eventName = element
 			element = this._element
 		}
-		this._on(eventName, element, bind(this, '_onDelegatedEvent', handler))
+		this._on(element, eventName, bind(this, '_onDelegatedEvent', handler))
 	}
 	
 	this._onDelegatedEvent = function(handler, e) {
@@ -145,19 +147,31 @@ exports = Class(common.Publisher, function(supr) {
 		}
 	}
 	
-/*******************
- * Layout and size *
- *******************/
+/********************
+ * Style and Layout *
+ ********************/
 	
+	this.getStyle = function(element, styleProp) {
+		if (arguments.length == 1) {
+			styleProp = element
+			element = this._element
+		}
+		if (element.currentStyle) {
+			return element.currentStyle[styleProp];
+		} else if (window.getComputedStyle) {
+			return document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
+		}
+	}
+
 	// this.layout({ width: 100, height: 100, top: 10, left: 10 })
 	// this.layout(anElement, { width: 10, height: 10 })
-	this.layout = function(el, dim) {
+	this.layout = function(element, dim) {
 		if (!dim) { 
-			dim = el
-			el = this._element
+			dim = element
+			element = this._element
 		}
 		for (var key in dim) {
-			el.style[key] = dim[key] + 'px'
+			element.style[key] = dim[key] + 'px'
 		}
 	}
 	

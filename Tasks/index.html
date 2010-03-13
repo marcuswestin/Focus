@@ -21,11 +21,17 @@
 	window.gBody = document.body
 	window.gUser = null
 	
-	jsio('import views.ItemSetView')
+	jsio('import views.Value')
+	jsio('import views.Input')
 	jsio('import views.ListView')
+	jsio('import views.Editable')
+	jsio('import views.ItemSetView')
 	
-	fin.registerView('ItemSetView', views.ItemSetView)
+	fin.registerView('Value', views.Value)
+	fin.registerView('Input', views.Input)
 	fin.registerView('ListView', views.ListView)
+	fin.registerView('Editable', views.Editable)
+	fin.registerView('ItemSetView', views.ItemSetView)
 	
 	jsio('import tasks.LoginManager')
 	jsio('import tasks.panels.LabelsPanel')

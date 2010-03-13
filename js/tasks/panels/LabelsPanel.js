@@ -27,7 +27,11 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		}, { 
 			label: "Unassigned tasks", 
 			type: 'task', 
-			view: ['ItemSetView', { user: null }]
+			view: ['ItemSetView', { type: 'task', user: undefined }]
+		}, { 
+			label: "All tasks", 
+			type: 'task', 
+			view: ['ItemSetView', { type: 'task' }]
 		}]
 		
 		for (var i=0, labelItem; labelItem = this._labelList[i]; i++) { // allow lookup by label

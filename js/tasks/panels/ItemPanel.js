@@ -29,7 +29,6 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this._onItemType = function(type) {
-		if (!type) { debugger }
 		this._loadTemplate(type, bind(this, function(template) {
 			this._content.innerHTML = ''
 			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))

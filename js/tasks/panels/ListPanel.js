@@ -1,6 +1,5 @@
 jsio('from common.javascript import Class')
 jsio('import tasks.panels.Panel')
-jsio('import ui.ClickableList')
 jsio('import ui.Button')
 
 exports = Class(tasks.panels.Panel, function(supr) {
@@ -11,16 +10,17 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
-		this._createButton = new ui.Button()
+		
+		var taskButton = new ui.Button('Create new task')
+		taskButton.subscribe('Click', bind(fin, 'createItem', { type: 'task' }, function(item) {
+			gItemPanel.setItem(item)
+		}))
+		taskButton.appendTo(this._element)
+		
 		this.hide()
 	}
 	
 	this.loadList = function(itemType, listView) {
-		this._itemType = itemType
-		this._createButton.setText('Create new ' + itemType)
-		this._createButton.subscribe('Click', bind(this, '_createItem'))
-		this._createButton.appendTo(this._element)
-		
 		this._content.innerHTML = ''
 		listView.appendTo(this._content)
 		listView.subscribe('Click', bind(this, '_onItemClick'))
@@ -29,13 +29,8 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this.show()
 	}
 	
-	this._createItem = function() {
-		fin.createItem({ type: this._itemType, user: gUser.getId() }, bind(this, function(item) {
-			console.log("CREATED", arguments)
-		}))
-	}
-	
 	this._onItemClick = function(itemId) {
-		gItemPanel.setItem(itemId)
+		var item = fin.getItem(itemId)
+		gItemPanel.setItem(item)
 	}
 })

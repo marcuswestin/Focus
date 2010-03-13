@@ -36,7 +36,7 @@ exports = Singleton(ui.Component, function(supr) {
 			this.hide()
 		}))
 		
-		this._input.setValue(item.getProperty(property))
+		this._input.setValue(item.getProperty(property) || '')
 		
 		this._view.subscribe('Resize', bind(this, '_onViewResize'))
 		this._onViewResize()

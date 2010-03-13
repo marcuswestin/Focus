@@ -73,6 +73,14 @@
 		gItemPanel.appendTo(gBody)
 		
 		initMeebo({network:'everywhere',stage:false})
+		
+		var items = [{ value: 'task', label: 'Create new Task' }, { value: 'project', label: 'Create new Project'}]
+		Meebo('addButton', { type: 'menu', label: 'Create new ...', items: items, onSelect: function(value) {
+			fin.createItem({ type: value }, function(item) {
+				console.log("HERE")
+				gItemPanel.setItem(item)
+			})
+		}})
 	}
 	
 	function initMeebo(q) {

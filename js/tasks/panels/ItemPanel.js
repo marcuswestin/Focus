@@ -21,13 +21,15 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		supr(this, '_onWindowResize', arguments)
 	}
 	
-	this.setItem = function(itemId) {
+	this.setItem = function(item) {
+		if (this._item) { console.log("TODO: release item")}
 		this.show()
-		this._item = fin.getItem(itemId)
+		this._item = item
 		this._item.addDependant('type', bind(this, '_onItemType'))
 	}
 	
 	this._onItemType = function(type) {
+		if (!type) { debugger }
 		this._loadTemplate(type, bind(this, function(template) {
 			this._content.innerHTML = ''
 			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))

@@ -29,9 +29,8 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._onItemType = function(type) {
 		this._loadTemplate(type, bind(this, function(template) {
-			console.log("HERE", template)
 			this._content.innerHTML = ''
-			this._content.appendChild(fin.applyTemplate(template, this._item))
+			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))
 		}))
 	}
 	
@@ -40,7 +39,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 			callback(itemType)
 			return
 		}
-		browser.xhr.get('./Tasks/templates/' + itemType + '.html', bind(this, function(template) {
+		browser.xhr.get('templates/' + itemType + '.html', bind(this, function(template) {
 			this._templates[itemType] = template
 			callback(template)
 		}))

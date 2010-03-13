@@ -20,7 +20,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this.hide()
 	}
 	
-	this.loadList = function(itemType, listView) {
+	this.loadList = function(listView) {
 		this._content.innerHTML = ''
 		listView.appendTo(this._content)
 		listView.subscribe('Click', bind(this, '_onItemClick'))

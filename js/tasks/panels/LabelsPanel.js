@@ -14,24 +14,19 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		// This can't be defined until gUser exists
 		this._labelList = [{ 
 			label: "My tasks", 
-			type: 'task', 
-			view: ['ItemSetView', { type: 'task', user: gUser }] 
+			view: ['TemplatedItemSetView', { type: 'task', user: gUser }] 
 		}, { 
 			label: "My projects", 
-			type: 'project', 
 			view: ['ListView', { item: gUser, property: 'projects' }]
 		}, { 
 			label: "All projects", 
-			type: 'project',
-			view: ['ItemSetView', { type: 'project' }]
+			view: ['TemplatedItemSetView', { type: 'project' }]
 		}, { 
 			label: "Unassigned tasks", 
-			type: 'task', 
-			view: ['ItemSetView', { type: 'task', user: undefined }]
+			view: ['TemplatedItemSetView', { type: 'task', user: undefined }]
 		}, { 
 			label: "All tasks", 
-			type: 'task', 
-			view: ['ItemSetView', { type: 'task' }]
+			view: ['TemplatedItemSetView', { type: 'task' }]
 		}]
 		
 		for (var i=0, labelItem; labelItem = this._labelList[i]; i++) { // allow lookup by label
@@ -53,7 +48,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		var labelItem = this._labelList[labelId]
 		
 		var view = fin.getView.apply(fin, labelItem.view)
-		gListPanel.loadList(labelItem.type, view)
+		gListPanel.loadList(view)
 	}
 	
 })

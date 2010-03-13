@@ -25,13 +25,13 @@
 	jsio('import views.Input')
 	jsio('import views.ListView')
 	jsio('import views.Editable')
-	jsio('import views.ItemSetView')
+	jsio('import views.TemplatedItemSetView')
 	
 	fin.registerView('Value', views.Value)
 	fin.registerView('Input', views.Input)
 	fin.registerView('ListView', views.ListView)
 	fin.registerView('Editable', views.Editable)
-	fin.registerView('ItemSetView', views.ItemSetView)
+	fin.registerView('TemplatedItemSetView', views.TemplatedItemSetView)
 	
 	jsio('import tasks.LoginManager')
 	jsio('import tasks.panels.LabelsPanel')
@@ -39,6 +39,21 @@
 	jsio('import tasks.panels.ItemPanel')
 	jsio('import ui.overlay')
 	
+	jsio('import browser.xhr')
+	
+	gUtil = {
+		_templates: {},
+		loadTemplate: function(itemType, callback) {
+			if (gUtil._templates[itemType]) { 
+				callback(gUtil._templates[itemType])
+				return
+			}
+			browser.xhr.get('templates/' + itemType + '.html', function(template) {
+				gUtil._templates[itemType] = template
+				callback(template)
+			})
+		}
+	}
 	
 	fin.connect(function(){
 		window.gLoginManager = new tasks.LoginManager()

@@ -24,6 +24,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		if (this._listView) { logger.warn("TODO: release current list view")}
 		
 		this._content.innerHTML = ''
+		this._listView = listView
 		this._listView.appendTo(this._content)
 		this._listView.subscribe('Click', bind(this, '_onCellClick'))
 		

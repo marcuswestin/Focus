@@ -17,7 +17,7 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this.setDependant = function(itemIds, property) {
-		if (this._item) { logger.log("TODO unsubscribe from old item") }
+		if (this._item) { logger.warn("TODO unsubscribe from old item") }
 		this._propertyChain = property.split('.')
 		var itemId = (typeof itemIds == 'string' ? itemIds 
 				: itemIds.getId ? itemIds.getId()

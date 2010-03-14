@@ -21,11 +21,12 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this.loadList = function(listView) {
-		this._content.innerHTML = ''
-		listView.appendTo(this._content)
-		listView.subscribe('Click', bind(this, '_onCellClick'))
+		if (this._listView) { logger.warn("TODO: release current list view")}
 		
-		// TODO We need to release the odld item set
+		this._content.innerHTML = ''
+		this._listView.appendTo(this._content)
+		this._listView.subscribe('Click', bind(this, '_onCellClick'))
+		
 		this.show()
 	}
 	

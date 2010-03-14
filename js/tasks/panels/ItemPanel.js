@@ -21,7 +21,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this.setItem = function(item) {
-		if (this._item) { console.log("TODO: release item")}
+		if (this._item) { logger.warn("TODO: release item")}
 		this.show()
 		this._item = item
 		this._item.addDependant('type', bind(this, '_onItemType'))

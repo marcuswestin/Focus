@@ -19,7 +19,7 @@ exports = Singleton(ui.Component, function(supr) {
 	}
 	
 	this.showAt = function(view, item, property) {
-		if (this._view) { logger.log('TODO: release current view') }
+		if (this._view) { logger.warn('TODO: release current view') }
 		this.appendTo(gBody)
 		this._view = view
 		var el = this._input.getElement()

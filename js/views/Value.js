@@ -23,14 +23,17 @@ exports = Class(ui.Component, function(supr){
 				: itemIds.getId ? itemIds.getId()
 				: itemIds[this._propertyChain.shift()])
 		this._item = fin.getItem(itemId)
-		this._item.addDependant(this._propertyChain, bind(this, '_setValue'))
+		this._item.addDependant(this._propertyChain, bind(this, '_onItemMutation'))
 	}
 	
-	this._setValue = function(value) {
+	this._onItemMutation = function(mutation) {
+		this.setValue(mutation.value)
+	}
+	
+	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
 		value = value.replace(/\n/g, '<br />')
 		value = value.replace(/ $/, '&nbsp;')
 		this._element.innerHTML = value
-		this._publish('Resize')
 	}
 })

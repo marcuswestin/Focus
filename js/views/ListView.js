@@ -13,8 +13,9 @@ exports = Class(ui.lists.List, function(supr){
 		this._item.addDependant(this._property, bind(this, '_onUpdated'))
 	}
 	
-	this._onUpdated = function(items, mutation) { 
+	this._onUpdated = function(mutation) { 
 		// mutation.from, mutation.to
+		var items = mutation.value
 		this.setItems(items)
 	}
 })

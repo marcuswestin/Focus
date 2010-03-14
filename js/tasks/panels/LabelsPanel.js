@@ -16,10 +16,10 @@ exports = Class(tasks.panels.Panel, function(supr) {
 			label: "My tasks", 
 			view: ['SortedItemListView', { type: 'task', user: gUser }, 'priority'] 
 		}, { 
-			label: "My projects", 
-			view: ['ListView', { item: gUser, property: 'projects' }]
-		}, { 
-			label: "All projects", 
+		// 	label: "My projects", 
+		// 	view: ['ListView', { item: gUser, property: 'projects' }]
+		// }, { 
+			label: "Projects", 
 			view: ['SortedItemListView', { type: 'project' }, 'target_date']
 		}, { 
 			label: "Unassigned tasks", 
@@ -46,7 +46,6 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this._selectedElement = element
 		
 		var labelItem = this._labelList[labelId]
-		
 		var view = fin.getView.apply(fin, labelItem.view)
 		gListPanel.loadList(view)
 	}

@@ -13,8 +13,9 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this.hide()
 	}
 	
-	this._onWindowResize = function(winSize) {
-		var leftPadding = 10,
+	this._onWindowResize = function(mutation) {
+		var winSize = mutation.value,
+			leftPadding = 10,
 			rightPadding = 250
 		this._width = winSize.width - this._left - leftPadding - rightPadding
 		supr(this, '_onWindowResize', arguments)
@@ -27,7 +28,8 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this._item.addDependant('type', bind(this, '_onItemType'))
 	}
 	
-	this._onItemType = function(type) {
+	this._onItemType = function(mutation) {
+		var type = mutation.value
 		gUtil.loadTemplate(type, bind(this, function(template) {
 			this._content.innerHTML = ''
 			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))

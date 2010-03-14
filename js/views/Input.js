@@ -36,7 +36,7 @@ exports = Class(views.Value, function(supr){
 		this._publish('Blur')
 	}
 	
-	this.setValue = this._setValue = function(value) {
+	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
 		if (this._focused) { return }
 		this._element.disabled = false
@@ -82,6 +82,8 @@ exports = Class(views.Value, function(supr){
 		
 		mutation.property = this._property
 		this._getItem().mutate(mutation)
+		
+		setTimeout(bind(this, function(){ this._publish('NewValue', this._element.value) }))
 	}
 	
 	this._getItem = function() {

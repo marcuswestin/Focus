@@ -26,10 +26,11 @@ exports = Singleton(ui.Component, function(supr) {
 	
 	this._hide = function() {
 		this.remove()
-		ui.resizeManager.addDependant(this._resizeCallback)
+		ui.resizeManager.removeDependant(this._resizeCallback)
 	}
 	
-	this._onWindowResize = function(size) {
+	this._onWindowResize = function(mutation) {
+		var size = mutation.value
 		this.layout(this._underlay, size)
 		var contentSize = this.getLayout(this._content.firstChild)
 		this.layout(this._content, { left: (size.width / 2) - (contentSize.width / 2),

@@ -27,6 +27,23 @@ exports = Class(common.Publisher, function(supr) {
 		this._element.parentNode.removeChild(this._element)
 	}
 	
+	this._insertElement = function (parentElement, insertItem, position) {
+		if (arguments.length == 2) {
+			position = insertItem
+			insertItem = parentElement
+			parentElement = this._element
+		}
+		
+		var childNodes = this._element.childNodes,
+			nextItem = childNodes[position + 1]
+		
+		if (nextItem) {
+			parentElement.insertBefore(insertItem, nextItem)
+		} else {
+			parentElement.appendChild(insertItem)
+		}
+	}
+	
 	this._create = function(params) {
 		var el = document.createElement(params.type || 'div');
 		if (params.className) { el.className = params.className; }

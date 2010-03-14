@@ -1,25 +1,13 @@
 jsio('from common.javascript import Class, bind')
-jsio('import ui.ClickableList')
+jsio('import ui.lists.SortedItemList')
 
-exports = Class(ui.ClickableList, function(supr){
+exports = Class(ui.lists.SortedItemList, function(supr){
 	
 	this.init = function(jsArgs, viewArgs) {
-		supr(this, 'init')
+		supr(this, 'init', jsArgs)
+		
 		var conditions = jsArgs[0]
 		this._type = conditions.type
-		this._itemSet = fin.getItemSet(conditions)
-	}
-	
-	this._createContent = function() {
-		supr(this, '_createContent')
-		this._itemSet.addDependant(bind(this, '_onUpdated'))
-	}
-	
-	this._onUpdated = function(mutation) { 
-		// mutation.from, mutation.to
-		this._itemSet.getItems(bind(this, function(items){
-			this.setItems(items)
-		}))
 	}
 	
 	this._getCellFor = function(itemId) {

@@ -1,7 +1,7 @@
 jsio('from common.javascript import Class, bind')
-jsio('import ui.ClickableList')
+jsio('import ui.lists.List')
 
-exports = Class(ui.ClickableList, function(supr){
+exports = Class(ui.lists.List, function(supr){
 	
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')

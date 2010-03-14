@@ -3,10 +3,14 @@ jsio('import ui.Component')
 
 exports = Class(ui.Component, function(supr){
 	
+	this.init = function() {
+		supr(this, 'init')
+		this._cells = {}
+		this._items = []
+	}
+	
 	this._createContent = function() {
 		this._delegateOn('click', bind(this, '_publish', 'Click'))
-		this._delegateOn('mouseover', bind(this, '_publish', 'MouseOver'))
-		this._delegateOn('mouseout', bind(this, '_publish', 'MouseOut'))
 		this._render()
 	}
 	
@@ -16,17 +20,20 @@ exports = Class(ui.Component, function(supr){
 	
 	this.setItems = function(items) {
 		this._items = items
+		if (!this._element) { return }
+		this._element.innerHTML = ''
 		this._render()
 	}
 	
 	this._render = function() {
-		if (!this._element) { return }
-		this._element.innerHTML = ''
-		if (!this._items || !this._items.length) { return }
-		for (var i=0, itemId; itemId = this._items[i]; i++) {
-			var cellElement = this._getCellFor(itemId)
-			cellElement.delegateId = itemId
-			this._element.appendChild(cellElement)
+		if (!this._element || !this._items) { return }
+		for (var i=0, item; item = this._items[i]; i++) {
+			var id = item.getId ? item.getId() : item
+			if (!this._cells[id]) {
+				this._cells[id] = this._getCellFor(item)
+				this._cells[id].delegateId = item
+			}
+			this._insertElement(this._cells[id], i)
 		}
 	}
 	

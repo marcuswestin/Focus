@@ -23,14 +23,14 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	this.loadList = function(listView) {
 		this._content.innerHTML = ''
 		listView.appendTo(this._content)
-		listView.subscribe('Click', bind(this, '_onItemClick'))
+		listView.subscribe('Click', bind(this, '_onCellClick'))
 		
 		// TODO We need to release the odld item set
 		this.show()
 	}
 	
-	this._onItemClick = function(itemId) {
-		var item = fin.getItem(itemId)
+	this._onCellClick = function(itemCell) {
+		var item = fin.getItem(itemCell.getId())
 		gItemPanel.setItem(item)
 	}
 })

@@ -1,6 +1,6 @@
 jsio('from common.javascript import Class, map')
 jsio('import tasks.panels.Panel')
-jsio('import ui.ClickableList')
+jsio('import ui.lists.List')
 
 exports = Class(tasks.panels.Panel, function(supr) {
 	
@@ -14,26 +14,26 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		// This can't be defined until gUser exists
 		this._labelList = [{ 
 			label: "My tasks", 
-			view: ['TemplatedItemSetView', { type: 'task', user: gUser }] 
+			view: ['SortedItemListView', { type: 'task', user: gUser }, 'priority'] 
 		}, { 
 			label: "My projects", 
 			view: ['ListView', { item: gUser, property: 'projects' }]
 		}, { 
 			label: "All projects", 
-			view: ['TemplatedItemSetView', { type: 'project' }]
+			view: ['SortedItemListView', { type: 'project' }, 'target_date']
 		}, { 
 			label: "Unassigned tasks", 
-			view: ['TemplatedItemSetView', { type: 'task', user: undefined }]
+			view: ['SortedItemListView', { type: 'task', user: undefined }, 'priority']
 		}, { 
 			label: "All tasks", 
-			view: ['TemplatedItemSetView', { type: 'task' }]
+			view: ['SortedItemListView', { type: 'task' }, 'priority']
 		}]
 		
 		for (var i=0, labelItem; labelItem = this._labelList[i]; i++) { // allow lookup by label
 			this._labelList[labelItem.label] = labelItem
 		}
 		
-		var list = new ui.ClickableList()
+		var list = new ui.lists.List()
 		var labels = map(this._labelList, function(labelItem) { return labelItem.label })
 		list.setItems(labels)
 		list.subscribe('Click', bind(this, '_onClick'))

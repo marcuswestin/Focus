@@ -14,7 +14,6 @@ exports = Singleton(ui.Component, function(supr) {
 	this._createContent = function() {
 		this._underlay = this._create({ parent: this._element, className: 'underlay' });
 		this._content = this._create({ parent: this._element, className: 'content' });
-		this._on(this._underlay, 'click', bind(this, '_hide'))
 	}
 	
 	this.show = function(content, notDismissable) {

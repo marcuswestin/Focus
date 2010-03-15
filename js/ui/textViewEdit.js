@@ -24,43 +24,36 @@ exports = Singleton(ui.Component, function(supr) {
 		if (this._view) { logger.warn('TODO: release current view') }
 		this.appendTo(gBody)
 		this._view = view
-		this._view.freeze()
+		this._item = item
 		var el = this._input.getElement()
-
+		
 		el.style.fontSize = this._view.getStyle('font-size');
 		el.style.fontFamily = this._view.getStyle('font-family');
 		el.style.fontWeight = this._view.getStyle('font-weight');
 		el.style.lineHeight = this._view.getStyle('line-height');
-
+		
 		this._input.setDependant(item, property)
-		
-		item.requestFocus(bind(this, '_onFocusDenied'))
-		
 		this._input.setValue(item.getProperty(property) || '')
 		
 		this._resizeSub = this._view.subscribe('Resize', bind(this, '_onViewResize'))
 		this._onViewResize()
-
+		
 		this.show()
 		this._input.focus()
 	}
 	
-	this._onFocusDenied = function() {
-		this._element.blur()
-		this.hide()
-	}
- 	
 	this.hide = function() {
 		if (this._view) { 
-			this._view.unfreeze() 
 			this._view.unsubscribe('Resize', this._resizeSub)
+			this._item.releaseFocus()
 			delete this._view
+			delete this._item
 		}
 		supr(this, 'hide')
 	}
 	
 	this._onInputNewValue = function(newValue) {
-		this._view.setValue(newValue, true) // force new value
+		this._view.setValue(newValue)
 	}
 	
 	this._onViewResize = function() {

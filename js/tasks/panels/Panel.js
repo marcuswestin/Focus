@@ -14,8 +14,7 @@ exports = Class(ui.Component, function(supr) {
 		ui.resizeManager.addDependant(bind(this, '_onWindowResize'))
 	}
 	
-	this._onWindowResize = function(mutation) {
-		var winSize = mutation.value
+	this._onWindowResize = function(winSize) {
 		var height = winSize.height - 100
 			padding = this._padding * 2
 		this.layout({ height: height, width: this._width, left: this._left })

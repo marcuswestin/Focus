@@ -29,8 +29,7 @@ exports = Singleton(ui.Component, function(supr) {
 		ui.resizeManager.removeDependant(this._resizeCallback)
 	}
 	
-	this._onWindowResize = function(mutation) {
-		var size = mutation.value
+	this._onWindowResize = function(size) {
 		this.layout(this._underlay, size)
 		var contentSize = this.getLayout(this._content.firstChild)
 		this.layout(this._content, { left: (size.width / 2) - (contentSize.width / 2),

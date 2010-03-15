@@ -26,8 +26,8 @@ exports = Class(ui.Component, function(supr){
 		this._item.addDependant(this._propertyChain, bind(this, '_onItemMutation'))
 	}
 	
-	this._onItemMutation = function(mutation) {
-		this.setValue(mutation.value)
+	this._onItemMutation = function(mutation, newValue) {
+		this.setValue(newValue)
 	}
 	
 	this.setValue = function(value) {

@@ -12,12 +12,16 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		supr(this, '_createContent')
 		
 		var taskButton = new ui.Button('Create new task')
-		taskButton.subscribe('Click', bind(fin, 'createItem', { type: 'task' }, function(item) {
-			gItemPanel.setItem(item)
-		}))
+		taskButton.subscribe('Click', bind(this, '_createItem'))
 		taskButton.appendTo(this._element)
 		
 		this.hide()
+	}
+	
+	this._createItem = function() {
+		fin.createItem({ type: 'task', user: gUser.getId() }, function(item) {
+			gItemPanel.setItem(item)
+		})
 	}
 	
 	this.loadList = function(listView) {

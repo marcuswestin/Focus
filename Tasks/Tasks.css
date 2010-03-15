@@ -64,3 +64,18 @@
 	bottom: 10px;
 	right: 10px;
 }
+
+.ListPanel .List .cell {
+	height: 60px;
+	overflow: hidden;
+}
+
+.ListPanel .List .cell .title {
+	color: #333;
+	max-height: 35px;
+	overflow: hidden;
+}
+.ListPanel .List .cell .priority {
+	float: right;
+	color: #666;
+}

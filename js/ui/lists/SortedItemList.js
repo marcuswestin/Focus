@@ -43,9 +43,12 @@ exports = Class(ui.lists.List, function(supr){
 	this._removeItems = function(removeItemIds) {
 		// this n*m loop could be made more efficient...
 		for (var i=0, removeItemId; removeItemId = removeItemIds[i]; i++) {
-			for (var j=0, item; item = this._items[j]; i++) {
-				if (item.getId() != removeItemId) { continue }
+			for (var j=0, item; item = this._items[j]; j++) {
+				var itemId = item.getId()
+				if (itemId != removeItemId) { continue }
 				this._items.splice(j, 1)
+				this.remove(this._cells[itemId])
+				delete this._cells[itemId]
 				break
 			}
 		}

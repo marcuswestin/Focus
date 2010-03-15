@@ -4,6 +4,7 @@ jsio('import ui.Component')
 exports = Class(ui.Component, function(supr){
 	
 	this._domType = 'span'
+	this._className = 'Value'
 	
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')

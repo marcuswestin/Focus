@@ -11,7 +11,7 @@ exports = Class(ui.lists.SortedItemList, function(supr){
 	}
 	
 	this._getCellFor = function(itemId) {
-		var container = this._create({ className: 'cellContainer'})
+		var container = this._create({ className: 'cell' })
 		
 		gUtil.loadTemplate(this._type + '-listCell', bind(this, function(template) {
 			container.appendChild(fin.applyTemplate(template, itemId))

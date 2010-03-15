@@ -3,6 +3,8 @@ jsio('import ui.Component')
 
 exports = Class(ui.Component, function(supr){
 	
+	this._className = 'List'
+	
 	this.init = function() {
 		supr(this, 'init')
 		this._cells = {}

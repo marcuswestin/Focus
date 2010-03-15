@@ -12,6 +12,8 @@ var SortableItem = Class(function() {
 
 exports = Class(ui.lists.List, function(supr){
 	
+	this._className += ' SortedItemList'
+	
 	this.init = function(conditions, sortBy) {
 		supr(this, 'init')
 		this._conditions = conditions
@@ -56,7 +58,7 @@ exports = Class(ui.lists.List, function(supr){
 	})
 	
 	this._getCellFor = function(itemId) {
-		var container = this._create({ className: 'cellContainer'})
+		var container = this._create({ className: 'cell'})
 		
 		gUtil.loadTemplate(this._type + '-listCell', bind(this, function(template) {
 			container.appendChild(fin.applyTemplate(template, itemId))

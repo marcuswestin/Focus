@@ -4,6 +4,8 @@ jsio('import ui.textViewEdit')
 
 exports = Class(views.Value, function(supr) {
 	
+	this._className += ' Editable'
+	
 	this._createContent = function() {
 		supr(this, '_createContent')
 		

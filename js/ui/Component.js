@@ -22,9 +22,10 @@ exports = Class(common.Publisher, function(supr) {
 	
 	this.appendTo = function(element) { element.appendChild(this.getElement()); return this }
 	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild); }
-	this.remove = function() { 
-		if (!this._element || !this._element.parentNode) { return } 
-		this._element.parentNode.removeChild(this._element)
+	this.remove = function(element) { 
+		element = element || this._element
+		if (!element || !element.parentNode) { return } 
+		element.parentNode.removeChild(element)
 	}
 	
 	this._insertElement = function (parentElement, insertItem, position) {

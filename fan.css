@@ -15,9 +15,9 @@ body, html {
 	cursor: pointer;
 }
 
-/*********
+/**********
  * Inputs *
- *********/
+ **********/
 .Input {
 	padding: 2px 3px;
 }

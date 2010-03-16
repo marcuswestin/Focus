@@ -3,7 +3,7 @@ jsio('import ui.Component')
 
 exports = Class(ui.Component, function(supr){
 	
-	this._domType = 'span'
+	this._domTag = 'span'
 	this._className = 'Value'
 	
 	this.init = function(jsArgs, viewArgs) {

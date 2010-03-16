@@ -3,12 +3,12 @@ jsio('import common.Publisher');
 
 exports = Class(common.Publisher, function(supr) {
 	
-	this._domType = 'div'
+	this._domTag = 'div'
 	this._className = null
 	
 	this.getElement = function() {
 		if (!this._element) { 
-			this._element = document.createElement(this._domType)
+			this._element = document.createElement(this._domTag)
 			if (this._className) { this.addClassName(this._className) }
 			this._createContent()
 		}
@@ -46,7 +46,7 @@ exports = Class(common.Publisher, function(supr) {
 	}
 	
 	this._create = function(params) {
-		var el = document.createElement(params.type || 'div');
+		var el = document.createElement(params.tag || 'div');
 		if (params.className) { el.className = params.className; }
 		if (params.html) { el.innerHTML = params.html; }
 		if (params.src) { el.src = params.src; }

@@ -4,7 +4,7 @@ jsio('import views.Value')
 
 exports = Class(views.Value, function(supr){
 	
-	this._domType = 'textarea'
+	this._domTag = 'textarea'
 	
 	this._createContent = function() {
 		this._on('focus', bind(this, '_onFocus'))

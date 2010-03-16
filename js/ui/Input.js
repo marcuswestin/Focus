@@ -4,7 +4,7 @@ jsio('import ui.Component');
 
 exports = Class(ui.Component, function(supr) {
 	
-	this._domType = 'input'
+	this._domTag = 'input'
 	this._className = 'Input'
 	
 	this.init = function(defaultText, isPassword) {

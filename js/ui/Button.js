@@ -4,7 +4,7 @@ jsio('import ui.Component')
 // Do something like http://sexybuttons.googlecode.com/svn/trunk/index.html#
 exports = Class(ui.Component, function(supr) {
 	
-	this._domType = 'button'
+	this._domTag = 'button'
 	this._className = 'Button'
 	
 	this.init = function(text) {

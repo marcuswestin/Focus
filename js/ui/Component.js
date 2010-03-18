@@ -3,12 +3,12 @@ jsio('import common.Publisher');
 
 exports = Class(common.Publisher, function(supr) {
 	
-	this._domType = 'div'
+	this._domTag = 'div'
 	this._className = null
 	
 	this.getElement = function() {
 		if (!this._element) { 
-			this._element = document.createElement(this._domType)
+			this._element = document.createElement(this._domTag)
 			if (this._className) { this.addClassName(this._className) }
 			this._createContent()
 		}
@@ -22,13 +22,31 @@ exports = Class(common.Publisher, function(supr) {
 	
 	this.appendTo = function(element) { element.appendChild(this.getElement()); return this }
 	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild); }
-	this.remove = function() { 
-		if (!this._element || !this._element.parentNode) { return } 
-		this._element.parentNode.removeChild(this._element)
+	this.remove = function(element) { 
+		element = element || this._element
+		if (!element || !element.parentNode) { return } 
+		element.parentNode.removeChild(element)
+	}
+	
+	this._insertElement = function (parentElement, insertItem, position) {
+		if (arguments.length == 2) {
+			position = insertItem
+			insertItem = parentElement
+			parentElement = this._element
+		}
+		
+		var childNodes = this._element.childNodes,
+			nextItem = childNodes[position + 1]
+		
+		if (nextItem) {
+			parentElement.insertBefore(insertItem, nextItem)
+		} else {
+			parentElement.appendChild(insertItem)
+		}
 	}
 	
 	this._create = function(params) {
-		var el = document.createElement(params.type || 'div');
+		var el = document.createElement(params.tag || 'div');
 		if (params.className) { el.className = params.className; }
 		if (params.html) { el.innerHTML = params.html; }
 		if (params.src) { el.src = params.src; }

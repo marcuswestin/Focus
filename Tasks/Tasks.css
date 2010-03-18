@@ -48,6 +48,8 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 7px;
 	padding: 10px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 /* Labels Panel */
@@ -63,4 +65,20 @@
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
+}
+
+.ListPanel .List .cell {
+	cursor: pointer;
+	height: 60px;
+	overflow: hidden;
+}
+
+.ListPanel .List .cell .title {
+	color: #333;
+	max-height: 35px;
+	overflow: hidden;
+}
+.ListPanel .List .cell .priority {
+	float: right;
+	color: #666;
 }

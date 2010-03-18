@@ -2,6 +2,7 @@ body, html {
 	font-family: arial,sans-serif;
 	overflow: hidden;
 	color: #222222;
+	font-size: 14px;
 }
 
 /*********
@@ -14,9 +15,9 @@ body, html {
 	cursor: pointer;
 }
 
-/*********
+/**********
  * Inputs *
- *********/
+ **********/
 .Input {
 	padding: 2px 3px;
 }

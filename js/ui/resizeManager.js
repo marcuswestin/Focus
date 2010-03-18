@@ -9,7 +9,7 @@ exports = Singleton(function(){
 	
 	this._onResize = function() {
 		if (!this._resizeCallbacks.length) { return }
-		var size = exports.getWindowSize()
+		var size = this.getWindowSize()
 		for (var i=0, callback; callback = this._resizeCallbacks[i]; i++) {
 			callback(size)
 		}

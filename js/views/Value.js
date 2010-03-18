@@ -3,7 +3,8 @@ jsio('import ui.Component')
 
 exports = Class(ui.Component, function(supr){
 	
-	this._domType = 'span'
+	this._domTag = 'span'
+	this._className = 'Value'
 	
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')
@@ -17,20 +18,23 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this.setDependant = function(itemIds, property) {
-		if (this._item) { logger.log("TODO unsubscribe from old item") }
+		if (this._item) { logger.warn("TODO unsubscribe from old item") }
 		this._propertyChain = property.split('.')
 		var itemId = (typeof itemIds == 'string' ? itemIds 
 				: itemIds.getId ? itemIds.getId()
 				: itemIds[this._propertyChain.shift()])
 		this._item = fin.getItem(itemId)
-		this._item.addDependant(this._propertyChain, bind(this, '_setValue'))
+		this._item.addDependant(this._propertyChain, bind(this, '_onItemMutation'))
 	}
 	
-	this._setValue = function(value) {
+	this._onItemMutation = function(mutation, newValue) {
+		this.setValue(newValue)
+	}
+	
+	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
 		value = value.replace(/\n/g, '<br />')
 		value = value.replace(/ $/, '&nbsp;')
 		this._element.innerHTML = value
-		this._publish('Resize')
 	}
 })

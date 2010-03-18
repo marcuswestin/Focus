@@ -14,7 +14,6 @@ exports = Singleton(ui.Component, function(supr) {
 	this._createContent = function() {
 		this._underlay = this._create({ parent: this._element, className: 'underlay' });
 		this._content = this._create({ parent: this._element, className: 'content' });
-		this._on(this._underlay, 'click', bind(this, '_hide'))
 	}
 	
 	this.show = function(content, notDismissable) {
@@ -27,7 +26,7 @@ exports = Singleton(ui.Component, function(supr) {
 	
 	this._hide = function() {
 		this.remove()
-		ui.resizeManager.addDependant(this._resizeCallback)
+		ui.resizeManager.removeDependant(this._resizeCallback)
 	}
 	
 	this._onWindowResize = function(size) {

@@ -17,12 +17,12 @@ exports = Class(browser.UIComponent, function(supr) {
 	this.createContent = function() {
 		this.addClassName('LabelCreator');
 		this._criteria = [];
-		this._nameInput = dom.create({ parent: this._element, type: 'input' });
+		this._nameInput = dom.create({ parent: this._element, tag: 'input' });
 		this._nameInput.value = 'label name';
 		this._inputs = dom.create({ parent: this._element, className: 'inputs' });
 
-		var submitButton = dom.create({ parent: this._element, type: 'button', html: 'create label' });
-		var conditionButton = dom.create({ parent: this._element, type: 'button', html: 'add condition' });
+		var submitButton = dom.create({ parent: this._element, tag: 'button', html: 'create label' });
+		var conditionButton = dom.create({ parent: this._element, tag: 'button', html: 'add condition' });
 		
 		events.add(conditionButton, 'click', bind(this, '_addCriteriumInput'))
 		events.add(submitButton, 'click', bind(this, '_submit'))
@@ -38,9 +38,9 @@ exports = Class(browser.UIComponent, function(supr) {
 		var container = dom.create({ parent: this._inputs, className: 'criteriaInput' });
 		var criterium = {};
 		this._criteria.push(criterium);
-		criterium.keyInput = dom.create({ parent: container, type: 'input', className: 'key' });
-		dom.create({ parent: container, type: 'span', text: '==' });
-		criterium.valueInput = dom.create({ parent: container, type: 'input', className: 'key' });
+		criterium.keyInput = dom.create({ parent: container, tag: 'input', className: 'key' });
+		dom.create({ parent: container, tag: 'span', text: '==' });
+		criterium.valueInput = dom.create({ parent: container, tag: 'input', className: 'key' });
 		criterium.keyInput.focus();
 	}
 

@@ -1,7 +1,7 @@
 jsio('from common.javascript import Class, bind')
-jsio('import ui.ClickableList')
+jsio('import ui.lists.List')
 
-exports = Class(ui.ClickableList, function(supr){
+exports = Class(ui.lists.List, function(supr){
 	
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')
@@ -13,8 +13,8 @@ exports = Class(ui.ClickableList, function(supr){
 		this._item.addDependant(this._property, bind(this, '_onUpdated'))
 	}
 	
-	this._onUpdated = function(items, mutation) { 
+	this._onUpdated = function(mutation, itemsArray) { 
 		// mutation.from, mutation.to
-		this.setItems(items)
+		this.setItems(itemsArray)
 	}
 })

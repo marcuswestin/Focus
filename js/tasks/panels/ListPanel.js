@@ -12,25 +12,31 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		supr(this, '_createContent')
 		
 		var taskButton = new ui.Button('Create new task')
-		taskButton.subscribe('Click', bind(fin, 'createItem', { type: 'task' }, function(item) {
-			gItemPanel.setItem(item)
-		}))
+		taskButton.subscribe('Click', bind(this, '_createItem'))
 		taskButton.appendTo(this._element)
 		
 		this.hide()
 	}
 	
+	this._createItem = function() {
+		fin.createItem({ type: 'task', user: gUser.getId() }, function(item) {
+			gItemPanel.setItem(item)
+		})
+	}
+	
 	this.loadList = function(listView) {
-		this._content.innerHTML = ''
-		listView.appendTo(this._content)
-		listView.subscribe('Click', bind(this, '_onItemClick'))
+		if (this._listView) { logger.warn("TODO: release current list view")}
 		
-		// TODO We need to release the odld item set
+		this._content.innerHTML = ''
+		this._listView = listView
+		this._listView.appendTo(this._content)
+		this._listView.subscribe('Click', bind(this, '_onCellClick'))
+		
 		this.show()
 	}
 	
-	this._onItemClick = function(itemId) {
-		var item = fin.getItem(itemId)
+	this._onCellClick = function(itemCell) {
+		var item = fin.getItem(itemCell.getId())
 		gItemPanel.setItem(item)
 	}
 })

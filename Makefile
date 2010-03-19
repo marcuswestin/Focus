@@ -7,8 +7,7 @@
 deps: lib/fin
 
 run-dbs:
-	make -C lib/fin run-couchdbx &
-	redis-server
+	make -C lib/fin run-dbs
 
 run:
 	cd lib/fin/js/server; node run_server.js

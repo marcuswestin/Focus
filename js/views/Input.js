@@ -1,5 +1,5 @@
-jsio('from common.javascript import Class, bind')
-jsio('import browser.caret')
+jsio('from shared.javascript import Class, bind')
+jsio('import client.caret')
 jsio('import views.Value')
 
 exports = Class(views.Value, function(supr){
@@ -49,7 +49,7 @@ exports = Class(views.Value, function(supr){
 		// TODO: Deal with pasting
 		if (e.metaKey && e.keyCode != this.keys['enter']) { return }
 		
-		var position = browser.caret.getPosition(this._element)
+		var position = client.caret.getPosition(this._element)
 		var selectionLength = position.end - position.start
 		var mutation = { position: position.caret - selectionLength }
 		

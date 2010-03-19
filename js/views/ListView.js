@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class, bind')
+jsio('from shared.javascript import Class, bind')
 jsio('import ui.lists.List')
 
 exports = Class(ui.lists.List, function(supr){

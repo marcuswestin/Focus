@@ -1,4 +1,4 @@
-jsio('from common.javascript import Singleton')
+jsio('from shared.javascript import Singleton')
 jsio('import ui.Component')
 
 exports = Singleton(ui.Component, function(supr) {

@@ -1,22 +1,22 @@
-jsio('from common.javascript import Class, bind');
-jsio('import browser.dimensions');
-jsio('import browser.events as events');
-jsio('import browser.dom as dom');
-jsio('import browser.css as css');
-jsio('import browser.itemFocus');
-jsio('import browser.ItemView');
-jsio('import browser.ListComponent');
+jsio('from shared.javascript import Class, bind');
+jsio('import client.dimensions');
+jsio('import client.events as events');
+jsio('import client.dom as dom');
+jsio('import client.css as css');
+jsio('import client.itemFocus');
+jsio('import client.ItemView');
+jsio('import client.ListComponent');
 
-jsio('import browser.panels.Panel');
+jsio('import client.panels.Panel');
 
 css.loadStyles(jsio.__path);
 
-exports = Class(browser.panels.Panel, function(supr) {
+exports = Class(client.panels.Panel, function(supr) {
 	
 	this.init = function() {
 		supr(this, 'init', arguments);
 		this._label = this._item;
-		this._listComponent = new browser.ListComponent(bind(this, '_onItemSelected'), 
+		this._listComponent = new client.ListComponent(bind(this, '_onItemSelected'), 
 			bind(this, '_onItemFocused'));
 	}
 	
@@ -45,11 +45,11 @@ exports = Class(browser.panels.Panel, function(supr) {
 	}
 	
 	this._onScroll = function() {
-		browser.itemFocus.layout();
+		client.itemFocus.layout();
 	}
 	
 	this._onItemFocused = function(item) {
-		var itemDimensions = browser.dimensions.getDimensions(item.getElement());
+		var itemDimensions = client.dimensions.getDimensions(item.getElement());
 		if (itemDimensions.top + itemDimensions.height > this._layout.height) {
 			this._content.scrollTop += itemDimensions.height;
 			return true; // to prevent updating position of focus until scroll event fires

@@ -1,10 +1,10 @@
-jsio('from common.javascript import Class, bind');
+jsio('from shared.javascript import Class, bind');
 
-jsio('import browser.css as css');
-jsio('import browser.events as events');
+jsio('import client.css as css');
+jsio('import client.events as events');
 
-jsio('import browser.keystrokeManager');
-jsio('import browser.itemFocus');
+jsio('import client.keystrokeManager');
+jsio('import client.itemFocus');
 
 exports = Class(function(supr){
 	
@@ -22,15 +22,15 @@ exports = Class(function(supr){
 	}
 	
 	this.focus = function() { 
-		this._keystrokeHandle = browser.keystrokeManager.handleKeys(this._keyMap);
+		this._keystrokeHandle = client.keystrokeManager.handleKeys(this._keyMap);
 		if (this._items[this._focusIndex]) {
 			this._focusOn(this._items[this._focusIndex]);
 		}
 	}
 	
 	this.blur = function() { 
-		browser.itemFocus.removeFrom(this._items[this._focusIndex]);
-		browser.keystrokeManager.release(this._keystrokeHandle);
+		client.itemFocus.removeFrom(this._items[this._focusIndex]);
+		client.keystrokeManager.release(this._keystrokeHandle);
 	}
 	
 	this.addItem = function(item) {
@@ -50,7 +50,7 @@ exports = Class(function(supr){
 	
 	this._focusOn = function(item) {
 		var preventLayout = this._itemFocusedCallback && this._itemFocusedCallback(item);
-		browser.itemFocus.showAt(item, preventLayout);
+		client.itemFocus.showAt(item, preventLayout);
 	}
 	
 	this._selectFocusedItem = function() { this._selectItem(this._items[this._focusIndex]); }
@@ -61,7 +61,7 @@ exports = Class(function(supr){
 		this._selectedItem = item;
 		item.addClassName('selected');
 
-		// Only the label list panel needs this - should move the handler into the browser.Label instead
+		// Only the label list panel needs this - should move the handler into the client.Label instead
 		if (this._itemSelectedCallback) {
 			this._itemSelectedCallback(item);
 		} else {

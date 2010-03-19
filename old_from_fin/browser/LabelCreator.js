@@ -1,13 +1,13 @@
-jsio('from common.javascript import Class, bind');
-jsio('import browser.dom as dom');
+jsio('from shared.javascript import Class, bind');
+jsio('import client.dom as dom');
 
-jsio('import browser.UIComponent');
+jsio('import client.UIComponent');
 
 var logger = logging.getLogger(jsio.__path);
 
 css.loadStyles(jsio.__path);
 
-exports = Class(browser.UIComponent, function(supr) {
+exports = Class(client.UIComponent, function(supr) {
 	
 	this._init = function(labelCreatedCallback) {
 		supr(this, 'init');

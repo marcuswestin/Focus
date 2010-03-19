@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class')
+jsio('from shared.javascript import Class')
 jsio('import ui.Component')
 jsio('import ui.resizeManager')
 

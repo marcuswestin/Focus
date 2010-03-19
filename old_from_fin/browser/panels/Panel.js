@@ -1,16 +1,16 @@
-jsio('from common.javascript import Class, bind');
-jsio('import browser.UIComponent');
-jsio('import browser.keystrokeManager');
-jsio('import browser.itemFocus');
-jsio('import browser.css as css');
-jsio('import browser.dom as dom');
-jsio('import browser.dimensions as dimensions');
-jsio('import browser.events as events');
+jsio('from shared.javascript import Class, bind');
+jsio('import client.UIComponent');
+jsio('import client.keystrokeManager');
+jsio('import client.itemFocus');
+jsio('import client.css as css');
+jsio('import client.dom as dom');
+jsio('import client.dimensions as dimensions');
+jsio('import client.events as events');
 
 
 css.loadStyles(jsio.__path);
 
-exports = Class(browser.UIComponent, function(supr) {
+exports = Class(client.UIComponent, function(supr) {
 	
 	this._contentMargin = 4;
 	
@@ -54,7 +54,7 @@ exports = Class(browser.UIComponent, function(supr) {
 		supr(this, 'layout', [{ width: layout.width - this._contentMargin * 2, 
 			height: layout.height - this._contentMargin * 2, margin: this._contentMargin }]);
 		if (this.hasFocus()) {
-			browser.itemFocus.layout();
+			client.itemFocus.layout();
 		}
 	}
 	
@@ -72,12 +72,12 @@ exports = Class(browser.UIComponent, function(supr) {
 		if (this.isMinimized()) {
 			var labelEl = this._labelEl;
 			var fakeView = { subscribe: function(){}, getElement: function(){ return labelEl; } }
-			browser.itemFocus.showAt(fakeView);
+			client.itemFocus.showAt(fakeView);
 			var onEnter = bind(this, function(){
 				this.maximize();
 				this.focus();
 			})
-			browser.keystrokeManager.handleKeys({ 'enter': onEnter });
+			client.keystrokeManager.handleKeys({ 'enter': onEnter });
 		}
 	}
 	this.blur = function() { this.removeClassName('focused'); }

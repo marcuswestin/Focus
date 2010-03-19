@@ -1,8 +1,8 @@
-jsio('from common.javascript import Class');
-jsio('import browser.UIComponent');
-jsio('import browser.itemFocus');
+jsio('from shared.javascript import Class');
+jsio('import client.UIComponent');
+jsio('import client.itemFocus');
 
-exports = Class(browser.UIComponent, function(supr){
+exports = Class(client.UIComponent, function(supr){
 	
 	this.init = function(label) {
 		supr(this, 'init');

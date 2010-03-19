@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class')
+jsio('from shared.javascript import Class')
 jsio('import tasks.panels.Panel')
 jsio('import ui.Button')
 

@@ -13,8 +13,8 @@
 		});
 		Meebo("domReady");
 	} else {
-		jsio('import browser.dom as dom');
-		jsio('import browser.events as events');
+		jsio('import client.dom as dom');
+		jsio('import client.events as events');
 
 		var commands = {};
 		window.Meebo = function(command) {

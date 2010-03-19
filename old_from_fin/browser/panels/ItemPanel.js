@@ -1,27 +1,27 @@
-jsio('from common.javascript import Class, bind, forEach');
-jsio('import common.ItemReference');
-jsio('import browser.events as events');
-jsio('import browser.dom as dom');
-jsio('import browser.css as css');
-jsio('import browser.ItemView');
-jsio('import browser.views.ItemReferenceView');
-jsio('import browser.ListComponent');
-jsio('import browser.panels.Panel');
+jsio('from shared.javascript import Class, bind, forEach');
+jsio('import shared.ItemReference');
+jsio('import client.events as events');
+jsio('import client.dom as dom');
+jsio('import client.css as css');
+jsio('import client.ItemView');
+jsio('import client.views.ItemReferenceView');
+jsio('import client.ListComponent');
+jsio('import client.panels.Panel');
 
 css.loadStyles(jsio.__path);
 
-exports = Class(browser.panels.Panel, function(supr) {
+exports = Class(client.panels.Panel, function(supr) {
 	
 	this.init = function() {
 		supr(this, 'init', arguments);
 
-		this._listComponent = new browser.ListComponent();
+		this._listComponent = new client.ListComponent();
 	}
 	
 	this.createContent = function() {
 		supr(this, 'createContent');
 		this.addClassName('ItemPanel');
-		this._itemView = new browser.ItemView(this._item, this._item.getType(), 'panel');
+		this._itemView = new client.ItemView(this._item, this._item.getType(), 'panel');
 		this._itemView.appendTo(this._content);
 		var views = this._itemView.getPropertyViews();
 		forEach(views, bind(this._listComponent, 'addItem'));

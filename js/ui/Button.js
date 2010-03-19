@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class')
+jsio('from shared.javascript import Class')
 jsio('import ui.Component')
 
 // Do something like http://sexybuttons.googlecode.com/svn/trunk/index.html#

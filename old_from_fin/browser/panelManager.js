@@ -1,22 +1,22 @@
-jsio('from common.javascript import Singleton, bind, map');
+jsio('from shared.javascript import Singleton, bind, map');
 
-jsio('import browser.css as css');
-jsio('import browser.events as events');
-jsio('import browser.dom as dom');
-jsio('import browser.dimensions as dimensions');
+jsio('import client.css as css');
+jsio('import client.events as events');
+jsio('import client.dom as dom');
+jsio('import client.dimensions as dimensions');
 
-jsio('import browser.Animation');
+jsio('import client.Animation');
 
-jsio('import browser.UIComponent');
-jsio('import browser.panels.ItemPanel');
+jsio('import client.UIComponent');
+jsio('import client.panels.ItemPanel');
 
-jsio('import browser.itemFocus');
+jsio('import client.itemFocus');
 
 var logger = logging.getLogger(jsio.__path);
 
 css.loadStyles(jsio.__path);
 
-exports = Singleton(browser.UIComponent, function(supr) {
+exports = Singleton(client.UIComponent, function(supr) {
 	
 	this.createContent = function() {
 		this.addClassName('PanelManager');
@@ -27,14 +27,14 @@ exports = Singleton(browser.UIComponent, function(supr) {
 		this._panelWidth = 400;
 		this._panelMargin = 30;
 		this._offset = 0;
-		this._panelAnimation = new browser.Animation(bind(this, '_animatePanels'), 1000);
-		this._scrollAnimation = new browser.Animation(bind(this, '_animateScroll'), 500);
+		this._panelAnimation = new client.Animation(bind(this, '_animatePanels'), 1000);
+		this._scrollAnimation = new client.Animation(bind(this, '_animateScroll'), 500);
 		
 		events.add(this._element, 'scroll', bind(this, '_onScroll'));
 	}
 	
 	this._onScroll = function() {
-		browser.itemFocus.layout();
+		client.itemFocus.layout();
 	}
 	
 	this.showItem = function(item) {
@@ -135,7 +135,7 @@ exports = Singleton(browser.UIComponent, function(supr) {
 	this._addPanel = function(item) {
 		if (this._panelsByItem[item]) { return this._panelsByItem[item]; }
 		
-		var panel = new browser.panels.ItemPanel(this, item);
+		var panel = new client.panels.ItemPanel(this, item);
 		panel.isNew = true;
 		this._panelsByIndex.splice(this._focusIndex, 0, panel);
 		this._panelsByItem[item] = panel;

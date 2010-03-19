@@ -1,35 +1,35 @@
-jsio.path.common = 'js';
-jsio.path.browser = 'js';
+jsio.path.shared = 'js';
+jsio.path.client = 'js';
 
-jsio('from common.javascript import bind');
+jsio('from shared.javascript import bind');
 jsio('import net, logging');
-jsio('import common.itemFactory');
+jsio('import shared.itemFactory');
 
-jsio('import browser.dimensions as dimensions');
-jsio('import browser.events as events');
-jsio('import browser.css as css');
+jsio('import client.dimensions as dimensions');
+jsio('import client.events as events');
+jsio('import client.css as css');
 
-jsio('import browser.Client');
-jsio('import browser.Drawer');
-jsio('import browser.panelManager');
-jsio('import browser.resizeManager');
-jsio('import browser.keystrokeManager');
-jsio('import browser.LabelCreator');
+jsio('import client.Client');
+jsio('import client.Drawer');
+jsio('import client.panelManager');
+jsio('import client.resizeManager');
+jsio('import client.keystrokeManager');
+jsio('import client.LabelCreator');
 
-jsio('import browser.overlay');
+jsio('import client.overlay');
 
-css.loadStyles('browser.app');
+css.loadStyles('client.app');
 
-gClient = new browser.Client();
-gDrawer = new browser.Drawer();
-gPanelManager = browser.panelManager;
+gClient = new client.Client();
+gDrawer = new client.Drawer();
+gPanelManager = client.panelManager;
 gCreateLabelFn = function() {
-	var labelCreator = new browser.LabelCreator(function(labelName){
+	var labelCreator = new client.LabelCreator(function(labelName){
 		gDrawer.addLabel(labelName);
-		browser.overlay.hide();
+		client.overlay.hide();
 	});
-	browser.keystrokeManager.requestFocus(function(){}, true);
-	browser.overlay.show(labelCreator.getElement());
+	client.keystrokeManager.requestFocus(function(){}, true);
+	client.overlay.show(labelCreator.getElement());
 }
 
 gPanelManager.subscribe('PanelFocused', function(panel) {
@@ -43,7 +43,7 @@ gClient.connect(function(){
 	document.body.appendChild(gDrawer.getElement());
 	
 	gDrawer.subscribe('LabelClick', bind(gPanelManager, 'showLabel'));
-	browser.resizeManager.onWindowResize(function(size) {
+	client.resizeManager.onWindowResize(function(size) {
 		var drawerSize = gDrawer.layout();
 		gPanelManager.setOffset(drawerSize.width + 40);
 		gPanelManager.layout({ width: size.width, height: size.height - 58 });
@@ -61,7 +61,7 @@ gClient.connect(function(){
 	(function(){
 		var parts = document.location.hash.substr(2).split('/')
 		if (parts[0] == 'panel') {
-			var item = common.itemFactory.getItem(parts[2]);
+			var item = shared.itemFactory.getItem(parts[2]);
 			item.setType(parts[1]);
 			gPanelManager.showItem(item);
 		} else {

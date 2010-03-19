@@ -1,21 +1,21 @@
-jsio('from common.javascript import Class, bind');
+jsio('from shared.javascript import Class, bind');
 
-jsio('import browser.css as css');
-jsio('import browser.events as events');
-jsio('import browser.dimensions as dimensions');
-jsio('import browser.dom as dom');
+jsio('import client.css as css');
+jsio('import client.events as events');
+jsio('import client.dimensions as dimensions');
+jsio('import client.dom as dom');
 
-jsio('import browser.resizeManager');
-jsio('import browser.UIComponent');
-jsio('import browser.Label');
-jsio('import browser.ItemView');
-jsio('import browser.panels.ListPanel');
+jsio('import client.resizeManager');
+jsio('import client.UIComponent');
+jsio('import client.Label');
+jsio('import client.ItemView');
+jsio('import client.panels.ListPanel');
 
 var logger = logging.getLogger(jsio.__path);
 
 css.loadStyles(jsio.__path);
 
-exports = Class(browser.UIComponent, function(supr) {
+exports = Class(client.UIComponent, function(supr) {
 	
 	var margin = { top: 10, bottom: 50 };
 	var padding = 3;
@@ -27,7 +27,7 @@ exports = Class(browser.UIComponent, function(supr) {
 	this.init = function() {
 		supr(this, 'init');
 		this._itemViewClickCallback = bind(this, '_onItemViewClick');
-		this._labelListPanel = new browser.panels.ListPanel(this, 'Drawer');
+		this._labelListPanel = new client.panels.ListPanel(this, 'Drawer');
 		this._labelListPanel._contentMargin = 0;
 	}
 	
@@ -66,7 +66,7 @@ exports = Class(browser.UIComponent, function(supr) {
 		this._labelViewPanel.unsubscribe('ItemSelected', this._itemViewClickCallback);
 		dom.remove(this._labelViewPanel.getElement());
 		this._labelViewPanel = null;
-		browser.resizeManager.fireResize();
+		client.resizeManager.fireResize();
 		this.focus();
 	}
 	
@@ -90,7 +90,7 @@ exports = Class(browser.UIComponent, function(supr) {
 	
 	this.addLabels = function(labels) {
 		for (var i=0, label; label = labels[i]; i++) {
-			var item = new browser.Label(label);
+			var item = new client.Label(label);
 			this._labelListPanel.addItem(item);
 		}
 	}
@@ -101,7 +101,7 @@ exports = Class(browser.UIComponent, function(supr) {
 		this.removePanel(this._labelViewPanel);
 		
 		gClient.getItemsForLabel(label, bind(this, '_onLabelItemsReceived'));
-		this._labelViewPanel = new browser.panels.ListPanel(this, label);
+		this._labelViewPanel = new client.panels.ListPanel(this, label);
 		this._labelViewPanel.appendTo(this._element);
 		this._labelViewPanel.addClassName('labelViewPanel');
 		this._labelViewPanel.subscribe('ItemSelected', this._itemViewClickCallback);
@@ -112,16 +112,16 @@ exports = Class(browser.UIComponent, function(supr) {
 				this._labelViewPanel.minimize();
 			}
 			this._labelViewPanel.focus();
-			browser.resizeManager.fireResize();
+			client.resizeManager.fireResize();
 		});
 		
 		this.focusPanel();
-		browser.resizeManager.fireResize();
+		client.resizeManager.fireResize();
 	}
 	
 	this._onLabelItemsReceived = function(label, items) {
 		for (var i=0, item; item = items[i]; i++) { 
-			var itemView = new browser.ItemView(item, item.getType(), 'list');
+			var itemView = new client.ItemView(item, item.getType(), 'list');
 			this._labelViewPanel.addItem(itemView);
 		}
 	}

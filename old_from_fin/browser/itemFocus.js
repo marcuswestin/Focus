@@ -1,14 +1,14 @@
-jsio('from common.javascript import Singleton');
-jsio('import browser.dimensions as dimensions');
-jsio('import browser.dom as dom');
-jsio('import browser.css as css');
-jsio('import browser.UIComponent');
-jsio('import browser.views.ItemValueView');
-jsio('import browser.views.ItemReferenceView');
+jsio('from shared.javascript import Singleton');
+jsio('import client.dimensions as dimensions');
+jsio('import client.dom as dom');
+jsio('import client.css as css');
+jsio('import client.UIComponent');
+jsio('import client.views.ItemValueView');
+jsio('import client.views.ItemReferenceView');
 
 css.loadStyles(jsio.__path);
 
-exports = Singleton(browser.UIComponent, function() {
+exports = Singleton(client.UIComponent, function() {
 	
 	var borderWidth = 7;
 	
@@ -31,9 +31,9 @@ exports = Singleton(browser.UIComponent, function() {
 			this.appendTo(document.body);
 		}
 
-		if (itemView instanceof browser.views.ItemReferenceView) {
+		if (itemView instanceof client.views.ItemReferenceView) {
 			this._element.className = 'ItemFocus onReferenceItemView';
-		} else if (itemView instanceof browser.views.ItemValueView) {
+		} else if (itemView instanceof client.views.ItemValueView) {
 			this._element.className = 'ItemFocus onValueItemView';
 		} else {
 			this._element.className = 'ItemFocus';

@@ -7,8 +7,8 @@
 <body>
 <script type="text/javascript" src="../lib/fin/lib/js.io/packages/jsio.js"></script>
 <script>
-	jsio.path.browser = '../lib/fin/js'
-	jsio.path.common = '../lib/fin/js'
+	jsio.path.client = '../lib/fin/js'
+	jsio.path.shared = '../lib/fin/js'
 	jsio.path.ui = '../js/'
 	jsio.path.tasks = '../js/'
 	jsio.path.views = '../js/'
@@ -16,7 +16,7 @@
 	Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
 	Meebo('domReady')
 	
-	jsio('import browser.fin') // makes fin globally accesible
+	jsio('import client.fin') // makes fin globally accesible
 	
 	window.gBody = document.body
 	window.gUser = null
@@ -39,7 +39,7 @@
 	jsio('import tasks.panels.ItemPanel')
 	jsio('import ui.overlay')
 	
-	jsio('import browser.xhr')
+	jsio('import client.xhr')
 	
 	gUtil = {
 		_templates: {},
@@ -48,7 +48,7 @@
 				callback(gUtil._templates[itemType])
 				return
 			}
-			browser.xhr.get('templates/' + itemType + '.html', function(template) {
+			client.xhr.get('templates/' + itemType + '.html', function(template) {
 				gUtil._templates[itemType] = template
 				callback(template)
 			})

@@ -1,9 +1,9 @@
-jsio('from common.javascript import Class, bind');
+jsio('from shared.javascript import Class, bind');
 jsio('from net.protocols.rtjp import RTJPProtocol');
 jsio('import net, logging');
-jsio('import common.itemFactory');
-jsio('import browser.overlay');
-jsio('import browser.loginManager');
+jsio('import shared.itemFactory');
+jsio('import client.overlay');
+jsio('import client.loginManager');
 
 var logger = logging.getLogger(jsio.__path);
 
@@ -18,7 +18,7 @@ exports = Class(RTJPProtocol, function(supr) {
 		this._subscribedItems = {};
 		this._labelCallbacks = {};
 		this._itemCreationCallbacks = {};
-		common.itemFactory.subscribe('ItemCreated', bind(this, '_onItemCreatedInFactory'));
+		shared.itemFactory.subscribe('ItemCreated', bind(this, '_onItemCreatedInFactory'));
 	}
 	
 	this._onItemCreatedInFactory = function(item) {
@@ -80,35 +80,35 @@ exports = Class(RTJPProtocol, function(supr) {
 					this.sendFrame('AUTHENTICATE', { email: email, password: password });
 				});
 				
-				browser.overlay.show(browser.loginManager.getElement(), true); 
-				browser.loginManager.requestAuthentication(callback, args.message);
+				client.overlay.show(client.loginManager.getElement(), true); 
+				client.loginManager.requestAuthentication(callback, args.message);
 				break;
 			case 'WELCOME':
 				logger.log('Connected!')
-				browser.overlay.hide();
+				client.overlay.hide();
 				for (var i=0; i < this._onConnectedCallbacks.length; i++) {
 					this._onConnectedCallbacks[i]();
 				}
 				delete this._onConnectedCallbacks;
 				break;
 			case 'ITEM_SNAPSHOT':
-				setTimeout(bind(common.itemFactory, 'loadItemSnapshot', args), 0);
+				setTimeout(bind(shared.itemFactory, 'loadItemSnapshot', args), 0);
 				break;
 			case 'ITEM_MUTATED':
 				var mutation = args.mutation;
-				var item = common.itemFactory.getItem(args.mutation._id);
+				var item = shared.itemFactory.getItem(args.mutation._id);
 				setTimeout(bind(item, 'applyMutation', args.mutation, false), 0);
 				break;
 			case 'LABELS':
 				setTimeout(bind(gDrawer, 'addLabels', args.labels), 0);
-				setTimeout(bind(browser.overlay, 'hide'), 0);
+				setTimeout(bind(client.overlay, 'hide'), 0);
 				break;
 			case 'LABEL_LIST':
 				var callback = this._labelCallbacks[args.label];
 				delete this._labelCallbacks[args.label];
 				var items = [];
 				for (var i=0, listItem; listItem = args.list[i]; i++) {
-					var item = common.itemFactory.getItem(listItem.id);
+					var item = shared.itemFactory.getItem(listItem.id);
 					item.setType(listItem.type);
 					items.push(item);
 				}
@@ -117,7 +117,7 @@ exports = Class(RTJPProtocol, function(supr) {
 			case 'ITEM_CREATED':
 				var callback = this._itemCreationCallbacks[args.type];
 				delete this._itemCreationCallbacks[args.type];
-				var item = common.itemFactory.getItem(args._id);
+				var item = shared.itemFactory.getItem(args._id);
 				item.setType(args.type);
 				callback(item);
 				break;

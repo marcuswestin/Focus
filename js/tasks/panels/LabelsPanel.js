@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class, map')
+jsio('from shared.javascript import Class, map')
 jsio('import tasks.panels.Panel')
 jsio('import ui.lists.List')
 

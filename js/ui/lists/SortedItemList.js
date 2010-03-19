@@ -1,4 +1,4 @@
-jsio('from common.javascript import Class, bind, delayedFunction')
+jsio('from shared.javascript import Class, bind, delayedFunction')
 jsio('import ui.lists.List')
 
 var SortableItem = Class(function() {

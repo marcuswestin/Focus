@@ -1,7 +1,7 @@
-jsio('from common.javascript import Class');
-jsio('import common.Publisher');
+jsio('from shared.javascript import Class');
+jsio('import shared.Publisher');
 
-exports = Class(common.Publisher, function(supr) {
+exports = Class(shared.Publisher, function(supr) {
 	
 	this._domTag = 'div'
 	this._className = null

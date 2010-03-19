@@ -1,4 +1,4 @@
-jsio('from common.javascript import Singleton, bind')
+jsio('from shared.javascript import Singleton, bind')
 jsio('import ui.resizeManager')
 jsio('import ui.Component')
 

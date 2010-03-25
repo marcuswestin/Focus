@@ -40,7 +40,8 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this._getCellFor = function(itemId) {
-		var text = itemId.replace(/_/g, ' ')
-		return this._create({ parent: this._element, className: 'item', text: text })
+		var text = itemId.replace(/_/g, ' '),
+			className = 'item ' + itemId.toLowerCase().replace(/ /g, '-')
+		return this._create({ parent: this._element, className: className, text: text })
 	}
 })

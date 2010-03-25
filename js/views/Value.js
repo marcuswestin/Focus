@@ -38,5 +38,6 @@ exports = Class(ui.Component, function(supr){
 			value = value.replace(/ $/, '&nbsp;')
 		}
 		this._element.innerHTML = value
+		this._element.className = this._className + ' fin-Value-' + this._property + '-' + value
 	}
 })

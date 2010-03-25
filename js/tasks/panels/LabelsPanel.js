@@ -13,9 +13,14 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		
 		this._items = {
 			"My tasks": [{ type: 'task', user: gUser.getId(), completed: false }, 'priority'],
-			"Unassigned": [{ type: 'task', user: false }, 'priority'],
-			"Projects": [{ type: 'project' }, 'target_date'],
-			"All tasks": [{ type: 'task' }, 'priority']
+				"High-Pri": [{ type: 'task', user: gUser.getId(), completed: false, priority: ['<', 3] }, 'priority'],
+				"Completed": [{ type: 'task', user: gUser.getId(), completed: true }, 'priority'],
+				"Unassigned": [{ type: 'task', user: false }, 'priority'],
+				"All tasks": [{ type: 'task' }, 'priority'],
+			"My projects": [{ type: 'project' }, 'target_date'],
+				"Beta_1": [{ type: 'project', title: 'Beta_1' }, 'target_date'],
+				"Cleanup": [{ type: 'project', title: 'Cleanup' }, 'target_date']
+			// TODO Add all my projects to projects list
 		}
 
 		var list = new ui.lists.List()

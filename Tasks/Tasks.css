@@ -52,10 +52,22 @@
 }
 
 /* Labels Panel */
-.LabelsPanel .item {
-	cursor: pointer;
+.LabelsPanel .List {
+	margin: 5px 0 0 11px;
 }
-.LabelsPanel .item.selected {
+.LabelsPanel .List .item {
+	cursor: pointer;
+	margin: 0 0 0 10px;
+	font-size: 15px;
+	color: #444;
+}
+.LabelsPanel .List .item.my-tasks, 
+.LabelsPanel .List .item.my-projects {
+	margin: 5px 0 0 0;
+	font-weight: bold;
+} 
+
+.LabelsPanel .List .item.selected {
 	text-decoration: underline;
 }
 
@@ -118,4 +130,12 @@
 
 .ItemPanel .property-list .Checkbox {
 	margin-top: 1px;
+}
+
+
+/**************************
+ * Value specific styling *
+ **************************/
+.fin-Value-priority-0, .fin-Value-priority-1 {
+	font-weight: bold;
 }

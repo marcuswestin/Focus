@@ -14,7 +14,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		// This can't be defined until gUser exists
 		this._labelList = [{ 
 			label: "My tasks", 
-			view: ['SortedItemListView', { type: 'task', user: gUser }, 'priority'] 
+			view: ['SortedItemListView', { type: 'task', user: gUser.getId(), completed: false }, 'priority'] 
 		}, { 
 		// 	label: "My projects", 
 		// 	view: ['ListView', { item: gUser, property: 'projects' }]

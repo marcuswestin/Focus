@@ -11,30 +11,16 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	this._createContent = function() {
 		supr(this, '_createContent')
 		
-		// This can't be defined until gUser exists
-		this._labelList = [{ 
-			label: "My tasks", 
-			view: ['SortedItemListView', { type: 'task', user: gUser.getId(), completed: false }, 'priority'] 
-		}, { 
-		// 	label: "My projects", 
-		// 	view: ['ListView', { item: gUser, property: 'projects' }]
-		// }, { 
-			label: "Projects", 
-			view: ['SortedItemListView', { type: 'project' }, 'target_date']
-		}, { 
-			label: "Unassigned tasks", 
-			view: ['SortedItemListView', { type: 'task', user: undefined }, 'priority']
-		}, { 
-			label: "All tasks", 
-			view: ['SortedItemListView', { type: 'task' }, 'priority']
-		}]
-		
-		for (var i=0, labelItem; labelItem = this._labelList[i]; i++) { // allow lookup by label
-			this._labelList[labelItem.label] = labelItem
+		this._items = {
+			"My tasks": [{ type: 'task', user: gUser.getId(), completed: false }, 'priority'],
+			"Unassigned": [{ type: 'task', user: false }, 'priority'],
+			"Projects": [{ type: 'project' }, 'target_date'],
+			"All tasks": [{ type: 'task' }, 'priority']
 		}
-		
+
 		var list = new ui.lists.List()
-		var labels = map(this._labelList, function(labelItem) { return labelItem.label })
+		var labels = []
+		for (var label in this._items) { labels.push(label) }
 		list.setItems(labels)
 		list.subscribe('Click', bind(this, '_onClick'))
 		this._content.appendChild(list.getElement())
@@ -45,8 +31,11 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		this.addClassName(element, 'selected')
 		this._selectedElement = element
 		
-		var labelItem = this._labelList[labelId]
-		var view = fin.getView.apply(fin, labelItem.view)
+		var labelItem = this._items[labelId],
+			query = labelItem[0],
+			sortyBy = labelItem[1],
+			view = fin.getView('SortedItemListView', query, sortyBy)
+		
 		gListPanel.loadList(view)
 	}
 	

@@ -33,8 +33,10 @@ exports = Class(ui.Component, function(supr){
 	
 	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
-		value = value.replace(/\n/g, '<br />')
-		value = value.replace(/ $/, '&nbsp;')
+		if (typeof value == 'string') {
+			value = value.replace(/\n/g, '<br />')
+			value = value.replace(/ $/, '&nbsp;')
+		}
 		this._element.innerHTML = value
 	}
 })

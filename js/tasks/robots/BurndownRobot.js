@@ -23,7 +23,7 @@ exports = Class(function() {
 	
 	this._onRemainingTimeChange = function(projectId, newTimeRemaining) {
 		var newHistoryItem = { timestamp: new Date().getTime(), timeRemaining: newTimeRemaining }
-		fin.getItem(projectId).mutate({ property: 'burndownHistory', append: newHistoryItem })
+		fin.getItem(projectId).mutate({ property: 'burndown_history', append: newHistoryItem })
 	}
 
 })

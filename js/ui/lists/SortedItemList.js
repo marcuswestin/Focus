@@ -33,9 +33,12 @@ exports = Class(ui.lists.List, function(supr){
 	}
 	
 	this._addItems = function(itemIds) {
+		
 		for (var i=0, itemId; itemId = itemIds[i]; i++) {
+			if (this._items[itemId]) { continue } // Hack: local item set changes can publish mutation twice
 			var item = fin.getItem(itemId)
 			this._items.push(new SortableItem(item, this._sortBy))
+			this._items[itemId] = true // Hack: local item set changes can publish mutation twice
 			item.addDependant(this._sortBy, bind(this, '_render'))
 		}
 	}
@@ -47,6 +50,7 @@ exports = Class(ui.lists.List, function(supr){
 				var itemId = item.getId()
 				if (itemId != removeItemId) { continue }
 				this._items.splice(j, 1)
+				delete this._items[itemId] // Hack: local item set changes can publish mutation twice
 				this.remove(this._cells[itemId])
 				delete this._cells[itemId]
 				break

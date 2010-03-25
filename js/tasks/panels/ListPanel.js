@@ -19,7 +19,15 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this._createItem = function() {
-		fin.createItem({ type: 'task', user: gUser.getId() }, function(item) {
+		var data = { 
+			type: 'task', 
+			title: 'I need to...',
+			user: gUser.getId(), 
+			completed: false, 
+			priority: 3, 
+			remaining_time: 3 
+		}
+		fin.createItem(data, function(item) {
 			gItemPanel.setItem(item)
 		})
 	}

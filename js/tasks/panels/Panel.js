@@ -7,7 +7,7 @@ exports = Class(ui.Component, function(supr) {
 	this._className = 'Panel'
 	this._width = null // override
 	this._left = null // override
-	this._padding = 14
+	this._padding = 4
 	
 	this._createContent = function() {
 		this._content = this._create({ parent: this._element, className: 'content' })

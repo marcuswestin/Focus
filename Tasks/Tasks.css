@@ -47,7 +47,6 @@
 	background: #fff;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 7px;
-	padding: 10px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -67,18 +66,56 @@
 	right: 10px;
 }
 
+.ListPanel .List {
+	margin: 5px 0;
+}
+
 .ListPanel .List .cell {
 	cursor: pointer;
-	height: 60px;
+	height: 38px;
 	overflow: hidden;
+	padding: 2px 6px 0px;
+	margin: 0px 5px;
+}
+
+.ListPanel .List .cell:nth-child(odd) {
+	background-color: #deedfc;
 }
 
 .ListPanel .List .cell .title {
 	color: #333;
-	max-height: 35px;
+	height: 17px;
 	overflow: hidden;
 }
-.ListPanel .List .cell .priority {
+.ListPanel .List .cell .priority,
+.ListPanel .List .cell .completed {
 	float: right;
 	color: #666;
+}
+
+/* Item Panel */
+.ItemPanel .fin-Template {
+	display: block;
+	padding: 10px;
+}
+
+.ItemPanel .title {
+	font-size: 20px;
+}
+
+.ItemPanel .property-list > div {
+	margin: 10px 0 0 0;
+}
+
+.ItemPanel .property-list .Value {
+	position: absolute;
+	left: 140px;
+}
+
+.ItemPanel .property-list .Input {
+	margin-top: -2px;
+}
+
+.ItemPanel .property-list .Checkbox {
+	margin-top: 1px;
 }

@@ -8,12 +8,12 @@ exports = Class(function() {
 	}
 	
 	this._onProjectsChange = function(mutation) {
-		
+
 		if (mutation.add) {
-			var projectId = mutation.add
-			
-			var taskSet = fin.getItemSet({ type: 'task', status: 'incomplete', project: projectId })
-			taskSet.reduce({ sum: 'estimated_time' }, bind(this, '_onRemainingTimeChange', projectId))
+			for (var i=0, projectId; projectId = mutation.add[i]; i++) {
+				var taskSet = fin.getItemSet({ type: 'task', status: 'incomplete', project: projectId })
+				taskSet.sum('estimated_time', bind(this, '_onRemainingTimeChange', projectId))
+			}
 		}
 		
 		if (mutation.remove) {

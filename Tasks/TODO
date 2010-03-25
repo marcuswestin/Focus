@@ -1,5 +1,11 @@
 === P1 =====
 
+Add global data item sets
+	gProjects
+	gSession = { user: userItem }
+	gUsers
+
+
 Add a reset stylesheet to fan
 
 Give new users useful labels

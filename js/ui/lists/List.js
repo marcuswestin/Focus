@@ -17,11 +17,16 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this._onClick = function(cellId, element) {
-		if (this._selectedElement) { this.removeClassName(this._selectedElement, 'selected') }
+		this.unselect()
 		this._selectedElement = element
 		this.addClassName(this._selectedElement, 'selected')
-		
 		this._publish('Click', cellId, element)
+	}
+	
+	this.unselect = function() {
+		if (this._selectedElement) { 
+			this.removeClassName(this._selectedElement, 'selected') 
+		}
 	}
 	
 	// this._onDrag = function() {

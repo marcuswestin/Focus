@@ -43,15 +43,22 @@
 	
 	gUtil = {
 		_templates: {},
+		_templateQueue: {},
 		loadTemplate: function(itemType, callback) {
 			if (gUtil._templates[itemType]) { 
 				callback(gUtil._templates[itemType])
-				return
+			} else if (gUtil._templateQueue[itemType]) {
+				gUtil._templateQueue[itemType].push(callback)
+			} else {
+				gUtil._templateQueue[itemType] = [callback]
+				client.xhr.get('templates/' + itemType + '.html', function(template) {
+					gUtil._templates[itemType] = template
+					var cbs = gUtil._templateQueue[itemType]
+					for (var i=0, cb; cb = cbs[i]; i++) {
+						cb(template)
+					}
+				})
 			}
-			client.xhr.get('templates/' + itemType + '.html', function(template) {
-				gUtil._templates[itemType] = template
-				callback(template)
-			})
 		}
 	}
 	

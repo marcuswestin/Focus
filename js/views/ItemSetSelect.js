@@ -36,7 +36,7 @@ exports = Class(ui.Component, function(supr){
 	this._onItemsChange = function(mutation) {
 		forEach(mutation.add, this, function(itemId) {
 			if (this._options[itemId]) { return }
-			this._options[itemId] = new Option(itemId, 'Loading...', false, false)
+			this._options[itemId] = new Option('Loading...', itemId, false, false)
 			this._element.add(this._options[itemId], null)
 			if (itemId == this._item.getProperty(this._targetProperty)) {
 				this._element.selectedIndex = this._element.options.length - 1

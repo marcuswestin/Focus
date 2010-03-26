@@ -69,6 +69,10 @@
 		window.gListPanel = new tasks.panels.ListPanel()
 		window.gItemPanel = new tasks.panels.ItemPanel()
 		
+		// global sets
+		window.gProjects = fin.getItemSet({ 'type': 'project' })
+		window.gUsers = fin.getItemSet({ 'type': 'user' })
+		
 		ui.overlay.show(gLoginManager.getElement())
 		gLoginManager.subscribe('Login', function(email, password){
 			fin.exists(email, function(userExists) {

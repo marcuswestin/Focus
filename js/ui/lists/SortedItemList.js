@@ -8,6 +8,7 @@ var SortableItem = Class(function() {
 	}
 	this.toString = function() { return this._item.getProperty(this._sortBy) }
 	this.getId = function() { return this._item.getId() }
+	this.getProperty = function(name) { return this._item.getProperty(name) }
 })
 
 exports = Class(ui.lists.List, function(supr){

@@ -46,6 +46,7 @@ exports = Class(ui.Component, function(supr){
 			var id = item.getId ? item.getId() : item
 			if (!this._cells[id]) {
 				this._cells[id] = this._getCellFor(item)
+				this._cells[id].className = 'cell ' + id.replace(/ /g, '-').toLowerCase()
 				this._cells[id].delegateId = item
 			}
 			this._insertElement(this._cells[id], i)
@@ -53,8 +54,6 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this._getCellFor = function(itemId) {
-		var text = itemId.replace(/_/g, ' '),
-			className = 'item ' + itemId.toLowerCase().replace(/ /g, '-')
-		return this._create({ parent: this._element, className: className, text: text })
+		return this._create({ parent: this._element, text: itemId.replace(/_/g, ' ') })
 	}
 })

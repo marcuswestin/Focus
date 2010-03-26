@@ -91,7 +91,10 @@
 }
 
 .ListPanel .List .cell:nth-child(odd) {
-	background-color: #deedfc;
+	background-color: #eeedfc;
+}
+.ListPanel .List .cell.selected {
+	background-color: #ddeeff;
 }
 
 .ListPanel .List .cell .title {

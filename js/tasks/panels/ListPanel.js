@@ -23,7 +23,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 			type: 'task', 
 			title: 'I need to...',
 			user: gUser.getId(), 
-			completed: false, 
+			done: false, 
 			priority: 3, 
 			remaining_time: 3 
 		}

@@ -7,7 +7,7 @@ exports = Class(ui.Component, function(supr) {
 	this._className = 'Panel'
 	this._width = null // override
 	this._left = null // override
-	this._headerHeight = 20
+	this._headerHeight = 22
 	this._padding = 2
 	this._border = 1
 	

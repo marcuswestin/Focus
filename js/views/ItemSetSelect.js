@@ -4,7 +4,7 @@ jsio('import ui.Component')
 exports = Class(ui.Component, function(supr){
 	
 	this._domTag = 'select'
-	this._className = 'Select'
+	this._className = 'Value Select'
 	
 	// (( ItemSetSelect type project title )) -> list of all items of type project, displayed by title
 	this.init = function(jsArgs, viewArgs) {

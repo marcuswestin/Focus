@@ -12,8 +12,16 @@ exports = Class(ui.Component, function(supr){
 	}
 	
 	this._createContent = function() {
-		this._delegateOn('click', bind(this, '_publish', 'Click'))
+		this._delegateOn('click', bind(this, '_onClick'))
 		this._render()
+	}
+	
+	this._onClick = function(cellId, element) {
+		if (this._selectedElement) { this.removeClassName(this._selectedElement, 'selected') }
+		this._selectedElement = element
+		this.addClassName(this._selectedElement, 'selected')
+		
+		this._publish('Click', cellId, element)
 	}
 	
 	// this._onDrag = function() {

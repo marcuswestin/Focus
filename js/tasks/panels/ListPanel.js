@@ -6,7 +6,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ListPanel'
 	this._width = 260
-	this._left = 150
+	this._left = 170
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
@@ -32,8 +32,10 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		})
 	}
 	
-	this.loadList = function(listView) {
+	this.loadList = function(listView, title) {
 		if (this._listView) { logger.warn("TODO: release current list view")}
+		
+		this._setTitle(title)
 		
 		this._content.innerHTML = ''
 		this._listView = listView

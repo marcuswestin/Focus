@@ -52,3 +52,42 @@ body, html {
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
+
+
+/**********
+ * Panels *
+ **********/
+
+.Panel {
+	position: absolute;
+	border: 1px solid #888;
+	background-color: #aaa;
+	top: 50px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.Panel .header {
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #888;
+	-moz-border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 8px 8px 0 0;
+}
+
+.Panel .header .title {
+	margin: 2px 0 0 5px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #666;
+}
+
+.Panel .content {
+	position: absolute;
+	border: 1px solid #888;
+	background: #fff;
+	-moz-border-radius: 0 0 6px 6px;
+	-webkit-border-radius: 0 0 8px 8px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}

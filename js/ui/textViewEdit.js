@@ -46,8 +46,6 @@ exports = Singleton(ui.Component, function(supr) {
 		if (this._view) { 
 			this._view.unsubscribe('Resize', this._resizeSub)
 			this._item.releaseFocus()
-			delete this._view
-			delete this._item
 		}
 		supr(this, 'hide')
 	}

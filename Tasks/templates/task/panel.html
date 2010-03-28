@@ -2,9 +2,9 @@
 	(( Editable title ))
 </div>
 
-<div class="property-list">
+<div class="properties">
 	<div class="user">
-		User: (( Editable user )) <!-- TODO this should really be a UserPicker view -->
+		User: (( ItemSetSelect type user _id ))
 	</div> 
 
 	<div class="done">
@@ -22,7 +22,11 @@
 	<div class="project">
 		Project: (( ItemSetSelect type project title ))
 	</div>
-
+	
+	<div class="burndown-chart">
+		(( BurndownChart burndown_history project ))
+	</div>
+	
 	<div class="discussion">
 		<!-- We want a Discussion view over the property discussion here later -->
 	</div>

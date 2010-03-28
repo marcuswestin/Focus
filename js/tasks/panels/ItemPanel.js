@@ -30,7 +30,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._onItemType = function(mutation, type) {
 		this._updateTitle()
-		gUtil.loadTemplate(type, bind(this, function(template) {
+		gUtil.loadTemplate(type, 'panel', bind(this, function(template) {
 			this._content.innerHTML = ''
 			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))
 		}))

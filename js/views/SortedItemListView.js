@@ -19,7 +19,7 @@ exports = Class(ui.lists.SortedItemList, function(supr){
 		if (this._template) {
 			this._applyTemplate(container, itemId, this._template)
 		} else {
-			gUtil.loadTemplate(this._type + '-listCell', bind(this, '_applyTemplate', container, itemId))
+			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', container, itemId))
 		}
 		
 		return container

@@ -57,7 +57,7 @@ exports = Class(ui.Component, function(supr){
 	this._onTargetPropertyChange = function(mutation, targetPropertyValue) {
 		for (var i=0, option; option = this._element.options[i]; i++) {
 			if (option.value != targetPropertyValue) { continue }
-			this._element.selectIndex = i
+			this._element.selectedIndex = i
 			break
 		}
 	}

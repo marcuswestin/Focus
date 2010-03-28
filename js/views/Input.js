@@ -45,6 +45,7 @@ exports = Class(views.Value, function(supr){
 		if (typeof newValue == 'undefined') { return }
 		this._onBlur()
 	}
+	this.clear = function() { this.setValue('') }
 		
 	this._onKeyPress = function(e) {
 		// TODO: Deal with pasting

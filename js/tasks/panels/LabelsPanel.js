@@ -14,8 +14,6 @@ exports = Class(tasks.panels.Panel, function(supr) {
 
 		this._createItems()
 		this._createLists()
-
-		setTimeout(bind(this, '_onClick', "My tasks"))
 	}
 	
 	this._createItems = function() {

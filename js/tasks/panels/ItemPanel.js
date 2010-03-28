@@ -15,7 +15,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	
 	this._onWindowResize = function(winSize) {
 		var leftPadding = 10,
-			rightPadding = 40
+			rightPadding = 160
 		this._width = winSize.width - this._left - leftPadding - rightPadding
 		supr(this, '_onWindowResize', arguments)
 	}

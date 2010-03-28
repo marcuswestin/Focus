@@ -4,11 +4,13 @@ jsio('import shared.Publisher');
 exports = Class(shared.Publisher, function(supr) {
 	
 	this._domTag = 'div'
+	this._domType = null
 	this._className = null
 	
 	this.getElement = function() {
 		if (!this._element) { 
 			this._element = document.createElement(this._domTag)
+			if (this._domType) { this._element.type = this._domType }
 			if (this._className) { this.addClassName(this._className) }
 			this._createContent()
 		}

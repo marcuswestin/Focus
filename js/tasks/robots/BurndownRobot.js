@@ -1,4 +1,4 @@
-jsio('from shared.javascript import Class, bind')
+jsio('from shared.javascript import Class, bind, forEach')
 
 exports = Class(function() {
 	
@@ -8,22 +8,21 @@ exports = Class(function() {
 	}
 	
 	this._onProjectsChange = function(mutation) {
-
-		if (mutation.add) {
-			for (var i=0, projectId; projectId = mutation.add[i]; i++) {
-				var taskSet = fin.getItemSet({ type: 'task', status: 'incomplete', project: projectId })
-				taskSet.sum('estimated_time', bind(this, '_onRemainingTimeChange', projectId))
-			}
-		}
 		
-		if (mutation.remove) {
-			logger.warn("TODO: Release item set and it's reduce")
-		}
+		forEach(mutation.add, this, function(projectId) {
+			logger.log("New project", projectId)
+			var tasks = fin.getItemSet({ type: 'task', done: false, project: projectId })
+			tasks.sum('remaining_time', bind(this, '_onRemainingTimeChange', projectId))
+		})
+		
+		forEach(mutation.remove, function(projectId) {
+			logger.warn("TODO: Release item set and it's reduce", projectId)
+		})
 	}
 	
-	this._onRemainingTimeChange = function(projectId, newTimeRemaining) {
-		var newHistoryItem = { timestamp: new Date().getTime(), timeRemaining: newTimeRemaining }
+	this._onRemainingTimeChange = function(projectId, mutation, newTimeRemaining) {
+		logger.log("Remaining time changed", projectId, newTimeRemaining)
+		var newHistoryItem = { timestamp: new Date().getTime(), remaining_time: newTimeRemaining }
 		fin.getItem(projectId).mutate({ property: 'burndown_history', append: newHistoryItem })
 	}
-
 })

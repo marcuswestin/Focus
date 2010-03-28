@@ -5,6 +5,9 @@
 	<link rel="stylesheet" href="Tasks.css" type="text/css">
 </head>
 <body>
+	<script type="text/javascript" src="../lib/raphael/raphael.js"></script>
+	<script type="text/javascript" src="../lib/g.raphael/g.raphael.js"></script>
+	<script type="text/javascript" src="../lib/g.raphael/g.line.js"></script>
 <script type="text/javascript" src="../lib/fin/lib/js.io/packages/jsio.js"></script>
 <script>
 	jsio.path.client = '../lib/fin/js'
@@ -27,6 +30,7 @@
 	jsio('import views.Editable')
 	jsio('import views.SortedItemListView')
 	jsio('import views.ItemSetSelect')
+	jsio('import views.BurndownChart')
 	
 	fin.registerView('Value', views.Value)
 	fin.registerView('Input', views.Input)
@@ -34,6 +38,7 @@
 	fin.registerView('Editable', views.Editable)
 	fin.registerView('SortedItemListView', views.SortedItemListView)
 	fin.registerView('ItemSetSelect', views.ItemSetSelect)
+	fin.registerView('BurndownChart', views.BurndownChart)
 	
 	jsio('import tasks.LoginManager')
 	jsio('import tasks.panels.LabelsPanel')

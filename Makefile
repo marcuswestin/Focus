@@ -6,6 +6,7 @@
 
 run-tasks:
 	make -C lib/fin run-dbs &
+	sleep 2;
 	cd lib/fin/js/server; node run_server.js &
 	cd Tasks; node run_robots.js &
 

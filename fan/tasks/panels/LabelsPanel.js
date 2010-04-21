@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Class, map')
-jsio('import tasks.panels.Panel')
-jsio('import ui.lists.List')
+jsio('import fan.tasks.panels.Panel')
+jsio('import fan.ui.lists.List')
 
-exports = Class(tasks.panels.Panel, function(supr) {
+exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._className += ' LabelsPanel'
 	this._width = 150
@@ -29,8 +29,8 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	}
 	
 	this._createLists = function() {
-		var tasksList = new ui.lists.List(),
-			projectsList = fin.getView('SortedItemListView', { type: 'project' }, 'title', '(( title ))'),
+		var tasksList = new fan.ui.lists.List(),
+			projectsList = fin.createView('SortedItemListView', { type: 'project' }, 'title', '(( title ))'),
 			taskLabels = []
 		
 		tasksList.subscribe('Click', bind(this, '_onListClick', projectsList)) // pass in other list for unselect
@@ -49,7 +49,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 		var preItem = this._items[selectedItem]
 			query = preItem ? preItem[0] : { type: 'task', project: selectedItem.getId() },
 			sortBy = preItem ? preItem[1] : 'priority',
-			view = fin.getView('SortedItemListView', query, sortBy)
+			view = fin.createView('SortedItemListView', query, sortBy)
 
 		gListPanel.loadList(view, preItem ? selectedItem : selectedItem.getProperty('title'))
 	}

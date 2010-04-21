@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Class')
-jsio('import tasks.panels.Panel')
-jsio('import ui.Button')
+jsio('import fan.tasks.panels.Panel')
+jsio('import fan.ui.Button')
 
-exports = Class(tasks.panels.Panel, function(supr) {
+exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ListPanel'
 	this._width = 260
@@ -11,7 +11,7 @@ exports = Class(tasks.panels.Panel, function(supr) {
 	this._createContent = function() {
 		supr(this, '_createContent')
 		
-		var taskButton = new ui.Button('Create new task')
+		var taskButton = new fan.ui.Button('Create new task')
 		taskButton.subscribe('Click', bind(this, '_createItem'))
 		taskButton.appendTo(this._element)
 		

@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Class, bind')
-jsio('import ui.lists.List')
+jsio('import fan.ui.lists.List')
 
-exports = Class(ui.lists.List, function(supr){
+exports = Class(fan.ui.lists.List, function(supr){
 	
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')

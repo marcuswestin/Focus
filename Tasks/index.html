@@ -12,9 +12,7 @@
 <script>
 	jsio.path.client = '../lib/fin/js'
 	jsio.path.shared = '../lib/fin/js'
-	jsio.path.ui = '../fan/'
-	jsio.path.tasks = '../fan/'
-	jsio.path.views = '../fan/'
+	jsio.path.fan = '../'
 	
 	Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
 	Meebo('domReady')
@@ -22,33 +20,34 @@
 	jsio('import client.fin') // makes fin globally accesible
 	
 	window.gBody = document.body
-	window.gUser = null
+	window.gUserId = null
 	
-	jsio('import views.Value')
-	jsio('import views.Input')
-	jsio('import views.Checkbox')
-	jsio('import views.ListView')
-	jsio('import views.Editable')
-	jsio('import views.SortedItemListView')
-	jsio('import views.ItemSetSelect')
-	jsio('import views.BurndownChart')
-	jsio('import views.Comments')
+	jsio('import fan.views.Value')
+	jsio('import fan.views.Input')
+	jsio('import fan.views.Checkbox')
+	jsio('import fan.views.ListView')
+	jsio('import fan.views.Editable')
+	jsio('import fan.views.SortedItemListView')
+	jsio('import fan.views.ItemSetSelect')
+	jsio('import fan.views.BurndownChart')
+	jsio('import fan.views.Comments')
 	
-	fin.registerView('Value', views.Value)
-	fin.registerView('Input', views.Input)
-	fin.registerView('Checkbox', views.Checkbox)
-	fin.registerView('ListView', views.ListView)
-	fin.registerView('Editable', views.Editable)
-	fin.registerView('SortedItemListView', views.SortedItemListView)
-	fin.registerView('ItemSetSelect', views.ItemSetSelect)
-	fin.registerView('BurndownChart', views.BurndownChart)
-	fin.registerView('Comments', views.Comments)
+	fin.registerView('Value', fan.views.Value)
+	fin.registerView('Number', fan.views.Value) // TODO Create number view that only accepts number input
+	fin.registerView('Input', fan.views.Input)
+	fin.registerView('Checkbox', fan.views.Checkbox)
+	fin.registerView('ListView', fan.views.ListView)
+	fin.registerView('Editable', fan.views.Editable)
+	fin.registerView('SortedItemListView', fan.views.SortedItemListView)
+	fin.registerView('ItemSetSelect', fan.views.ItemSetSelect)
+	fin.registerView('BurndownChart', fan.views.BurndownChart)
+	fin.registerView('Comments', fan.views.Comments)
 	
-	jsio('import tasks.LoginManager')
-	jsio('import tasks.panels.LabelsPanel')
-	jsio('import tasks.panels.ListPanel')
-	jsio('import tasks.panels.ItemPanel')
-	jsio('import ui.overlay')
+	jsio('import fan.tasks.LoginManager')
+	jsio('import fan.tasks.panels.LabelsPanel')
+	jsio('import fan.tasks.panels.ListPanel')
+	jsio('import fan.tasks.panels.ItemPanel')
+	jsio('import fan.ui.overlay')
 	
 	jsio('import client.xhr')
 	

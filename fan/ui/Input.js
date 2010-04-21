@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Class');
 
-jsio('import ui.Component');
+jsio('import fan.ui.Component');
 
-exports = Class(ui.Component, function(supr) {
+exports = Class(fan.ui.Component, function(supr) {
 	
 	this._domTag = 'input'
 	this._className = 'Input'

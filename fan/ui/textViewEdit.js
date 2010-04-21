@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Singleton')
-jsio('import ui.Component')
+jsio('import fan.ui.Component')
 
-exports = Singleton(ui.Component, function(supr) {
+exports = Singleton(fan.ui.Component, function(supr) {
 	
 	this._className = 'TextViewEdit'
 	this._padding = 4

@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Class, bind')
-jsio('import views.Value')
-jsio('import ui.textViewEdit')
+jsio('import fan.views.Value')
+jsio('import fan.ui.textViewEdit')
 
-exports = Class(views.Value, function(supr) {
+exports = Class(fan.views.Value, function(supr) {
 	
 	this._className += ' Editable'
 	
@@ -13,7 +13,7 @@ exports = Class(views.Value, function(supr) {
 	}
 	
 	this._onClick = function() {
-		ui.textViewEdit.showAt(this, this._item, this._property)
+		fan.ui.textViewEdit.showAt(this, this._item, this._property)
 	}
 	
 	this.setValue = function(value) {

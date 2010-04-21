@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Class, capitalize')
-jsio('import tasks.panels.Panel')
+jsio('import fan.tasks.panels.Panel')
 
-exports = Class(tasks.panels.Panel, function(supr) {
+exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ItemPanel'
 	this._width = null // dynamic

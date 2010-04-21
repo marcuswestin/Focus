@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Singleton, bind')
-jsio('import ui.resizeManager')
-jsio('import ui.Component')
+jsio('import fan.ui.resizeManager')
+jsio('import fan.ui.Component')
 
-exports = Singleton(ui.Component, function(supr) {
+exports = Singleton(fan.ui.Component, function(supr) {
 	
 	this._className = 'Overlay'
 	
@@ -21,12 +21,12 @@ exports = Singleton(ui.Component, function(supr) {
 		this._content.innerHTML = ''
 		this._content.appendChild(content)
 		document.body.appendChild(this.getElement())
-		ui.resizeManager.addDependant(this._resizeCallback)
+		fan.ui.resizeManager.addDependant(this._resizeCallback)
 	}
 	
 	this._hide = function() {
 		this.remove()
-		ui.resizeManager.removeDependant(this._resizeCallback)
+		fan.ui.resizeManager.removeDependant(this._resizeCallback)
 	}
 	
 	this._onWindowResize = function(size) {

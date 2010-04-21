@@ -1,9 +1,9 @@
 jsio('from shared.javascript import Class, bind')
-jsio('import views.ListView')
-jsio('import ui.Button')
-jsio('import ui.Input')
+jsio('import fan.views.ListView')
+jsio('import fan.ui.Button')
+jsio('import fan.ui.Input')
 
-exports = Class(views.ListView, function(supr) {
+exports = Class(fan.views.ListView, function(supr) {
 	
 	this._className += ' Comments'
 	
@@ -17,12 +17,12 @@ exports = Class(views.ListView, function(supr) {
 	this._createHeader = function() {
 		var header = this._create({ parent: this._element, className: 'header' })
 		
-		this._commentInput = new ui.Input("Comment on it!")
+		this._commentInput = new fan.ui.Input("Comment on it!")
 		this._commentInput.appendTo(inputs)
 		this._commentInput.addClassName('email')
 		this._publish('Create', this._email.getValue(), this._password.getValue())
 		
-		var sendButton = new ui.Button("Add comment")
+		var sendButton = new fan.ui.Button("Add comment")
 		sendButton.appendTo(header)
 		sendButton.subscribe('Click', bind(this, '_addComment'))
 	}

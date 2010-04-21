@@ -1,10 +1,11 @@
 jsio('from shared.javascript import Class')
-jsio('import ui.Component')
-jsio('import ui.Input')
-jsio('import ui.Button')
-jsio('import ui.Link')
+jsio('import fan.sha1')
+jsio('import fan.ui.Component')
+jsio('import fan.ui.Input')
+jsio('import fan.ui.Button')
+jsio('import fan.ui.Link')
 
-exports = Class(ui.Component, function(supr) {
+exports = Class(fan.ui.Component, function(supr) {
 	
 	this._className = 'LoginManager'
 	
@@ -12,19 +13,19 @@ exports = Class(ui.Component, function(supr) {
 		this._state = 'login'
 		var inputs = this._create({ className: 'inputs', parent: this._element })
 
-		this._email = new ui.Input("What's your email?")
+		this._email = new fan.ui.Input("What's your email?")
 		this._email.appendTo(inputs)
 		this._email.addClassName('email')
 
-		this._password = new ui.Input("And what's your password?", true)
+		this._password = new fan.ui.Input("And what's your password?", true)
 		this._password.appendTo(inputs)
 		this._password.addClassName('password')
 		
-		this._submitButton = new ui.Button("Login")
+		this._submitButton = new fan.ui.Button("Login")
 		this._submitButton.appendTo(this._element)
 		this._submitButton.subscribe('Click', bind(this, '_submit'))
 
-		this._createLink = new ui.Link("Create an account")
+		this._createLink = new fan.ui.Link("Create an account")
 		this._createLink.appendTo(this._element)
 		this._createLink.subscribe('Click', bind(this, '_toggleState'))
 		

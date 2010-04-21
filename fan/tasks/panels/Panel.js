@@ -1,8 +1,8 @@
 jsio('from shared.javascript import Class')
-jsio('import ui.Component')
-jsio('import ui.resizeManager')
+jsio('import fan.ui.Component')
+jsio('import fan.ui.resizeManager')
 
-exports = Class(ui.Component, function(supr) {
+exports = Class(fan.ui.Component, function(supr) {
 	
 	this._className = 'Panel'
 	this._width = null // override
@@ -14,7 +14,7 @@ exports = Class(ui.Component, function(supr) {
 	this._createContent = function() {
 		this._header = this._create({ parent: this._element, className: 'header' })
 		this._content = this._create({ parent: this._element, className: 'content' })
-		ui.resizeManager.addDependant(bind(this, '_onWindowResize'))
+		fan.ui.resizeManager.addDependant(bind(this, '_onWindowResize'))
 	}
 	
 	this._onWindowResize = function(winSize) {

@@ -73,60 +73,71 @@
 		}
 	}
 	
-	fin.connect(function(){
-		window.gLoginManager = new tasks.LoginManager()
-		
-		window.gLabelsPanel = new tasks.panels.LabelsPanel()
-		window.gListPanel = new tasks.panels.ListPanel()
-		window.gItemPanel = new tasks.panels.ItemPanel()
-		
-		// global sets
-		window.gProjects = fin.getItemSet({ 'type': 'project' })
-		window.gUsers = fin.getItemSet({ 'type': 'user' })
-		
-		ui.overlay.show(gLoginManager.getElement())
-		gLoginManager.subscribe('Login', function(email, password){
-			fin.exists(email, function(userExists) {
-				if (!userExists) { return }
-				gUser = fin.getItem(email)
-				openApp()
-			})
-		})
-		gLoginManager.subscribe('Create', function(email, password){
-			fin.exists(email, function(alreadyExists) {
-				if (alreadyExists) { return }
-				fin.createItem({ _id: email, type: 'user', email: email }, function(userItem) {
-					gUser = userItem // user item has now been loaded
-					openApp()
-				})
-			})
-		})
+	window.gLoginManager = new fan.tasks.LoginManager()
+
+	fin.registerEventHandler('FAN_AUTHENTICATION_DEMAND', function() {
+		fan.ui.overlay.show(gLoginManager.getElement())
 		gLoginManager.focus()
+	})
+
+	fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
+		if (response.authenticated) {
+			gUserId = response.id
+			openApp()
+		} else {
+			alert("That didn't work.\n\n" + response.reason)
+		}
+	})
+	
+	gLoginManager.subscribe('Login', function(email, passwordHash){
+		fin.send('FAN_AUTHENTICATION_REQUEST', { email: email, password_hash: passwordHash })
+	})
+	
+	gLoginManager.subscribe('Create', function(email, passwordHash){
+		fin.send('FAN_REQUEST_CREATE_USER', { email: email, password_hash: passwordHash })
+	})
+	
+	
+	
+	
+	fin.connect(function(){
+		window.gLabelsPanel = new fan.tasks.panels.LabelsPanel()
+		window.gListPanel = new fan.tasks.panels.ListPanel()
+		window.gItemPanel = new fan.tasks.panels.ItemPanel()
 	})
 	
 	function openApp() {
-		ui.overlay.remove()
+		fan.ui.overlay.remove()
+
+		if (openApp.initialized) { return }
+		openApp.initialized = true
+		
+		// global sets
+		// window.gProjects = []
+		// window.gUsers = []
+		// fin.query({ 'type': 'user' })
+		// fin.query({ 'type': 'project' })
+		
 		gLabelsPanel.appendTo(gBody)
 		gListPanel.appendTo(gBody)
 		gItemPanel.appendTo(gBody)
 		
-		initMeebo({network:'everywhere',stage:false})
+		;(function initMeebo(q) {
+			return
+			var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');
+			m.id='meebo';m.style.display='none';m.innerHTML='<iframe id="meebo-iframe"></iframe>';
+			s.src='http'+(q.https?'s':'')+'://'+(q.stage?'stage-':'')+'cim.meebo.com/cim/cim.php?network='+q.network;
+			b.insertBefore(s,b.firstChild);
+		})({ network:'everywhere',stage:false })
 		
 		var items = [{ value: 'task', label: 'Create new Task' }, { value: 'project', label: 'Create new Project'}]
 		Meebo('addButton', { type: 'menu', label: 'Create new ...', items: items, onSelect: function(value) {
-			fin.createItem({ type: value }, function(item) {
+			fin.create({ type: value }, function(item) {
 				gItemPanel.setItem(item)
 			})
 		}})
 	}
 	
-	function initMeebo(q) {
-		return
-		var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');
-		m.id='meebo';m.style.display='none';m.innerHTML='<iframe id="meebo-iframe"></iframe>';
-		s.src='http'+(q.https?'s':'')+'://'+(q.stage?'stage-':'')+'cim.meebo.com/cim/cim.php?network='+q.network;
-		b.insertBefore(s,b.firstChild);
-	}
 </script>
 
 <body>

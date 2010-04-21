@@ -9,22 +9,17 @@ exports = Class(fan.ui.Component, function(supr){
 	this.init = function(jsArgs, viewArgs) {
 		supr(this, 'init')
 		
-		this._itemIds = jsArgs[0]
+		this._itemId = jsArgs[0]
 		this._property = viewArgs[0]
 	}
 	
 	this._createContent = function() {
-		this.setDependant(this._itemIds, this._property)
-	}
-	
-	this.setDependant = function(itemIds, property) {
-		if (this._item) { logger.warn("TODO unsubscribe from old item") }
-		this._propertyChain = property.split('.')
-		var itemId = (typeof itemIds == 'string' ? itemIds 
-				: itemIds.getId ? itemIds.getId()
-				: itemIds[this._propertyChain.shift()])
-		this._item = fin.getItem(itemId)
-		this._item.addDependant(this._propertyChain, bind(this, '_onItemMutation'))
+		var itemIds = this._itemIds
+		
+		// this._propertyChain = this._property.split('.')
+		// var itemId = (typeof itemIds == 'number' ? itemIds : itemIds[this._propertyChain.shift()])
+		
+		fin.subscribe(this._itemId, this._property, bind(this, '_onItemMutation'))
 	}
 	
 	this._onItemMutation = function(mutation, newValue) {

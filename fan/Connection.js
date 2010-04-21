@@ -9,15 +9,32 @@ exports = Class(server.Connection, function(supr) {
 	
 	this.connectionMade = function() {
 		supr(this, 'connectionMade', arguments)
-		this.sendFrame('FAN_DEMAND_AUTHENTICATION')
+		this.sendFrame('FAN_AUTHENTICATION_DEMAND')
 	}
 	
-	this.frameReceived = function() {
-		if (!this._authenticatedUser) {
-			this.sendFrame('FIN_DEMAND_AUTHENTICATION')
-			return
+	this._sendAuthenticationResponse = function(userId, reason) {
+		var response = { authenticated: !!userId }
+		if (userId) { this._authenticatedUser = response.id = userId }
+		else { response.reason = reason }
+		this.sendFrame('FAN_AUTHENTICATION_RESPONSE', response)
+	}
+	
+	this.frameReceived = function(id, name, args) {
+		switch(name) {
+			case 'FAN_AUTHENTICATION_REQUEST':
+				this.server.authenticate(args.email, args.password_hash, bind(this, function(userId, reason) {
+					this._sendAuthenticationResponse(userId, reason)
+				}))
+				break;
+			case 'FAN_REQUEST_CREATE_USER':
+				this.server.createUser(args.email, args.password_hash, bind(this, function(userId, reason) {
+					this._sendAuthenticationResponse(userId, reason)
+				}))
+				break;
+			default:
+				if (this._authenticatedUser) { supr(this, 'frameReceived', arguments) }
+				else { this.sendFrame('FAN_AUTHENTICATION_DEMAND') }
 		}
-		supr(this, 'frameReceived', arguments)
 	}
 	
 	this.getUser = function() { return this._authenticatedUser }

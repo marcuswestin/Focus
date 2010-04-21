@@ -24,11 +24,9 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._createContent = function() {
-		var itemSet = fin.getItemSet(this._query)
-		itemSet.addDependant(bind(this, '_onItemsChange'))
-
-		this._item = fin.getItem(this._itemId)
-		this._item.addDependant(this._targetProperty, bind(this, '_onTargetPropertyChange'))
+		var queryId = fin.query(this._query, bind(this, '_onItemsChange'))
+		
+		fin.subscribe(this._itemId, this._targetProperty, bind(this, '_onTargetPropertyChange'))
 		
 		this._on('change', bind(this, '_onSelectionChange'))
 	}

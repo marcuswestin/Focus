@@ -20,24 +20,32 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		supr(this, '_onWindowResize', arguments)
 	}
 	
-	this.setItem = function(item) {
-		if (this._item) { logger.warn("TODO: release item")}
+	this.setItem = function(itemId) {
+		if (this._typeSub) { fin.release(this._typeSub) }
+		if (this._titleSub) { fin.release(this._titleSub) }
+		
+		this._itemId = itemId
 		this.show()
-		this._item = item
-		this._item.addDependant('type', bind(this, '_onItemType'))
-		this._item.addDependant('title', bind(this, '_updateTitle'))
+
+		this._typeSub = fin.subscribe(this._itemId, 'type', bind(this, '_onItemType'))
+		this._titleSub = fin.subscribe(this._itemId, 'type', bind(this, '_onTitle'))
 	}
 	
 	this._onItemType = function(mutation, type) {
+		this._itemType = type
 		this._updateTitle()
 		gUtil.loadTemplate(type, 'panel', bind(this, function(template) {
 			this._content.innerHTML = ''
-			this._content.appendChild(fin.applyTemplate(template, this._item.getId()))
+			this._content.appendChild(fin.applyTemplate(template, this._itemId))
 		}))
 	}
 	
+	this._onTitle = function(mutation, title) {
+		this._itemTitle = title
+	}
+	
 	this._updateTitle = function() {
-		this._setTitle(capitalize(this._item.getProperty('type')) + ': ' + this._item.getProperty('title'))
+		this._setTitle(capitalize(this._itemType) + ': ' + this._itemTitle)
 	}
 	
 })

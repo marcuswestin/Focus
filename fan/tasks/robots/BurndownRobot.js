@@ -3,26 +3,29 @@ jsio('from shared.javascript import Class, bind, forEach')
 exports = Class(function() {
 	
 	this.init = function() {
-		var allProjects = fin.getItemSet({ type: 'project' })
-		allProjects.addDependant(bind(this, '_onProjectsChange'))
+		fin.query({ type: 'project' }, bind(this, '_onProjectsChange'))
+		this._subs = {}
 	}
 	
 	this._onProjectsChange = function(mutation) {
-		
-		forEach(mutation.add, this, function(projectId) {
-			logger.log("New project", projectId)
-			var tasks = fin.getItemSet({ type: 'task', done: false, project: projectId })
-			tasks.sum('remaining_time', bind(this, '_onRemainingTimeChange', projectId))
-		})
-		
-		forEach(mutation.remove, function(projectId) {
-			logger.warn("TODO: Release item set and it's reduce", projectId)
-		})
+		var projectId = (mutation.sadd || mutation.srem),
+			query = { type: 'task', done: false, project: projectId }
+
+		if (mutation.sadd) {
+			this._subs[projectId] = fin.sum(query, bind(this, '_onRemainingTimeChange'))
+		}
+		if (mutation.srem) {
+			var projectId = mutation.srem,
+				query = { type: 'task', done: false, project: projectId }
+			
+			fin.release(this._subs[projectId])
+		}
 	}
 	
 	this._onRemainingTimeChange = function(projectId, mutation, newTimeRemaining) {
 		logger.log("Remaining time changed", projectId, newTimeRemaining)
 		var newHistoryItem = { timestamp: new Date().getTime(), remaining_time: newTimeRemaining }
-		fin.getItem(projectId).mutate({ property: 'burndown_history', append: newHistoryItem })
+		fin.mutate(projectId, { property: 'burndown_history', rpush: newHistoryItem })
+		fin.getItem(projectId).mutate()
 	}
 })

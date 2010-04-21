@@ -23,8 +23,8 @@ exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
-		this._itemSet = fin.getItemSet(this._conditions)
-		this._itemSet.addDependant(bind(this, '_onUpdated'))
+		// TODO Release
+		this._queryId = fin.query(this._conditions, bind(this, '_onUpdated'))
 	}
 	
 	this._onUpdated = function(mutation) { 

@@ -58,12 +58,15 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._submit = function() {
+		var email = this._email.getValue(),
+			passwordHash = fan.sha1(this._password.getValue())
+		
 		this._email.disable()
 		this._password.disable()
 		if (this._state == 'create') {
-			this._publish('Create', this._email.getValue(), this._password.getValue())
+			this._publish('Create', email, passwordHash)
 		} else {
-			this._publish('Login', this._email.getValue(), this._password.getValue())
+			this._publish('Login', email, passwordHash)
 		}
 	}
 })

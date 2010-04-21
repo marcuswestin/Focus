@@ -31,7 +31,7 @@ exports = Class(fan.views.ListView, function(supr) {
 		var comment = this._commentInput.getValue()
 		this._commentInput.clear()
 		
-		var newCommentItem = { timestamp: new Date().getTime(), comment: comment, user: gUser.getId() }
+		var newCommentItem = { timestamp: new Date().getTime(), comment: comment, user: gUserId }
 		this._getItem().mutate({ property: this._property, append: newCommentItem })
 	}
 	

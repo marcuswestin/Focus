@@ -9,7 +9,7 @@ exports = Singleton(fan.ui.Component, function(supr) {
 	
 	this._createContent = function() {
 		this.hide()
-		this._input = fin.getView('Input')
+		this._input = fin.createView('Input')
 		this._input.appendTo(this._element)
 		this._input.subscribe('Blur', bind(this, 'hide'))
 		this._input.subscribe('NewValue', bind(this, '_onInputNewValue'))

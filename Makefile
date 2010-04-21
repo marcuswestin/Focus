@@ -16,12 +16,6 @@ run-tasks:
 
 deps: lib/fin lib/raphael lib/g.raphael
 
-run-dbs:
-	make -C lib/fin run-dbs
-
-run:
-	cd lib/fin/js/server; node run_server.js
-
 clean:
 	rm -rf lib/*
 	touch lib/empty.txt

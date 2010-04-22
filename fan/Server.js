@@ -11,7 +11,7 @@ exports = Class(server.Server, function(supr) {
 		supr(this, 'mutateItem', arguments)
 	}
 	
-	this.createUser = function(inputEmail, inputPasswordHash, callback) {
+	this.createUser = function(inputEmail, inputPasswordHash, origConnection, callback) {
 		var emailToIdKey = fan.keys.userEmailToId(inputEmail)
 		this._redisClient.setnx(emailToIdKey, '__fan_tmp_holder', bind(this, function(err, wasCreated) {
 			if (err) { throw logger.error('Could not create user email to id ', inputEmail, emailToIdKey, err) }
@@ -21,7 +21,7 @@ exports = Class(server.Server, function(supr) {
 			}
 			var userProps = { 'password_hash': inputPasswordHash, 'email': inputEmail }
 			logger.log("Create user with items", userProps)
-			this.createItem(userProps, bind(this, function(newItemId) {
+			this.createItem(userProps, origConnection, bind(this, function(newItemId) {
 				this._redisClient.set(emailToIdKey, newItemId, bind(this, function(err) {
 					if (err) { throw logger.error('Could not update user email to id', emailToIdKey, newItemId, err) }
 					callback(newItemId)

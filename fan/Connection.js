@@ -27,7 +27,7 @@ exports = Class(server.Connection, function(supr) {
 				}))
 				break;
 			case 'FAN_REQUEST_CREATE_USER':
-				this.server.createUser(args.email, args.password_hash, bind(this, function(userId, reason) {
+				this.server.createUser(args.email, args.password_hash, this, bind(this, function(userId, reason) {
 					this._sendAuthenticationResponse(userId, reason)
 				}))
 				break;

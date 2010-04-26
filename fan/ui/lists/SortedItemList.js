@@ -2,13 +2,10 @@ jsio('from shared.javascript import Class, bind, delayedFunction')
 jsio('import fan.ui.lists.List')
 
 var SortableItem = Class(function() {
-	this.init = function(item, sortBy) {
-		this._item = item
-		this._sortBy = sortBy
-	}
-	this.toString = function() { return this._item.getProperty(this._sortBy) }
-	this.getId = function() { return this._item.getId() }
-	this.getProperty = function(name) { return this._item.getProperty(name) }
+	this.init = function(id) { this._id = id }
+	this.getId = function() { return this._id }
+	this.toString = function() { return this._sortValue }
+	this.setSortValue = function(value) { this._sortValue = value }
 })
 
 exports = Class(fan.ui.lists.List, function(supr){
@@ -28,19 +25,21 @@ exports = Class(fan.ui.lists.List, function(supr){
 	}
 	
 	this._onUpdated = function(mutation) { 
-		if (mutation.add) { this._addItems(mutation.add) }
-		if (mutation.remove) { this._removeItems(mutation.remove) }
+		if (mutation.op == 'sadd') { this._addItems(mutation.args) }
+		if (mutation.op == 'srem') { this._removeItems(mutation.args) }
 		this._render()
 	}
 	
 	this._addItems = function(itemIds) {
 		
 		for (var i=0, itemId; itemId = itemIds[i]; i++) {
-			if (this._items[itemId]) { continue } // Hack: local item set changes can publish mutation twice
-			var item = fin.getItem(itemId)
-			this._items.push(new SortableItem(item, this._sortBy))
-			this._items[itemId] = true // Hack: local item set changes can publish mutation twice
-			item.addDependant(this._sortBy, bind(this, '_render'))
+			var item = new SortableItem(itemId)
+			fin.subscribe(itemId, this._sortBy, bind(this, function(mutation, value) {
+				item.setSortValue(value)
+				this._render()
+			}))
+			this._items.push(item)
+			this._render()
 		}
 	}
 	
@@ -51,7 +50,6 @@ exports = Class(fan.ui.lists.List, function(supr){
 				var itemId = item.getId()
 				if (itemId != removeItemId) { continue }
 				this._items.splice(j, 1)
-				delete this._items[itemId] // Hack: local item set changes can publish mutation twice
 				this.remove(this._cells[itemId])
 				delete this._cells[itemId]
 				break

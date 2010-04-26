@@ -19,26 +19,21 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	}
 	
 	this._createItem = function() {
-		var data = { 
-			type: 'task', 
-			title: 'I need to...',
-			user: gUserId, 
-			done: false, 
-			priority: 3, 
-			remaining_time: 3 
-		}
+		var data = { type: 'task', title: 'I need to...', user: gUserId, done: 0, priority: 3, remaining_time: 3 }
+		
 		fin.create(data, function(itemId) {
 			gItemPanel.setItem(itemId)
 		})
 	}
 	
-	this.loadList = function(listView, title) {
+	this.load = function(query, sortBy, title) {
 		if (this._listView) { logger.warn("TODO: release current list view")}
+		
+		this._listView = fin.createView('SortedItemListView', query, sortBy)
 		
 		this._setTitle(title)
 		
 		this._content.innerHTML = ''
-		this._listView = listView
 		this._listView.appendTo(this._content)
 		this._listView.subscribe('Click', bind(this, '_onCellClick'))
 		
@@ -46,7 +41,6 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	}
 	
 	this._onCellClick = function(itemCell) {
-		var item = fin.getItem(itemCell.getId())
-		gItemPanel.setItem(item)
+		gItemPanel.setItem(itemCell.getId())
 	}
 })

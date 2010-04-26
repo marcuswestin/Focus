@@ -32,27 +32,31 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._onItemsChange = function(mutation) {
-		forEach(mutation.add, this, function(itemId) {
-			if (this._options[itemId]) { return }
-			this._options[itemId] = new Option('Loading...', itemId, false, false)
-			this._element.add(this._options[itemId], null)
-			if (itemId == this._item.getProperty(this._targetProperty)) {
-				this._element.selectedIndex = this._element.options.length - 1
-			}
-			fin.getItem(itemId).addDependant(this._displayProperty, bind(this, '_onDisplayPropertyChange', itemId))
-		})
-		forEach(mutation.remove, this, function(itemId) {
-			for (var i=0, option; option = this._element.options[i]; i++) {
-				if (option.value != itemId) { continue }
-				this._element.remove(i)
-				logger.warn("TODO Remove dependant from item for title")
-				break
-			}
-			delete this._options[itemId]
-		})
+		if (mutation.op == 'sadd') {
+			forEach(mutation.args, this, function(itemId) {
+				if (this._options[itemId]) { return }
+				this._options[itemId] = new Option('Loading...', itemId, false, false)
+				this._element.add(this._options[itemId], null)
+				if (itemId == this._targetItemId) {
+					this._element.selectedIndex = this._element.options.length - 1
+				}
+				fin.subscribe(itemId, this._displayProperty, bind(this, '_onDisplayPropertyChange', itemId))
+			})
+		} else if (mutation.op == 'srem') {
+			forEach(mutation.args, this, function(itemId) {
+				for (var i=0, option; option = this._element.options[i]; i++) {
+					if (option.value != itemId) { continue }
+					this._element.remove(i)
+					logger.warn("TODO Remove dependant from item for title")
+					break
+				}
+				delete this._options[itemId]
+			})
+		}
 	}
 	
 	this._onTargetPropertyChange = function(mutation, targetPropertyValue) {
+		this._targetItemId = targetPropertyValue
 		for (var i=0, option; option = this._element.options[i]; i++) {
 			if (option.value != targetPropertyValue) { continue }
 			this._element.selectedIndex = i
@@ -65,6 +69,6 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._onSelectionChange = function() {
-		this._item.setProperty(this._targetProperty, this._element.value)
+		fin.set(this._itemId, this._targetProperty, this._element.value)
 	}
 })

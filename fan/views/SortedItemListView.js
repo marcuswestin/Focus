@@ -13,13 +13,13 @@ exports = Class(fan.ui.lists.SortedItemList, function(supr){
 		this._template = template
 	}
 	
-	this._getCellFor = function(itemId) {
+	this._getCellFor = function(item) {
 		var container = this._create({})
 		
 		if (this._template) {
-			this._applyTemplate(container, itemId, this._template)
+			this._applyTemplate(container, item.getId(), this._template)
 		} else {
-			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', container, itemId))
+			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', container, item.getId()))
 		}
 		
 		return container

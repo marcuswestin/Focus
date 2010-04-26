@@ -46,7 +46,7 @@ exports = Class(fan.ui.Component, function(supr){
 			var id = item.getId ? item.getId() : item
 			if (!this._cells[id]) {
 				this._cells[id] = this._getCellFor(item)
-				this._cells[id].className = 'cell ' + id.replace(/ /g, '-').toLowerCase()
+				this._cells[id].className = 'cell ' + id.toString().replace(/ /g, '-').toLowerCase()
 				this._cells[id].delegateId = item
 			}
 			this._insertElement(this._cells[id], i)

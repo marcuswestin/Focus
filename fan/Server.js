@@ -19,7 +19,7 @@ exports = Class(server.Server, function(supr) {
 				callback(null, 'user with email exists') 
 				return
 			}
-			var userProps = { 'password_hash': inputPasswordHash, 'email': inputEmail }
+			var userProps = { 'password_hash': inputPasswordHash, 'email': inputEmail, type: 'user' }
 			logger.log("Create user with items", userProps)
 			this.createItem(userProps, origConnection, bind(this, function(newItemId) {
 				this._redisClient.set(emailToIdKey, newItemId, bind(this, function(err) {

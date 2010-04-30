@@ -1,34 +1,37 @@
-.PHONY: run clean
-
 ############
 ### Apps ###
 ############
 
+.PHONY: run-tasks
 run-tasks:
-	make -C lib/fin run-dbs &
-	sleep 2;
-	cd lib/fin/js/server; node run_server.js &
-	cd Tasks; node run_robots.js &
+	redis-server lib/fin/redis.conf &
+	cd lib/fin/; node run_query_observer.js &
+	node run_server.js &
 
-################
-### Commands ###
-################
+.PHONY: stop-tasks
+stop-tasks:
+	killall node
+	killall redis-server
 
-deps: lib/fin lib/raphael lib/g.raphael
-
-clean:
-	rm -rf lib/*
-	touch lib/empty.txt
-
+.PHONY: restart-tasks
+restart-tasks: stop-tasks run-tasks
 
 ####################
 ### Dependencies ###
 ####################
 
+.PHONY: deps
+deps: lib/fin lib/raphael lib/g.raphael
+
+.PHONY: clean
+clean:
+	rm -rf lib/*
+	touch lib/empty.txt
+
 lib/fin:
 	git clone git://github.com/marcuswestin/fin.git
 	mv ./fin lib/
-	cd lib/fin; make deps
+	cd lib/fin; make download-dependencies
 
 lib/raphael:
 	git clone git://github.com/DmitryBaranovskiy/raphael.git

@@ -14,15 +14,12 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
-		this._element.checked = Boolean(value)
+		this._element.checked = this._value = Boolean(value)
 	}
-
+	
 	this.createDelayedMethod('_checkValue', function() {
-		var isChecked = this._element.checked,
-			shouldBeChecked = Boolean(this._item.getProperty(this._property))
-		
-		if (isChecked != shouldBeChecked) {
-			this._item.mutate({ property: this._property, value: isChecked })
-		}
+		var isChecked = this._element.checked
+		this._value = Boolean(isChecked)
+		fin.set(this._itemId, this._property, this._value)
 	})
 })

@@ -27,6 +27,7 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this.setValue = function(value) {
+		this._value = value
 		if (typeof value == 'undefined') { return }
 		if (typeof value == 'string') {
 			value = value.replace(/\n/g, '<br />')

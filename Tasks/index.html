@@ -93,13 +93,6 @@
 		fin.send('FAN_AUTHENTICATION_REQUEST', { email: email, password_hash: passwordHash })
 	})
 	
-	gLoginManager.subscribe('Create', function(email, passwordHash){
-		fin.send('FAN_REQUEST_CREATE_USER', { email: email, password_hash: passwordHash })
-	})
-	
-	
-	
-	
 	fin.connect(function(){
 		window.gLabelsPanel = new fan.tasks.panels.LabelsPanel()
 		window.gListPanel = new fan.tasks.panels.ListPanel()

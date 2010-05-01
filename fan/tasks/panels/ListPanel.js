@@ -19,7 +19,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	}
 	
 	this._createItem = function() {
-		var data = { type: 'task', title: 'I need to...', user: gUserId, done: 0, priority: 3, remaining_time: 3 }
+		var data = { type: 'task', title: 'I need to...', user: gUserId, done: false, priority: 3, remaining_time: 3 }
 		
 		fin.create(data, function(itemId) {
 			gItemPanel.setItem(itemId)

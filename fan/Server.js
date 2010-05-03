@@ -40,7 +40,7 @@ exports = Class(server.Server, function(supr) {
 			var userId = userIdBytes.toString()
 			
 			this.getItemProperty(userId, 'password_hash', bind(this, function(passwordHash, key) {
-				var response = (passwordHash == inputPasswordHash) ? userId : null
+				var response = (passwordHash == JSON.stringify(inputPasswordHash)) ? userId : null
 				callback(response, 'That\'s not the right password')
 			}))
 		}))

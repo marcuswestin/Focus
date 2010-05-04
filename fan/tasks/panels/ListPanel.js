@@ -34,13 +34,14 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		this._setTitle(title)
 		
 		this._content.innerHTML = ''
+
 		this._listView.appendTo(this._content)
 		this._listView.subscribe('Click', bind(this, '_onCellClick'))
 		
 		this.show()
 	}
 	
-	this._onCellClick = function(itemCell) {
-		gItemPanel.setItem(itemCell.getId())
+	this._onCellClick = function(itemId) {
+		gItemPanel.setItem(itemId)
 	}
 })

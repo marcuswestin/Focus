@@ -14,18 +14,24 @@ exports = Class(fan.ui.lists.SortedItemList, function(supr){
 	}
 	
 	this._getCellFor = function(item) {
-		var container = this._create({})
+		var itemId = item.getId(),
+			cell = this._cells[itemId]
+		
+		if (cell) { return cell }
+		
+		cell = this._create({ className: 'cell' })
+		cell.delegateId = itemId
 		
 		if (this._template) {
-			this._applyTemplate(container, item.getId(), this._template)
+			this._applyTemplate(cell, itemId, this._template)
 		} else {
-			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', container, item.getId()))
+			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', cell, itemId))
 		}
 		
-		return container
+		return (this._cells[itemId] = cell)
 	}
 	
-	this._applyTemplate = function(container, itemId, template) {
-		container.appendChild(fin.applyTemplate(template, itemId))
+	this._applyTemplate = function(cell, itemId, template) {
+		cell.appendChild(fin.applyTemplate(template, itemId))
 	}
 })

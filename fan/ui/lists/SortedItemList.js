@@ -16,6 +16,7 @@ exports = Class(fan.ui.lists.List, function(supr){
 		supr(this, 'init')
 		this._conditions = conditions
 		this._sortBy = sortBy
+		this._itemsById = {}
 	}
 	
 	this._createContent = function() {
@@ -31,14 +32,15 @@ exports = Class(fan.ui.lists.List, function(supr){
 	}
 	
 	this._addItems = function(itemIds) {
-		
 		for (var i=0, itemId; itemId = itemIds[i]; i++) {
+			if (this._itemsById[itemId]) { continue }
 			var item = new SortableItem(itemId)
 			fin.observe(itemId, this._sortBy, bind(this, function(mutation, value) {
 				item.setSortValue(value)
 				this._render()
 			}))
 			this._items.push(item)
+			this._itemsById[itemId] = item
 			this._render()
 		}
 	}
@@ -46,15 +48,19 @@ exports = Class(fan.ui.lists.List, function(supr){
 	this._removeItems = function(removeItemIds) {
 		// this n*m loop could be made more efficient...
 		for (var i=0, removeItemId; removeItemId = removeItemIds[i]; i++) {
+			if (!this._itemsById[removeItemId]) { continue }
 			for (var j=0, item; item = this._items[j]; j++) {
 				var itemId = item.getId()
 				if (itemId != removeItemId) { continue }
 				this._items.splice(j, 1)
+				delete this._itemsById[itemId]
+				if (!this._cells[itemId]) { break }
 				this.remove(this._cells[itemId])
 				delete this._cells[itemId]
 				break
 			}
 		}
+		
 		this._render()
 	}
 	

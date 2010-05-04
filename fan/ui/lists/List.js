@@ -29,12 +29,8 @@ exports = Class(fan.ui.Component, function(supr){
 		}
 	}
 	
-	// this._onDrag = function() {
-	// 	this._item.mutate({ property: this._property, from: 2, to: 4 })
-	// }
-	
 	this.setItems = function(items) {
-		this._items = items
+		this._items = items;
 		if (!this._element) { return }
 		this._element.innerHTML = ''
 		this._render()
@@ -43,17 +39,19 @@ exports = Class(fan.ui.Component, function(supr){
 	this._render = function() {
 		if (!this._element || !this._items) { return }
 		for (var i=0, item; item = this._items[i]; i++) {
-			var id = item.getId ? item.getId() : item
-			if (!this._cells[id]) {
-				this._cells[id] = this._getCellFor(item)
-				this._cells[id].className = 'cell ' + id.toString().replace(/ /g, '-').toLowerCase()
-				this._cells[id].delegateId = item
-			}
-			this._insertElement(this._cells[id], i)
+			this._insertElement(this._getCellFor(item), i)
 		}
 	}
 	
-	this._getCellFor = function(itemId) {
-		return this._create({ parent: this._element, text: itemId.replace(/_/g, ' ') })
+	this._getCellFor = function(label) {
+		var cell = this._cells[label]
+		
+		if (cell) { return cell }
+		cell = this._create({ parent: this._element, text: label.replace(/_/g, ' '),
+				className: 'cell ' + label.toString().replace(/ /g, '-').toLowerCase() })
+		
+		cell.delegateId = label
+		
+		return (this._cells[label] = cell)
 	}
 })

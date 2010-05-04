@@ -19,7 +19,7 @@ exports = Class(fan.ui.Component, function(supr){
 		// this._propertyChain = this._property.split('.')
 		// var itemId = (typeof itemIds == 'number' ? itemIds : itemIds[this._propertyChain.shift()])
 		
-		fin.subscribe(this._itemId, this._property, bind(this, '_onItemMutation'))
+		fin.observe(this._itemId, this._property, bind(this, '_onItemMutation'))
 	}
 	
 	this._onItemMutation = function(mutation, newValue) {

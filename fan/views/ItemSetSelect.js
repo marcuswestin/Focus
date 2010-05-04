@@ -26,7 +26,7 @@ exports = Class(fan.ui.Component, function(supr){
 	this._createContent = function() {
 		var queryId = fin.query(this._query, bind(this, '_onItemsChange'))
 		
-		fin.subscribe(this._itemId, this._targetProperty, bind(this, '_onTargetPropertyChange'))
+		fin.observe(this._itemId, this._targetProperty, bind(this, '_onTargetPropertyChange'))
 		
 		this._on('change', bind(this, '_onSelectionChange'))
 	}
@@ -40,7 +40,7 @@ exports = Class(fan.ui.Component, function(supr){
 				if (itemId == this._targetItemId) {
 					this._element.selectedIndex = this._element.options.length - 1
 				}
-				fin.subscribe(itemId, this._displayProperty, bind(this, '_onDisplayPropertyChange', itemId))
+				fin.observe(itemId, this._displayProperty, bind(this, '_onDisplayPropertyChange', itemId))
 			})
 		} else if (mutation.op == 'srem') {
 			forEach(mutation.args, this, function(itemId) {

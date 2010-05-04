@@ -34,7 +34,7 @@ exports = Class(fan.ui.lists.List, function(supr){
 		
 		for (var i=0, itemId; itemId = itemIds[i]; i++) {
 			var item = new SortableItem(itemId)
-			fin.subscribe(itemId, this._sortBy, bind(this, function(mutation, value) {
+			fin.observe(itemId, this._sortBy, bind(this, function(mutation, value) {
 				item.setSortValue(value)
 				this._render()
 			}))

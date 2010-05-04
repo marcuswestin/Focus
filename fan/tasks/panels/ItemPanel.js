@@ -27,8 +27,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		this._itemId = itemId
 		this.show()
 
-		this._typeSub = fin.subscribe(this._itemId, 'type', bind(this, '_onItemType'))
-		this._titleSub = fin.subscribe(this._itemId, 'type', bind(this, '_onTitle'))
+		this._typeSub = fin.observe(this._itemId, 'type', bind(this, '_onItemType'))
+		this._titleSub = fin.observe(this._itemId, 'type', bind(this, '_onTitle'))
 	}
 	
 	this._onItemType = function(mutation, type) {

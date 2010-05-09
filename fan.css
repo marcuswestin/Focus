@@ -72,7 +72,8 @@ body, html {
 	background-color: #fff;
 	border: 1px solid #888;
 	-moz-border-radius: 6px 6px 0 0;
-	-webkit-border-radius: 8px 8px 0 0;
+	-webkit-border-top-right-radius: 8px;
+	-webkit-border-top-left-radius: 8px;
 }
 
 .Panel .header .title {
@@ -87,7 +88,8 @@ body, html {
 	border: 1px solid #888;
 	background: #fff;
 	-moz-border-radius: 0 0 6px 6px;
-	-webkit-border-radius: 0 0 8px 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }

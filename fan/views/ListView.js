@@ -3,11 +3,6 @@ jsio('import fan.ui.lists.List')
 
 exports = Class(fan.ui.lists.List, function(supr){
 	
-	this.init = function(jsArgs, viewArgs) {
-		supr(this, 'init')
-
-	}
-	
 	this._createContent = function() {
 		supr(this, '_createContent')
 		this._item.addDependant(this._property, bind(this, '_onUpdated'))

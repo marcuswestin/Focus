@@ -74,5 +74,4 @@ exports = Class(fan.views.Value, function(supr){
 		this._value = value
 		this._element.value = value
 	}
-
 })

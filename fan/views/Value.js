@@ -6,11 +6,11 @@ exports = Class(fan.ui.Component, function(supr){
 	this._domTag = 'span'
 	this._className = 'Value'
 	
-	this.init = function(jsArgs, viewArgs) {
+	this.init = function(args) {
 		supr(this, 'init')
 		
-		this._itemId = jsArgs[0]
-		this._property = viewArgs[0] || jsArgs[1]
+		this._itemId = args[0]
+		this._property = args[1]
 	}
 	
 	this._createContent = function() {
@@ -36,5 +36,9 @@ exports = Class(fan.ui.Component, function(supr){
 		this._element.innerHTML = value
 		var valueClassName = typeof value == 'string' ? value.replace(/ /g, '_') : value
 		this._element.className = this._className + ' fin-Value-' + this._property + '-' + valueClassName
+	}
+	
+	this.release = function() {
+		logger.warn("TODO implement release of views")
 	}
 })

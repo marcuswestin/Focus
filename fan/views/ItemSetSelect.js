@@ -7,13 +7,13 @@ exports = Class(fan.ui.Component, function(supr){
 	this._className = 'Value Select'
 	
 	// (( ItemSetSelect type project title )) -> list of all items of type project, displayed by title
-	this.init = function(jsArgs, viewArgs) {
+	this.init = function(args) {
 		supr(this, 'init')
 		
-		var propertyName = viewArgs[0],
-			propertyValue = viewArgs[1],
-			displayProperty = viewArgs[2],
-			itemId = jsArgs[0]
+		var itemId = args[0],
+			propertyName = args[1],
+			propertyValue = args[2],
+			displayProperty = args[3]
 		
 		this._targetProperty = propertyValue
 		this._displayProperty = displayProperty

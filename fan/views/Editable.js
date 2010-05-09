@@ -18,8 +18,7 @@ exports = Class(fan.views.Value, function(supr) {
 		var input = fin.createView('Input', this._itemId, this._property),
 			inputEl = input.getElement()
 		
-		input.appendTo(document.body)
-		input.subscribe('Blur', bind(input, 'hide'))
+		this._input = input
 		
 		inputEl.style.position = 'absolute'
 		inputEl.style.overflow = 'hidden'
@@ -31,16 +30,18 @@ exports = Class(fan.views.Value, function(supr) {
 		inputEl.style.fontWeight = this.getStyle('font-weight');
 		inputEl.style.lineHeight = this.getStyle('line-height');
 		
-		input.focus()
-		this._input = input
-		fin.focus(this._itemId, this._property, bind(this, '_onRemoteBlur'))
+		fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
+		input.subscribe('Blur', bind(this, '_onBlur'))
+		
 		this._resizeInput()
+		input.appendTo(document.body)
+		input.focus()
 	}
 
-	this._onRemoteBlur = function() {
+	this.createDelayedMethod('_onBlur', function() {
 		this._input.release()
 		this._input.remove()
-	}
+	})
 	
 	this.setValue = function() {
 		supr(this, 'setValue', arguments)

@@ -15,8 +15,15 @@ exports = Class(fan.views.Value, function(supr){
 		this._on('keypress', bind(this, '_onKeyPress'))
 	}
 	
-	this.focus = function() { this._element.focus() }
-	this.blur = function() { this._element.blur() }
+	this.focus = function() { 
+		if (this._focused) { return }
+		this._element.focus()
+	}
+	
+	this.blur = function() { 
+		if (!this._focused) { return }
+		this._element.blur()
+	}
 	
 	this._onFocus = function(e) { 
 		this._focused = true
@@ -65,8 +72,8 @@ exports = Class(fan.views.Value, function(supr){
 		// if (!mutation.deletion && !mutation.addition) { return }
 		
 		setTimeout(bind(this, function(){ 
+			if (this._value == this._element.value) { return }
 			fin.set(this._itemId, this._property, this._element.value)
-			// this._publish('NewValue', this._element.value)
 		}))
 	}
 	

@@ -10,7 +10,7 @@ exports = Class(fan.ui.Component, function(supr){
 		supr(this, 'init')
 		
 		this._itemId = jsArgs[0]
-		this._property = viewArgs[0]
+		this._property = viewArgs[0] || jsArgs[1]
 	}
 	
 	this._createContent = function() {

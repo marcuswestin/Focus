@@ -10,7 +10,7 @@ var SortableItem = Class(function() {
 
 exports = Class(fan.ui.lists.List, function(supr){
 	
-	this._className += ' SortedItemList'
+	this._className += ' SortedList'
 	
 	this.init = function(conditions, sortBy) {
 		supr(this, 'init')

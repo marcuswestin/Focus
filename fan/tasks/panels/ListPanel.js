@@ -29,7 +29,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	this.load = function(query, sortBy, title) {
 		if (this._listView) { logger.warn("TODO: release current list view")}
 		
-		this._listView = fin.createView('SortedItemListView', query, sortBy)
+		this._listView = fin.createView('SortedList', query, sortBy)
 		
 		this._setTitle(title)
 		

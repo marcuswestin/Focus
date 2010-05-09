@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Class, bind')
-jsio('import fan.ui.lists.SortedItemList')
+jsio('import fan.ui.lists.SortedList')
 
-exports = Class(fan.ui.lists.SortedItemList, function(supr){
+exports = Class(fan.ui.lists.SortedList, function(supr){
 	
 	this.init = function(args) {
 		supr(this, 'init', args)

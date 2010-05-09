@@ -30,7 +30,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._createLists = function() {
 		var tasksList = new fan.ui.lists.List(),
-			projectsList = fin.createView('SortedItemListView', { type: 'project' }, 'title', '(( title ))'),
+			projectsList = fin.createView('SortedList', { type: 'project' }, 'title', '(( title ))'),
 			taskLabels = []
 		
 		tasksList.subscribe('Click', bind(this, '_onListClick', projectsList)) // pass in other list for unselect

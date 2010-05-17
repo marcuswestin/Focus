@@ -93,3 +93,11 @@ body, html {
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+
+.Panel .content .left-column {
+	float: left;
+	width: 350px;
+}
+.Panel .content .right-column {
+	float: right;
+}

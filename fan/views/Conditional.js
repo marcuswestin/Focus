@@ -10,7 +10,6 @@ exports = Class(fan.views.Value, function(supr){
 		
 		this._ifTrue = args[2]
 		this._ifFalse = args[3]
-		console.log("HERE", this._ifTrue, this._ifFalse, args)
 	}
 	
 	this.setValue = function(value) {

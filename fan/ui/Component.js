@@ -22,8 +22,8 @@ exports = Class(shared.Publisher, function(supr) {
 	this.show = function() { this.getElement().style.display = 'block'; }
 	this.hide = function() { this.getElement().style.display = 'none'; }
 	
-	this.appendTo = function(element) { element.appendChild(this.getElement()); return this }
-	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild); }
+	this.appendTo = function(element) { element.appendChild(this.getElement()) }
+	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild) }
 	this.remove = function(element) { 
 		element = element || this._element
 		if (!element || !element.parentNode) { return } 

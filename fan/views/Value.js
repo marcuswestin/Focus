@@ -14,7 +14,7 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._createContent = function() {
-		var itemIds = this._itemIds
+		// var itemIds = this._itemIds
 		
 		// this._propertyChain = this._property.split('.')
 		// var itemId = (typeof itemIds == 'number' ? itemIds : itemIds[this._propertyChain.shift()])

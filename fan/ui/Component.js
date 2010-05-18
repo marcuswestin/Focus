@@ -12,22 +12,33 @@ exports = Class(shared.Publisher, function(supr) {
 			this._element = document.createElement(this._domTag)
 			if (this._domType) { this._element.type = this._domType }
 			if (this._className) { this.addClassName(this._className) }
-			this._createContent()
+			this._createContent() // subclasses should implement _createContent
 		}
 		return this._element
 	}
 	
-	this._createContent = function() {} // abstract method
+	this.show = function() {
+		this.getElement().style.display = 'block'
+		return this
+	}
+	this.hide = function() {
+		this.getElement().style.display = 'none'
+		return this
+	}
 	
-	this.show = function() { this.getElement().style.display = 'block'; }
-	this.hide = function() { this.getElement().style.display = 'none'; }
-	
-	this.appendTo = function(element) { element.appendChild(this.getElement()) }
-	this.prependTo = function(element) { element.insertBefore(this.getElement(), element.firstChild) }
+	this.appendTo = function(element) {
+		element.appendChild(this.getElement())
+		return this
+	}
+	this.prependTo = function(element) {
+		element.insertBefore(this.getElement(), element.firstChild)
+		return this
+	}
 	this.remove = function(element) { 
 		element = element || this._element
-		if (!element || !element.parentNode) { return } 
+		if (!element || !element.parentNode) { return this } 
 		element.parentNode.removeChild(element)
+		return this
 	}
 	
 	this._insertElement = function (parentElement, insertItem, position) {
@@ -67,17 +78,18 @@ exports = Class(shared.Publisher, function(supr) {
 	this.addClassName = function(element, className) { 
 		if (arguments.length == 1) {
 			className = element
-			element = this._element
+			element = this.getElement()
 		}
 		if (!(' ' + element.className + ' ').match(' ' + className + ' ')) {
 			element.className += ' ' + className + ' ';
 		}
+		return this
 	}
 	
 	this.removeClassName = function(element, className) { 
 		if (arguments.length == 1) {
 			className = element
-			element = this._element
+			element = this.getElement()
 		}
 		className += ' ';
 		var current = element.className;
@@ -85,6 +97,7 @@ exports = Class(shared.Publisher, function(supr) {
 		if (index != -1) {
 			element.className = current.slice(0, index) + current.slice(index + className.length);
 		}
+		return this
 	}
 	
 	this._hasClassName = function(element, className) {
@@ -193,6 +206,7 @@ exports = Class(shared.Publisher, function(supr) {
 		for (var key in dim) {
 			element.style[key] = dim[key] + 'px'
 		}
+		return this
 	}
 	
 	// dom offset code adopted from jQuery JavaScript Library v1.3.2

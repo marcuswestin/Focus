@@ -20,6 +20,9 @@ body, html {
  **********/
 .Input {
 	padding: 2px 3px;
+	height: 25px;
+	font-family: arial,sans-serif;
+	font-size: 14px;
 }
 .Input.defaultValue {
 	font-style: italic;
@@ -100,4 +103,10 @@ body, html {
 }
 .Panel .content .right-column {
 	float: right;
+}
+
+.UserIcon img {
+	background: url("img/user_icon.gif");
+	width: 50px;
+	height: 50px;
 }

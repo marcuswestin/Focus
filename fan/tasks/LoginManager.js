@@ -10,20 +10,19 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._className = 'LoginManager'
 	
 	this._createContent = function() {
-		this._state = 'login'
-		var inputs = this._create({ className: 'inputs', parent: this._element })
+		var inputsEl = this._create({ className: 'inputs', parent: this._element })
 		
 		this._email = new fan.ui.Input("What's your email?")
-		this._email.appendTo(inputs)
-		this._email.addClassName('email')
+			.addClassName('email')
+			.appendTo(inputsEl)
 		
 		this._password = new fan.ui.Input("And what's your password?", true)
-		this._password.appendTo(inputs)
-		this._password.addClassName('password')
+			.addClassName('password')
+			.appendTo(inputsEl)
 		
-		this._submitButton = new fan.ui.Button("Login")
-		this._submitButton.appendTo(this._element)
-		this._submitButton.subscribe('Click', bind(this, '_submit'))
+		new fan.ui.Button("Login")
+			.appendTo(this._element)
+			.subscribe('Click', bind(this, '_submit'))
 		
 		this._on('keydown', bind(this, '_onKeyDown'))
 		

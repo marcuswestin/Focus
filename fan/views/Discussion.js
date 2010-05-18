@@ -3,6 +3,9 @@ jsio('import fan.views.Value')
 jsio('import fan.ui.lists.List')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.Component')
+jsio('import fan.ui.Input')
+jsio('import fan.ui.UserIcon')
+jsio('import fan.ui.TimeString')
 
 exports = Class(fan.views.Value, function(supr){
 	
@@ -14,15 +17,20 @@ exports = Class(fan.views.Value, function(supr){
 	}
 	
 	this._createMessageBox = function() {
-		this._textarea = this._create({ tag: 'textarea', parent: this._element })
-		var button = new fan.ui.Button("Comment")
-		button.appendTo(this._element)
-		button.subscribe('Click', bind(this, '_submit'))
+		this._input = new fan.ui.Input("Add a comment")
+			.appendTo(this._element)
+		
+		new fan.ui.UserIcon(gUserId)
+			.appendTo(this._element)
+		
+		new fan.ui.Button("Comment")
+			.appendTo(this._element)
+			.subscribe('Click', bind(this, '_submit'))
 	}
 	
 	this._submit = function() {
-		var message = this._textarea.value
-		fin.append(this._itemId, this._property, { message: message })
+		var message = { message: this._input.getValue(), user: gUserId, timestamp: fin.now() }
+		fin.append(this._itemId, this._property, message)
 	}
 	
 	this._onListMutation = function(operation, items) {
@@ -51,10 +59,25 @@ DiscussionList = Class(fan.ui.lists.List, function(supr) {
 		var cell = this._cells[message]
 		
 		if (cell) { return cell }
-		cell = this._create({ text: message })
+		cell = this._createCell(item)
 		cell.delegateId = message
 		
 		return (this._cells[message] = cell)
+	}
+	
+	this._createCell = function(item) {
+		var cell = this._create({ className: 'cell' })
+
+		new fan.ui.UserIcon(item.user)
+			.appendTo(cell)
+		
+		new fan.ui.TimeString(item.timestamp)
+			.appendTo(cell)
+		
+		var message = this._create({ className: 'message', text: item.message })
+		this._element.appendChild(message)
+		
+		return cell
 	}
 	
 })

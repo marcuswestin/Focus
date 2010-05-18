@@ -4,13 +4,17 @@ jsio('import fan.ui.Component');
 
 exports = Class(fan.ui.Component, function(supr) {
 	
-	this._domTag = 'input'
+	this._domTag = 'textarea'
 	this._className = 'Input'
 	
 	this.init = function(defaultText, isPassword) {
-		supr(this, 'init');
+		supr(this, 'init')
 		this.setText(defaultText)
-		this._isPassword = isPassword;
+		this._isPassword = isPassword
+		if (this._isPassword) {
+			this._domTag = 'input'
+			this._domType = 'password'
+		}
 	}
 	
 	this.setText = function(text, dontBlur) {
@@ -22,7 +26,6 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._createContent = function() {
-		this._element.type = 'text';
 		this._element.value = this._defaultText;
 		this._on('focus', bind(this, '_onFocus'));
 		this._on('blur', bind(this, '_onBlur'));

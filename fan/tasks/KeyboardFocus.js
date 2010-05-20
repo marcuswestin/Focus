@@ -43,7 +43,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this._movePanel = function(steps) {
 		var newPanelIndex = this._panelIndex + steps
-		if (newPanelIndex < 0 || newPanelIndex > gPanels.length) { return }
+		if (newPanelIndex < 0 || newPanelIndex >= gPanels.length) { return }
 		this._focusIndex = -1
 		this._panelIndex = newPanelIndex
 		this._moveFocus(1)

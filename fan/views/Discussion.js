@@ -19,6 +19,7 @@ exports = Class(fan.views.Value, function(supr){
 	this._createMessageBox = function() {
 		this._input = new fan.ui.Input("Add a comment")
 			.appendTo(this._element)
+			.subscribe('Submit', bind(this, '_submit'))
 		
 		new fan.ui.UserIcon(gUserId)
 			.appendTo(this._element)
@@ -29,8 +30,10 @@ exports = Class(fan.views.Value, function(supr){
 	}
 	
 	this._submit = function() {
-		var message = { message: this._input.getValue(), user: gUserId, timestamp: fin.now() }
-		fin.append(this._itemId, this._property, message)
+		var message = this._input.getValue()
+		if (!message) { return }
+		fin.append(this._itemId, this._property, { message: message, user: gUserId, timestamp: fin.now() })
+		this._input.clear()
 	}
 	
 	this._onListMutation = function(operation, items) {
@@ -71,11 +74,11 @@ DiscussionList = Class(fan.ui.lists.List, function(supr) {
 		new fan.ui.UserIcon(item.user)
 			.appendTo(cell)
 		
+		var message = this._create({ className: 'message', text: item.message })
+		cell.appendChild(message)
+		
 		new fan.ui.TimeString(item.timestamp)
 			.appendTo(cell)
-		
-		var message = this._create({ className: 'message', text: item.message })
-		this._element.appendChild(message)
 		
 		return cell
 	}

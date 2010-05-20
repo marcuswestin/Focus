@@ -43,8 +43,14 @@ exports = Class(fan.views.Value, function(supr) {
 		this._input.remove()
 	})
 	
-	this.setValue = function() {
+	this.setValue = function(value) {
 		supr(this, 'setValue', arguments)
+		
+		if (!value) {
+			this._element.innerHTML = 'Click to edit ' + this._property
+			this._element.className = this._className + ' defaultValue'
+		}
+		
 		this._resizeInput()
 	}
 	
@@ -55,7 +61,7 @@ exports = Class(fan.views.Value, function(supr) {
 		layout.left -= (this._padding + this._border)
 		layout.top -= (this._padding + this._border)
 		layout.height += this._padding * 2 + this._border * 2
-		layout.width += this._padding * 2 + this._border * 2 + 20
+		layout.width += this._padding * 2 + this._border * 2 + 5
 		
 		this._input.layout(layout)
 	}

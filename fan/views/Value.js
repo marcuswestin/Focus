@@ -28,11 +28,9 @@ exports = Class(fan.ui.Component, function(supr){
 	
 	this.setValue = function(value) {
 		this._value = value
-		if (typeof value == 'undefined') { return }
-		if (typeof value == 'string') {
-			value = value.replace(/\n/g, '<br />')
-			value = value.replace(/ $/, '&nbsp;')
-		}
+		if (!value) { return }
+		value = value.toString().replace(/\n/g, '<br />')
+		value = value.replace(/ $/, '&nbsp;')
 		this._element.innerHTML = value
 		var valueClassName = typeof value == 'string' ? value.replace(/ /g, '_') : value
 		this._element.className = this._className + ' fin-Value-' + this._property + '-' + valueClassName

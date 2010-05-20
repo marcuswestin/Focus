@@ -8,7 +8,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this.init = function() {
 		supr(this, 'init')
-		this._on(document, 'keydown', bind(this, '_onKeyDown'))
+		// this._on(document, 'keydown', bind(this, '_onKeyDown'))
 		
 		this._focusIndex = -1
 		this._panelIndex = -1

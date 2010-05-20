@@ -46,9 +46,12 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this.createDelayedMethod('_render', function() {
-		if (!this._element || !this._items) { return }
-		for (var i=0, item; item = this._items[i]; i++) {
-			this._insertElement(this._getCellFor(item), i)
+		var items = this._items
+		if (!this._element || !items) { return }
+
+		for (var i=0, item; item = items[i]; i++) {
+			var cell = this._getCellFor(item)
+			this._element.appendChild(cell)
 		}
 	})
 	

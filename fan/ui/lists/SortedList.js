@@ -35,14 +35,16 @@ exports = Class(fan.ui.lists.List, function(supr){
 		for (var i=0, itemId; itemId = itemIds[i]; i++) {
 			if (this._itemsById[itemId]) { continue }
 			var item = new SortableItem(itemId)
-			fin.observe(itemId, this._sortBy, bind(this, function(mutation, value) {
-				item.setSortValue(value)
-				this._render()
-			}))
+			fin.observe(itemId, this._sortBy, bind(this, '_onSortPropChange', itemId));
 			this._items.push(item)
 			this._itemsById[itemId] = item
 			this._render()
 		}
+	}
+	
+	this._onSortPropChange = function(itemId, op, value) {
+		this._itemsById[itemId].setSortValue(value)
+		this._render()
 	}
 	
 	this._removeItems = function(removeItemIds) {

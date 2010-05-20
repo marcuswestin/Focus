@@ -51,7 +51,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	}
 	
 	this._updateTitle = function() {
-		this._setTitle(capitalize(this._itemType) + ': ' + this._itemTitle)
+		this._setTitle(capitalize(this._itemType) + ' - ' + this._itemTitle)
 	}
 	
 })

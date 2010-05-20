@@ -34,6 +34,9 @@ exports = Class(fan.ui.Component, function(supr) {
 	this.focus = function() { this._email.focus() }
 	
 	this._submit = function() {
+		this._password.blur()
+		this._email.blur()
+		
 		var email = this._email.getValue(),
 			passwordHash = fan.sha1(this._password.getValue())
 		

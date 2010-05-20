@@ -26,11 +26,13 @@ exports = Class(fan.views.Value, function(supr){
 	}
 	
 	this._onFocus = function(e) { 
+		gKeyboardFocus.grabFocus(this)
 		this._focused = true
 		if (this._element.value == this._property) { this._element.value = '' }
 	}
 	
 	this._onBlur = function() {
+		gKeyboardFocus.releaseFocus(this)
 		this._focused = false 
 		if (this._element.value == '') { this._element.value = this._property }
 		this._publish('Blur')

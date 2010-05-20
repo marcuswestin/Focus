@@ -40,6 +40,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	this.blur = function() { this._element.blur() }
 	
 	this._onFocus = function() {
+		gKeyboardFocus.grabFocus(this)
 		if (this._element.value != this._defaultText) { return; }
 		if (this._isPassword) { this._element.type = 'password'; }
 		this.removeClassName('defaultValue');
@@ -47,6 +48,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._onBlur = function() {
+		gKeyboardFocus.releaseFocus(this)
 		if (this._element.value != '' && this._element.value != this._defaultText) { return; }
 		if (this._isPassword) { this._element.type = 'text'; }
 		this.addClassName('defaultValue');

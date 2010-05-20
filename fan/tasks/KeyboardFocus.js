@@ -8,7 +8,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this.init = function() {
 		supr(this, 'init')
-		// this._on(document, 'keydown', bind(this, '_onKeyDown'))
+		this._on(document, 'keydown', bind(this, '_onKeyDown'))
 		
 		this._focusIndex = -1
 		this._panelIndex = -1
@@ -25,8 +25,15 @@ exports = Class(fan.ui.Component, function(supr) {
 		keyMap[keys['tab']] = bind(this, '_movePanel', 1)
 		keyMap[keys['`']] = bind(this, '_movePanel', -1)
 	}
+	
+	this.grabFocus = function(uiComponent) { this._focusedUIComponent = uiComponent }
+	this.releaseFocus = function(uiComponent) {
+		if (uiComponent != this._focusedUIComponent) { return }
+		delete this._focusedUIComponent
+	}
 
 	this._onKeyDown = function(e) {
+		if (this._focusedUIComponent) { return }
 		var callback = this._keyMap[e.keyCode]
 		if (callback) {
 			e.cancel()

@@ -21,6 +21,7 @@
 	
 	window.gBody = document.body
 	window.gUserId = null
+	window.gUserIconUrl = null
 	
 	jsio('import fan.views.Value')
 	jsio('import fan.views.Input')
@@ -83,6 +84,7 @@
 	fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
 		if (response.authenticated) {
 			gUserId = response.id
+			fin.observe(gUserId, 'iconUrl', function(op, iconUrl) { gUserIconUrl = iconUrl })
 			openApp()
 		} else {
 			alert("That didn't work.\n\n" + response.reason)

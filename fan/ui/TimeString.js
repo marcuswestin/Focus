@@ -3,6 +3,8 @@ jsio('import fan.ui.Component')
 
 exports = Class(fan.ui.Component, function(supr) {
 	
+	this._className = 'TimeString'
+	
 	this.init = function(timestamp) {
 		supr(this, 'init')
 		this._timestamp = timestamp

@@ -13,12 +13,13 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._createContent = function() {
-		this._img = this._create({ tag: 'img', parent: this._element })
+		this._img = this._create({ tag: 'img', parent: this._element, src: gUserIconUrl })
 		fin.observe(this._userId, 'iconUrl', bind(this, '_onIconUrlChange'))
 	}
 	
 	this._onIconUrlChange = function(op, iconUrl) {
-		if (!iconUrl) { return }
-		this._img.src = iconUrl
+		var img = this._img
+		if (!iconUrl || iconUrl == img.src.iconUrl) { return }
+		img.src = iconUrl
 	}
 })

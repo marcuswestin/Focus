@@ -15,16 +15,16 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._email = new fan.ui.Input("What's your email?")
 			.addClassName('email')
 			.appendTo(inputsEl)
+			.subscribe('Submit', bind(this, '_submit'))
 		
 		this._password = new fan.ui.Input("And what's your password?", true)
 			.addClassName('password')
 			.appendTo(inputsEl)
+			.subscribe('Submit', bind(this, '_submit'))
 		
 		new fan.ui.Button("Login")
 			.appendTo(this._element)
 			.subscribe('Click', bind(this, '_submit'))
-		
-		this._on('keydown', bind(this, '_onKeyDown'))
 		
 		// // while developing
 		this._email._element.value = 'marcus@meebo-inc.com'
@@ -32,11 +32,6 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this.focus = function() { this._email.focus() }
-	
-	this._onKeyDown = function(e) {
-		if (e.keyCode != this.keys['enter']) { return }
-		this._submit()
-	}
 	
 	this._submit = function() {
 		var email = this._email.getValue(),

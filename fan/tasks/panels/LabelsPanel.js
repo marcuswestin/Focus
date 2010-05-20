@@ -18,9 +18,9 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._createItems = function() {
 		this._items = {
-			"My Tasks": [{ type: 'task', user: gUserId, done: false, backlog: false }, 'important'],
-			"My Backlog": [{ type: 'task', user: gUserId, done: false, backlog: true }, 'important'],
-			"Accomplishments": [{ type: 'task', user: gUserId, done: true }, 'important'],
+			"My Tasks": [{ type: 'task', user: gUserId, done: false, backlog: false }, 'crucial'],
+			"My Backlog": [{ type: 'task', user: gUserId, done: false, backlog: true }, 'crucial'],
+			"Accomplishments": [{ type: 'task', user: gUserId, done: true }, 'crucial'],
 			"My Projects": [{ type: 'project' }, 'target_date']
 		}
 	}

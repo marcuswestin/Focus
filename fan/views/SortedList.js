@@ -28,6 +28,8 @@ exports = Class(fan.ui.lists.SortedList, function(supr){
 			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', cell, itemId))
 		}
 		
+		this._makeFocusable(cell)
+		
 		return (this._cells[itemId] = cell)
 	}
 	

@@ -17,16 +17,20 @@ exports = Class(fan.views.Value, function(supr){
 	}
 	
 	this._createMessageBox = function() {
+		var messageBox = this._create({ className: 'commentBox', parent: this._element })
+		
 		this._input = new fan.ui.Input("Add a comment")
-			.appendTo(this._element)
+			.appendTo(messageBox)
 			.subscribe('Submit', bind(this, '_submit'))
 		
 		new fan.ui.UserIcon(gUserId)
-			.appendTo(this._element)
+			.appendTo(messageBox)
 		
 		new fan.ui.Button("Comment")
-			.appendTo(this._element)
+			.appendTo(messageBox)
 			.subscribe('Click', bind(this, '_submit'))
+		
+		this._makeFocusable(messageBox)
 	}
 	
 	this._submit = function() {

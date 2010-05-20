@@ -29,6 +29,8 @@ exports = Class(fan.ui.Component, function(supr){
 		fin.observe(this._itemId, this._targetProperty, bind(this, '_onTargetPropertyChange'))
 		
 		this._on('change', bind(this, '_onSelectionChange'))
+		
+		this._makeFocusable()
 	}
 	
 	this._onItemsChange = function(mutation) {

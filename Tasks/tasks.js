@@ -33,6 +33,7 @@ fin.registerView('ItemSetSelect', fan.views.ItemSetSelect)
 fin.registerView('Discussion', fan.views.Discussion)
 
 jsio('import fan.tasks.LoginManager')
+jsio('import fan.tasks.KeyboardFocus')
 jsio('import fan.tasks.panels.LabelsPanel')
 jsio('import fan.tasks.panels.ListPanel')
 jsio('import fan.tasks.panels.ItemPanel')
@@ -88,6 +89,7 @@ fin.connect(function(){
 	window.gListPanel = new fan.tasks.panels.ListPanel()
 	window.gItemPanel = new fan.tasks.panels.ItemPanel()
 	window.gPanels = [gLabelsPanel, gListPanel, gItemPanel]
+	window.gKeyboardFocus = new fan.tasks.KeyboardFocus()
 })
 
 function openApp() {

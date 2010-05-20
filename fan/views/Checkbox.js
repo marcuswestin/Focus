@@ -10,6 +10,7 @@ exports = Class(fan.views.Value, function(supr){
 	this._createContent = function() {
 		supr(this, '_createContent')
 		this._on('change', bind(this, '_checkValue'))
+		this._makeFocusable()
 	}
 	
 	this.setValue = function(value) {

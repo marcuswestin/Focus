@@ -12,6 +12,7 @@ exports = Class(fan.views.Value, function(supr) {
 		supr(this, '_createContent')
 		
 		this._on('click', bind(this, '_onClick'))
+		this._makeFocusable()
 	}
 	
 	this._onClick = function() {

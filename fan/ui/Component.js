@@ -70,7 +70,9 @@ exports = Class(shared.Publisher, function(supr) {
 		if (params.parent) { params.parent.appendChild(el); }
 		return el;
 	}
-
+	
+	this._makeFocusable = function(el) { this.addClassName(el || this._element, 'fan-focusable') }
+	
 /***************
  * Class names *
  ***************/
@@ -400,7 +402,7 @@ exports = Class(shared.Publisher, function(supr) {
 		'dash': 189,
 		'period': 190,
 		'forward slash': 191,
-		'grave accent': 192,
+		'`': 192,
 		'open bracket': 219,
 		'back slash': 220,
 		'close braket': 221,

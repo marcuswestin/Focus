@@ -65,6 +65,8 @@ exports = Class(fan.ui.Component, function(supr){
 		cell = this._create({ text: text, className: className })
 		cell.delegateId = label
 		
+		this._makeFocusable(cell)
+		
 		return (this._cells[label] = cell)
 	}
 })

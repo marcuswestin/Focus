@@ -3,6 +3,12 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 .Editable { cursor: pointer; }
 .Editable.defaultValue { font-style: italic; color: #333; }
 
+.KeyboardFocus .piece { position: absolute; background: #76aee5; opacity: .65; }
+.KeyboardFocus .piece.top { -moz-border-radius: 20px 20px 0 0;
+	-webkit-border-top-right-radius: 20px; -webkit-border-top-left-radius: 20px; }
+.KeyboardFocus .piece.bottom { -moz-border-radius: 0 0 20px 20px;
+	-webkit-border-bottom-right-radius: 20px; -webkit-border-bottom-left-radius: 20px; }
+
 /*********
  * Links *
  *********/

@@ -8,12 +8,24 @@
 			User: (( ItemSetSelect type user email ))
 		</div> 
 
-		<div class="done">
-			Done: (( Checkbox done ))
+		<div class="project">
+			Project: (( ItemSetSelect type project title ))
+		</div> 
+
+		<div class="status">
+			Critical (( Checkbox critical ))			
+			<br />
+			Backlog (( Checkbox backlog ))
+			<br />
+			Done (( Checkbox done ))
 		</div>
 	</div>
 
+	<div class="description">
+		(( Editable description ))
+	</div>
 </div>
+
 <div class="right-column">
 	<div class="discussion">
 		(( Discussion comments ))

@@ -5,7 +5,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ItemPanel'
 	this._width = null // dynamic
-	this._left = 440
+	this._left = 470
 	this._templates = {}
 	this._wideWidth = 750
 	this._narrowWidth = 370

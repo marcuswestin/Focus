@@ -5,7 +5,7 @@ jsio('import fan.ui.Button')
 exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._className += ' ListPanel'
-	this._width = 260
+	this._width = 280
 	this._left = 170
 	
 	this._createContent = function() {

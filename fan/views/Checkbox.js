@@ -14,7 +14,7 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
-		this._element.checked = this._value = Boolean(value)
+		this._element.checked = this._value = value ? true : null
 	}
 	
 	this.createDelayedMethod('_checkValue', function() {

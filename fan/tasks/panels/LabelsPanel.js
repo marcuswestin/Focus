@@ -20,7 +20,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		this._items = {
 			"My Tasks": [{ type: 'task', user: gUserId, done: false, backlog: false }, 'crucial'],
 			"My Backlog": [{ type: 'task', user: gUserId, done: false, backlog: true }, 'crucial'],
-			"Accomplishments": [{ type: 'task', user: gUserId, done: true }, 'crucial'],
+			"My Accomplishments": [{ type: 'task', user: gUserId, done: true }, 'crucial'],
 			"My Projects": [{ type: 'project' }, 'target_date']
 		}
 	}

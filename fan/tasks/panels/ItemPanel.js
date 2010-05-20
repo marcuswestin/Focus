@@ -7,6 +7,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	this._width = null // dynamic
 	this._left = 440
 	this._templates = {}
+	this._wideWidth = 750
+	this._narrowWidth = 370
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
@@ -15,8 +17,11 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._onWindowResize = function(winSize) {
 		var leftPadding = 10,
-			rightPadding = 10
-		this._width = winSize.width - this._left - leftPadding - rightPadding
+			rightPadding = 10,
+			availableWith = winSize.width - this._left - leftPadding - rightPadding,
+			shouldBeNarrow = (availableWith < this._wideWidth)
+
+		this._width = shouldBeNarrow ? this._narrowWidth : this._wideWidth
 		supr(this, '_onWindowResize', arguments)
 	}
 	
@@ -28,7 +33,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		this.show()
 
 		this._typeSub = fin.observe(this._itemId, 'type', bind(this, '_onItemType'))
-		this._titleSub = fin.observe(this._itemId, 'type', bind(this, '_onTitle'))
+		this._titleSub = fin.observe(this._itemId, 'title', bind(this, '_onTitle'))
 	}
 	
 	this._onItemType = function(mutation, type) {
@@ -42,6 +47,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._onTitle = function(mutation, title) {
 		this._itemTitle = title
+		this._updateTitle()
 	}
 	
 	this._updateTitle = function() {

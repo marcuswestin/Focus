@@ -1,155 +1,56 @@
 /*****************
  * Login Manager *
  *****************/
-
-.LoginManager {
-	width: 250px;
-	height: 90px;
-}
-.LoginManager .inputs {
-	display: block;
-	width: 200px;
-	margin: 20px auto;
-}
-.LoginManager .inputs .Input {
-	width: 100%;
-	margin-top: 2px;
-}
-.LoginManager .Button {
-	position: absolute;
-	bottom: 3px;
-	right: 5px;
-}
-.LoginManager .Link {
-	position: absolute;
-	bottom: 8px;
-	left: 5px;
-}
+.LoginManager { width: 250px; height: 90px; }
+.LoginManager .inputs { display: block; width: 200px; margin: 20px auto; }
+.LoginManager .inputs .Input { width: 100%; margin-top: 2px; }
+.LoginManager .Button { position: absolute; bottom: 3px; right: 5px; }
+.LoginManager .Link { position: absolute; bottom: 8px; left: 5px; }
 
 /**********
  * Panels *
  **********/
-
-/* Labels Panel */
-.LabelsPanel .List {
-	margin: 5px 0 0 11px;
-}
-.LabelsPanel .List .cell {
-	cursor: pointer;
-	margin: 0 0 0 10px;
-	font-size: 15px;
-	color: #444;
-}
+.LabelsPanel .List { margin: 5px 0 0 11px; }
+.LabelsPanel .List .cell { cursor: pointer; margin: 0 0 0 10px; font-size: 14px; color: #444; }
 .LabelsPanel .List .cell.my-tasks, 
-.LabelsPanel .List .cell.projects {
-	margin: 5px 0 0 0;
-	font-weight: bold;
-} 
+.LabelsPanel .List .cell.projects { margin: 5px 0 0 0; font-weight: bold; } 
+.LabelsPanel .List .cell.selected { text-decoration: underline; }
 
-.LabelsPanel .List .cell.selected {
-	text-decoration: underline;
-}
+.ListPanel .Button { position: absolute; bottom: 3px; right: 19px; }
+.ListPanel .List { margin: 5px 0; }
+.ListPanel .List .cell { cursor: pointer; height: 48px; overflow: hidden; 
+	padding: 1px 6px 0; margin: 0px 5px; border: 3px solid #fff; }
+.ListPanel .List .cell:nth-child(odd) { background-color: #eeedfc; 
+	border-top-color: #eeedfc; border-bottom-color: #eeedfc; }
+.ListPanel .List .cell.selected { border-color: #abd; }
+.ListPanel .List .cell .title { color: #333; height: 17px; overflow: hidden; }
+.ListPanel .List .cell .user { font-size: 12px; color: #666; }
+.ListPanel .List .cell .priority { float: right; font-size: 12px; color: #666; }
+.ListPanel .List .cell .done { float: left; font-size: 12px; color: #666; }
 
-/* List Panel */
-.ListPanel .Button {
-	position: absolute;
-	bottom: 10px;
-	right: 17px;
-}
-
-.ListPanel .List {
-	margin: 5px 0;
-}
-
-.ListPanel .List .cell {
-	cursor: pointer;
-	height: 48px;
-	overflow: hidden;
-	padding: 1px 6px 0;
-	margin: 0px 5px;
-	border: 3px solid #fff;
-}
-
-.ListPanel .List .cell:nth-child(odd) {
-	background-color: #eeedfc;
-	border-top-color: #eeedfc;
-	border-bottom-color: #eeedfc;
-}
-.ListPanel .List .cell.selected {
-	border-color: #abd;
-}
-
-.ListPanel .List .cell .title {
-	color: #333;
-	height: 17px;
-	overflow: hidden;
-}
-.ListPanel .List .cell .user {
-	font-size: 12px;
-	color: #666;
-}
-.ListPanel .List .cell .priority {
-	float: right;
-	font-size: 12px;
-	color: #666;
-}
-.ListPanel .List .cell .done {
-	float: left;
-	font-size: 12px;
-	color: #666;
-}
-
-/* Item Panel */
-.ItemPanel .fin-Template {
-	display: block;
-	padding: 10px;
-}
-
-.ItemPanel .title {
-	font-size: 20px;
-}
-
-.ItemPanel .properties > div {
-	margin: 10px 0 0 0;
-}
-
-.ItemPanel .properties .Value {
-	position: absolute;
-	left: 140px;
-}
-.ItemPanel .properties .Value.BurndownChart {
-	position: static;
-}
-
-.ItemPanel .properties .Input {
-	margin-top: -2px;
-}
-
-.ItemPanel .properties .Checkbox {
-	margin-top: 1px;
-}
-
-.ItemPanel .properties .Select {
-	left: 139px;
-	width: 165px;
-	padding: 2px;
-}
-.ItemPanel .properties .Select option {
-	padding: 2px;
-}
-
-
+.ItemPanel .fin-Template { display: block; padding: 10px; }
+.ItemPanel .title { font-size: 19px; }
+.ItemPanel .properties { margin: 0 0 15px 0; }
+.ItemPanel .properties > div { margin: 10px 0 0 0; }
+.ItemPanel .properties .Value { position: absolute; left: 140px; }
+.ItemPanel .properties .Value.BurndownChart { position: static; }
+.ItemPanel .properties .Input { margin-top: -2px; }
+.ItemPanel .properties .Checkbox { margin-top: 1px; }
+.ItemPanel .properties .Select { left: 139px; width: 165px; padding: 2px; }
+.ItemPanel .properties .Select option { padding: 2px; }
+.ItemPanel .discussion { width: 345px; }
+.ItemPanel .discussion .Button { position: relative; left: 266px; bottom: 23px; }
+.ItemPanel .discussion .UserIcon img { margin: 1px 8px 0 0; }
+.ItemPanel .discussion .Input { float: right; width: 280px; height: 50px; margin-right: 5px; }
+.ItemPanel .discussion .List { clear: both; overflow: auto; }
+.ItemPanel .discussion .cell { clear: both; margin-bottom: 8px; min-height: 51px; }
+.ItemPanel .discussion .cell { clear: both; }
+.ItemPanel .discussion .cell .UserIcon { float: left; }
+.ItemPanel .discussion .cell .TimeString { margin-bottom: 8px; }
 
 /**************************
  * Value specific styling *
  **************************/
-.fin-Value-priority-0, .fin-Value-priority-1 {
-	font-weight: bold;
-}
+.fin-Value-priority-0, .fin-Value-priority-1 { font-weight: bold; }
 
 
-
-.discussion .Button { display: block; }
-.discussion .UserIcon img { margin: 0 8px 8px 0; }
-.discussion .Input { float: right; width: 200px; height: 50px; }
-.discussion .List { clear: both; }

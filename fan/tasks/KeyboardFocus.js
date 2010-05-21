@@ -10,24 +10,21 @@ exports = Class(fan.ui.Component, function(supr) {
 		supr(this, 'init')
 		this._on(document, 'keydown', bind(this, '_onKeyDown'))
 		
-		this._focusIndex = -1
 		this._panelIndex = -1
+		this._focusIndex = {}
 		this._keyMap = {}
 
 		var keys = this.keys,
 			keyMap = this._keyMap
 		
-		keyMap[keys['j']] = bind(this, '_moveFocus', 1) 
-		keyMap[keys['k']] = bind(this, '_moveFocus', -1) 
-		keyMap[keys['tab']] = bind(this, '_movePanel', 1)
-		keyMap[keys['`']] = bind(this, '_movePanel', -1)
-
-		keyMap[keys['up arrow']] = keyMap[keys['j']]
-		keyMap[keys['down arrow']] = keyMap[keys['k']]
-		keyMap[keys['right arrow']] = keyMap[keys['tab']]
-		keyMap[keys['left arrow']] = keyMap[keys['`']]
-
+		keyMap[keys['k']] = keyMap[keys['w']] = keyMap[keys['up arrow']] = bind(this, '_moveFocus', -1) 
+		keyMap[keys['j']] = keyMap[keys['s']] = keyMap[keys['down arrow']] = bind(this, '_moveFocus', 1) 
+		keyMap[keys['`']] = keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
+		keyMap[keys['tab']] = keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
+		
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
+		
+		keyMap[keys['c']] = bind(gListPanel, 'createItem')
 	}
 	
 	this.grabFocus = function(uiComponent) { this._focusedUIComponent = uiComponent }
@@ -48,28 +45,34 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._movePanel = function(steps) {
 		var newPanelIndex = this._panelIndex + steps
 		if (newPanelIndex < 0 || newPanelIndex >= gPanels.length) { return }
-		this._focusIndex = -1
+		if (typeof this._focusIndex[newPanelIndex] != 'number') {
+			this._focusIndex[newPanelIndex] = 0
+		}
 		this._panelIndex = newPanelIndex
-		this._moveFocus(1)
+		this._moveFocus(0)
 	}
 	
 	this._moveFocus = function(steps) {
 		var panel = gPanels[this._panelIndex];
 		if (!panel) { return }
 		
-		var newFocusIndex = this._focusIndex + steps,
-			targets = panel.getElement().getElementsByClassName('fan-focusable')
+		var newFocusIndex = this._focusIndex[this._panelIndex] + steps,
+			targetEls = panel.getElement().getElementsByClassName('fan-focusable')
 		
-		if (newFocusIndex < 0 || newFocusIndex >= targets.length) { return; }
-		this._targetEl = targets[newFocusIndex]
-		this._focusIndex = newFocusIndex
-		this._showAt(this._targetEl)
+		if (newFocusIndex < 0 || newFocusIndex >= targetEls.length) { return; }
+		this._focusIndex[this._panelIndex] = newFocusIndex
+		
+		var targetEl = this._targetEl = targetEls[newFocusIndex],
+			target = this._target = this._getFocusableComponent(targetEl)
+		
+		this._showAt(targetEl)
 	}
 	
 	this._selectFocusedItem = function() {
-		var targetEl = this._targetEl
-		if (!targetEl) { return }
-		this._getFocusableComponent(targetEl).handleKeyboardSelect(targetEl)
+		var target = this._target,
+			targetEl = this._targetEl
+		if (!target || !targetEl) { return }
+		target.handleKeyboardSelect(targetEl)
 	}
 	
 	this._createContent = function() {

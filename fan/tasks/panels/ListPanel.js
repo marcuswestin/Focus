@@ -12,13 +12,13 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		supr(this, '_createContent')
 		
 		var taskButton = new fan.ui.Button('Create new task')
-		taskButton.subscribe('Click', bind(this, '_createItem'))
+		taskButton.subscribe('Click', bind(this, 'createItem'))
 		taskButton.appendTo(this._element)
 		
 		this.hide()
 	}
 	
-	this._createItem = function() {
+	this.createItem = function() {
 		var data = { type: 'task', user: gUserId, done: false }
 		
 		fin.create(data, function(itemId) {

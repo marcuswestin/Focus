@@ -53,7 +53,9 @@ exports = Class(fan.views.Value, function(supr) {
 		
 		if (!value) {
 			this._element.innerHTML = 'Click to edit ' + this._property
-			this._element.className = this._className + ' defaultValue'
+			this.addClassName('defaultValue')
+		} else {
+			this.removeClassName('defaultValue')
 		}
 		
 		this._resizeInput()

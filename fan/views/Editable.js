@@ -15,6 +15,10 @@ exports = Class(fan.views.Value, function(supr) {
 		this._makeFocusable()
 	}
 	
+	this.handleKeyboardSelect = function() {
+		this._onClick()
+	}
+	
 	this._onClick = function() {
 		var input = fin.createView('Input', this._itemId, this._property),
 			inputEl = input.getElement()

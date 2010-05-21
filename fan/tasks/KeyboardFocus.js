@@ -57,12 +57,15 @@ exports = Class(fan.ui.Component, function(supr) {
 			targets = panel.getElement().getElementsByClassName('fan-focusable')
 		
 		if (newFocusIndex < 0 || newFocusIndex >= targets.length) { return; }
-		this._focusIndex = newFocusIndex;
-		this._showAt(targets[newFocusIndex]);
+		this._targetEl = targets[newFocusIndex]
+		this._focusIndex = newFocusIndex
+		this._showAt(this._targetEl)
 	}
 	
 	this._selectFocusedItem = function() {
-		logger.warn("TODO - notify focused item it was selected - equivelant of a click")
+		var targetEl = this._targetEl
+		if (!targetEl) { return }
+		this._getFocusableComponent(targetEl).handleKeyboardSelect(targetEl)
 	}
 	
 	this._createContent = function() {

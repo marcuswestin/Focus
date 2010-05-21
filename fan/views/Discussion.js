@@ -87,6 +87,9 @@ DiscussionList = Class(fan.ui.lists.List, function(supr) {
 		return cell
 	}
 	
+	this.handleKeyboardSelect = function() {
+		this._input.focus()
+	}
 })
 
 

@@ -69,4 +69,8 @@ exports = Class(fan.ui.Component, function(supr){
 		
 		return (this._cells[label] = cell)
 	}
+	
+	this.handleKeyboardSelect = function(cell) {
+		this._onClick(cell['delegateId'], cell)
+	}
 })

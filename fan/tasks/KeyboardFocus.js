@@ -19,11 +19,15 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		keyMap[keys['j']] = bind(this, '_moveFocus', 1) 
 		keyMap[keys['k']] = bind(this, '_moveFocus', -1) 
-		keyMap[keys['up arrow']] = this._keyMap[keys['j']]
-		keyMap[keys['down arrow']] = this._keyMap[keys['k']]
-		keyMap[keys['enter']] = bind(this, '_selectFocusedItem'),
 		keyMap[keys['tab']] = bind(this, '_movePanel', 1)
 		keyMap[keys['`']] = bind(this, '_movePanel', -1)
+
+		keyMap[keys['up arrow']] = keyMap[keys['j']]
+		keyMap[keys['down arrow']] = keyMap[keys['k']]
+		keyMap[keys['right arrow']] = keyMap[keys['tab']]
+		keyMap[keys['left arrow']] = keyMap[keys['`']]
+
+		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
 	}
 	
 	this.grabFocus = function(uiComponent) { this._focusedUIComponent = uiComponent }
@@ -37,7 +41,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		var callback = this._keyMap[e.keyCode]
 		if (callback) {
 			e.cancel()
-			callback()
+			setTimeout(callback)
 		} 
 	}
 	

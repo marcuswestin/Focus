@@ -13,6 +13,11 @@ exports = Class(fan.views.Value, function(supr){
 		this._makeFocusable()
 	}
 	
+	this.handleKeyboardSelect = function() {
+		this.setValue(!this._value)
+		fin.set(this._itemId, this._property, this._value)
+	}
+	
 	this.setValue = function(value) {
 		if (typeof value == 'undefined') { return }
 		this._element.checked = this._value = value ? true : null

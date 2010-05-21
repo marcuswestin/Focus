@@ -33,6 +33,10 @@ exports = Class(fan.views.Value, function(supr){
 		this._makeFocusable(messageBox)
 	}
 	
+	this.handleKeyboardSelect = function() {
+		this._input.focus()
+	}
+	
 	this._submit = function() {
 		var message = this._input.getValue()
 		if (!message) { return }
@@ -85,10 +89,6 @@ DiscussionList = Class(fan.ui.lists.List, function(supr) {
 			.appendTo(cell)
 		
 		return cell
-	}
-	
-	this.handleKeyboardSelect = function() {
-		this._input.focus()
 	}
 })
 

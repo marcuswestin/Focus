@@ -46,9 +46,4 @@
 .ItemPanel .discussion .cell .UserIcon { float: left; }
 .ItemPanel .discussion .cell .TimeString { margin-bottom: 8px; }
 
-/**************************
- * Value specific styling *
- **************************/
-.fin-Value-priority-0, .fin-Value-priority-1 { font-weight: bold; }
-
 

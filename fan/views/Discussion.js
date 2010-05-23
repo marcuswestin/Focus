@@ -30,7 +30,7 @@ exports = Class(fan.views.Value, function(supr){
 			.appendTo(messageBox)
 			.subscribe('Click', bind(this, '_submit'))
 		
-		this._makeFocusable(messageBox)
+		this._makeFocusable(this._input.getElement())
 	}
 	
 	this.handleKeyboardSelect = function() {

@@ -94,7 +94,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		document.body.appendChild(this.getElement())
 		
-		layout.width += focusPadding * 2;
+		layout.width += focusPadding * 2 + 7;
 		layout.height += focusPadding * 2;
 		layout.left -= focusPadding;
 		layout.top -= focusPadding;

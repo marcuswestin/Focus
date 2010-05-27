@@ -1,6 +1,6 @@
 jsio('from shared.javascript import Class, capitalize')
 jsio('import fan.tasks.panels.Panel')
-jsio('import fan.tasks.views.TaskView')
+jsio('import fan.tasks.views.TaskItemView')
 
 exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
@@ -21,6 +21,6 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this.setItem = function(itemId) {
 		this.appendTo(gBody)
-		this._setView(new fan.tasks.views.TaskView(itemId))
+		this._setView(new fan.tasks.views.TaskItemView(itemId))
 	}
 })

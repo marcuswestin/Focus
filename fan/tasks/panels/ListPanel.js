@@ -4,7 +4,7 @@ jsio('import fan.tasks.panels.Panel')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.ui.Button')
 
-jsio('import fan.tasks.views.TasksView')
+jsio('import fan.tasks.views.TasksListView')
 // jsio('import fan.tasks.views.CalendarView')
 // jsio('import fan.tasks.views.ChangesView')
 // jsio('import fan.tasks.views.CoworkersView')
@@ -15,7 +15,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	this._className += ' ListPanel'
 	
 	this._viewCtors = {
-		'tasks': fan.tasks.views.TasksView,
+		'tasks': fan.tasks.views.TasksListView,
 		'calendar': fan.tasks.views.CalendarView,
 		'changes': fan.tasks.views.ChangesView,
 		'coworkers': fan.tasks.views.CoworkersView,

@@ -5,7 +5,7 @@ jsio('import fan.tasks.views.View')
 
 exports = Class(fan.tasks.views.View, function(supr) {
 	
-	this._className += ' TasksView'
+	this._className += ' TasksListView'
 	
 	this._buildHeader = function() {
 		new fan.ui.RadioButtons()

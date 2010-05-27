@@ -5,7 +5,7 @@ jsio('import fan.tasks.views.View')
 
 exports = Class(fan.tasks.views.View, function(supr) {
 	
-	this._className += ' TaskView'
+	this._className += ' TaskItemView'
 	this._minWidth = 500
 	this._maxWidth = 800
 	

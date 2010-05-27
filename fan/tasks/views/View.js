@@ -18,7 +18,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	this.setWidth = function(maxWidth) {
 		this._width = maxWidth >= this._maxWidth ? this._maxWidth : this._minWidth
-		this.toggleClassName(this._width == this._minWidth, 'narrow')
+		this.toggleClassName('narrow', this._width == this._minWidth)
 		this._resize()
 		return this._width
 	}

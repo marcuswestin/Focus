@@ -121,12 +121,15 @@ exports = Class(shared.Publisher, function(supr) {
 		return this
 	}
 	
-	this.toggleClassName = function(shouldHave, className) {
-		if (shouldHave) {
-			this.removeClassName.apply(this, arguments)
-		} else {
-			this.addClassName.apply(this, arguments)
+	this.toggleClassName = function(el, className, shouldHave) {
+		if (arguments.length == 2) {
+			shouldHave = className
+			className = el
+			el = this._element
 		}
+		if (shouldHave) { this.addClassName(el, className) }
+		else { this.removeClassName(el, className) }
+		return this
 	}
 	
 	this._hasClassName = function(element, className) {

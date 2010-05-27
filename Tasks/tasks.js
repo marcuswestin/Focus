@@ -60,6 +60,11 @@ gUtil = {
 				}
 			})
 		}
+	},
+	createNewTask: function() {
+		fin.create({ type: 'task', user: gUserId, done: false }, function(itemId) {
+			gItemPanel.setItem(itemId)
+		})
 	}
 }
 

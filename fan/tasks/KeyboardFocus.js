@@ -24,7 +24,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
 		
-		keyMap[keys['c']] = bind(gListPanel, 'createItem')
+		keyMap[keys['c']] = bind(gUtil, 'createNewTask')
 	}
 	
 	this.grabFocus = function(uiComponent) { this._focusedUIComponent = uiComponent }

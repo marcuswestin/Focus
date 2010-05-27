@@ -16,11 +16,10 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.appendTo(this._header)
 			.select(0)
 		
-		var newItemProps = { type: 'task', user: gUserId, done: false }
 		new fan.ui.Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(fin, 'create', newItemProps, bind(gItemPanel, 'setItem')))
+			.subscribe('Click', bind(gUtil, 'createNewTask'))
 	}
 	
 	this.loadQuery = function(query) {

@@ -10,11 +10,20 @@
 /**********
  * Panels *
  **********/
-.LabelsPanel .List { margin: 5px 0 0 11px; }
-.LabelsPanel .List .cell { cursor: pointer; font-size: 14px; color: #444; }
-.LabelsPanel .List .cell.selected { text-decoration: underline; }
+.Panel .header .RadioButtons { margin: 7px 0 0 7px; }
 
-.ListPanel .Button { position: absolute; bottom: 3px; right: 19px; }
+.ListPanel .AppsTabs { position: absolute; top: 19px; left: -28px; }
+.ListPanel .AppsTabs .Button { display: block; -moz-border-radius: 3px; -webkit-border-radius: 3px; 
+	width: 6px; height: 15px; overflow: hidden; background: no-repeat 5px 4px; border-right: none;
+	border-width: 2px; border-bottom-width: 1px; }
+.ListPanel .AppsTabs .Button.down { background-position: 5px 5px; background-color: #e5e5e5; width: 5px; }
+.ListPanel .AppsTabs .Button.tasks { background-image: url("img/apps/tasks.png"); }
+.ListPanel .AppsTabs .Button.calendar { background-image: url("img/apps/calendar.png"); }
+.ListPanel .AppsTabs .Button.changes { background-image: url("img/apps/changes.png"); }
+.ListPanel .AppsTabs .Button.coworkers { background-image: url("img/apps/coworkers.png"); }
+.ListPanel .AppsTabs .Button.accomplishments { background-image: url("img/apps/accomplishments.png"); }
+
+.ListPanel .createButton { float: right; margin: 7px 7px 0 0; }
 .ListPanel .List { margin: 5px 0; }
 .ListPanel .List .cell { cursor: pointer; height: 20px; overflow: hidden; 
 	padding: 4px 6px 3px; margin: 0px 5px; }

@@ -34,10 +34,10 @@ fin.registerView('Discussion', fan.views.Discussion)
 
 jsio('import fan.tasks.LoginManager')
 jsio('import fan.tasks.KeyboardFocus')
-jsio('import fan.tasks.panels.LabelsPanel')
 jsio('import fan.tasks.panels.ListPanel')
 jsio('import fan.tasks.panels.ItemPanel')
 jsio('import fan.ui.overlay')
+jsio('import fan.ui.resizeManager')
 
 jsio('import client.xhr')
 
@@ -85,11 +85,16 @@ gLoginManager.subscribe('Login', function(email, passwordHash){
 })
 
 fin.connect(function(){
-	window.gLabelsPanel = new fan.tasks.panels.LabelsPanel()
 	window.gListPanel = new fan.tasks.panels.ListPanel()
 	window.gItemPanel = new fan.tasks.panels.ItemPanel()
-	window.gPanels = [gLabelsPanel, gListPanel, gItemPanel]
+	window.gPanels = [gListPanel, gItemPanel]
 	window.gKeyboardFocus = new fan.tasks.KeyboardFocus()
+	
+	gListPanel.subscribe('Resize', function(takenWidth) {
+		var winSize = fan.ui.resizeManager.getWindowSize()
+		takenWidth += 50
+		gItemPanel.position(takenWidth, winSize.width - takenWidth)
+	})
 })
 
 function openApp() {
@@ -104,9 +109,7 @@ function openApp() {
 	// fin.query({ 'type': 'user' })
 	// fin.query({ 'type': 'project' })
 	
-	gLabelsPanel.appendTo(gBody)
 	gListPanel.appendTo(gBody)
-	gItemPanel.appendTo(gBody)
 	
 	;(function initMeebo(q) {
 		return

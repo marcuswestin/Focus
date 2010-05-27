@@ -32,18 +32,37 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
  * Panels *
  **********/
 .Panel { position: absolute; border: 1px solid #aaa; background-color: #999;
-	top: 50px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
-.Panel .header { position: absolute; background-color: #fff; border: 1px solid #aaa; 
+	top: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+
+.Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; 
 	-moz-border-radius: 6px 6px 0 0; -webkit-border-top-right-radius: 8px; 
 	-webkit-border-top-left-radius: 8px; }
-.Panel .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
-.Panel .content { position: absolute; border: 1px solid #aaa; background: #fff; 
+.Panel .View .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
+.Panel .View .body { position: absolute; border: 1px solid #aaa; background: #fff; 
 	-moz-border-radius: 0 0 6px 6px; -webkit-border-bottom-right-radius: 8px; 
 	-webkit-border-bottom-left-radius: 8px; overflow-y: auto; overflow-x: hidden; }
+.Panel .View .body .left-column { float: left; width: 350px; margin-bottom: 10px; }
+.Panel .View .body .right-column { float: right; }
 
-.Panel .content .left-column { float: left; width: 350px; margin-bottom: 10px; }
-.Panel .content .right-column { float: right; }
+.Panel .View { overflow: hidden; }
+.Panel .View .body, .Panel .View .header { position: absolute; }
+.Panel .View .body { overflow-x: hidden; overflow-y: auto; }
 
-.UserIcon img { background: url("img/user_icon.gif"); width: 50px; height: 50px; }
+/***********
+ * Buttons *
+ ***********/
+.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px outset #333; border-right: 0px; 
+	background: #ddd; display: inline-block; cursor: pointer; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.Button.down { border-style: inset; }
+
+.RadioButtons { display: inline-block; }
+.RadioButtons .Button.left { -moz-border-radius: 20px 0 0 20px; -webkit-border-top-left-radius: 20px; 
+	-webkit-border-bottom-left-radius: 20px; }
+.RadioButtons .Button.right { -moz-border-radius: 0 20px 20px 0; -webkit-border-bottom-right-radius: 20px;
+	-webkit-border-top-right-radius: 20px; border-right: 1px outset; }
+/**********************
+ * Misc UI Components *
+ **********************/
+.UserIcon img { background: url("Tasks/img/user_icon.gif"); width: 50px; height: 50px; }
 
 .TimeString { font-size: 12px; color: #666; }

@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Class');
 jsio('import shared.Publisher');
 
-_uniqueFocusId = 0
+_uniqueId = 1
 _focusables = {}
 
 exports = Class(shared.Publisher, function(supr) {
@@ -73,14 +73,15 @@ exports = Class(shared.Publisher, function(supr) {
 		if (params.parent) { params.parent.appendChild(el); }
 		return el;
 	}
-
+	
+	this._getUniqueId = function() { return 'fan_u' + _uniqueId++ }
 /***************************
  * Focusable UI Components *
  ***************************/
 	// UI Components need to be made focusable for fan.tasks.KeyboardFocus to find them
 	this._makeFocusable = function(el) {
 		if (!el) { el = this._element}
-		var focusableId = el['fan-focusableId'] = _uniqueFocusId++
+		var focusableId = el['fan-focusableId'] = this._getUniqueId()
 		_focusables[focusableId] = this
 		this.addClassName(el, 'fan-focusable')
 	}
@@ -109,13 +110,23 @@ exports = Class(shared.Publisher, function(supr) {
 			className = element
 			element = this.getElement()
 		}
-		className += ' ';
-		var current = element.className;
-		var index = current.indexOf(className);
-		if (index != -1) {
-			element.className = current.slice(0, index) + current.slice(index + className.length);
+		if (element.className) {
+			className += ' ';
+			var current = element.className;
+			var index = current.indexOf(className);
+			if (index != -1) {
+				element.className = current.slice(0, index) + current.slice(index + className.length);
+			}
 		}
 		return this
+	}
+	
+	this.toggleClassName = function(shouldHave, className) {
+		if (shouldHave) {
+			this.removeClassName.apply(this, arguments)
+		} else {
+			this.addClassName.apply(this, arguments)
+		}
 	}
 	
 	this._hasClassName = function(element, className) {

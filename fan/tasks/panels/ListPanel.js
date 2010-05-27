@@ -1,47 +1,55 @@
 jsio('from shared.javascript import Class')
+jsio('import fan.ui.resizeManager')
 jsio('import fan.tasks.panels.Panel')
+jsio('import fan.ui.RadioButtons')
 jsio('import fan.ui.Button')
 
+jsio('import fan.tasks.views.TasksView')
+// jsio('import fan.tasks.views.CalendarView')
+// jsio('import fan.tasks.views.ChangesView')
+// jsio('import fan.tasks.views.CoworkersView')
+// jsio('import fan.tasks.views.AccomplishmentsView')
+
 exports = Class(fan.tasks.panels.Panel, function(supr) {
-	
+
 	this._className += ' ListPanel'
-	this._width = 280
-	this._left = 170
+	
+	this._viewCtors = {
+		'tasks': fan.tasks.views.TasksView,
+		'calendar': fan.tasks.views.CalendarView,
+		'changes': fan.tasks.views.ChangesView,
+		'coworkers': fan.tasks.views.CoworkersView,
+		'accomplishments': fan.tasks.views.AccomplishmentsView
+	}
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
+		this._element.style.left = '30px';
 		
-		var taskButton = new fan.ui.Button('Create new task')
-		taskButton.subscribe('Click', bind(this, 'createItem'))
-		taskButton.appendTo(this._element)
+		this._views = {}
 		
-		this.hide()
+		new fan.ui.RadioButtons()
+			.addButton('tasks', 'tasks')
+			// .addButton('calendar', 'calendar')
+			// .addButton('changes', 'changes')
+			// .addButton('coworkers', 'coworkers')
+			// .addButton('accomplishments', 'accomplishments')
+			.addClassName('AppsTabs')
+			.appendTo(this._element)
+			.subscribe('Click', bind(this, 'selectApp'))
+			.select(0)
 	}
 	
-	this.createItem = function() {
-		var data = { type: 'task', user: gUserId, done: false }
+	this._onWindowResize = function(winSize) {
+		supr(this, '_onWindowResize', arguments)
 		
-		fin.create(data, function(itemId) {
-			gItemPanel.setItem(itemId)
-		})
+		this._lastMaxWidth = winSize.width
+		if (!this._currentView) { return }
+		this._resize()
 	}
 	
-	this.load = function(query, sortBy, title) {
-		if (this._listView) { logger.warn("TODO: release current list view")}
-		
-		this._listView = fin.createView('SortedList', query, sortBy)
-		
-		this._setTitle(title)
-		
-		this._content.innerHTML = ''
-
-		this._listView.appendTo(this._content)
-		this._listView.subscribe('Click', bind(this, '_onCellClick'))
-		
-		this.show()
-	}
-	
-	this._onCellClick = function(itemId) {
-		gItemPanel.setItem(itemId)
+	this.selectApp = function(appName) {
+		if (!this._views[appName]) { this._views[appName] = new this._viewCtors[appName]() }
+		this._setView(this._views[appName])
 	}
 })

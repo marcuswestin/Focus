@@ -6,34 +6,37 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this._className = 'Panel'
 	this._width = null // override
-	this._left = null // override
-	this._headerHeight = 22
-	this._padding = 2
-	this._border = 1
 	
 	this._createContent = function() {
-		this._header = this._create({ parent: this._element, className: 'header' })
-		this._content = this._create({ parent: this._element, className: 'content' })
 		fan.ui.resizeManager.addDependant(bind(this, '_onWindowResize'))
 	}
 	
 	this._onWindowResize = function(winSize) {
-		var padding2 = this._padding * 2 + this._border * 2,
-			height = winSize.height - 100,
-			contentWidth = this._width - padding2,
-			contentHeight = height - padding2 - this._headerHeight - this._border * 4
-		
-		// Layout panel
-		this.layout({ height: height, width: this._width, left: this._left })
-		// Layout header
-		this.layout(this._header, { top: this._padding, left: this._padding,
-				height: this._headerHeight, width: contentWidth })
-		// Layout content
-		this.layout(this._content, { top: this._headerHeight + padding2, left: this._padding, 
-				height: contentHeight, width: contentWidth })
+		var height = this._lastHeight = winSize.height - 25
+		this._element.style.height = height + 'px'
+		if (this._currentView) { this._currentView.setHeight(height) }
 	}
 	
-	this._setTitle = function(title) {
-		this._header.innerHTML = '<div class="title">' + title + '</div>'
+	this._setView = function(view) {
+		// fade out current view
+		// get new view's width
+		// resize to new width
+		// 		remove current view
+		//		fade in new view
+		var currentView = this._currentView
+		if (currentView) {
+			currentView.release()
+			currentView.remove() // TODO fade
+		}
+		this._currentView = view
+		this._element.appendChild(view.getElement()) // TODO fade in
+		this._currentView.setHeight(this._lastHeight)
+		this._resize()
+	}
+	
+	this._resize = function() {
+		var takenWidth = this._currentView.setWidth(this._lastMaxWidth)
+		this._element.style.width = takenWidth + 'px' // TODO animate resize
+		this._publish('Resize', takenWidth)
 	}
 })

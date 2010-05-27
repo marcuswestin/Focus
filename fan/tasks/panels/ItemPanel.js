@@ -8,15 +8,15 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
-		this.position(this._lastLeft, this._lastWidth)
+		this.position(this._lastLeft, this._lastMaxWidth)
 	}
 	
 	this.position = function(left, availableWidth) {
 		this._lastLeft = left
-		this._lastWidth = availableWidth
+		this._lastMaxWidth = availableWidth
 		if (!this._element) { return }
 		this._element.style.left = left + 'px'
-		if (this._currentView) { this._currentView.setWidth(availableWidth) }
+		if (this._currentView) { this._resize() }
 	}
 	
 	this.setItem = function(itemId) {

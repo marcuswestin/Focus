@@ -52,11 +52,12 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 /***********
  * Buttons *
  ***********/
-.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px outset #333; border-right: 0px; 
-	background: #ddd; display: inline-block; cursor: pointer; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
-.Button.down { border-style: inset; }
+.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px outset #333; background: #ddd; 
+	display: inline-block; cursor: pointer; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.Button.down { border-style: inset; background-color: #cfcfcf; }
 
 .RadioButtons { display: inline-block; }
+.RadioButtons .Button { border-right: none; -moz-border-radius: 0px; -webkit-border-radius: 0px; }
 .RadioButtons .Button.left { -moz-border-radius: 20px 0 0 20px; -webkit-border-top-left-radius: 20px; 
 	-webkit-border-bottom-left-radius: 20px; }
 .RadioButtons .Button.right { -moz-border-radius: 0 20px 20px 0; -webkit-border-bottom-right-radius: 20px;

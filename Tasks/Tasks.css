@@ -4,7 +4,7 @@
 .LoginManager { width: 250px; height: 90px; }
 .LoginManager .inputs { display: block; width: 200px; margin: 20px auto; }
 .LoginManager .inputs .Input { width: 100%; margin-top: 2px; }
-.LoginManager .Button { position: absolute; bottom: 3px; right: 5px; }
+.LoginManager .Button { position: absolute; bottom: 3px; right: 24px; }
 .LoginManager .Link { position: absolute; bottom: 8px; left: 5px; }
 
 /**********

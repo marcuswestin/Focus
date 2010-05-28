@@ -71,5 +71,6 @@ exports = Class(fan.views.Value, function(supr) {
 		layout.width += this._padding * 2 + this._border * 2 + 5
 		
 		this._input.layout(layout)
+		gKeyboardFocus.resize()
 	}
 })

@@ -65,7 +65,9 @@ exports = Class(fan.ui.Component, function(supr) {
 		var targetEl = this._targetEl = targetEls[newFocusIndex],
 			target = this._target = this._getFocusableComponent(targetEl)
 		
-		this._showAt(targetEl)
+		this
+			.appendTo(document.body)
+			.resize()
 	}
 	
 	this._selectFocusedItem = function() {
@@ -87,14 +89,13 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._top.style.height = this._bottom.style.height = borderWidth + 'px'
 	}
 	
-	this._showAt = function(targetEl) {
-		var focusPadding = 2,
+	this.resize = function() {
+		var targetEl = this._targetEl,
+			focusPadding = 2,
 			borderWidth = this._borderWidth,
 			layout = this.getLayout(targetEl)
 		
-		document.body.appendChild(this.getElement())
-		
-		layout.width += focusPadding * 2 + 7;
+		layout.width += focusPadding * 2 + 10;
 		layout.height += focusPadding * 2;
 		layout.left -= focusPadding;
 		layout.top -= focusPadding;

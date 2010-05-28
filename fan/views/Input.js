@@ -47,7 +47,7 @@ exports = Class(fan.views.Value, function(supr){
 		// var mutation = { position: position.caret - selectionLength }
 		
 		var shiftIsDown = false // we need to know if the shift key is down to enable adding breaklines :(
-		if (e.keyCode == this.keys['enter'] && !shiftIsDown) {
+		if (e.keyCode == this.keys['escape'] || (e.keyCode == this.keys['enter'] && !shiftIsDown)) {
 			this._element.blur()
 			e.cancel()
 			return

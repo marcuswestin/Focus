@@ -25,10 +25,12 @@
 
 .ListPanel .createButton { float: right; margin: 7px 7px 0 0; }
 .ListPanel .List { margin: 5px 0; }
-.ListPanel .List .cell { cursor: pointer; height: 20px; overflow: hidden; 
-	padding: 4px 6px 3px; margin: 0px 5px; }
-.ListPanel .List .cell:nth-child(odd) { background-color: #eeedfc; 
-	border-top-color: #eeedfc; border-bottom-color: #eeedfc; }
+.ListPanel .List .cell { cursor: pointer; height: 20px; overflow: hidden; padding: 4px 6px 3px; 
+	margin: 0px 5px; }
+.ListPanel .List .cell:nth-child(odd) { background-color: #e5e4fc; }
+.ListPanel .List .cell.crucial { background-color: #fcfcee; }
+.ListPanel .List .cell.crucial:nth-child(odd) { background-color: #fbebdd; }
+.ListPanel .List .cell.crucial .title { color: #222; }
 .ListPanel .List .cell.selected { border-color: #abd; }
 .ListPanel .List .cell .title { color: #333; height: 17px; overflow: hidden; }
 .ListPanel .List .cell .user { font-size: 12px; color: #666; }

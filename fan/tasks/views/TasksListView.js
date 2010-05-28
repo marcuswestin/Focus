@@ -2,6 +2,7 @@ jsio('from shared.javascript import Class')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
+jsio('import fan.ui.lists.TaskList')
 
 exports = Class(fan.tasks.views.View, function(supr) {
 	
@@ -25,7 +26,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this.loadQuery = function(query) {
 		if (this._listView) { logger.log("TODO Release view!") }
 		this._body.innerHTML = ''
-		this._listView = fin.createView('SortedList', query, 'critical')
+		this._listView = new fan.ui.lists.TaskList(query, 'crucial')
 			.subscribe('Click', bind(gItemPanel, 'setItem'))
 			.appendTo(this._body)
 	}

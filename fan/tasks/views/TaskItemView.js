@@ -17,7 +17,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this._buildHeader = function() {
 		new fan.ui.RadioButtons()
 			.addTextButton('Normal', 'normal')
-			.addTextButton('Critical', 'critical')
+			.addTextButton('Crucial', 'crucial')
 			.addTextButton('Backlog', 'backlog')
 			.addTextButton('Done', 'done')
 			.subscribe('Click', bind(this, '_toggleTaskState'))
@@ -25,7 +25,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	}
 	
 	this._buildBody = function() {
-		gUtil.loadTemplate('task', 'panel', bind(this, function(template) {
+		gUtil.withTemplate('task', 'panel', bind(this, function(template) {
 			this._body.innerHTML = ''
 			this._body.appendChild(fin.applyTemplate(template, this._itemId))
 		}))

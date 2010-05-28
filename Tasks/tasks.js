@@ -17,7 +17,6 @@ jsio('import fan.views.Checkbox')
 jsio('import fan.views.Conditional')
 jsio('import fan.views.ListView')
 jsio('import fan.views.Editable')
-jsio('import fan.views.SortedList')
 jsio('import fan.views.ItemSetSelect')
 jsio('import fan.views.Discussion')
 
@@ -28,7 +27,6 @@ fin.registerView('Input', fan.views.Input)
 fin.registerView('Checkbox', fan.views.Checkbox)
 fin.registerView('ListView', fan.views.ListView)
 fin.registerView('Editable', fan.views.Editable)
-fin.registerView('SortedList', fan.views.SortedList)
 fin.registerView('ItemSetSelect', fan.views.ItemSetSelect)
 fin.registerView('Discussion', fan.views.Discussion)
 
@@ -44,7 +42,7 @@ jsio('import client.xhr')
 gUtil = {
 	_templates: {},
 	_templateQueue: {},
-	loadTemplate: function(itemType, viewType, callback) {
+	withTemplate: function(itemType, viewType, callback) {
 		var path = 'templates/' + itemType + '/' + viewType + '.html'
 		if (gUtil._templates[path]) { 
 			callback(gUtil._templates[path])

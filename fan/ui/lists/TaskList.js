@@ -3,15 +3,7 @@ jsio('import fan.ui.lists.SortedList')
 
 exports = Class(fan.ui.lists.SortedList, function(supr){
 	
-	this.init = function(args) {
-		supr(this, 'init', args)
-		
-		var conditions = args[0],
-			template = args[2]
-		
-		this._type = conditions.type
-		this._template = template
-	}
+	this._className += ' TaskList'
 	
 	this._getCellFor = function(item) {
 		var itemId = item.getId(),
@@ -21,19 +13,19 @@ exports = Class(fan.ui.lists.SortedList, function(supr){
 		
 		cell = this._create({ className: 'cell' })
 		cell.delegateId = itemId
-		
-		if (this._template) {
-			this._applyTemplate(cell, itemId, this._template)
-		} else {
-			gUtil.loadTemplate(this._type, 'list', bind(this, '_applyTemplate', cell, itemId))
-		}
-		
 		this._makeFocusable(cell)
+		
+		gUtil.withTemplate('task', 'list', bind(this, '_applyTemplate', cell, itemId))
+		fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
 		
 		return (this._cells[itemId] = cell)
 	}
 	
 	this._applyTemplate = function(cell, itemId, template) {
 		cell.appendChild(fin.applyTemplate(template, itemId))
+	}
+	
+	this._onCellCriticalChange = function(cell, mutation, isCritical) {
+		this.toggleClassName(cell, 'crucial', isCritical)
 	}
 })

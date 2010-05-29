@@ -67,7 +67,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		this
 			.appendTo(document.body)
-			.resize()
+			.updatePosition()
 	}
 	
 	this._selectFocusedItem = function() {
@@ -89,7 +89,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._top.style.height = this._bottom.style.height = borderWidth + 'px'
 	}
 	
-	this.resize = function() {
+	this.updatePosition = function() {
 		var targetEl = this._targetEl,
 			focusPadding = 2,
 			borderWidth = this._borderWidth,

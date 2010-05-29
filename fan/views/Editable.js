@@ -64,13 +64,16 @@ exports = Class(fan.views.Value, function(supr) {
 	this._resizeInput = function() {
 		if (!this._input) { return; }
 		
-		var layout = this.getLayout()
-		layout.left -= (this._padding + this._border)
-		layout.top -= (this._padding + this._border)
-		layout.height += this._padding * 2 + this._border * 2
-		layout.width += this._padding * 2 + this._border * 2 + 5
+		var layout = this.getLayout(),
+			padding = this._padding,
+			border = this._border
+		
+		layout.left -= (padding + border)
+		layout.top -= (padding + border)
+		layout.height += padding * 2 + border * 2
+		layout.width += padding * 2 + border * 2 + 5
 		
 		this._input.layout(layout)
-		gKeyboardFocus.resize()
+		gKeyboardFocus.updatePosition()
 	}
 })

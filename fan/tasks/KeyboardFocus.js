@@ -23,8 +23,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		keyMap[keys['tab']] = keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
 		
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
-		
-		keyMap[keys['c']] = bind(gUtil, 'createNewTask')
 	}
 	
 	this.grabFocus = function(uiComponent) { this._focusedUIComponent = uiComponent }

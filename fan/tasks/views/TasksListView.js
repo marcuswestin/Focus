@@ -2,7 +2,9 @@ jsio('from shared.javascript import Class')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
-jsio('import fan.ui.lists.TaskList')
+jsio('import fan.tasks.views.TaskItemView')
+jsio('import fan.ui.lists.SortedList')
+
 
 exports = Class(fan.tasks.views.View, function(supr) {
 	
@@ -20,14 +22,40 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(gUtil, 'createNewTask'))
+			.subscribe('Click', bind(gUtil, 'createNewTask', {}, bind(this, '_selectTask')))
 	}
 	
 	this.loadQuery = function(query) {
 		if (this._listView) { logger.log("TODO Release view!") }
 		this._body.innerHTML = ''
-		this._listView = new fan.ui.lists.TaskList(query, 'crucial')
-			.subscribe('Click', bind(gItemPanel, 'setItem'))
+		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'), query, 'crucial')
+			.addClassName('TaskList')
+			.subscribe('Click', bind(this, '_selectTask'))
 			.appendTo(this._body)
+	}
+	
+	this._selectTask = function(itemId) {
+		var view = new fan.tasks.views.TaskItemView(itemId)
+		gItemPanel.setView(view)
+	}
+	
+	this._getCellFor = function(item) {
+		var itemId = item.getId(),
+			cell = this._create({ className: 'cell' })
+		
+		cell.delegateId = itemId
+		
+		gUtil.withTemplate('task', 'list', bind(this, '_applyTemplate', cell, itemId))
+		fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
+		
+		return cell
+	}
+	
+	this._applyTemplate = function(cell, itemId, template) {
+		cell.appendChild(fin.applyTemplate(template, itemId))
+	}
+	
+	this._onCellCriticalChange = function(cell, mutation, isCritical) {
+		this.toggleClassName(cell, 'crucial', isCritical)
 	}
 })

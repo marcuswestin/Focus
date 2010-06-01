@@ -12,8 +12,8 @@ exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._className += ' SortedList'
 	
-	this.init = function(conditions, sortBy) {
-		supr(this, 'init')
+	this.init = function(getCellFn, conditions, sortBy) {
+		supr(this, 'init', arguments)
 		this._conditions = conditions
 		this._sortBy = sortBy
 		this._itemsById = {}

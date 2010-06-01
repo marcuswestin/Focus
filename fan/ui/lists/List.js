@@ -5,10 +5,11 @@ exports = Class(fan.ui.Component, function(supr){
 	
 	this._className = 'List'
 	
-	this.init = function() {
+	this.init = function(makeCellFn) {
 		supr(this, 'init')
 		this._cells = {}
 		this._items = []
+		this._makeCellFn = makeCellFn
 	}
 	
 	this._createContent = function() {
@@ -46,29 +47,20 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this.createDelayedMethod('_render', function() {
-		var items = this._items
+		var items = this._items,
+			cells = this._cells
+		
 		if (!this._element || !items) { return }
 
 		for (var i=0, item; item = items[i]; i++) {
-			var cell = this._getCellFor(item)
-			this._element.appendChild(cell)
+			var itemId = item.getId ? item.getId() : item.timestamp // hack for lists with items that don't have a getId method
+			if (!cells[itemId]) {
+				cells[itemId] = this._makeCellFn(item)
+				this._makeFocusable(cells[itemId])
+			}
+			this._element.appendChild(cells[itemId])
 		}
 	})
-	
-	this._getCellFor = function(label) {
-		var cell = this._cells[label]
-		
-		if (cell) { return cell }
-		var text = label.replace(/_/g, ' '),
-			className = 'cell ' + label.toString().replace(/ /g, '-').toLowerCase()
-		
-		cell = this._create({ text: text, className: className })
-		cell.delegateId = label
-		
-		this._makeFocusable(cell)
-		
-		return (this._cells[label] = cell)
-	}
 	
 	this.handleKeyboardSelect = function(cell) {
 		this._onClick(cell['delegateId'], cell)

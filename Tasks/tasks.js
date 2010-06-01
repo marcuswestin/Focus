@@ -59,10 +59,14 @@ gUtil = {
 			})
 		}
 	},
-	createNewTask: function() {
-		fin.create({ type: 'task', user: gUserId, done: false }, function(itemId) {
-			gItemPanel.setItem(itemId)
-		})
+	createNewTask: function(params, callback) {
+		params.type = 'task'
+		params.user = gUserId
+		params.done = false
+		fin.create(params, callback)
+	},
+	createNewProject: function(callback) {
+		fin.create({ type: 'project', done: false, }, callback)
 	}
 }
 

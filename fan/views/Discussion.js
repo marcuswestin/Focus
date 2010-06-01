@@ -11,9 +11,19 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._createContent = function() {
 		this._createMessageBox()
-		this._list = new DiscussionList()
+		this._list = new fan.ui.lists.List(bind(this, '_createCell'))
 		this._list.appendTo(this._element)
 		this._subId = fin.observeList(this._itemId, this._property, bind(this, '_onListMutation'))
+	}
+	
+	this._createCell = function(item) {
+		var cell = this._create({ className: 'cell' })
+		
+		new fan.ui.UserIcon(item.user).appendTo(cell)
+		this._create({ className: 'message', text: item.message, parent: cell })
+		new fan.ui.TimeString(item.timestamp).appendTo(cell)
+		
+		return cell
 	}
 	
 	this._createMessageBox = function() {
@@ -61,36 +71,3 @@ exports = Class(fan.views.Value, function(supr){
 		fin.extendList(this._itemId, this._property, maxNumInSight)
 	}
 })
-
-DiscussionList = Class(fan.ui.lists.List, function(supr) {
-	
-	this._getCellFor = function(item) {
-		var message = item.message
-
-		var cell = this._cells[message]
-		
-		if (cell) { return cell }
-		cell = this._createCell(item)
-		cell.delegateId = message
-		
-		return (this._cells[message] = cell)
-	}
-	
-	this._createCell = function(item) {
-		var cell = this._create({ className: 'cell' })
-
-		new fan.ui.UserIcon(item.user)
-			.appendTo(cell)
-		
-		var message = this._create({ className: 'message', text: item.message })
-		cell.appendChild(message)
-		
-		new fan.ui.TimeString(item.timestamp)
-			.appendTo(cell)
-		
-		return cell
-	}
-})
-
-
-

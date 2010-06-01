@@ -57,7 +57,8 @@ exports = Class(fan.ui.Component, function(supr) {
 		var newFocusIndex = this._focusIndex[this._panelIndex] + steps,
 			targetEls = panel.getElement().getElementsByClassName('fan-focusable')
 		
-		if (newFocusIndex < 0 || newFocusIndex >= targetEls.length) { return; }
+		if (newFocusIndex < 0) { return; }
+		if (newFocusIndex >= targetEls.length) { newFocusIndex = targetEls.length - 1 }
 		this._focusIndex[this._panelIndex] = newFocusIndex
 		
 		var targetEl = this._targetEl = targetEls[newFocusIndex],

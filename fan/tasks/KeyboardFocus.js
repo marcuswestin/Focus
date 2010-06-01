@@ -89,6 +89,8 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this.updatePosition = function() {
+		if (!this._targetEl) { return }
+		
 		var targetEl = this._targetEl,
 			focusPadding = 2,
 			borderWidth = this._borderWidth,

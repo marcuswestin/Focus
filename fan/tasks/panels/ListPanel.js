@@ -17,8 +17,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._viewCtors = {
 		'tasks': fan.tasks.views.TasksListView,
-		'projects': fan.tasks.views.ProjectsListView
-		// 'calendar': fan.tasks.views.CalendarView,
+		'projects': fan.tasks.views.ProjectsListView,
+		// 'calendar': fan.tasks.views.CalendarView
 		// 'changes': fan.tasks.views.ChangesView,
 		// 'coworkers': fan.tasks.views.CoworkersView,
 		// 'accomplishments': fan.tasks.views.AccomplishmentsView
@@ -30,10 +30,10 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		
 		this._views = {}
 		
-		new fan.ui.RadioButtons()
+		this._apps = new fan.ui.RadioButtons()
 			.addButton('tasks', 'tasks')
 			.addButton('projects', 'projects')
-			// .addButton('calendar', 'calendar')
+			.addButton('calendar', 'calendar')
 			// .addButton('changes', 'changes')
 			// .addButton('coworkers', 'coworkers')
 			// .addButton('accomplishments', 'accomplishments')
@@ -55,5 +55,9 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		var views = this._views
 		if (!views[appName]) { views[appName] = new this._viewCtors[appName]() }
 		this._setView(views[appName])
+	}
+	
+	this.selectAppByIndex = function(index) {
+		this._apps.select(index)
 	}
 })

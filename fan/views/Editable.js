@@ -12,6 +12,8 @@ exports = Class(fan.views.Value, function(supr) {
 		supr(this, '_createContent')
 		
 		this._on('click', bind(this, '_onClick'))
+		this._on('mouseover', bind(this, 'addClassName', 'hot'))
+		this._on('mouseout', bind(this, 'removeClassName', 'hot'))
 		this._makeFocusable()
 	}
 	

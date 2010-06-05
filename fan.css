@@ -1,6 +1,7 @@
 body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; font-size: 13px; }
 
 .Editable { cursor: pointer; }
+.Editable.hot { background-color: #e6ffff; }
 .Editable.defaultValue { font-style: italic; color: #333; }
 
 .KeyboardFocus .piece { position: absolute; background: #76aee5; opacity: .65; }

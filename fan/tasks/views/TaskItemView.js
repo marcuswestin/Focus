@@ -14,6 +14,8 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		this._itemId = itemId
 	}
 	
+	this.getTaskId = function() { return this._itemId }
+	
 	this._buildHeader = function() {
 		new fan.ui.RadioButtons()
 			.addTextButton('Normal', 'normal')

@@ -25,6 +25,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	}
 	
 	this.viewTask = function(taskItemId) {
+		if (this._currentView && this._currentView.getTaskId() == taskItemId) { return }
 		var view = new fan.tasks.views.TaskItemView(taskItemId)
 		this.setView(view)
 	}

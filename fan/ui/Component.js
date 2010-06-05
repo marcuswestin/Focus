@@ -95,7 +95,7 @@ exports = Class(shared.Publisher, function(supr) {
  ***************/
 
 	this.addClassName = function(element, className) { 
-		if (arguments.length == 1) {
+		if (typeof element == 'string') {
 			className = element
 			element = this.getElement()
 		}
@@ -106,7 +106,7 @@ exports = Class(shared.Publisher, function(supr) {
 	}
 	
 	this.removeClassName = function(element, className) { 
-		if (arguments.length == 1) {
+		if (typeof element == 'string') {
 			className = element
 			element = this.getElement()
 		}

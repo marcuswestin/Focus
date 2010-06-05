@@ -23,6 +23,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this.select = function(index) {
 		this._onDelegateClick(this._buttons[index].delegateId)
+		return this
 	}
 	
 	this._addButton = function(payload) {

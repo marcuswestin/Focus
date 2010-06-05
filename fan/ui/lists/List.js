@@ -9,6 +9,7 @@ exports = Class(fan.ui.Component, function(supr){
 		supr(this, 'init')
 		this._cells = {}
 		this._items = []
+		this._itemsById = {}
 		this._makeCellFn = makeCellFn
 	}
 	
@@ -30,10 +31,31 @@ exports = Class(fan.ui.Component, function(supr){
 		}
 	}
 	
-	this.setItems = function(items) {
-		this._items = items;
-		if (!this._element) { return }
-		this._element.innerHTML = ''
+	this.addItems = function(itemIds) {
+		var byId = this._itemsById
+		for (var i=0, itemId; itemId = itemIds[i]; i++) {
+			if (byId[itemId]) { continue }
+			byId[itemId] = this._addItem(itemId)
+		}
+		this._render()
+	}
+	
+	this.removeItems = function(removeItemIds) {
+		// this n*m loop could be made more efficient...
+		for (var i=0, removeItemId; removeItemId = removeItemIds[i]; i++) {
+			if (!this._itemsById[removeItemId]) { continue }
+			for (var j=0, item; item = this._items[j]; j++) {
+				var itemId = this._getItemId(item)
+				if (itemId != removeItemId) { continue }
+				this._items.splice(j, 1)
+				delete this._itemsById[itemId]
+				if (!this._cells[itemId]) { break }
+				this.remove(this._cells[itemId])
+				delete this._cells[itemId]
+				break
+			}
+		}
+		
 		this._render()
 	}
 	
@@ -53,14 +75,22 @@ exports = Class(fan.ui.Component, function(supr){
 		if (!this._element || !items) { return }
 
 		for (var i=0, item; item = items[i]; i++) {
-			var itemId = item.getId ? item.getId() : item.timestamp // hack for lists with items that don't have a getId method
+			var itemId = this._getItemId(item)
+			
 			if (!cells[itemId]) {
 				cells[itemId] = this._makeCellFn(item)
 				this._makeFocusable(cells[itemId])
 			}
-			this._element.appendChild(cells[itemId])
+			parentEl = (this._groupsById && this._groupsById[itemId]) || this._element
+			parentEl.appendChild(cells[itemId])
 		}
 	})
+	
+	this._getItemId = function(item) {
+		return item.getId ? item.getId() 
+				: item.timestamp ? item.timestamp
+				: item
+	}
 	
 	this.handleKeyboardSelect = function(cell) {
 		this._onClick(cell['delegateId'], cell)

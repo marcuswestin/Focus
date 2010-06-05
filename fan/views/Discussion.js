@@ -5,7 +5,7 @@ jsio('import fan.ui.Button')
 jsio('import fan.ui.Component')
 jsio('import fan.ui.Input')
 jsio('import fan.ui.UserIcon')
-jsio('import fan.ui.TimeString')
+jsio('import fan.time')
 
 exports = Class(fan.views.Value, function(supr){
 	
@@ -21,7 +21,7 @@ exports = Class(fan.views.Value, function(supr){
 		
 		new fan.ui.UserIcon(item.user).appendTo(cell)
 		this._create({ className: 'message', text: item.message, parent: cell })
-		new fan.ui.TimeString(item.timestamp).appendTo(cell)
+		new fan.time.TimeString(item.timestamp).appendTo(cell)
 		
 		return cell
 	}

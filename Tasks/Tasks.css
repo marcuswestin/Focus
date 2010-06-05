@@ -56,4 +56,6 @@
 .ItemPanel .discussion .cell .UserIcon { float: left; }
 .ItemPanel .discussion .cell .TimeString { margin-bottom: 8px; }
 
+.CalendarView .groupHeader { width: 20%; float: left; margin-top: 10px; text-align: center; }
+.CalendarView .group { width: 20%; float: left; }
 

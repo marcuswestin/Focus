@@ -2,7 +2,6 @@ jsio('from shared.javascript import Class')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
-jsio('import fan.tasks.views.TaskItemView')
 jsio('import fan.ui.lists.SortedList')
 
 
@@ -30,13 +29,8 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		this._body.innerHTML = ''
 		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'), query, 'crucial')
 			.addClassName('TaskList')
-			.subscribe('Click', bind(this, '_selectTask'))
+			.subscribe('Click', bind(gItemPanel, 'viewTask'))
 			.appendTo(this._body)
-	}
-	
-	this._selectTask = function(itemId) {
-		var view = new fan.tasks.views.TaskItemView(itemId)
-		gItemPanel.setView(view)
 	}
 	
 	this._getCellFor = function(item) {

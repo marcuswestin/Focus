@@ -5,7 +5,6 @@ jsio('import fan.ui.RadioButtons')
 jsio('import fan.ui.lists.SortedList')
 
 jsio('import fan.tasks.views.View')
-jsio('import fan.tasks.views.TaskItemView')
 
 exports = Class(fan.tasks.views.View, function(supr) {
 	
@@ -22,20 +21,21 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New Task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(gUtil, 'createNewTask', {project: this._itemId}, function(){}))
+			.subscribe('Click', bind(gUtil, 'createNewTask', { project: this._itemId, title: "I need to..."}, function(){}))
 	}
 	
 	this._buildBody = function() {
 		var body = this._body,
 			template = '<div class="title">Project - (( Editable title ))</div>'
 				+ '<div class="status">Completed(( Checkbox done ))</div>'
+				+ '<div class="remaining"><br />Remaining Tasks:</div>'
 		
 		body.innerHTML = ''
 		body.appendChild(fin.applyTemplate(template, this._itemId))
 
 		var query = { type: 'task', done: false, project: this._itemId }
 		new fan.ui.lists.SortedList(bind(this, '_createCell'), query, 'crucial')
-			.subscribe('Click', bind(this, '_selectProject'))
+			.subscribe('Click', bind(gItemPanel, 'viewTask'))
 			.appendTo(body)
 	}
 	
@@ -50,10 +50,5 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._applyTemplate = function(cell, itemId, template) {
 		cell.appendChild(fin.applyTemplate(template, itemId))
-	}
-	
-	this._selectProject = function(itemId, cell) {
-		var view = new fan.tasks.views.TaskItemView(itemId)
-		gItemPanel.setView(view)
 	}
 })

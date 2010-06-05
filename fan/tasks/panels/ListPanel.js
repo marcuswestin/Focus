@@ -6,7 +6,7 @@ jsio('import fan.ui.Button')
 
 jsio('import fan.tasks.views.TasksListView')
 jsio('import fan.tasks.views.ProjectsListView')
-// jsio('import fan.tasks.views.CalendarView')
+jsio('import fan.tasks.views.CalendarView')
 // jsio('import fan.tasks.views.ChangesView')
 // jsio('import fan.tasks.views.CoworkersView')
 // jsio('import fan.tasks.views.AccomplishmentsView')
@@ -18,7 +18,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	this._viewCtors = {
 		'tasks': fan.tasks.views.TasksListView,
 		'projects': fan.tasks.views.ProjectsListView,
-		// 'calendar': fan.tasks.views.CalendarView
+		'calendar': fan.tasks.views.CalendarView
 		// 'changes': fan.tasks.views.ChangesView,
 		// 'coworkers': fan.tasks.views.CoworkersView,
 		// 'accomplishments': fan.tasks.views.AccomplishmentsView
@@ -32,8 +32,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		
 		this._apps = new fan.ui.RadioButtons()
 			.addButton('tasks', 'tasks')
-			.addButton('projects', 'projects')
 			.addButton('calendar', 'calendar')
+			.addButton('projects', 'projects')
 			// .addButton('changes', 'changes')
 			// .addButton('coworkers', 'coworkers')
 			// .addButton('accomplishments', 'accomplishments')

@@ -44,7 +44,7 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 	-webkit-border-bottom-left-radius: 8px; overflow-y: auto; overflow-x: hidden; }
 .Panel .View .body .left-column { float: left; width: 350px; margin-bottom: 10px; }
 .Panel .View .body .right-column { float: left; }
-.Panel .View.narrow .body .right-column { float: right; }
+.Panel .View.narrow .body .right-column { float: none; }
 
 .Panel .View { overflow: hidden; }
 .Panel .View .body, .Panel .View .header { position: absolute; }

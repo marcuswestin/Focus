@@ -35,7 +35,6 @@ exports = Class(fan.ui.lists.List, function(supr){
 			groups = this._groupByLabel,
 			cell = this._cells[itemId]
 		
-		console.log('_onDayOffset', dayOffset, dayOffset == 0, !dayOffset)
 		if (dayOffset == 0) { group = groups['Today'] }
 		else if (!dayOffset) { group = groups['Unscheduled'] }
 		else if (dayOffset < 0) { group = groups['Overdue'] }

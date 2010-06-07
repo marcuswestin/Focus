@@ -28,10 +28,10 @@ exports = Singleton(fan.ui.Component, function(supr) {
 		underlay.style.opacity = dontLightbox ? .15 : .89;
 		document.body.appendChild(el)
 		fan.ui.resizeManager.addDependant(this._resizeCallback)
-		if (dontLightbox) { this._on(underlay, 'click', bind(this, '_hide')) }
+		if (dontLightbox) { this._on(underlay, 'click', bind(this, 'hide')) }
 	}
 	
-	this._hide = function(unhookClick) {
+	this.hide = function(unhookClick) {
 		this.remove()
 		fan.ui.resizeManager.removeDependant(this._resizeCallback)
 	}

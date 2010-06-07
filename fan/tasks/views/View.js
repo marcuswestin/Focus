@@ -35,14 +35,9 @@ exports = Class(fan.ui.Component, function(supr) {
 			contentWidth = this._width - padding2,
 			contentHeight = this._height - padding2 - this._headerHeight - this._border * 4
 		
-		// Layout panel
-		this.layout({ height: this._height, width: this._width, left: this._left })
-		// Layout header
-		this.layout(this._header, { top: this._padding, left: this._padding,
-				height: this._headerHeight, width: contentWidth })
-		// Layout content
-		this.layout(this._body, { top: this._headerHeight + padding2, left: this._padding, 
-				height: contentHeight, width: contentWidth })
+		this.layout({ h: this._height, w: this._width, x: this._left })
+		this.layout(this._header, { y: this._padding, x: this._padding, h: this._headerHeight, w: contentWidth })
+		this.layout(this._body, { y: this._headerHeight + padding2, x: this._padding, h: contentHeight, w: contentWidth })
 	}
 	
 	this._buildHeader = function() {}

@@ -100,17 +100,14 @@ exports = Class(fan.ui.Component, function(supr) {
 			borderWidth = this._borderWidth,
 			layout = this.getLayout(targetEl)
 		
-		layout.width += focusPadding * 2 + 10;
-		layout.height += focusPadding * 2;
-		layout.left -= focusPadding;
-		layout.top -= focusPadding;
+		layout.w += focusPadding * 2 + 10;
+		layout.h += focusPadding * 2;
+		layout.x -= focusPadding;
+		layout.y -= focusPadding;
 		
-		this.layout(this._top, { top: layout.top - borderWidth, left: layout.left - borderWidth, 
-			width: layout.width + borderWidth });
-		this.layout(this._bottom, { top: layout.top + layout.height, left: layout.left - borderWidth, 
-			width: layout.width + borderWidth });
-		this.layout(this._left, { top: layout.top, left: layout.left - borderWidth, height: layout.height });
-		this.layout(this._right, { top: layout.top, left: layout.left + layout.width - borderWidth, 
-			height: layout.height });
+		this.layout(this._top, { y: layout.y - borderWidth, x: layout.x - borderWidth, w: layout.w + borderWidth });
+		this.layout(this._bottom, { y: layout.y + layout.h, x: layout.x - borderWidth, w: layout.w + borderWidth });
+		this.layout(this._left, { y: layout.y, x: layout.x - borderWidth, h: layout.h });
+		this.layout(this._right, { y: layout.y, x: layout.x + layout.w - borderWidth, h: layout.h });
 	}
 })

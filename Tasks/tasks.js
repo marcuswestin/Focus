@@ -98,7 +98,7 @@ fin.connect(function(){
 	gListPanel.subscribe('Resize', function(takenWidth) {
 		var winSize = fan.ui.resizeManager.getWindowSize()
 		takenWidth += 50
-		gItemPanel.position(takenWidth, winSize.width - takenWidth)
+		gItemPanel.position(takenWidth, winSize.w - takenWidth)
 	})
 })
 

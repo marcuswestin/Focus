@@ -230,14 +230,16 @@ exports = Class(shared.Publisher, function(supr) {
 
 	// this.layout({ width: 100, height: 100, top: 10, left: 10 })
 	// this.layout(anElement, { width: 10, height: 10 })
-	this.layout = function(element, dim) {
+	this.layout = function(el, dim) {
 		if (!dim) { 
-			dim = element
-			element = this._element
+			dim = el
+			el = this._element
 		}
-		for (var key in dim) {
-			element.style[key] = dim[key] + 'px'
-		}
+		var style = el.style
+		if (typeof dim.x != 'undefined') { style.left = dim.x + 'px' }
+		if (typeof dim.y != 'undefined') { style.top = dim.y + 'px' }
+		if (typeof dim.w != 'undefined') { style.width = dim.w + 'px' }
+		if (typeof dim.h != 'undefined') { style.height = dim.h + 'px' }
 		return this
 	}
 	
@@ -262,7 +264,7 @@ exports = Class(shared.Publisher, function(supr) {
 				clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
 				top  = box.top  + (win.pageYOffset || docElem.scrollTop  || body.scrollTop ) - clientTop,
 				left = box.left + (win.pageXOffset || docElem.scrollLeft || body.scrollLeft) - clientLeft;
-			return { top: top, left: left, width: box.right - box.left, height: box.bottom - box.top };
+			return { y: top, x: left, w: box.right - box.left, h: box.bottom - box.top };
 
 		} else {
 			var offset = arguments.callee.offset;
@@ -330,7 +332,7 @@ exports = Class(shared.Publisher, function(supr) {
 				left += Math.max(docElem.scrollLeft, body.scrollLeft);
 			}
 
-			return { top: top, left: left, width: width, height: height };
+			return { y: top, x: left, w: width, h: height };
 		}
 	}
 	// end jQuery positioning code

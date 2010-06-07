@@ -31,7 +31,7 @@ exports = Singleton(function(){
 	}
 	
 	this.getWindowSize = function() {
-		return { width: window.innerWidth, height: window.innerHeight }
+		return { w: window.innerWidth, h: window.innerHeight }
 	}
 	
 	this.fireResize = function() {
@@ -50,8 +50,8 @@ exports = Singleton(function(){
 		this.addDependant(function(winSize) {
 			var width = el.offsetWidth
 			var height = el.offsetHeight
-			el.style.right = ((winSize.width - 500) / 2) - (width / 2) + 'px' // in the middle on the right off of the panels
-			el.style.top = (winSize.height / 2) - (height / 2) + 'px'
+			el.style.right = ((winSize.w - 500) / 2) - (width / 2) + 'px' // in the middle on the right off of the panels
+			el.style.top = (winSize.h / 2) - (height / 2) + 'px'
 		})
 	}
 	

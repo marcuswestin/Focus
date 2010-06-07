@@ -12,7 +12,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._onWindowResize = function(winSize) {
-		var height = this._lastHeight = winSize.height - 25
+		var height = this._lastHeight = winSize.h - 25
 		this._element.style.height = height + 'px'
 		if (this._currentView) { this._currentView.setHeight(height) }
 	}

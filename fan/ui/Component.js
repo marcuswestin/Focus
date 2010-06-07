@@ -1,7 +1,6 @@
 jsio('from shared.javascript import Class');
 jsio('import shared.Publisher');
 
-_uniqueId = 1
 _focusables = {}
 
 exports = Class(shared.Publisher, function(supr) {
@@ -69,19 +68,28 @@ exports = Class(shared.Publisher, function(supr) {
 		if (params.href) { el.href = params.href; }
 		if (params.text) { el.appendChild(document.createTextNode(params.text)); }
 		if (params.type) { el.type = params.type; }
-		if (params.style) { exports.setStyle(el, params.style); }
+		if (params.style) { this.setStyle(el, params.style); }
 		if (params.parent) { params.parent.appendChild(el); }
 		return el;
 	}
 	
-	this._getUniqueId = function() { return 'fan_u' + _uniqueId++ }
+	this.setStyle = function(el, styleProps) {
+		if (!styleProps) {
+			styleProps = el
+			el = this._element
+		}
+		var elStyle = el.style
+		for (var key in styleProps) { elStyle[key] = styleProps[key] }
+		return this
+	}
+	
 /***************************
  * Focusable UI Components *
  ***************************/
 	// UI Components need to be made focusable for fan.tasks.KeyboardFocus to find them
 	this._makeFocusable = function(el) {
 		if (!el) { el = this._element}
-		var focusableId = el['fan-focusableId'] = this._getUniqueId()
+		var focusableId = el['fan-focusableId'] = fin.unique()
 		_focusables[focusableId] = this
 		this.addClassName(el, 'fan-focusable')
 	}

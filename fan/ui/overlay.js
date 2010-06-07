@@ -16,23 +16,33 @@ exports = Singleton(fan.ui.Component, function(supr) {
 		this._content = this._create({ parent: this._element, className: 'content' });
 	}
 	
-	this.show = function(content, notDismissable) {
-		this.getElement()
+	this.show = function(content, dontLightbox) {
+		var el = this.getElement(),
+			underlay = this._underlay
+			
+		this._dontLightbox = dontLightbox
 		this._content.innerHTML = ''
 		this._content.appendChild(content)
-		document.body.appendChild(this.getElement())
+		this.toggleClassName('lightbox', !dontLightbox)
+		
+		underlay.style.opacity = dontLightbox ? .15 : .89;
+		document.body.appendChild(el)
 		fan.ui.resizeManager.addDependant(this._resizeCallback)
+		if (dontLightbox) { this._on(underlay, 'click', bind(this, '_hide')) }
 	}
 	
-	this._hide = function() {
+	this._hide = function(unhookClick) {
 		this.remove()
 		fan.ui.resizeManager.removeDependant(this._resizeCallback)
 	}
 	
 	this._onWindowResize = function(size) {
 		this.layout(this._underlay, size)
-		var contentSize = this.getLayout(this._content.firstChild)
-		this.layout(this._content, { left: (size.width / 2) - (contentSize.width / 2),
-			top: (size.height / 2) - (contentSize.height / 2) });
+		if (this._dontLightbox) {
+			this.layout(this._content, { x: 0, y: 0 })
+		} else {
+			var contentSize = this.getLayout(this._content.firstChild)
+			this.layout(this._content, { x: (size.w / 2) - (contentSize.w / 2), y: (size.h / 2) - (contentSize.h / 2) })
+		}
 	}
 })

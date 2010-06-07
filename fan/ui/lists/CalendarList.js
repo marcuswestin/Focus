@@ -27,7 +27,8 @@ exports = Class(fan.ui.lists.List, function(supr){
 	}
 	
 	this._onDateChange = function(itemId, op, timestamp) {
-		fan.time.getDayOffset(timestamp, bind(this, '_onDayOffset', itemId))
+		if (this._releaseOffsetFn) { this._releaseOffsetFn() }
+		this._releaseOffsetFn = fan.time.getDayOffset(timestamp, bind(this, '_onDayOffset', itemId))
 	}
 	
 	this._onDayOffset = function(itemId, dayOffset) {

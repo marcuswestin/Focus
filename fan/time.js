@@ -9,21 +9,40 @@ time.hours = time.minutes * 60
 time.days = time.hours * 24
 time.weeks = time.days * 7
 
-time.getDayOffset = function(timestamp, callback) {
+var offsetTimeouts = {}
+time.getDayOffset = function(timestamp, callback, clearTimeoutId) {
 	if (!timestamp) {
 		callback(null)
 		return
 	}
 	
-	var now = fin.now(),
-		diff = timestamp - now,
+	var then = new Date(timestamp),
+		now = new Date(fin.now()),
+		normalizedThen = new Date(then.getYear(), then.getMonth(), then.getDate()),
+		normalizedNow = new Date(now.getYear(), now.getMonth(), now.getDate())
+	
+	var diff = normalizedThen.getTime() - normalizedNow.getTime(),
 		days = Math.floor(diff / time.days),
 		updateIn = diff - days * time.days
 	
 	callback(days)
-	setTimeout(bind(time, 'getDayOffset', timestamp, callback), updateIn)
-	// TODO this leaves timeouts with closures that cannot be cleared out
+	
+	if (!clearTimeoutId) { clearTimeoutId = fin.unique() }
+	offsetTimeouts[clearTimeoutId] = setTimeout(bind(time, 'getDayOffset', timestamp, callback, clearTimeoutId), updateIn)
+	
+	return function() { clearTimeout(offsetTimeouts[clearTimeoutId]) }
 }
+
+time.daysInMonth = function (date) {
+	if (typeof date == 'number') { date = new Date(date) }
+	return new Date(date.getYear(), date.getMonth() + 1, 0).getDate()
+}
+time.firstDayOfMonth = function (date) {
+	date = new Date(date)
+	date.setDate(1)
+	return date.getDay()
+}
+
 
 time.TimeString = Class(fan.ui.Component, function(supr) {
 	

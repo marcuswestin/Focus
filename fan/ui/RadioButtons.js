@@ -28,7 +28,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this._addButton = function(payload) {
 		var el = this._create({ className: 'Button', parent: this.getElement() }),
-			delegateId = this._getUniqueId(),
+			delegateId = fin.unique(),
 			buttons = this._buttons
 		
 		this._payloads[delegateId] = payload

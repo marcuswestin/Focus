@@ -28,9 +28,9 @@ exports = Class(fan.ui.Component, function(supr) {
 			currentView.release()
 			currentView.remove() // TODO fade
 		}
-		this._currentView = view
+		view.setHeight(this._lastHeight)
 		this._element.appendChild(view.getElement()) // TODO fade in
-		this._currentView.setHeight(this._lastHeight)
+		this._currentView = view
 		this._resize()
 	}
 	

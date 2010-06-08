@@ -34,7 +34,19 @@ exports = Class(fan.ui.Component, function(supr) {
 		if (uiComponent != this._focusedUIComponent) { return }
 		delete this._focusedUIComponent
 	}
+	
+	this._createContent = function() {
+		var borderWidth = this._borderWidth
 
+		this._top = this._create({ className: 'piece top', parent: this._element })
+		this._left = this._create({ className: 'piece left', parent: this._element })
+		this._right = this._create({ className: 'piece right', parent: this._element })
+		this._bottom = this._create({ className: 'piece bottom', parent: this._element })
+		
+		this._left.style.width = this._right.style.width = borderWidth + 'px'
+		this._top.style.height = this._bottom.style.height = borderWidth + 'px'
+	}
+	
 	this._onKeyDown = function(e) {
 		if (this._focusedUIComponent) { return }
 		var callback = this._keyMap[e.keyCode]
@@ -78,18 +90,6 @@ exports = Class(fan.ui.Component, function(supr) {
 			targetEl = this._targetEl
 		if (!target || !targetEl) { return }
 		target.handleKeyboardSelect(targetEl)
-	}
-	
-	this._createContent = function() {
-		var borderWidth = this._borderWidth
-
-		this._top = this._create({ className: 'piece top', parent: this._element })
-		this._left = this._create({ className: 'piece left', parent: this._element })
-		this._right = this._create({ className: 'piece right', parent: this._element })
-		this._bottom = this._create({ className: 'piece bottom', parent: this._element })
-		
-		this._left.style.width = this._right.style.width = borderWidth + 'px'
-		this._top.style.height = this._bottom.style.height = borderWidth + 'px'
 	}
 	
 	this.updatePosition = function() {

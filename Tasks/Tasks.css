@@ -35,6 +35,8 @@
 .List .cell.crucial .title { color: #222; }
 .List .cell.selected { border-color: #abd; }
 .List .cell .fin-Template { padding: 0px; }
+.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static; 
+	border-color: #666; }
 
 .ItemPanel .fin-Template { display: block; padding: 10px; }
 .ItemPanel .title { font-size: 19px; }

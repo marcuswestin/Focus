@@ -27,7 +27,10 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this.loadQuery = function(query) {
 		if (this._listView) { logger.log("TODO Release view!") }
 		this._body.innerHTML = ''
-		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'), query, 'crucial')
+		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'))
+			.query(query)
+			.sortBy('crucial')
+			.groupBy('project', 'title')
 			.addClassName('TaskList')
 			.subscribe('Click', bind(gItemPanel, 'viewTask'))
 			.appendTo(this._body)

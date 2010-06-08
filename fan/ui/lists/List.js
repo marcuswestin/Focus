@@ -7,10 +7,11 @@ exports = Class(fan.ui.Component, function(supr){
 	
 	this.init = function(makeCellFn) {
 		supr(this, 'init')
+
+		this._makeCellFn = makeCellFn
 		this._cells = {}
 		this._items = []
 		this._itemsById = {}
-		this._makeCellFn = makeCellFn
 	}
 	
 	this._createContent = function() {

@@ -67,13 +67,13 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this._moveFocus = function(steps) {
-		var panel = gPanels[this._panelIndex];
+		var panel = gPanels[this._panelIndex]
 		if (!panel) { return }
 		
 		var newFocusIndex = this._focusIndex[this._panelIndex] + steps,
 			targetEls = panel.getElement().getElementsByClassName('fan-focusable')
 		
-		if (newFocusIndex < 0) { return; }
+		if (newFocusIndex < 0) { return }
 		if (newFocusIndex >= targetEls.length) { newFocusIndex = targetEls.length - 1 }
 		this._focusIndex[this._panelIndex] = newFocusIndex
 		

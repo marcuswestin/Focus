@@ -70,10 +70,10 @@ exports = Class(fan.views.Value, function(supr) {
 			padding = this._padding,
 			border = this._border
 		
-		layout.left -= (padding + border)
-		layout.top -= (padding + border)
-		layout.height += padding * 2 + border * 2
-		layout.width += padding * 2 + border * 2 + 5
+		layout.x -= (padding + border)
+		layout.y -= (padding + border)
+		layout.h += padding * 2 + border * 2
+		layout.w += padding * 2 + border * 2 + 5
 		
 		this._input.layout(layout)
 		gKeyboardFocus.updatePosition()

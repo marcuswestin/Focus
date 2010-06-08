@@ -27,7 +27,9 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		if (this._listView) { logger.log("TODO Release view!") }
 		this._body.innerHTML = ''
 		
-		this._listView = new fan.ui.lists.SortedList(bind(this, '_createCell'), query, 'date')
+		this._listView = new fan.ui.lists.SortedList(bind(this, '_createCell'))
+			.query(query)
+			.sortBy('date')
 			.subscribe('Click', bind(this, '_selectProject'))
 			.appendTo(this._body)
 	}

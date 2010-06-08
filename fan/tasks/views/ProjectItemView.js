@@ -34,7 +34,9 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		body.appendChild(fin.applyTemplate(template, this._itemId))
 
 		var query = { type: 'task', done: false, project: this._itemId }
-		new fan.ui.lists.SortedList(bind(this, '_createCell'), query, 'crucial')
+		new fan.ui.lists.SortedList(bind(this, '_createCell'))
+			.query(query)
+			.sortBy('crucial')
 			.subscribe('Click', bind(gItemPanel, 'viewTask'))
 			.appendTo(body)
 	}

@@ -12,8 +12,6 @@ exports = Class(fan.ui.lists.List, function(supr){
 		this._groupByLabel = []
 	}
 	
-	// Make isTomorrow isOld isToday methods - map them to groups
-	
 	this.addGroup = function(label) {
 		var el = this._create({ className: 'group', html: '&nbsp;', parent: this.getElement() })
 		this._groupByLabel[label] = el

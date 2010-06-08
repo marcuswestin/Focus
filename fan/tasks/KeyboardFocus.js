@@ -45,9 +45,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		this._left.style.width = this._right.style.width = borderWidth + 'px'
 		this._top.style.height = this._bottom.style.height = borderWidth + 'px'
-
-		gListPanel.subscribe('Resize', bind(this, 'updatePosition'))
-		gItemPanel.subscribe('Resize', bind(this, 'updatePosition'))
 	}
 	
 	this._onKeyDown = function(e) {

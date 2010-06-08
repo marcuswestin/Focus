@@ -28,8 +28,9 @@ exports = Class(fan.ui.Component, function(supr) {
 			currentView.release()
 			currentView.remove() // TODO fade
 		}
+		var viewEl = view.getElement() // force _createContent
 		view.setHeight(this._lastHeight)
-		this._element.appendChild(view.getElement()) // TODO fade in
+		this._element.appendChild(viewEl) // TODO fade in
 		this._currentView = view
 		this._resize()
 	}
@@ -38,5 +39,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		var takenWidth = this._currentView.setWidth(this._lastMaxWidth)
 		this._element.style.width = takenWidth + 'px' // TODO animate resize
 		this._publish('Resize', takenWidth)
+		gKeyboardFocus.updatePosition()
 	}
 })

@@ -28,6 +28,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._body = this._create({ className: 'body', parent: this._element })
 		this._buildHeader()
 		this._buildBody()
+		this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition'))
 	}
 	
 	this._resize = function() {

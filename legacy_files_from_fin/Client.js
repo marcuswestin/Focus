@@ -1,11 +1,9 @@
 jsio('from shared.javascript import Class, bind');
 jsio('from net.protocols.rtjp import RTJPProtocol');
-jsio('import net, logging');
+jsio('import net');
 jsio('import shared.itemFactory');
 jsio('import client.overlay');
 jsio('import client.loginManager');
-
-var logger = logging.getLogger(jsio.__path);
 
 exports = Class(RTJPProtocol, function(supr) {
 

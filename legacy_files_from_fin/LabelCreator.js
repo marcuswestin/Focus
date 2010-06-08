@@ -3,8 +3,6 @@ jsio('import client.dom as dom');
 
 jsio('import client.UIComponent');
 
-var logger = logging.getLogger(jsio.__path);
-
 css.loadStyles(jsio.__path);
 
 exports = Class(client.UIComponent, function(supr) {

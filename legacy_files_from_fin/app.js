@@ -2,7 +2,7 @@ jsio.path.shared = 'js';
 jsio.path.client = 'js';
 
 jsio('from shared.javascript import bind');
-jsio('import net, logging');
+jsio('import net');
 jsio('import shared.itemFactory');
 
 jsio('import client.dimensions as dimensions');

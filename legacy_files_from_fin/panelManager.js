@@ -12,8 +12,6 @@ jsio('import client.panels.ItemPanel');
 
 jsio('import client.itemFocus');
 
-var logger = logging.getLogger(jsio.__path);
-
 css.loadStyles(jsio.__path);
 
 exports = Singleton(client.UIComponent, function(supr) {

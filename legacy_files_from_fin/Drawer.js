@@ -11,8 +11,6 @@ jsio('import client.Label');
 jsio('import client.ItemView');
 jsio('import client.panels.ListPanel');
 
-var logger = logging.getLogger(jsio.__path);
-
 css.loadStyles(jsio.__path);
 
 exports = Class(client.UIComponent, function(supr) {

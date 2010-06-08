@@ -76,6 +76,6 @@ exports = Class(fan.views.Value, function(supr) {
 		layout.w += padding * 2 + border * 2 + 5
 		
 		this._input.layout(layout)
-		gKeyboardFocus.updatePosition()
+		gKeyboardFocus.updatePosition(false)
 	}
 })

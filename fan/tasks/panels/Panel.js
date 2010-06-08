@@ -39,6 +39,8 @@ exports = Class(fan.ui.Component, function(supr) {
 		var takenWidth = this._currentView.setWidth(this._lastMaxWidth)
 		this._element.style.width = takenWidth + 'px' // TODO animate resize
 		this._publish('Resize', takenWidth)
-		gKeyboardFocus.updatePosition()
+		gKeyboardFocus.updatePosition(false)
 	}
+	
+	this.handleKeyboardFocus = function(el) { this._currentView.handleKeyboardFocus(el) }
 })

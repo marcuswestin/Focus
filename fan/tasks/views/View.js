@@ -28,7 +28,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._body = this._create({ className: 'body', parent: this._element })
 		this._buildHeader()
 		this._buildBody()
-		this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition'))
+		this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition', true))
 	}
 	
 	this._resize = function() {
@@ -44,4 +44,13 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._buildHeader = function() {}
 	this._buildBody = function() {}
 	this.release = function() { logger.warn("TODO: Implement View#release") }
+	
+	this.handleKeyboardFocus = function(el) {
+		var body = this._body,
+			diffTop = body.scrollTop - el.offsetTop,
+			diffBottom = (el.offsetTop + el.offsetHeight) - (body.scrollTop + body.offsetHeight)
+		
+		if (diffTop > 0) { body.scrollTop -= diffTop }
+		if (diffBottom > 0) { body.scrollTop += diffBottom }
+	}
 })

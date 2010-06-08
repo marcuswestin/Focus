@@ -77,12 +77,12 @@ exports = Class(fan.ui.Component, function(supr) {
 		if (newFocusIndex >= targetEls.length) { newFocusIndex = targetEls.length - 1 }
 		this._focusIndex[this._panelIndex] = newFocusIndex
 		
-		var targetEl = this._targetEl = targetEls[newFocusIndex],
-			target = this._target = this._getFocusableComponent(targetEl)
+		this._targetEl = targetEls[newFocusIndex]
+		this._target = this._getFocusableComponent(this._targetEl)
 		
 		this
 			.appendTo(document.body)
-			.updatePosition()
+			.updatePosition(false)
 	}
 	
 	this._selectFocusedItem = function() {
@@ -92,7 +92,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		target.handleKeyboardSelect(targetEl)
 	}
 	
-	this.updatePosition = function() {
+	this.updatePosition = function(suppressForward) {
 		if (!this._targetEl) { return }
 		
 		var targetEl = this._targetEl,
@@ -109,5 +109,9 @@ exports = Class(fan.ui.Component, function(supr) {
 		this.layout(this._bottom, { y: layout.y + layout.h, x: layout.x - borderWidth, w: layout.w + borderWidth })
 		this.layout(this._left, { y: layout.y, x: layout.x - borderWidth, h: layout.h })
 		this.layout(this._right, { y: layout.y, x: layout.x + layout.w - borderWidth, h: layout.h })
+		
+		if (!suppressForward) {
+			gPanels[this._panelIndex].handleKeyboardFocus(targetEl)
+		}
 	}
 })

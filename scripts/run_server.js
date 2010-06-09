@@ -1,9 +1,9 @@
-require('./lib/fin/lib/js.io/packages/jsio')
+require('../lib/fin/lib/js.io/packages/jsio')
 
-var redis = require('./lib/fin/lib/redis-node-client/lib/redis-client')
+var redis = require('../lib/fin/lib/redis-node-client/lib/redis-client')
 
-jsio.path.shared = 'lib/fin/js'
-jsio.path.server = 'lib/fin/js'
+jsio.path.shared = './lib/fin/js'
+jsio.path.server = './lib/fin/js'
 jsio.path.fan = '.'
 
 jsio('import fan.Server')

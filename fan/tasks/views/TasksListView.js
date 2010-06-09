@@ -42,7 +42,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		
 		cell.delegateId = itemId
 		
-		gUtil.withTemplate('task', 'list', bind(this, '_applyTemplate', cell, itemId))
+		gUtil.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
 		fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
 		
 		return cell

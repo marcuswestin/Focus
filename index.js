@@ -42,8 +42,8 @@ jsio('import client.xhr')
 gUtil = {
 	_templates: {},
 	_templateQueue: {},
-	withTemplate: function(itemType, viewType, callback) {
-		var path = 'templates/' + itemType + '/' + viewType + '.html'
+	withTemplate: function(templateName, callback) {
+		var path = 'templates/' + templateName + '.html'
 		if (gUtil._templates[path]) { 
 			callback(gUtil._templates[path])
 		} else if (gUtil._templateQueue[path]) {

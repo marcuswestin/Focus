@@ -46,7 +46,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			cell = this._create({ className: 'cell' })
 		
 		cell.delegateId = itemId
-		gUtil.withTemplate('task', 'list', bind(this, '_applyTemplate', cell, itemId))
+		gUtil.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
 		return cell
 	}
 	

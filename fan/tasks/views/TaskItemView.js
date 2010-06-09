@@ -27,7 +27,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	}
 	
 	this._buildBody = function() {
-		gUtil.withTemplate('task', 'panel', bind(this, function(template) {
+		gUtil.withTemplate('task-panel', bind(this, function(template) {
 			this._body.innerHTML = ''
 			this._body.appendChild(fin.applyTemplate(template, this._itemId))
 		}))

@@ -1,6 +1,6 @@
-jsio.path.client = '../lib/fin/js'
-jsio.path.shared = '../lib/fin/js'
-jsio.path.fan = '../'
+jsio.path.client = './lib/fin/js'
+jsio.path.shared = './lib/fin/js'
+jsio.path.fan = '.'
 
 Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
 Meebo('domReady')

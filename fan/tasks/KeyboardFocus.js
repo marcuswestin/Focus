@@ -101,6 +101,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this.updatePosition = function(suppressForward) {
 		if (!this._targetEl) { return }
+		if (!suppressForward) { gPanels[this._panelIndex].handleKeyboardFocus(this._targetEl) }
 		
 		var targetEl = this._targetEl,
 			focusPadding = 2,
@@ -116,9 +117,5 @@ exports = Class(fan.ui.Component, function(supr) {
 		this.layout(this._bottom, { y: layout.y + layout.h, x: layout.x - borderWidth, w: layout.w + borderWidth })
 		this.layout(this._left, { y: layout.y, x: layout.x - borderWidth, h: layout.h })
 		this.layout(this._right, { y: layout.y, x: layout.x + layout.w - borderWidth, h: layout.h })
-		
-		if (!suppressForward) {
-			gPanels[this._panelIndex].handleKeyboardFocus(targetEl)
-		}
 	}
 })

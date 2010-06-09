@@ -11,7 +11,10 @@ exports = Class(fan.views.Value, function(supr){
 	this._createContent = function() {
 		this._on('click', bind(this, '_showPicker'))
 		fin.observe(this._itemId, this._property, bind(this, '_onDateChange'))
+		this._makeFocusable()
 	}
+	
+	this.handleKeyboardSelect = function() { this._showPicker() }
 	
 	this._onDateChange = function(mutation, newValue) {
 		this._timestamp = newValue

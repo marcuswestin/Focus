@@ -22,10 +22,8 @@ exports = Class(fan.views.Value, function(supr) {
 	}
 	
 	this._onClick = function() {
-		var input = fin.createView('Input', this._itemId, this._property),
+		var input = this._input = fin.createView('Input', this._itemId, this._property),
 			inputEl = input.getElement()
-		
-		this._input = input
 		
 		inputEl.style.position = 'absolute'
 		inputEl.style.overflow = 'hidden'
@@ -46,8 +44,9 @@ exports = Class(fan.views.Value, function(supr) {
 	}
 
 	this.createDelayedMethod('_onBlur', function() {
-		this._input.release()
-		this._input.remove()
+		this._input
+			.remove()
+			.release()
 	})
 	
 	this.setValue = function(value) {

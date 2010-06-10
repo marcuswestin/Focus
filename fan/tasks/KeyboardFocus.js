@@ -82,10 +82,15 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		if (newFocusIndex < 0) { return }
 		if (newFocusIndex >= targetEls.length) { newFocusIndex = targetEls.length - 1 }
+		
+		if (this._target) {
+			this._target.unsubscribe('Resize', this, 'updatePosition')
+		}
 		this._focusIndex[this._panelIndex] = newFocusIndex
 		
 		this._targetEl = targetEls[newFocusIndex]
 		this._target = this._getFocusableComponent(this._targetEl)
+			.subscribe('Resize', this, 'updatePosition')
 		
 		this
 			.appendTo(document.body)

@@ -20,6 +20,7 @@ exports = Class(fan.views.Value, function(supr){
 		this._timestamp = newValue
 		this._element.innerHTML = newValue ? new Date(newValue).toUTCString() : 'No date'
 		this._updatePicker()
+		this._publish('Resize')
 	}
 	
 	this._showPicker = function() {

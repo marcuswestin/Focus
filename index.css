@@ -137,5 +137,5 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 /**********************
  * Misc UI Components *
  **********************/
-.UserIcon img { background: url("Tasks/img/user_icon.gif"); width: 50px; height: 50px; }
+.UserIcon img { background: url("img/user_icon.gif"); width: 50px; height: 50px; }
 .TimeString { font-size: 12px; color: #666; }

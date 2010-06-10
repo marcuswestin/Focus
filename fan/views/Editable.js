@@ -1,6 +1,5 @@
 jsio('from shared.javascript import Class, bind')
 jsio('import fan.views.Value')
-jsio('import fan.ui.textViewEdit')
 
 exports = Class(fan.views.Value, function(supr) {
 	

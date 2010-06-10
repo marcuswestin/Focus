@@ -2,26 +2,26 @@
 ### Apps ###
 ############
 
-.PHONY: run-tasks
-run-tasks:
+.PHONY: run
+run: lib/fin
 	redis-server lib/fin/redis.conf &
 	cd lib/fin/; node run_query_observer.js &
 	node run_server.js &
 
 .PHONY: stop-tasks
-stop-tasks:
+stop:
 	killall node
 	killall redis-server
 
 .PHONY: restart-tasks
-restart-tasks: stop-tasks run-tasks
+restart: stop run
 
 ####################
 ### Dependencies ###
 ####################
 
 .PHONY: deps
-deps: lib/fin lib/raphael lib/g.raphael
+deps: lib/fin
 
 .PHONY: clean
 clean:

@@ -23,6 +23,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		keyMap[keys['`']] = keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
 		keyMap[keys['tab']] = keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
 		
+		keyMap[keys['c']] = bind(gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
 		
 		keyMap[keys['1']] = bind(gListPanel, 'selectAppByIndex', 0)

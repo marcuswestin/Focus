@@ -21,7 +21,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New Task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', gUtil, 'createNewTask', { project: this._itemId, title: "I need to..."}, function(){})
+			.subscribe('Click', gUtil, 'createNewTask', { project: this._itemId }, function(){})
 	}
 	
 	this._buildBody = function() {

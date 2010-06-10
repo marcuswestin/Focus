@@ -63,6 +63,7 @@ gUtil = {
 		params.type = 'task'
 		params.user = gUserId
 		params.done = false
+		params.title = params.title || 'I need to...'
 		fin.create(params, callback)
 	},
 	createNewProject: function(callback) {

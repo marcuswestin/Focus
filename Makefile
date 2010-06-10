@@ -4,9 +4,9 @@
 
 .PHONY: run
 run: lib/fin
-	redis-server lib/fin/redis.conf &
-	cd lib/fin/; node run_query_observer.js &
-	node run_server.js &
+	redis-server redis.conf &> run-redis-server.out &
+	cd lib/fin/; node run_query_observer.js &> ../../run-node-query-observer.out &
+	node node_scripts/run_server.js &> run-node-server.out &
 
 .PHONY: stop-tasks
 stop:
@@ -25,6 +25,7 @@ deps: lib/fin
 
 .PHONY: clean
 clean:
+	rm run-*.out
 	rm -rf lib/*
 	touch lib/empty.txt
 

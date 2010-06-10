@@ -4,7 +4,10 @@ jsio('import fan.ui.lists.List')
 var SortableItem = Class(function() {
 	this.init = function(id) { this._id = id }
 	this.getId = function() { return this._id }
-	this.toString = function() { return (this._sortValue ? 0 : 1) + ':' + this._id }
+	this.toString = function() { 
+		var sortValue = (this._sortValue ? this._sortValue : 'zzz') + ':' + this._id // zzz is there to come last
+		return sortValue.toLowerCase()
+	}
 	this.setSortValue = function(value) { this._sortValue = value }
 })
 

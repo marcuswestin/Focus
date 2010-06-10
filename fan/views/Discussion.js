@@ -31,14 +31,14 @@ exports = Class(fan.views.Value, function(supr){
 		
 		this._input = new fan.ui.Input("Add a comment")
 			.appendTo(messageBox)
-			.subscribe('Submit', bind(this, '_submit'))
+			.subscribe('Submit', this, '_submit')
 		
 		new fan.ui.UserIcon(gUserId)
 			.appendTo(messageBox)
 		
 		new fan.ui.Button("Comment")
 			.appendTo(messageBox)
-			.subscribe('Click', bind(this, '_submit'))
+			.subscribe('Click', this, '_submit')
 		
 		this._makeFocusable(this._input.getElement())
 	}

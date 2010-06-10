@@ -39,7 +39,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 			// .addButton('accomplishments', 'accomplishments')
 			.addClassName('AppsTabs')
 			.appendTo(this._element)
-			.subscribe('Click', bind(this, 'selectApp'))
+			.subscribe('Click', this, 'selectApp')
 			.select(0)
 	}
 	

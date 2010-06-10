@@ -22,7 +22,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.addTextButton('Crucial', 'crucial')
 			.addTextButton('Backlog', 'backlog')
 			.addTextButton('Done', 'done')
-			.subscribe('Click', bind(this, '_toggleTaskState'))
+			.subscribe('Click', this, '_toggleTaskState')
 			.appendTo(this._header)
 	}
 	

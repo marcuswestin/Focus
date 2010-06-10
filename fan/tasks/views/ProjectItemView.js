@@ -21,7 +21,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New Task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(gUtil, 'createNewTask', { project: this._itemId, title: "I need to..."}, function(){}))
+			.subscribe('Click', gUtil, 'createNewTask', { project: this._itemId, title: "I need to..."}, function(){})
 	}
 	
 	this._buildBody = function() {
@@ -37,7 +37,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.lists.SortedList(bind(this, '_createCell'))
 			.query(query)
 			.sortBy('crucial')
-			.subscribe('Click', bind(gItemPanel, 'viewTask'))
+			.subscribe('Click', gItemPanel, 'viewTask')
 			.appendTo(body)
 	}
 	

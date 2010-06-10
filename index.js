@@ -87,7 +87,7 @@ fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
 	}
 })
 
-gLoginManager.subscribe('Login', function(email, passwordHash){
+gLoginManager.subscribe('Login', this, function(email, passwordHash) {
 	fin.send('FAN_AUTHENTICATION_REQUEST', { email: email, password_hash: passwordHash })
 })
 
@@ -97,7 +97,7 @@ fin.connect(function(){
 	window.gPanels = [gListPanel, gItemPanel]
 	window.gKeyboardFocus = new fan.tasks.KeyboardFocus()
 	
-	gListPanel.subscribe('Resize', function(takenWidth) {
+	gListPanel.subscribe('Resize', this, function(takenWidth) {
 		var winSize = fan.ui.resizeManager.getWindowSize()
 		takenWidth += 50
 		gItemPanel.position(takenWidth, winSize.w - takenWidth)

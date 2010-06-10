@@ -13,14 +13,14 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.RadioButtons()
 			.addTextButton('Projects', { done: false, type: 'project' })
 			.addTextButton('Completed', { done: true, type: 'project' })
-			.subscribe('Click', bind(this, 'loadQuery'))
+			.subscribe('Click', this, 'loadQuery')
 			.appendTo(this._header)
 			.select(0)
 		
 		new fan.ui.Button('New Project')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(gUtil, 'createNewProject', bind(this, '_selectProject')))
+			.subscribe('Click', gUtil, 'createNewProject', bind(this, '_selectProject'))
 	}
 	
 	this.loadQuery = function(query) {
@@ -30,7 +30,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		this._listView = new fan.ui.lists.SortedList(bind(this, '_createCell'))
 			.query(query)
 			.sortBy('date')
-			.subscribe('Click', bind(this, '_selectProject'))
+			.subscribe('Click', this, '_selectProject')
 			.appendTo(this._body)
 	}
 	

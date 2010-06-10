@@ -15,16 +15,16 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._email = new fan.ui.Input("What's your email?")
 			.addClassName('email')
 			.appendTo(inputsEl)
-			.subscribe('Submit', bind(this, '_submit'))
+			.subscribe('Submit', this, '_submit')
 		
 		this._password = new fan.ui.Input("And what's your password?", true)
 			.addClassName('password')
 			.appendTo(inputsEl)
-			.subscribe('Submit', bind(this, '_submit'))
+			.subscribe('Submit', this, '_submit')
 		
 		new fan.ui.Button("Login")
 			.appendTo(this._element)
-			.subscribe('Click', bind(this, '_submit'))
+			.subscribe('Click', this, '_submit')
 		
 		// // while developing
 		this._email._element.value = 'marcus@meebo-inc.com'

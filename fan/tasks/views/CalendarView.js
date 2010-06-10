@@ -24,7 +24,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this.init = function() {
 		supr(this, 'init')
 		this._list = new fan.ui.lists.CalendarList()
-			.subscribe('Click', bind(gItemPanel, 'viewTask'))
+			.subscribe('Click', gItemPanel, 'viewTask')
 	}
 	
 	this._buildHeader = function() {

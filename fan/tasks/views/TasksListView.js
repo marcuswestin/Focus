@@ -14,14 +14,14 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.addTextButton('Tasks', { done: false, backlog: false, type: 'task', user: gUserId, })
 			.addTextButton('Backlog', { done: false, backlog: true, type: 'task', user: gUserId })
 			.addTextButton('Done', { done: true, type: 'task', user: gUserId })
-			.subscribe('Click', bind(this, 'loadQuery'))
+			.subscribe('Click', this, 'loadQuery')
 			.appendTo(this._header)
 			.select(0)
 		
 		new fan.ui.Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', bind(gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask')))
+			.subscribe('Click', gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 	}
 	
 	this.loadQuery = function(query) {
@@ -32,7 +32,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.sortBy('crucial')
 			.groupBy('project', 'title')
 			.addClassName('TaskList')
-			.subscribe('Click', bind(gItemPanel, 'viewTask'))
+			.subscribe('Click', gItemPanel, 'viewTask')
 			.appendTo(this._body)
 	}
 	

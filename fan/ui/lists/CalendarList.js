@@ -10,6 +10,7 @@ exports = Class(fan.ui.lists.List, function(supr){
 		supr(this, 'init', [bind(this, '_makeCell')])
 		this._groupsById = {}
 		this._groupByLabel = []
+		this._offsetReleaseFn = {}
 	}
 	
 	this.addGroup = function(label) {
@@ -25,8 +26,9 @@ exports = Class(fan.ui.lists.List, function(supr){
 	}
 	
 	this._onDateChange = function(itemId, op, timestamp) {
-		if (this._releaseOffsetFn) { this._releaseOffsetFn() }
-		this._releaseOffsetFn = fan.time.getDayOffset(timestamp, bind(this, '_onDayOffset', itemId))
+		var releaseFns = this._offsetReleaseFn
+		if (releaseFns[itemId]) { releaseFns[itemId]() }
+		releaseFns[itemId] = fan.time.getDayOffset(timestamp, bind(this, '_onDayOffset', itemId))
 	}
 	
 	this._onDayOffset = function(itemId, dayOffset) {

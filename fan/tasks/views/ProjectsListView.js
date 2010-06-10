@@ -29,7 +29,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		
 		this._listView = new fan.ui.lists.SortedList(bind(this, '_createCell'))
 			.query(query)
-			.sortBy('date')
+			.sortBy('title')
 			.subscribe('Click', this, '_selectProject')
 			.appendTo(this._body)
 	}

@@ -18,15 +18,13 @@ time.getDayOffset = function(timestamp, callback, clearTimeoutId) {
 	
 	var then = new Date(timestamp),
 		now = new Date(fin.now()),
-		normalizedThen = new Date(then.getYear(), then.getMonth(), then.getDate()),
-		normalizedNow = new Date(now.getYear(), now.getMonth(), now.getDate())
-	
-	var diff = normalizedThen.getTime() - normalizedNow.getTime(),
+		normalizedThen = new Date(then.getFullYear(), then.getMonth(), then.getDate()),
+		normalizedTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1),
+		diff = normalizedThen.getTime() - now,
 		days = Math.floor(diff / time.days),
-		updateIn = diff - days * time.days
+		updateIn = normalizedTomorrow.getTime() - now.getTime()
 	
 	callback(days)
-	
 	if (!clearTimeoutId) { clearTimeoutId = fin.unique() }
 	offsetTimeouts[clearTimeoutId] = setTimeout(bind(time, 'getDayOffset', timestamp, callback, clearTimeoutId), updateIn)
 	

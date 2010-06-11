@@ -43,7 +43,6 @@ exports = Class(fan.ui.lists.List, function(supr){
 	this._onQueryUpdated = function(mutation) { 
 		if (mutation.op == 'sadd') { this.addItems(mutation.args) }
 		if (mutation.op == 'srem') { this.removeItems(mutation.args) }
-		this._render()
 	}
 	
 	this._addItem = function(itemId) {

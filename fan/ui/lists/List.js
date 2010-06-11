@@ -82,7 +82,8 @@ exports = Class(fan.ui.Component, function(supr){
 				cells[itemId] = this._makeCellFn(item)
 				this._makeFocusable(cells[itemId])
 			}
-			this._getParentFor(itemId).appendChild(cells[itemId])
+			var parent = this._getParentFor(itemId)
+			if (parent) { parent.appendChild(cells[itemId]) }
 		}
 	})
 	

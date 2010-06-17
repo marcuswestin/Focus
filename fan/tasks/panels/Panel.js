@@ -42,5 +42,8 @@ exports = Class(fan.ui.Component, function(supr) {
 		gKeyboardFocus.updatePosition(false)
 	}
 	
-	this.handleKeyboardFocus = function(el) { this._currentView.handleKeyboardFocus(el) }
+	this.handleKeyboardFocus = function(el) {
+		if (!this._currentView) { return }
+		this._currentView.handleKeyboardFocus(el)
+	}
 })

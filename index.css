@@ -52,17 +52,24 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 /***********
  * Buttons *
  ***********/
-.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px outset #333; background: #ddd; display: inline-block; cursor: pointer; 
-	-moz-border-radius: 5px; -webkit-border-radius: 5px; }
-.Button.down { border-style: inset; background-color: #cfcfcf; }
+.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; cursor: pointer; 
+	-moz-border-radius: 5px; -webkit-border-radius: 5px; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
+	background: -moz-linear-gradient(top,  #fff,  #ccc); }
+.Button.down {
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	background: -moz-linear-gradient(top,  #ccc,  #fff); }
+}
 
 /*****************
  * Radio Buttons *
  *****************/
 .RadioButtons { display: inline-block; }
-.RadioButtons .Button { border-right: none; -moz-border-radius: 0px; -webkit-border-radius: 0px; }
-.RadioButtons .Button.left { -moz-border-radius: 20px 0 0 20px; -webkit-border-top-left-radius: 20px; -webkit-border-bottom-left-radius: 20px; }
-.RadioButtons .Button.right { -moz-border-radius: 0 20px 20px 0; -webkit-border-bottom-right-radius: 20px; -webkit-border-top-right-radius: 20px; border-right: 1px outset; }
+.RadioButtons .Button { -moz-border-radius: 0px; -webkit-border-radius: 0px; border-right-style: none; }
+.RadioButtons .Button.left { -moz-border-radius: 20px 0 0 20px; -webkit-border-top-left-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px; }
+.RadioButtons .Button.right { -moz-border-radius: 0 20px 20px 0; -webkit-border-bottom-right-radius: 20px; 
+	-webkit-border-top-right-radius: 20px; border-right-style: solid; }
 
 /*****************
  * Login Manager *

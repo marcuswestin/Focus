@@ -18,10 +18,10 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._buildHeader = function() {
 		new fan.ui.RadioButtons()
-			.addTextButton('Normal', 'normal')
-			.addTextButton('Crucial', 'crucial')
-			.addTextButton('Backlog', 'backlog')
-			.addTextButton('Done', 'done')
+			.addButton({ text: 'Normal', payload: 'normal' })
+			.addButton({ text: 'Crucial', payload: 'crucial' })
+			.addButton({ text: 'Backlog', payload: 'backlog' })
+			.addButton({ text: 'Done', payload: 'done' })
 			.subscribe('Click', this, '_toggleTaskState')
 			.appendTo(this._header)
 	}

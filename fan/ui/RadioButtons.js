@@ -11,27 +11,12 @@ exports = Class(fan.ui.Component, function(supr) {
 		this._buttons = []
 	}
 	
-	this.addTextButton = function(text, payload) {
-		this._addButton(payload).innerHTML = text
-		return this
-	}
-	
-	this.addButton = function(className, payload) {
-		this._addButton(payload).className += (' ' + className)
-		return this
-	}
-	
-	this.select = function(index) {
-		this._onDelegateClick(this._buttons[index].delegateId)
-		return this
-	}
-	
-	this._addButton = function(payload) {
-		var el = this._create({ className: 'Button', parent: this.getElement() }),
+	this.addButton = function(props) {
+		var el = this._create({ className: 'Button ' + props.className, text: props.text, parent: this.getElement() }),
 			delegateId = fin.unique(),
 			buttons = this._buttons
 		
-		this._payloads[delegateId] = payload
+		this._payloads[delegateId] = props.payload
 		el.delegateId = delegateId
 		buttons.push(el)
 		buttons[delegateId] = el

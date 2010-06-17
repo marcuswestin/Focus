@@ -31,9 +31,9 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		this._views = {}
 		
 		this._apps = new fan.ui.RadioButtons()
-			.addButton('tasks', 'tasks')
-			.addButton('calendar', 'calendar')
-			.addButton('projects', 'projects')
+			.addButton(this._getButton('tasks'))
+			.addButton(this._getButton('calendar'))
+			.addButton(this._getButton('projects'))
 			// .addButton('changes', 'changes')
 			// .addButton('coworkers', 'coworkers')
 			// .addButton('accomplishments', 'accomplishments')
@@ -42,6 +42,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 			.subscribe('Click', this, 'selectApp')
 			.select(0)
 	}
+	
+	this._getButton = function(id) { return { payload: id, icon: 'apps/' + id + '.png' } }
 	
 	this._onWindowResize = function(winSize) {
 		supr(this, '_onWindowResize', arguments)

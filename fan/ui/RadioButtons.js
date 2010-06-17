@@ -12,7 +12,8 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this.addButton = function(props) {
-		var el = this._create({ className: 'Button ' + props.className, text: props.text, parent: this.getElement() }),
+		var className = 'Button' + (props.className ? ' ' + props.className : '')
+			el = this._create({ className: className, text: props.text, parent: this.getElement() }),
 			delegateId = fin.unique(),
 			buttons = this._buttons
 		

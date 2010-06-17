@@ -43,7 +43,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 			.select(0)
 	}
 	
-	this._getButton = function(id) { return { payload: id, icon: 'apps/' + id + '.png' } }
+	this._getButton = function(id) { return { payload: id, className: id } }
 	
 	this._onWindowResize = function(winSize) {
 		supr(this, '_onWindowResize', arguments)

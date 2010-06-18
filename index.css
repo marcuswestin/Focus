@@ -1,6 +1,12 @@
 body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #333; font-size: 13px; }
 table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 
+body {
+	background: -moz-linear-gradient(top,  #fff,  #d5d5d5);
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#d5d5d5));
+	height: 100%;
+}
+
 .fan-unselectable {
 	cursor: default;
 	-moz-user-select: none;

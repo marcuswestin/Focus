@@ -47,11 +47,12 @@ exports = Singleton(function(){
 		el.style.fontStyle = 'Italic'
 		el.style.position = 'absolute'
 		el.innerHTML = "Don't Panic"
+		el.className = 'fan-unselectable'
 		this.addDependant(function(winSize) {
 			var width = el.offsetWidth
 			var height = el.offsetHeight
 			el.style.right = ((winSize.w - 500) / 2) - (width / 2) + 'px' // in the middle on the right off of the panels
-			el.style.top = (winSize.h / 2) - (height / 2) + 'px'
+			el.style.top = (winSize.h / 1.3) - (height / 1.5) + 'px'
 		})
 	}
 	

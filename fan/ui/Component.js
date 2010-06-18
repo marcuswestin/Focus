@@ -42,7 +42,7 @@ exports = Class(shared.Publisher, function(supr) {
 		element.parentNode.removeChild(element)
 		return this
 	}
-	
+
 	this._insertElement = function (parentElement, insertItem, position) {
 		if (arguments.length == 2) {
 			position = insertItem
@@ -97,7 +97,14 @@ exports = Class(shared.Publisher, function(supr) {
 		var focusableId = el['fan-focusableId']
 		return _focusables[focusableId]
 	}
-	
+/******************************
+ * Unselectable UI Components *
+ ******************************/
+	this._makeUnselectable = function(el) {
+		this.addClassName(el || this.getElement(), 'fan-unselectable')
+		return this
+	}
+
 /***************
  * Class names *
  ***************/
@@ -182,7 +189,7 @@ exports = Class(shared.Publisher, function(supr) {
 		} else if (element.attachEvent){
 			element.attachEvent("on"+eventName, normalizeEvent)
 		}
-		return handler
+		return this
 	}
 
 	// I don't think this code works...

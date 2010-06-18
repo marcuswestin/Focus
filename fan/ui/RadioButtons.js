@@ -12,11 +12,12 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this.addButton = function(props) {
-		var className = 'Button fan-unselectable' + (props.className ? ' ' + props.className : '')
+		var className = 'Button ' + (props.className ? ' ' + props.className : '')
 			el = this._create({ className: className, text: props.text, parent: this.getElement() }),
 			delegateId = fin.unique(),
 			buttons = this._buttons
 		
+		this._makeUnselectable(el)
 		this._payloads[delegateId] = props.payload
 		el.delegateId = delegateId
 		buttons.push(el)

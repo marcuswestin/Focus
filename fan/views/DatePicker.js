@@ -41,7 +41,7 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._getPicker = function() {
 		if (this._picker) { return this._picker }
-		var picker = this._create({ tag: 'table', parent: this._element }),
+		var picker = this._create({ tag: 'table', parent: this._element, className: 'DatePickerBody' }),
 			body = this._create({ tag: 'tbody', parent: picker }),
 			days = this._days,
 			row, rowsCount = 5

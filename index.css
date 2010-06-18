@@ -1,4 +1,5 @@
 body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; font-size: 13px; }
+table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 
 /*******************
  * Editable values *
@@ -135,13 +136,30 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
 .List .cell.crucial .title { color: #222; }
 .List .cell.selected { border-color: #abd; }
 .List .cell .fin-Template { padding: 0px; }
-.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static; border-color: #666; }
+.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; 
+	position: static; border: 1px solid #999; border-bottom: none;
+	-moz-border-radius: 4px 4px 0 0; -webkit-border-top-right-radius: 4px; -webkit-border-top-left-radius: 4px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+	background: -moz-linear-gradient(top,  #fff,  #e5e5e5); }
+.List .group .holder { border: 1px solid #999; margin: -1px 6px 0;
+	-moz-border-radius: 0 3px 3px 3px; -webkit-border-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px; -webkit-border-bottom-left-radius: 3px; }
 
 /*****************
  * Calendar View *
  *****************/
 .CalendarView .groupHeader { width: 20%; float: left; margin-top: 10px; text-align: center; }
-.CalendarView .group { width: 20%; float: left; }
+.CalendarView .group { width: 20%; height: 100%; float: left; }
+
+/***************
+ * Date Picker *
+ ***************/
+.DatePicker { cursor: pointer; }
+.DatePickerBody th { padding: 2px; text-align: center; }
+.DatePickerBody td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px; }
+.DatePickerBody td.selected { background-color: #B5D4F3; }
+.DatePickerBody td.today { font-weight: bold; }
+.DatePickerBody td:hover { background-color: #BFDFFF; }
 
 /**********************
  * Misc UI Components *

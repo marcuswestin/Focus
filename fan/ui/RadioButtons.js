@@ -31,8 +31,13 @@ exports = Class(fan.ui.Component, function(supr) {
 		}
 		this._rightButton = el
 		this.addClassName(el, 'right')
-
-		return el
+		
+		return this
+	}
+	
+	this.select = function(index) {
+		this._onDelegateClick(this._buttons[index].delegateId)
+		return this
 	}
 	
 	this._onDelegateClick = function(delegateId) {

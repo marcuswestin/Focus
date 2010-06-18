@@ -56,7 +56,6 @@ exports = Class(fan.ui.Component, function(supr){
 				break
 			}
 		}
-		
 		this._render()
 	}
 	

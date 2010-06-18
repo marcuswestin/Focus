@@ -21,7 +21,8 @@ time.getDayOffset = function(timestamp, callback, clearTimeoutId) {
 		normalizedThen = new Date(then.getFullYear(), then.getMonth(), then.getDate()),
 		normalizedTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1),
 		diff = normalizedThen.getTime() - now,
-		days = Math.floor(diff / time.days),
+		roundFn = diff < 0 ? Math.ceil : Math.floor,
+		days = Math.ceil(diff / time.days),
 		updateIn = normalizedTomorrow.getTime() - now.getTime()
 	
 	callback(days)
@@ -51,35 +52,48 @@ time.TimeString = Class(fan.ui.Component, function(supr) {
 		this._timestamp = timestamp
 	}
 	
+	this.release = function() { clearTimeout(this._timeout) }
+	this.setTimestamp = function(timestamp) {
+		this.release()
+		this._timestamp = timestamp
+		this._update()
+	}
+	
 	this._createContent = function() { this._update() }
 	
 	this._update = function() {
+		if (!this._timestamp) {
+			this._element.innerHTML = 'Not set'
+			return
+		}
 		var now = fin.now(),
 			diff = now - this._timestamp,
-			weeks = Math.floor(diff / time.weeks),
-			days = Math.floor(diff / time.days),
-			hours = Math.floor(diff / time.hours),
-			minutes = Math.floor(diff / time.minutes),
-			seconds = Math.floor(diff / time.seconds),
+			isFuture = diff < 0,
+			roundFn = isFuture ? Math.ceil : Math.floor,
+			weeks = roundFn(diff / time.weeks),
+			days = roundFn(diff / time.days),
+			hours = roundFn(diff / time.hours),
+			minutes = roundFn(diff / time.minutes),
+			seconds = roundFn(diff / time.seconds),
 			timeStr = null,
 			updateIn = null,
 			pluralize = false,
 			el = this._element
 		
 		if (weeks) {
-			timeStr = weeks + ' week'
+			timeStr = Math.abs(weeks) + ' week'
 			updateIn = diff - weeks * time.weeks
 			pluralize = weeks
 		} else if (days) {
-			timeStr = days + ' day'
+			timeStr = Math.abs(days) + ' day'
 			updateIn = diff - days * time.days
 			pluralize = days
 		} else if (hours) {
-			timeStr = hours + ' hour'
+			timeStr = Math.abs(hours) + ' hour'
 			updateIn = diff - hours * time.hours
 			pluralize = hours
 		} else if (minutes) {
-			timeStr = minutes + ' minute'
+			timeStr = Math.abs(minutes) + ' minute'
 			updateIn = diff - minutes * time.minutes
 			pluralize = minutes
 		} else if (seconds > 20) {
@@ -90,9 +104,9 @@ time.TimeString = Class(fan.ui.Component, function(supr) {
 			updateIn = (20 - seconds) * time.seconds
 		}
 		
-		if (pluralize) { el.innerHTML = timeStr + (pluralize > 1 ? 's' : '') + ' ago' } 
+		if (pluralize) { el.innerHTML = timeStr + (Math.abs(pluralize) > 1 ? 's' : '') + ' ' + (isFuture ? 'from now' : 'ago') } 
 		else { el.innerHTML = timeStr }
 		
-		setTimeout(bind(this, '_update'), updateIn)
+		this._timeout = setTimeout(bind(this, '_update'), Math.abs(updateIn))
 	}
 })

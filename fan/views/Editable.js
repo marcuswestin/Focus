@@ -35,11 +35,12 @@ exports = Class(fan.views.Value, function(supr) {
 		inputEl.style.lineHeight = this.getStyle('line-height');
 		
 		fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
-		input.subscribe('Blur', this, '_onBlur')
-		
 		this._resizeInput()
-		input.appendTo(document.body)
-		input.focus()
+
+		input
+			.subscribe('Blur', this, '_onBlur')
+			.appendTo(document.body)
+			.focus()
 	}
 
 	this.createDelayedMethod('_onBlur', function() {

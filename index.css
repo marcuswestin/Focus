@@ -84,7 +84,7 @@ table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 /**********
  * Panels *
  **********/
-.Panel .header .RadioButtons { margin: 7px 0 0 7px; }
+.Panel .header .RadioButtons { float: left; margin: 7px 0 0 7px; }
 .Panel .header .createButton { float: right; margin: 7px 7px 0 0; }
 
 /*********************

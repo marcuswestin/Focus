@@ -1,4 +1,4 @@
-jsio('from shared.javascript import Class, bind')
+jsio('from shared.javascript import Class, bind, recall')
 jsio('import fan.ui.lists.List')
 jsio('import fan.time')
 

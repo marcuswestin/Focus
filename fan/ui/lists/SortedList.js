@@ -36,7 +36,8 @@ exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
-		this._defaultGroup = this._create({ className: 'group', parent: this._element })
+		this._defaultGroup = this._createGroup()
+		this.addClassName(this._defaultGroup, 'default')
 		this._queryId = fin.query(this._query, bind(this, '_onQueryUpdated'))
 	}
 	
@@ -73,21 +74,40 @@ exports = Class(fan.ui.lists.List, function(supr){
 		supr(this, '_render')
 	})
 	
-	this._onGroupPropChange = function(itemId, op, value) {
-		if (!value) {
-			delete this._groupsById[itemId]
-			return
+	this._onGroupPropChange = function(itemId, op, itemGroup) {
+		var groups = this._groupsByValue,
+			currentGroup = this._groupsById[itemId],
+			newGroup
+		
+		if (currentGroup) { // should we hide current group?
+			var holder = currentGroup.childNodes[1]
+			if (holder.childNodes.length == 1) {
+				currentGroup.style.display = 'none'
+			}
 		}
-		var groups = this._groupsByValue
-		if (!groups[value]) {
-			groups[value] = this._create({ className: 'group', parent: this._element })
-			var header = this._create({ className: 'header', parent: groups[value] }),
-				holder = this._create({ className: 'holder', parent: groups[value] })
-			
-			fin.observe(value, this._groupDisplayProp, function(op, value) { header.innerHTML = value })
+		
+		newGroup = groups[itemGroup]
+		if (!itemGroup) { // was the item removed from a group?
+			newGroup = this._defaultGroup
+		} else if (!newGroup) {
+			newGroup = groups[itemGroup] = this._createGroup()
+			fin.observe(itemGroup, this._groupDisplayProp, function(op, groupTitle) { 
+				var header = newGroup.childNodes[0]
+				header.innerHTML = groupTitle
+			})
 		}
-		this._groupsById[itemId] = groups[value]
+		
+		newGroup.style.display = 'block' // make sure we're showing current group
+		
+		this._groupsById[itemId] = newGroup
 		this._render()
+	}
+	
+	this._createGroup = function() {
+		var group = this._create({ className: 'group', parent: this._element }),
+			header = this._create({ className: 'header', parent: group }),
+			holder = this._create({ className: 'holder', parent: group })
+		return group
 	}
 })
 

@@ -159,6 +159,9 @@ body {
 .List .group .holder { border: 1px solid #999; margin: -1px 6px 0;
 	-moz-border-radius: 0 3px 3px 3px; -webkit-border-radius: 3px;
 	-webkit-border-bottom-right-radius: 3px; -webkit-border-bottom-left-radius: 3px; }
+.List .group.default { display: none; } /* will be overridden by js */
+.List .group.default .header { display: none; }
+.List .group.default .holder { border-style: dotted; }
 
 /*****************
  * Calendar View *

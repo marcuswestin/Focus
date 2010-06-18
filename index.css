@@ -127,7 +127,7 @@ body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #222222; f
  * Lists *
  *********/
 .List { margin: 5px 0; }
-.List .cell { cursor: pointer; padding: 4px 6px; margin: 0px 5px; font-size: 12px; min-height: 18px; }
+.List .cell { cursor: pointer; padding: 4px 6px; font-size: 12px; min-height: 18px; }
 .List .cell .title { font-size: 12px; }
 .List .cell:nth-child(odd) { background-color: #e5e4fc; }
 .List .cell.crucial { background-color: #fcfcee; }

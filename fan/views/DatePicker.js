@@ -59,21 +59,34 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._updatePicker = function() {
 		if (!this._picker) { return }
-		var visibleDate = new Date(this._timestamp || fin.now()),
-			daysInMonth = fan.time.daysInMonth(visibleDate),
-			firstDay = fan.time.firstDayOfMonth(visibleDate),
+		var selected = this._timestamp,
+			now = fin.now(),
+			currentDate = new Date(selected || now),
+			daysInMonth = fan.time.daysInMonth(currentDate),
+			firstDay = fan.time.firstDayOfMonth(currentDate),
 			cell, cells = this._picker.getElementsByTagName('td')
 		
+		currentDate.setHours(0)
+		currentDate.setMinutes(0)
+		currentDate.setSeconds(0)
 		for (var date=1; date <= daysInMonth; date++) {
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date
-			visibleDate.setDate(date)
-			cell.delegateId = visibleDate.getTime()
+			currentDate.setDate(date)
+			cell.delegateId = currentDate.getTime()
+			var startOfDay = currentDate.getTime(),
+				endOfDay = startOfDay + fan.time.days
+			
+			this.toggleClassName(cell, 'selected', startOfDay <= selected && selected < endOfDay)
+			this.toggleClassName(cell, 'today', startOfDay <= now && now < endOfDay)
+			if (startOfDay <= now && now < endOfDay) {
+				console.log(new Date(startOfDay), new Date(now), new Date(endOfDay))
+			}
 		}
 	}
 	
 	this._onPickerClick = function(timestamp) {
 		fin.set(this._itemId, this._property, timestamp)
-		fan.ui.overlay.hide()
+		// fan.ui.overlay.hide()
 	}
 })

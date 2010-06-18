@@ -64,7 +64,8 @@ exports = Class(fan.ui.lists.List, function(supr){
 	}
 	
 	this._getParentFor = function(itemId) {
-		return this._groupsById && this._groupsById[itemId] || this._defaultGroup
+		var group = this._groupsById && this._groupsById[itemId] || this._defaultGroup
+		return group.childNodes[1]
 	}
 	
 	this.createDelayedMethod('_render', function() {
@@ -80,7 +81,9 @@ exports = Class(fan.ui.lists.List, function(supr){
 		var groups = this._groupsByValue
 		if (!groups[value]) {
 			groups[value] = this._create({ className: 'group', parent: this._element })
-			var header = this._create({ className: 'header', parent: groups[value] })
+			var header = this._create({ className: 'header', parent: groups[value] }),
+				holder = this._create({ className: 'holder', parent: groups[value] })
+			
 			fin.observe(value, this._groupDisplayProp, function(op, value) { header.innerHTML = value })
 		}
 		this._groupsById[itemId] = groups[value]

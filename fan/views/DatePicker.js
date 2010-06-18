@@ -17,8 +17,12 @@ exports = Class(fan.views.Value, function(supr){
 	this.handleKeyboardSelect = function() { this._showPicker() }
 	
 	this._onDateChange = function(mutation, newValue) {
+		if (!this._timeString) { 
+			this._timeString = new fan.time.TimeString(newValue)
+				.appendTo(this._element)
+		}
 		this._timestamp = newValue
-		this._element.innerHTML = newValue ? new Date(newValue).toUTCString() : 'No date'
+		this._timeString.setTimestamp(this._timestamp)
 		this._updatePicker()
 		this._publish('Resize')
 	}

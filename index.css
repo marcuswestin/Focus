@@ -70,11 +70,11 @@ body {
  ***********/
 .Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; cursor: pointer; 
 	-moz-border-radius: 5px; -webkit-border-radius: 5px; 
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
-	background: -moz-linear-gradient(top,  #fff,  #ccc); }
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+	background: -moz-linear-gradient(top,  #fff,  #ddd); }
 .Button.down {
-	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#fff));
-	background: -moz-linear-gradient(top,  #ccc,  #fff); }
+	background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
+	background: -moz-linear-gradient(top,  #ddd,  #fff); }
 }
 
 /*****************

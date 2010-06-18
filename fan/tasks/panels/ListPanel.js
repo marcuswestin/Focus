@@ -58,8 +58,4 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		if (!views[appName]) { views[appName] = new this._viewCtors[appName]() }
 		this._setView(views[appName])
 	}
-	
-	this.selectAppByIndex = function(index) {
-		this._apps.select(index)
-	}
 })

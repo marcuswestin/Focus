@@ -25,10 +25,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		keyMap[keys['c']] = bind(gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
-		
-		keyMap[keys['1']] = bind(gListPanel, 'selectAppByIndex', 0)
-		keyMap[keys['2']] = bind(gListPanel, 'selectAppByIndex', 1)
-		keyMap[keys['3']] = bind(gListPanel, 'selectAppByIndex', 2)
 	}
 	
 	this.shiftIsDown = function() { return this._shiftIsDown }

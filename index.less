@@ -1,5 +1,31 @@
+/*********
+ * Reset *
+ *********/
 body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #333; font-size: 13px; }
 table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
+
+/******************
+ * Less functions *
+ ******************/
+.rounded(@radius: 0) {
+	border-radius: @radius;
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+}
+.rounded4(@top_left: 3px, @top_right: 0, @bottom_right: 0, @bottom_left: 0) {
+	border-radius: @top_left @top_right @bottom_right @bottom_left;
+	-moz-border-radius: @top_left @top_right @bottom_right @bottom_left;
+	-webkit-border-top-left-radius: @top_left;
+	-webkit-border-top-right-radius: @top_right;
+	-webkit-border-bottom-left-radius: @bottom_left;
+	-webkit-border-bottom-right-radius: @bottom_right;
+}
+
+/********************************
+ * Misc UI Components & globals *
+ ********************************/
+.UserIcon img { background: url("img/user_icon.gif"); width: 50px; height: 50px; }
+.TimeString { font-size: 12px; color: #666; }
 
 body {
 	background: -moz-linear-gradient(top,  #fff,  #d5d5d5);
@@ -7,6 +33,9 @@ body {
 	height: 100%;
 }
 
+/***************
+ * UIComponent *
+ ***************/
 .fan-unselectable {
 	cursor: default;
 	-moz-user-select: none;
@@ -24,7 +53,7 @@ body {
  * Keyboard controlled focus *
  *****************************/
 .KeyboardFocus .piece { position: absolute; background: #76aee5; opacity: .65; }
-.KeyboardFocus .piece.top { -moz-border-radius: 20px 20px 0 0; -webkit-border-top-right-radius: 20px; -webkit-border-top-left-radius: 20px; }
+.KeyboardFocus .piece.top { .rounded4(20px, 20px, 0, 0) }
 .KeyboardFocus .piece.bottom { -moz-border-radius: 0 0 20px 20px; -webkit-border-bottom-right-radius: 20px; -webkit-border-bottom-left-radius: 20px; }
 
 /*********
@@ -72,9 +101,10 @@ body {
 	-moz-border-radius: 5px; -webkit-border-radius: 5px; 
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
 	background: -moz-linear-gradient(top,  #fff,  #ddd); }
+
 .Button.down {
 	background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
-	background: -moz-linear-gradient(top,  #ddd,  #fff); }
+	background: -moz-linear-gradient(top,  #ddd,  #fff);
 }
 
 /*****************
@@ -173,15 +203,10 @@ body {
  * Date Picker *
  ***************/
 .DatePicker { cursor: pointer; }
-.DatePickerBody th { padding: 2px; text-align: center; }
-.DatePickerBody td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px;
-	-moz-border-radius: 2px; -webkit-border-radius: 2px; }
+.DatePickerBody { .rounded(4px); padding: 0 5px 1px; }
+.DatePickerBody th { text-align: center; }
+.DatePickerBody th label { display: block; width: 19px; padding: 2px; }
+.DatePickerBody td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px; .rounded(3px); }
 .DatePickerBody td.selected { background-color: #B5D4F3; }
 .DatePickerBody td.today { font-weight: bold; }
 .DatePickerBody td:hover { background-color: #BFDFFF; }
-
-/**********************
- * Misc UI Components *
- **********************/
-.UserIcon img { background: url("img/user_icon.gif"); width: 50px; height: 50px; }
-.TimeString { font-size: 12px; color: #666; }

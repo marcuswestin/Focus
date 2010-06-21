@@ -33,7 +33,7 @@ exports = Class(fan.views.Value, function(supr){
 		
 		this
 			.setStyle(picker, { position: 'absolute', background: 'white', border: '1px solid #333' })
-			.layout(picker, { x: layout.x, y: layout.y + layout.h, w: 100, h: 100 })
+			.layout(picker, { x: layout.x, y: layout.y + layout.h })
 			._updatePicker()
 		
 		fan.ui.overlay.show(picker, true)
@@ -41,14 +41,16 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._getPicker = function() {
 		if (this._picker) { return this._picker }
-		var picker = this._create({ tag: 'table', parent: this._element, className: 'DatePickerBody' }),
-			body = this._create({ tag: 'tbody', parent: picker }),
+		var picker = this._create({ className: 'DatePickerBody' }),
+			table = this._create({ tag: 'table', parent: picker }),
+			body = this._create({ tag: 'tbody', parent: table }),
 			days = this._days,
 			row, rowsCount = 5
 		
 		row = this._create({ tag: 'tr', parent: body }),
 		forEach(days, bind(this, function(day) {
-			this._create({ tag: 'th', parent: row, text: day })
+			var th = this._create({ tag: 'th', parent: row })
+			this._create({ tag: 'label', parent: th, text: day })
 		}))
 		
 		while (rowsCount-- > 0) {

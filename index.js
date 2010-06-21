@@ -5,6 +5,9 @@ jsio.path.fan = '.'
 Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
 Meebo('domReady')
 
+// Watch for updates in the less files
+less.watch()
+
 jsio('import client.fin') // makes fin globally accesible
 
 window.gBody = document.body

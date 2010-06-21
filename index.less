@@ -20,6 +20,10 @@ table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 	-webkit-border-bottom-left-radius: @bottom_left;
 	-webkit-border-bottom-right-radius: @bottom_right;
 }
+.gradient(@from, @to) {
+	background: -moz-linear-gradient(top,  @from,  @to);
+	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
+}
 
 /********************************
  * Misc UI Components & globals *
@@ -28,8 +32,7 @@ table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 .TimeString { font-size: 12px; color: #666; }
 
 body {
-	background: -moz-linear-gradient(top,  #fff,  #d5d5d5);
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#d5d5d5));
+	.gradient(#fff, #d5d5d5);
 	height: 100%;
 }
 
@@ -79,11 +82,8 @@ body {
  * Panels *
  **********/
 .Panel { position: absolute; border: 1px solid #aaa; top: 10px; 
-	.rounded(10px);
-	-moz-box-shadow: 3px 7px 10px #888; -webkit-box-shadow: 3px 7px 10px #888; box-shadow: 3px 7px 10px #888; 
-	background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#ddd));
-	background: -moz-linear-gradient(top,  #ccc,  #ddd);
-	}
+	.rounded(10px); .gradient(#bbb, #ddd);
+	-moz-box-shadow: 3px 7px 10px #888; -webkit-box-shadow: 3px 7px 10px #888; box-shadow: 3px 7px 10px #888; }
 .Panel .View { overflow: hidden; }
 .Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0); }
 .Panel .View .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
@@ -96,14 +96,8 @@ body {
  * Buttons *
  ***********/
 .Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; 
-	cursor: pointer; .rounded(5px);
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
-	background: -moz-linear-gradient(top,  #fff,  #ddd); }
-
-.Button.down {
-	background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
-	background: -moz-linear-gradient(top,  #ddd,  #fff);
-}
+	cursor: pointer; .rounded(5px); .gradient(#fff, #ddd); }
+.Button.down { .gradient(#ddd, #fff); }
 
 /*****************
  * Radio Buttons *
@@ -177,10 +171,8 @@ body {
 .List .cell.crucial .title { color: #222; }
 .List .cell.selected { border-color: #abd; }
 .List .cell .fin-Template { padding: 0px; }
-.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; 
-	position: static; border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0);
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
-	background: -moz-linear-gradient(top,  #fff,  #e5e5e5); }
+.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static;
+	border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
 .List .group .holder { border: 1px solid #999; margin: -1px 6px 0; .rounded(0, 3px, 3px, 0); }
 .List .group.default { display: none; } /* will be overridden by js */
 .List .group.default .header { display: none; }

@@ -1,70 +1,70 @@
 /*********
  * Reset *
  *********/
-body, html { font-family: tahoma,sans-serif; overflow: hidden; color: #333; font-size: 13px; }
-table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
+body, html { font-family:tahoma,sans-serif; overflow:hidden; color:#333; font-size:13px; }
+table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
 
 /******************
  * Less functions *
  ******************/
-.rounded(@radius: 0) {
-	border-radius: @radius;
-	-moz-border-radius: @radius;
-	-webkit-border-radius: @radius;
+.rounded(@radius:0) {
+	border-radius:@radius;
+	-moz-border-radius:@radius;
+	-webkit-border-radius:@radius;
 }
-.rounded4(@top_left: 3px, @top_right: 0, @bottom_right: 0, @bottom_left: 0) {
-	border-radius: @top_left @top_right @bottom_right @bottom_left;
-	-moz-border-radius: @top_left @top_right @bottom_right @bottom_left;
-	-webkit-border-top-left-radius: @top_left;
-	-webkit-border-top-right-radius: @top_right;
-	-webkit-border-bottom-left-radius: @bottom_left;
-	-webkit-border-bottom-right-radius: @bottom_right;
+.rounded4(@top_left:3px, @top_right:0, @bottom_right:0, @bottom_left:0) {
+	border-radius:@top_left @top_right @bottom_right @bottom_left;
+	-moz-border-radius:@top_left @top_right @bottom_right @bottom_left;
+	-webkit-border-top-left-radius:@top_left;
+	-webkit-border-top-right-radius:@top_right;
+	-webkit-border-bottom-left-radius:@bottom_left;
+	-webkit-border-bottom-right-radius:@bottom_right;
 }
 .gradient(@from, @to) {
-	background: -moz-linear-gradient(top,  @from,  @to);
-	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
+	background:-moz-linear-gradient(top, @from, @to);
+	background:-webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
 }
 .shadow(@h_offset, @v_offset, @blur, @color) {
-	box-shadow: @h_offset @v_offset @blur @color;
-	-moz-box-shadow: @h_offset @v_offset @blur @color;
-	-webkit-box-shadow: @h_offset @v_offset @blur @color;
+	box-shadow:@h_offset @v_offset @blur @color;
+	-moz-box-shadow:@h_offset @v_offset @blur @color;
+	-webkit-box-shadow:@h_offset @v_offset @blur @color;
 }
 .unselectable {
-	-moz-user-select: none;
-	-webkit-user-select: none;
+	-moz-user-select:none;
+	-webkit-user-select:none;
 }
 
 /********************************
  * Misc UI Components & globals *
  ********************************/
-.UserIcon img { background: url("img/user_icon.gif"); width: 50px; height: 50px; }
-.TimeString { font-size: 12px; color: #666; }
+.UserIcon img { background:url("img/user_icon.gif"); width:50px; height:50px; }
+.TimeString { font-size:12px; color:#666; }
 
 body {
 	.gradient(#fff, #d5d5d5);
-	height: 100%;
+	height:100%;
 }
 
 /***************
  * UIComponent *
  ***************/
 .fan-unselectable {
-	cursor: default;
+	cursor:default;
 	.unselectable;
 }
 
 /*******************
  * Editable values *
  *******************/
-.Editable { cursor: pointer; }
-.Editable.hot { background-color: #e6ffff; }
-.Editable.defaultValue { font-style: italic; color: #333; }
+.Editable { cursor:pointer; }
+.Editable.hot { background-color:#e6ffff; }
+.Editable.defaultValue { font-style:italic; color:#333; }
 
 /*****************************
  * Keyboard controlled focus *
  *****************************/
 .KeyboardFocus { 
-	.piece { position: absolute; background: #76aee5; opacity: .65; }
+	.piece { position:absolute; background:#76aee5; opacity:.65; }
 	.piece.top { .rounded4(20px, 20px, 0, 0); }
 	.piece.bottom { .rounded4(0, 0, 20px, 20px ); }
 }
@@ -72,74 +72,74 @@ body {
 /*********
  * Links *
  *********/
-.Link { color: #559; text-decoration: underline; font-size: 12px; cursor: pointer; }
+.Link { color:#559; text-decoration:underline; font-size:12px; cursor:pointer; }
 
 /**********
  * Inputs *
  **********/
-.Input { padding: 2px 3px; height: 25px; font-family: arial,sans-serif; font-size: 13px; }
-.Input.defaultValue { font-style: italic; color: #333; }
+.Input { padding:2px 3px; height:25px; font-family:arial,sans-serif; font-size:13px; }
+.Input.defaultValue { font-style:italic; color:#333; }
 
 /***********
  * Overlay *
  ***********/
-.Overlay { position: fixed; top: 0px; left: 0px; z-index: 2;
+.Overlay { position:fixed; top:0px; left:0px; z-index:2;
 	
-	.underlay { background-color: #333; position: absolute; top: 0px; left: 0px; }
-	.content { position: absolute; top: 0px; left: 0px; }
+	.underlay { background-color:#333; position:absolute; top:0px; left:0px; }
+	.content { position:absolute; top:0px; left:0px; }
 }
-.Overlay.lightbox .content { .rounded(10px); border: 8px solid #ddd; background-color: #ddd; }
+.Overlay.lightbox .content { .rounded(10px); border:8px solid #ddd; background-color:#ddd; }
 
 /***********
  * Buttons *
  ***********/
-.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666;
-	display: inline-block; cursor: pointer; .rounded(5px); .gradient(#fff, #ddd); }
+.Button { font-size:12px; padding:3px 10px 5px 10px; border:1px solid #666;
+	display:inline-block; cursor:pointer; .rounded(5px); .gradient(#fff, #ddd); }
 .Button.down { .gradient(#ddd, #fff); }
 
 /*****************
  * Radio Buttons *
  *****************/
-.RadioButtons { display: inline-block;
+.RadioButtons { display:inline-block;
 	
-	.Button { .rounded(0px); border-right-style: none; }
+	.Button { .rounded(0px); border-right-style:none; }
 	.Button.left { .rounded4(20px, 0, 0, 20px); }
-	.Button.right { .rounded4(0, 20px, 20px, 0); border-right-style: solid; }
+	.Button.right { .rounded4(0, 20px, 20px, 0); border-right-style:solid; }
 }
 
 /*****************
  * Login Manager *
  *****************/
-.LoginManager { width: 250px; height: 90px;
+.LoginManager { width:250px; height:90px;
 	
-	.inputs { display: block; width: 200px; margin: 20px auto;
+	.inputs { display:block; width:200px; margin:20px auto;
 		
-		.Input { width: 100%; margin-top: 2px; }
+		.Input { width:100%; margin-top:2px; }
 	}
-	.Button { position: absolute; bottom: 3px; right: 24px; }
-	.Link { position: absolute; bottom: 8px; left: 5px; }
+	.Button { position:absolute; bottom:3px; right:24px; }
+	.Link { position:absolute; bottom:8px; left:5px; }
 }
 
 /**********
  * Panels *
  **********/
 .Panel {
-	position: absolute; border: 1px solid #aaa; top: 10px;
+	position:absolute; border:1px solid #aaa; top:10px;
 	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888);
 	
-	.View { overflow: hidden;
+	.View { overflow:hidden;
 		
-		.header {  position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0);
+		.header {  position:absolute; background-color:#fff; border:1px solid #aaa; .rounded4(6px, 6px, 0, 0);
 			
-			.title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
+			.title { margin:3px 0 0 7px; font-size:13px; font-weight:bold; color:#666; }
 		}
-		.body { position: absolute; border: 1px solid #aaa; background: #fff; overflow-y: auto; overflow-x: hidden; .rounded4(0, 0, 6px, 6px);
+		.body { position:absolute; border:1px solid #aaa; background:#fff; overflow-y:auto; overflow-x:hidden; .rounded4(0, 0, 6px, 6px);
 			
-			.left-column { float: left; width: 350px; margin-bottom: 10px; }
-			.right-column { float: left; }
+			.left-column { float:left; width:350px; margin-bottom:10px; }
+			.right-column { float:left; }
 		}
 	}
-	.View.narrow .body .right-column { float: none; }
+	.View.narrow .body .right-column { float:none; }
 }
 
 /*********************
@@ -148,20 +148,20 @@ body {
 .ListPanel { 
 	
 	.header {
-		.RadioButtons { float: left; margin: 7px 0 0 7px; }	
-		.createButton { float: right; margin: 7px 7px 0 0; }
+		.RadioButtons { float:left; margin:7px 0 0 7px; }	
+		.createButton { float:right; margin:7px 7px 0 0; }
 	}
-	.AppsTabs { position: absolute; top: 19px; left: -28px;
+	.AppsTabs { position:absolute; top:19px; left:-28px;
 		
-		.Button { display: block; width: 6px; height: 15px; overflow: hidden; background: no-repeat 5px 4px;
-			border-right: none; border-width: 2px; border-bottom-width: 1px; .rounded(3px); }
-		.Button.down { background-position: 5px 5px; background-color: #e5e5e5; width: 5px; }
-		.Button.tasks { background-image: url("img/apps/tasks.png"); }
-		.Button.projects { background-image: url("img/apps/projects.png"); }
-		.Button.calendar { background-image: url("img/apps/calendar.png"); }
-		.Button.changes { background-image: url("img/apps/changes.png"); }
-		.Button.coworkers { background-image: url("img/apps/coworkers.png"); }
-		.Button.accomplishments { background-image: url("img/apps/accomplishments.png"); }
+		.Button { display:block; width:6px; height:15px; overflow:hidden; background:no-repeat 5px 4px;
+			border-right:none; border-width:2px; border-bottom-width:1px; .rounded(3px); }
+		.Button.down { background-position:5px 5px; background-color:#e5e5e5; width:5px; }
+		.Button.tasks { background-image:url("img/apps/tasks.png"); }
+		.Button.projects { background-image:url("img/apps/projects.png"); }
+		.Button.calendar { background-image:url("img/apps/calendar.png"); }
+		.Button.changes { background-image:url("img/apps/changes.png"); }
+		.Button.coworkers { background-image:url("img/apps/coworkers.png"); }
+		.Button.accomplishments { background-image:url("img/apps/accomplishments.png"); }
 	}
 }
 
@@ -170,29 +170,29 @@ body {
  **********************/
 .ItemPanel {
 	
-	.fin-Template { display: block; padding: 10px; }
-	.title { font-size: 19px; }
-	.properties { margin: 0 0 15px 0;
+	.fin-Template { display:block; padding:10px; }
+	.title { font-size:19px; }
+	.properties { margin:0 0 15px 0;
 		
-		.Value { position: absolute; left: 140px; }
-		.Input { margin-top: -2px; }
-		.Checkbox { margin-top: 1px; }
-		.Select { left: 139px; width: 210px; padding: 2px; }
-		.Select option { padding: 2px; }
+		.Value { position:absolute; left:140px; }
+		.Input { margin-top:-2px; }
+		.Checkbox { margin-top:1px; }
+		.Select { left:139px; width:210px; padding:2px; }
+		.Select option { padding:2px; }
 	}
-	.discussion { width: 345px;
+	.discussion { width:345px;
 		
-		.Button { position: relative; left: 266px; bottom: 23px; }
-		.UserIcon img { margin: 1px 8px 0 0; }
-		.Input { float: right; width: 280px; height: 50px; margin-right: 5px; }
+		.Button { position:relative; left:266px; bottom:23px; }
+		.UserIcon img { margin:1px 8px 0 0; }
+		.Input { float:right; width:280px; height:50px; margin-right:5px; }
 		.List {
-			clear: both; overflow: auto;
+			clear:both; overflow:auto;
 			
 			.cell {
-				clear: both; margin-bottom: 8px; min-height: 51px;
+				clear:both; margin-bottom:8px; min-height:51px;
 				
-				.UserIcon { float: left; }
-				.TimeString { margin-bottom: 8px; }
+				.UserIcon { float:left; }
+				.TimeString { margin-bottom:8px; }
 			}
 		}
 	}
@@ -201,42 +201,42 @@ body {
 /*********
  * Lists *
  *********/
-.List { margin: 5px 0;
+.List { margin:5px 0;
 	
-	.cell { cursor: pointer; padding: 4px 6px; font-size: 12px; min-height: 18px; }
-	.cell .title { font-size: 12px; }
-	.cell:nth-child(odd) { background-color: #e5e4fc; }
-	.cell.crucial { background-color: #fcfcee; }
-	.cell.crucial:nth-child(odd) { background-color: #fbebdd; }
-	.cell.crucial .title { color: #222; }
-	.cell.selected { border-color: #abd; }
-	.cell .fin-Template { padding: 0px; }
-	.group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static;
-		border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
-	.group .holder { border: 1px solid #999; margin: -1px 6px 0; .rounded(0, 3px, 3px, 0); }
-	.group.default { display: none; } /* will be overridden by js */
-	.group.default .header { display: none; }
-	.group.default .holder { border-style: dotted; }
+	.cell { cursor:pointer; padding:4px 6px; font-size:12px; min-height:18px; }
+	.cell .title { font-size:12px; }
+	.cell:nth-child(odd) { background-color:#e5e4fc; }
+	.cell.crucial { background-color:#fcfcee; }
+	.cell.crucial:nth-child(odd) { background-color:#fbebdd; }
+	.cell.crucial .title { color:#222; }
+	.cell.selected { border-color:#abd; }
+	.cell .fin-Template { padding:0px; }
+	.group .header { display:inline-block; margin:6px 0 0 6px; padding:2px 5px; position:static;
+		border:1px solid #999; border-bottom:none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
+	.group .holder { border:1px solid #999; margin:-1px 6px 0; .rounded(0, 3px, 3px, 0); }
+	.group.default { display:none; } /* will be overridden by js */
+	.group.default .header { display:none; }
+	.group.default .holder { border-style:dotted; }
 }
 
 /*****************
  * Calendar View *
  *****************/
 .CalendarView {
-	.groupHeader { width: 20%; float: left; margin-top: 10px; text-align: center; }
-	.group { width: 20%; height: 100%; float: left; }
+	.groupHeader { width:20%; float:left; margin-top:10px; text-align:center; }
+	.group { width:20%; height:100%; float:left; }
 }
 
 /***************
  * Date Picker *
  ***************/
-.DatePicker { cursor: pointer; }
-.DatePickerBody { .rounded(4px); padding: 0 5px 1px;
+.DatePicker { cursor:pointer; }
+.DatePickerBody { .rounded(4px); padding:0 5px 1px;
 	
-	th { text-align: center; }
-	th label { display: block; width: 19px; padding: 2px; }
-	td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px; .rounded(3px); }
-	td.selected { background-color: #B5D4F3; }
-	td.today { font-weight: bold; }
-	td:hover { background-color: #BFDFFF; }
+	th { text-align:center; }
+	th label { display:block; width:19px; padding:2px; }
+	td { text-align:center; cursor:pointer; font-size:13px; padding:3px; .rounded(3px); }
+	td.selected { background-color:#B5D4F3; }
+	td.today { font-weight:bold; }
+	td:hover { background-color:#BFDFFF; }
 }

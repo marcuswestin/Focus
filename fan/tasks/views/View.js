@@ -9,9 +9,9 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._padding = 2
 	this._border = 1
 
-	this._minWidth = 300
+	this._minWidth = 400
 	this._maxWidth = 400
-	
+
 	this.setHeight = function(height) {
 		this._height = height
 		this._resize()

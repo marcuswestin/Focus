@@ -17,15 +17,15 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this.getTaskId = function() { return this._itemId }
 	
-	this._buildHeader = function() {
-		new fan.ui.RadioButtons()
-			.addButton({ text: 'Normal', payload: 'normal' })
-			.addButton({ text: 'Crucial', payload: 'crucial' })
-			.addButton({ text: 'Backlog', payload: 'backlog' })
-			.addButton({ text: 'Done', payload: 'done' })
-			.subscribe('Click', this, '_toggleTaskState')
-			.appendTo(this._header)
-	}
+	// this._buildHeader = function() {
+	// 	new fan.ui.RadioButtons()
+	// 		.addButton({ text: 'Normal', payload: 'normal' })
+	// 		.addButton({ text: 'Crucial', payload: 'crucial' })
+	// 		.addButton({ text: 'Backlog', payload: 'backlog' })
+	// 		.addButton({ text: 'Done', payload: 'done' })
+	// 		.subscribe('Click', this, '_toggleTaskState')
+	// 		.appendTo(this._header)
+	// }
 	
 	this._buildBody = function() {
 		gUtil.withTemplate('task-panel', bind(this, function(template) {

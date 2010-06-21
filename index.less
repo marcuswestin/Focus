@@ -63,9 +63,11 @@ body {
 /*****************************
  * Keyboard controlled focus *
  *****************************/
-.KeyboardFocus .piece { position: absolute; background: #76aee5; opacity: .65; }
-.KeyboardFocus .piece.top { .rounded4(20px, 20px, 0, 0); }
-.KeyboardFocus .piece.bottom { .rounded4(0, 0, 20px, 20px ); }
+.KeyboardFocus { 
+	.piece { position: absolute; background: #76aee5; opacity: .65; }
+	.piece.top { .rounded4(20px, 20px, 0, 0); }
+	.piece.bottom { .rounded4(0, 0, 20px, 20px ); }
+}
 
 /*********
  * Links *
@@ -81,124 +83,160 @@ body {
 /***********
  * Overlay *
  ***********/
-.Overlay { position: fixed; top: 0px; left: 0px; z-index: 2; }
-.Overlay .underlay { background-color: #333; position: absolute; top: 0px; left: 0px; }
-.Overlay .content { position: absolute; top: 0px; left: 0px; }
+.Overlay { position: fixed; top: 0px; left: 0px; z-index: 2;
+	
+	.underlay { background-color: #333; position: absolute; top: 0px; left: 0px; }
+	.content { position: absolute; top: 0px; left: 0px; }
+}
 .Overlay.lightbox .content { .rounded(10px); border: 8px solid #ddd; background-color: #ddd; }
-
-/**********
- * Panels *
- **********/
-.Panel { position: absolute; border: 1px solid #aaa; top: 10px;
-	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888); }
-.Panel .View { overflow: hidden; }
-.Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0); }
-.Panel .View .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
-.Panel .View .body { position: absolute; border: 1px solid #aaa; background: #fff; overflow-y: auto; overflow-x: hidden; .rounded4(0, 0, 6px, 6px); }
-.Panel .View .body .left-column { float: left; width: 350px; margin-bottom: 10px; }
-.Panel .View .body .right-column { float: left; }
-.Panel .View.narrow .body .right-column { float: none; }
 
 /***********
  * Buttons *
  ***********/
-.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; 
-	cursor: pointer; .rounded(5px); .gradient(#fff, #ddd); }
+.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666;
+	display: inline-block; cursor: pointer; .rounded(5px); .gradient(#fff, #ddd); }
 .Button.down { .gradient(#ddd, #fff); }
 
 /*****************
  * Radio Buttons *
  *****************/
-.RadioButtons { display: inline-block; }
-.RadioButtons .Button { .rounded(0px); border-right-style: none; }
-.RadioButtons .Button.left { .rounded4(20px, 0, 0, 20px); }
-.RadioButtons .Button.right { .rounded4(0, 20px, 20px, 0); border-right-style: solid; }
+.RadioButtons { display: inline-block;
+	
+	.Button { .rounded(0px); border-right-style: none; }
+	.Button.left { .rounded4(20px, 0, 0, 20px); }
+	.Button.right { .rounded4(0, 20px, 20px, 0); border-right-style: solid; }
+}
 
 /*****************
  * Login Manager *
  *****************/
-.LoginManager { width: 250px; height: 90px; }
-.LoginManager .inputs { display: block; width: 200px; margin: 20px auto; }
-.LoginManager .inputs .Input { width: 100%; margin-top: 2px; }
-.LoginManager .Button { position: absolute; bottom: 3px; right: 24px; }
-.LoginManager .Link { position: absolute; bottom: 8px; left: 5px; }
+.LoginManager { width: 250px; height: 90px;
+	
+	.inputs { display: block; width: 200px; margin: 20px auto;
+		
+		.Input { width: 100%; margin-top: 2px; }
+	}
+	.Button { position: absolute; bottom: 3px; right: 24px; }
+	.Link { position: absolute; bottom: 8px; left: 5px; }
+}
 
 /**********
  * Panels *
  **********/
-.Panel .header .RadioButtons { float: left; margin: 7px 0 0 7px; }
-.Panel .header .createButton { float: right; margin: 7px 7px 0 0; }
+.Panel {
+	position: absolute; border: 1px solid #aaa; top: 10px;
+	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888);
+	
+	.View { overflow: hidden;
+		
+		.header {  position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0);
+			
+			.title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
+		}
+		.body { position: absolute; border: 1px solid #aaa; background: #fff; overflow-y: auto; overflow-x: hidden; .rounded4(0, 0, 6px, 6px);
+			
+			.left-column { float: left; width: 350px; margin-bottom: 10px; }
+			.right-column { float: left; }
+		}
+	}
+	.View.narrow .body .right-column { float: none; }
+}
 
 /*********************
  * List (left) Panel *
  *********************/
-.ListPanel .AppsTabs { position: absolute; top: 19px; left: -28px; }
-.ListPanel .AppsTabs .Button { display: block;  width: 6px; height: 15px; overflow: hidden; 
-	background: no-repeat 5px 4px; border-right: none; border-width: 2px; border-bottom-width: 1px; .rounded(3px); }
-.ListPanel .AppsTabs .Button.down { background-position: 5px 5px; background-color: #e5e5e5; width: 5px; }
-.ListPanel .AppsTabs .Button.tasks { background-image: url("img/apps/tasks.png"); }
-.ListPanel .AppsTabs .Button.projects { background-image: url("img/apps/projects.png"); }
-.ListPanel .AppsTabs .Button.calendar { background-image: url("img/apps/calendar.png"); }
-.ListPanel .AppsTabs .Button.changes { background-image: url("img/apps/changes.png"); }
-.ListPanel .AppsTabs .Button.coworkers { background-image: url("img/apps/coworkers.png"); }
-.ListPanel .AppsTabs .Button.accomplishments { background-image: url("img/apps/accomplishments.png"); }
+.ListPanel { 
+	
+	.header {
+		.RadioButtons { float: left; margin: 7px 0 0 7px; }	
+		.createButton { float: right; margin: 7px 7px 0 0; }
+	}
+	.AppsTabs { position: absolute; top: 19px; left: -28px;
+		
+		.Button { display: block; width: 6px; height: 15px; overflow: hidden; background: no-repeat 5px 4px;
+			border-right: none; border-width: 2px; border-bottom-width: 1px; .rounded(3px); }
+		.Button.down { background-position: 5px 5px; background-color: #e5e5e5; width: 5px; }
+		.Button.tasks { background-image: url("img/apps/tasks.png"); }
+		.Button.projects { background-image: url("img/apps/projects.png"); }
+		.Button.calendar { background-image: url("img/apps/calendar.png"); }
+		.Button.changes { background-image: url("img/apps/changes.png"); }
+		.Button.coworkers { background-image: url("img/apps/coworkers.png"); }
+		.Button.accomplishments { background-image: url("img/apps/accomplishments.png"); }
+	}
+}
 
 /**********************
  * Item (right) Panel *
  **********************/
-.ItemPanel .fin-Template { display: block; padding: 10px; }
-.ItemPanel .title { font-size: 19px; }
-.ItemPanel .properties { margin: 0 0 15px 0; }
-.ItemPanel .properties > div { margin: 10px 0 0 0; }
-.ItemPanel .properties .Value { position: absolute; left: 140px; }
-.ItemPanel .properties .Value.BurndownChart { position: static; }
-.ItemPanel .properties .Input { margin-top: -2px; }
-.ItemPanel .properties .Checkbox { margin-top: 1px; }
-.ItemPanel .properties .Select { left: 139px; width: 210px; padding: 2px; }
-.ItemPanel .properties .Select option { padding: 2px; }
-.ItemPanel .discussion { width: 345px; }
-.ItemPanel .discussion .Button { position: relative; left: 266px; bottom: 23px; }
-.ItemPanel .discussion .UserIcon img { margin: 1px 8px 0 0; }
-.ItemPanel .discussion .Input { float: right; width: 280px; height: 50px; margin-right: 5px; }
-.ItemPanel .discussion .List { clear: both; overflow: auto; }
-.ItemPanel .discussion .cell { clear: both; margin-bottom: 8px; min-height: 51px; }
-.ItemPanel .discussion .cell { clear: both; }
-.ItemPanel .discussion .cell .UserIcon { float: left; }
-.ItemPanel .discussion .cell .TimeString { margin-bottom: 8px; }
+.ItemPanel {
+	
+	.fin-Template { display: block; padding: 10px; }
+	.title { font-size: 19px; }
+	.properties { margin: 0 0 15px 0;
+		
+		.Value { position: absolute; left: 140px; }
+		.Input { margin-top: -2px; }
+		.Checkbox { margin-top: 1px; }
+		.Select { left: 139px; width: 210px; padding: 2px; }
+		.Select option { padding: 2px; }
+	}
+	.discussion { width: 345px;
+		
+		.Button { position: relative; left: 266px; bottom: 23px; }
+		.UserIcon img { margin: 1px 8px 0 0; }
+		.Input { float: right; width: 280px; height: 50px; margin-right: 5px; }
+		.List {
+			clear: both; overflow: auto;
+			
+			.cell {
+				clear: both; margin-bottom: 8px; min-height: 51px;
+				
+				.UserIcon { float: left; }
+				.TimeString { margin-bottom: 8px; }
+			}
+		}
+	}
+}
 
 /*********
  * Lists *
  *********/
-.List { margin: 5px 0; }
-.List .cell { cursor: pointer; padding: 4px 6px; font-size: 12px; min-height: 18px; }
-.List .cell .title { font-size: 12px; }
-.List .cell:nth-child(odd) { background-color: #e5e4fc; }
-.List .cell.crucial { background-color: #fcfcee; }
-.List .cell.crucial:nth-child(odd) { background-color: #fbebdd; }
-.List .cell.crucial .title { color: #222; }
-.List .cell.selected { border-color: #abd; }
-.List .cell .fin-Template { padding: 0px; }
-.List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static;
-	border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
-.List .group .holder { border: 1px solid #999; margin: -1px 6px 0; .rounded(0, 3px, 3px, 0); }
-.List .group.default { display: none; } /* will be overridden by js */
-.List .group.default .header { display: none; }
-.List .group.default .holder { border-style: dotted; }
+.List { margin: 5px 0;
+	
+	.cell { cursor: pointer; padding: 4px 6px; font-size: 12px; min-height: 18px; }
+	.cell .title { font-size: 12px; }
+	.cell:nth-child(odd) { background-color: #e5e4fc; }
+	.cell.crucial { background-color: #fcfcee; }
+	.cell.crucial:nth-child(odd) { background-color: #fbebdd; }
+	.cell.crucial .title { color: #222; }
+	.cell.selected { border-color: #abd; }
+	.cell .fin-Template { padding: 0px; }
+	.group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; position: static;
+		border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
+	.group .holder { border: 1px solid #999; margin: -1px 6px 0; .rounded(0, 3px, 3px, 0); }
+	.group.default { display: none; } /* will be overridden by js */
+	.group.default .header { display: none; }
+	.group.default .holder { border-style: dotted; }
+}
 
 /*****************
  * Calendar View *
  *****************/
-.CalendarView .groupHeader { width: 20%; float: left; margin-top: 10px; text-align: center; }
-.CalendarView .group { width: 20%; height: 100%; float: left; }
+.CalendarView {
+	.groupHeader { width: 20%; float: left; margin-top: 10px; text-align: center; }
+	.group { width: 20%; height: 100%; float: left; }
+}
 
 /***************
  * Date Picker *
  ***************/
 .DatePicker { cursor: pointer; }
-.DatePickerBody { .rounded(4px); padding: 0 5px 1px; }
-.DatePickerBody th { text-align: center; }
-.DatePickerBody th label { display: block; width: 19px; padding: 2px; }
-.DatePickerBody td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px; .rounded(3px); }
-.DatePickerBody td.selected { background-color: #B5D4F3; }
-.DatePickerBody td.today { font-weight: bold; }
-.DatePickerBody td:hover { background-color: #BFDFFF; }
+.DatePickerBody { .rounded(4px); padding: 0 5px 1px;
+	
+	th { text-align: center; }
+	th label { display: block; width: 19px; padding: 2px; }
+	td { text-align: center; cursor: pointer; font-size: 13px; padding: 3px; .rounded(3px); }
+	td.selected { background-color: #B5D4F3; }
+	td.today { font-weight: bold; }
+	td:hover { background-color: #BFDFFF; }
+}

@@ -1,0 +1,236 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf320
+{\fonttbl\f0\fnil\fcharset0 LucidaGrande;\f1\fnil\fcharset0 TrebuchetMS;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red42\green42\blue42;\red38\green54\blue98;
+\red220\green236\blue253;}
+\margl1440\margr1440\vieww18700\viewh12220\viewkind0
+\deftab720
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f0\fs24 \cf2 \
+\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs52 \cf3 The Language\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 As an extension to CSS, LESS is not only backwards compatible with CSS, but the extra features it adds use existing CSS syntax. This makes learning LESS a breeze, and if in doubt, lets you fall back to CSS.\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Variables\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 These are pretty self-explanatory:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 @nice-blue: #5B83AD;\
+@light-blue: @nice-blue + #111;\
+\
+#header \{ color: @light-blue; \}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 Outputs:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #header \{ color: #6c94be; \}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 Note that variables are actually 'constants' in that they can only be defined once.\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Mixins\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Mixins are a way of including ('mixing in') a bunch of properties from one rule-set into another rule-set. So say we have the following class:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 .bordered \{\
+  border-top: dotted 1px black;\
+  border-bottom: solid 2px black;\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 And we want to use these properties inside other rule-sets. Well, we just have to drop in the name of the class where we want the properties, like so:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #menu a \{\
+  color: #111;\
+  .bordered;\
+\}\
+\
+.post a \{\
+  color: red;\
+  .bordered;\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 The properties of the 
+\f2 .bordered
+\f0  class will now appear in both 
+\f2 #menu a
+\f0  and 
+\f2 .post a
+\f0 . (Note that you can also use 
+\f2 #id
+\f0 s as mixins)\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Nested rules\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 LESS gives you the ability to use nesting instead of, or in combination with cascading. Lets say we have the following CSS:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #header \{ color: black; \}\
+#header .navigation \{\
+  font-size: 12px;\
+\}\
+#header .logo \{ \
+  width: 300px; \
+\}\
+#header .logo:hover \{\
+  text-decoration: none;\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 In LESS, we can also write it this way:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #header \{\
+  color: black;\
+\
+  .navigation \{\
+    font-size: 12px;\
+  \}\
+  .logo \{\
+    width: 300px;\
+    :hover \{ text-decoration: none \}\
+  \}\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 The resulting code is more concise, and mimics the structure of your 
+\f2 html
+\f0 .\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Operations\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Any number, color or variable can be operated on. Here are a couple of examples:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 @base: 5%;\
+@filler: @base * 2;\
+@other: @base + @filler;\
+\
+color: #888 / 4;\
+background-color: @base-color + #111;\
+height: 100% / 2 + @filler;\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 The output is pretty much what you expect\'97LESS understands the difference between colors and units. If a unit is used in an operation, like in:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 @var: 1px + 5;\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 LESS will use that unit for the final output\'97
+\f2 6px
+\f0  in this case.\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Namespaces & Accessors\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Sometimes, you may want to group your variables or mixins, for organizational purposes, or just to offer some encapsulation. You can do this pretty intuitively in LESS\'97say you want to bundle some mixins and variables under 
+\f2 #bundle
+\f0 , for later re-use, or for distributing:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #bundle \{\
+  .button \{\
+    display: block;\
+    border: 1px solid black;\
+    background-color: grey;\
+    :hover \{ background-color: white \}\
+  \}\
+  .tab \{ ... \}\
+  .citation \{ ... \}\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 Now if we want to mixin the 
+\f2 .button
+\f0  class in our 
+\f2 #header a
+\f0 , we can do:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #header a \{\
+  color: orange;\
+  #bundle > .button;\
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 LESS also allows you to access specific properties or variables from different rule-sets:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 #defaults \{\
+  @width: 960px;\
+  @color: black;\
+\}\
+\
+.article \{ color: #294366; \}\
+\
+.comment \{\
+  width: #defaults[@width];\
+  color: .article['color']; \
+\}\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\fs28 \cf2 \cb1 Variables and accessors can be used almost interchangeably, use whichever is best suited for the situation\'97accessors might make more sense if that property only needs to be accessed once.\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 Scope\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Scope in LESS is very similar to that of programming languages. Variables and mixins are first looked for locally, and if they aren't found, the compiler will look in the parent scope, and so on. Note that the order of declaration does matter.\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 @var: red;\
+\
+#page \{\
+  @var: white;\
+  #header \{\
+    color: @var; // white\
+  \}\
+\}\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 \cb1 Comments\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Both C-style and inline comments are authorized:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 /* One hell of a comment */\
+@var: red;\
+\
+// Get in line!\
+@var: white;\
+\pard\pardeftab720\sl300\ql\qnatural
+
+\f1\b\fs44 \cf4 \cb1 Importing\
+\pard\pardeftab720\sl360\sa440\ql\qnatural
+
+\f0\b0\fs28 \cf2 Importing works pretty much as expected. You can import a 
+\f2 .less
+\f0  file, and all the variables in it will be available. If the file is a 
+\f2 .less
+\f0 , the extension is optional:\
+\pard\pardeftab720\sl400\ql\qnatural
+
+\f2\fs30 \cf0 \cb5 @import "library";\
+@import "typo.css";\
+}

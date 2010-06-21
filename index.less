@@ -24,6 +24,15 @@ table, tr, td, th { border-collapse: collapse; margin: 0; padding: 0; }
 	background: -moz-linear-gradient(top,  @from,  @to);
 	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
 }
+.shadow(@h_offset, @v_offset, @blur, @color) {
+	box-shadow: @h_offset @v_offset @blur @color;
+	-moz-box-shadow: @h_offset @v_offset @blur @color;
+	-webkit-box-shadow: @h_offset @v_offset @blur @color;
+}
+.unselectable {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
 
 /********************************
  * Misc UI Components & globals *
@@ -41,8 +50,7 @@ body {
  ***************/
 .fan-unselectable {
 	cursor: default;
-	-moz-user-select: none;
-	-webkit-user-select: none;
+	.unselectable;
 }
 
 /*******************
@@ -81,9 +89,8 @@ body {
 /**********
  * Panels *
  **********/
-.Panel { position: absolute; border: 1px solid #aaa; top: 10px; 
-	.rounded(10px); .gradient(#bbb, #ddd);
-	-moz-box-shadow: 3px 7px 10px #888; -webkit-box-shadow: 3px 7px 10px #888; box-shadow: 3px 7px 10px #888; }
+.Panel { position: absolute; border: 1px solid #aaa; top: 10px;
+	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888); }
 .Panel .View { overflow: hidden; }
 .Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0); }
 .Panel .View .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }

@@ -53,8 +53,8 @@ body {
  * Keyboard controlled focus *
  *****************************/
 .KeyboardFocus .piece { position: absolute; background: #76aee5; opacity: .65; }
-.KeyboardFocus .piece.top { .rounded4(20px, 20px, 0, 0) }
-.KeyboardFocus .piece.bottom { -moz-border-radius: 0 0 20px 20px; -webkit-border-bottom-right-radius: 20px; -webkit-border-bottom-left-radius: 20px; }
+.KeyboardFocus .piece.top { .rounded4(20px, 20px, 0, 0); }
+.KeyboardFocus .piece.bottom { .rounded4(0, 0, 20px, 20px ); }
 
 /*********
  * Links *
@@ -73,23 +73,21 @@ body {
 .Overlay { position: fixed; top: 0px; left: 0px; z-index: 2; }
 .Overlay .underlay { background-color: #333; position: absolute; top: 0px; left: 0px; }
 .Overlay .content { position: absolute; top: 0px; left: 0px; }
-.Overlay.lightbox .content { border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border: 8px solid #ddd; background-color: #ddd; }
+.Overlay.lightbox .content { .rounded(10px); border: 8px solid #ddd; background-color: #ddd; }
 
 /**********
  * Panels *
  **********/
 .Panel { position: absolute; border: 1px solid #aaa; top: 10px; 
-	-moz-border-radius: 10px; -webkit-border-radius: 10px;
+	.rounded(10px);
 	-moz-box-shadow: 3px 7px 10px #888; -webkit-box-shadow: 3px 7px 10px #888; box-shadow: 3px 7px 10px #888; 
 	background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#ddd));
 	background: -moz-linear-gradient(top,  #ccc,  #ddd);
 	}
 .Panel .View { overflow: hidden; }
-.Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; 
-	-moz-border-radius: 6px 6px 0 0; -webkit-border-top-right-radius: 8px; -webkit-border-top-left-radius: 8px; }
+.Panel .View .header { position: absolute; background-color: #fff; border: 1px solid #aaa; .rounded4(6px, 6px, 0, 0); }
 .Panel .View .header .title { margin: 3px 0 0 7px; font-size: 13px; font-weight: bold; color: #666; }
-.Panel .View .body { position: absolute; border: 1px solid #aaa; background: #fff; overflow-y: auto; overflow-x: hidden;
-	-moz-border-radius: 0 0 6px 6px; -webkit-border-bottom-right-radius: 8px; -webkit-border-bottom-left-radius: 8px; }
+.Panel .View .body { position: absolute; border: 1px solid #aaa; background: #fff; overflow-y: auto; overflow-x: hidden; .rounded4(0, 0, 6px, 6px); }
 .Panel .View .body .left-column { float: left; width: 350px; margin-bottom: 10px; }
 .Panel .View .body .right-column { float: left; }
 .Panel .View.narrow .body .right-column { float: none; }
@@ -97,8 +95,8 @@ body {
 /***********
  * Buttons *
  ***********/
-.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; cursor: pointer; 
-	-moz-border-radius: 5px; -webkit-border-radius: 5px; 
+.Button { font-size: 12px; padding: 3px 10px 5px 10px; border: 1px solid #666; display: inline-block; 
+	cursor: pointer; .rounded(5px);
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
 	background: -moz-linear-gradient(top,  #fff,  #ddd); }
 
@@ -111,11 +109,9 @@ body {
  * Radio Buttons *
  *****************/
 .RadioButtons { display: inline-block; }
-.RadioButtons .Button { -moz-border-radius: 0px; -webkit-border-radius: 0px; border-right-style: none; }
-.RadioButtons .Button.left { -moz-border-radius: 20px 0 0 20px; -webkit-border-top-left-radius: 20px;
-	-webkit-border-bottom-left-radius: 20px; }
-.RadioButtons .Button.right { -moz-border-radius: 0 20px 20px 0; -webkit-border-bottom-right-radius: 20px; 
-	-webkit-border-top-right-radius: 20px; border-right-style: solid; }
+.RadioButtons .Button { .rounded(0px); border-right-style: none; }
+.RadioButtons .Button.left { .rounded4(20px, 0, 0, 20px); }
+.RadioButtons .Button.right { .rounded4(0, 20px, 20px, 0); border-right-style: solid; }
 
 /*****************
  * Login Manager *
@@ -136,8 +132,8 @@ body {
  * List (left) Panel *
  *********************/
 .ListPanel .AppsTabs { position: absolute; top: 19px; left: -28px; }
-.ListPanel .AppsTabs .Button { display: block;  width: 6px; height: 15px; overflow: hidden; background: no-repeat 5px 4px; 
-	border-right: none; border-width: 2px; border-bottom-width: 1px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+.ListPanel .AppsTabs .Button { display: block;  width: 6px; height: 15px; overflow: hidden; 
+	background: no-repeat 5px 4px; border-right: none; border-width: 2px; border-bottom-width: 1px; .rounded(3px); }
 .ListPanel .AppsTabs .Button.down { background-position: 5px 5px; background-color: #e5e5e5; width: 5px; }
 .ListPanel .AppsTabs .Button.tasks { background-image: url("img/apps/tasks.png"); }
 .ListPanel .AppsTabs .Button.projects { background-image: url("img/apps/projects.png"); }
@@ -182,13 +178,10 @@ body {
 .List .cell.selected { border-color: #abd; }
 .List .cell .fin-Template { padding: 0px; }
 .List .group .header { display: inline-block; margin: 6px 0 0 6px; padding: 2px 5px; 
-	position: static; border: 1px solid #999; border-bottom: none;
-	-moz-border-radius: 4px 4px 0 0; -webkit-border-top-right-radius: 4px; -webkit-border-top-left-radius: 4px;
+	position: static; border: 1px solid #999; border-bottom: none; .rounded4(4px, 4px, 0, 0);
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
 	background: -moz-linear-gradient(top,  #fff,  #e5e5e5); }
-.List .group .holder { border: 1px solid #999; margin: -1px 6px 0;
-	-moz-border-radius: 0 3px 3px 3px; -webkit-border-radius: 3px;
-	-webkit-border-bottom-right-radius: 3px; -webkit-border-bottom-left-radius: 3px; }
+.List .group .holder { border: 1px solid #999; margin: -1px 6px 0; .rounded(0, 3px, 3px, 0); }
 .List .group.default { display: none; } /* will be overridden by js */
 .List .group.default .header { display: none; }
 .List .group.default .holder { border-style: dotted; }

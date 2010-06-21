@@ -26,19 +26,22 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._createContent = function() {
 		this._header = this._create({ className: 'header', parent: this._element })
 		this._body = this._create({ className: 'body', parent: this._element })
-		this._buildHeader()
+		if (this._headerHeight) { this._buildHeader()
+		} else { this.addClassName('noHeader') }
 		this._buildBody()
 		this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition', true))
 	}
 	
 	this._resize = function() {
-		var padding2 = this._padding * 2 + this._border * 2,
-			contentWidth = this._width - padding2,
-			contentHeight = this._height - padding2 - this._headerHeight - this._border * 4
+		var border2 = this._border * (this._headerHeight ? 2 : 1),
+			vertPadding2 = this._padding * (this._headerHeight ? 2 : 1) + border2,
+			contentWidth = this._width - this._padding * 2 - this._border * 2,
+			contentHeight = this._height - vertPadding2 - this._headerHeight - border2 * 2,
+			top = this._headerHeight ? this._headerHeight + vertPadding2 : this._padding
 		
 		this.layout({ h: this._height, w: this._width, x: this._left })
 		this.layout(this._header, { y: this._padding, x: this._padding, h: this._headerHeight, w: contentWidth })
-		this.layout(this._body, { y: this._headerHeight + padding2, x: this._padding, h: contentHeight, w: contentWidth })
+		this.layout(this._body, { y: top, x: this._padding, h: contentHeight, w: contentWidth })
 	}
 	
 	this._buildHeader = function() {}

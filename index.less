@@ -129,7 +129,7 @@ body {
 	
 	.View { overflow:hidden;
 		
-		.header {  position:absolute; background-color:#fff; border:1px solid #aaa; .rounded4(6px, 6px, 0, 0);
+		.header { position:absolute; background-color:#fff; border:1px solid #aaa; .rounded4(6px, 6px, 0, 0);
 			
 			.title { margin:3px 0 0 7px; font-size:13px; font-weight:bold; color:#666; }
 		}
@@ -138,6 +138,10 @@ body {
 			.left-column { float:left; width:350px; margin-bottom:10px; }
 			.right-column { float:left; }
 		}
+	}
+	.View.noHeader {
+		.header { display: none; }
+		.body { .rounded(6px); }
 	}
 	.View.narrow .body .right-column { float:none; }
 }

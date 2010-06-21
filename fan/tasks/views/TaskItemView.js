@@ -8,6 +8,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this._className += ' TaskItemView'
 	this._minWidth = 390
 	this._maxWidth = 740
+	this._headerHeight = 0
 	
 	this.init = function(itemId) {
 		supr(this, 'init')

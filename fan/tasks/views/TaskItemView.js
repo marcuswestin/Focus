@@ -64,4 +64,14 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.addClassName('discussion')
 			.appendTo(rightColumn)
 	}
+	
+	this._toggleTaskState = function(status) {
+		var states = { crucial: false, done: false, backlog: false }
+		if (status != 'normal') {
+			states[status] = true;
+		}
+		for (var prop in states) {
+			fin.set(this._itemId, prop, states[prop]);
+		}
+	}
 })

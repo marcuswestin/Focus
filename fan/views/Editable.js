@@ -65,7 +65,7 @@ exports = Class(fan.views.Value, function(supr) {
 	this._resizeInput = function() {
 		if (!this._input) { return; }
 		
-		var layout = this.getLayout(),
+		var layout = this.getLayout(this._content),
 			padding = this._padding,
 			border = this._border
 		

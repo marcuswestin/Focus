@@ -3,7 +3,6 @@ jsio('import fan.ui.Component')
 
 exports = Class(fan.ui.Component, function(supr){
 	
-	this._domTag = 'span'
 	this._className = 'Value'
 	
 	this.init = function(args) {
@@ -18,7 +17,7 @@ exports = Class(fan.ui.Component, function(supr){
 		
 		// this._propertyChain = this._property.split('.')
 		// var itemId = (typeof itemIds == 'number' ? itemIds : itemIds[this._propertyChain.shift()])
-		
+		this._content = this._create({ tag: this._valueTag, className: 'content', parent: this._element })
 		fin.observe(this._itemId, this._property, bind(this, '_onItemMutation'))
 	}
 	
@@ -31,7 +30,7 @@ exports = Class(fan.ui.Component, function(supr){
 		if (!value) { return }
 		value = value.toString().replace(/\n/g, '<br />')
 		value = value.replace(/ $/, '&nbsp;')
-		this._element.innerHTML = value
+		this._content.innerHTML = value
 	}
 	
 	this.release = function() {

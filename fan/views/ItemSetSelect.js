@@ -1,29 +1,29 @@
 jsio('from shared.javascript import Class, bind, forEach')
-jsio('import fan.ui.Component')
+jsio('import fan.views.Value')
 
-exports = Class(fan.ui.Component, function(supr){
+exports = Class(fan.views.Value, function(supr){
 	
-	this._domTag = 'select'
-	this._className = 'Value Select'
+	this._className += ' ItemSetSelect'
 	
 	// (( ItemSetSelect type project title )) -> list of all items of type project, displayed by title
 	this.init = function(args) {
-		supr(this, 'init')
+		supr(this, 'init', [args])
 		
-		var itemId = args[0],
-			propertyName = args[1],
-			propertyValue = args[2],
+		var propertyValue = args[2],
 			displayProperty = args[3]
 		
 		this._targetProperty = propertyValue
 		this._displayProperty = displayProperty
 		this._query = {}
-		this._query[propertyName] = propertyValue
-		this._itemId = itemId
+		this._query[this._property] = propertyValue
 		this._options = {}
 	}
 	
+	this.handleKeyboardSelect = function() { /* There's no way to make a select element open :( */ }
+	
 	this._createContent = function() {
+		this._select = this._create({ tag: 'select', parent: this._element })
+		
 		var queryId = fin.query(this._query, bind(this, '_onItemsChange'))
 		
 		fin.observe(this._itemId, this._targetProperty, bind(this, '_onTargetPropertyChange'))
@@ -34,21 +34,22 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._onItemsChange = function(mutation) {
+		var selectEl = this._select
 		if (mutation.op == 'sadd') {
 			forEach(mutation.args, this, function(itemId) {
 				if (this._options[itemId]) { return }
 				this._options[itemId] = new Option('Loading...', itemId, false, false)
-				this._element.add(this._options[itemId], null)
+				selectEl.add(this._options[itemId], null)
 				if (itemId == this._targetItemId) {
-					this._element.selectedIndex = this._element.options.length - 1
+					selectEl.selectedIndex = selectEl.options.length - 1
 				}
 				fin.observe(itemId, this._displayProperty, bind(this, '_onDisplayPropertyChange', itemId))
 			})
 		} else if (mutation.op == 'srem') {
 			forEach(mutation.args, this, function(itemId) {
-				for (var i=0, option; option = this._element.options[i]; i++) {
+				for (var i=0, option; option = selectEl.options[i]; i++) {
 					if (option.value != itemId) { continue }
-					this._element.remove(i)
+					selectEl.remove(i)
 					logger.warn("TODO Remove dependant from item for title")
 					break
 				}
@@ -58,10 +59,11 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._onTargetPropertyChange = function(mutation, targetPropertyValue) {
+		var selectEl = this._select
 		this._targetItemId = targetPropertyValue
-		for (var i=0, option; option = this._element.options[i]; i++) {
+		for (var i=0, option; option = selectEl.options[i]; i++) {
 			if (option.value != targetPropertyValue) { continue }
-			this._element.selectedIndex = i
+			selectEl.selectedIndex = i
 			break
 		}
 	}
@@ -71,6 +73,6 @@ exports = Class(fan.ui.Component, function(supr){
 	}
 	
 	this._onSelectionChange = function() {
-		fin.set(this._itemId, this._targetProperty, this._element.value)
+		fin.set(this._itemId, this._targetProperty, this._select.value)
 	}
 })

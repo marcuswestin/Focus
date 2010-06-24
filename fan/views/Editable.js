@@ -53,7 +53,7 @@ exports = Class(fan.views.Value, function(supr) {
 		supr(this, 'setValue', arguments)
 		
 		if (!value) {
-			this._element.innerHTML = 'Click to edit ' + this._property
+			this._content.innerHTML = 'Click to edit ' + this._property
 			this.addClassName('defaultValue')
 		} else {
 			this.removeClassName('defaultValue')

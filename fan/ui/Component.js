@@ -42,6 +42,11 @@ exports = Class(shared.Publisher, function(supr) {
 		element.parentNode.removeChild(element)
 		return this
 	}
+	this.createLabel = function(text) {
+		this.addClassName('withLabel')
+		this._insertElement(this._create({ tag: 'label', text: text }), 0)
+		return this
+	}
 
 	this._insertElement = function (parentElement, insertItem, position) {
 		if (arguments.length == 2) {

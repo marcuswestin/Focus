@@ -46,6 +46,7 @@ time.firstDayOfMonth = function (date) {
 time.TimeString = Class(fan.ui.Component, function(supr) {
 	
 	this._className = 'TimeString'
+	this._domTag = 'span'
 	
 	this.init = function(timestamp) {
 		supr(this, 'init')
@@ -63,7 +64,7 @@ time.TimeString = Class(fan.ui.Component, function(supr) {
 	
 	this._update = function() {
 		if (!this._timestamp) {
-			this._element.innerHTML = 'Not set'
+			this._element.innerHTML = 'Date not set'
 			return
 		}
 		var now = fin.now(),

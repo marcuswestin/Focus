@@ -39,6 +39,14 @@ table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
  ********************************/
 .UserIcon img { background:url("img/user_icon.gif"); width:50px; height:50px; }
 .TimeString { font-size:12px; color:#666; }
+.withLabel { padding: 2px; position: relative; .gradient(#f4f4f4, #e4e4e4); 
+	.rounded4(0, 5px, 5px, 5px); border: 1px solid #ccc;
+		
+	label { position: absolute; top: -16px; left: -1px; .rounded4(3px, 3px, 0, 0); font-size: 11px;
+		border: 1px solid #ccc; border-bottom: none; .gradient(#ffffff, #f4f4f4); padding: 0 5px; }
+	.content { background: #fff; border: 1px solid #ccc; rounded: 3px;
+		padding: 2px 4px; }
+}
 
 body {
 	.gradient(#fff, #d5d5d5);
@@ -135,8 +143,9 @@ body {
 		}
 		.body { position:absolute; border:1px solid #aaa; background:#fff; overflow-y:auto; overflow-x:hidden; .rounded4(0, 0, 6px, 6px);
 			
-			.left-column { float:left; width:350px; margin-bottom:10px; }
-			.right-column { float:left; }
+			.left-column { float:left; width:340px; margin-bottom:10px; padding: 0 0 10px 10px; }
+			.right-column { float: right; padding: 0 10px 10px 0; }
+			.narrow .right-column { padding-left: 10px; }
 		}
 	}
 	.View.noHeader {
@@ -174,17 +183,21 @@ body {
  **********************/
 .ItemPanel {
 	
-	.fin-Template { display:block; padding:10px; }
 	.title { font-size:19px; }
-	.properties { margin:0 0 15px 0;
+	.ItemSetSelect { display: inline-block;
 		
-		.Value { position:absolute; left:140px; }
-		.Input { margin-top:-2px; }
-		.Checkbox { margin-top:1px; }
-		.Select { left:139px; width:210px; padding:2px; }
-		.Select option { padding:2px; }
+		select { width:210px; padding:2px; }
+		option { padding:2px; }
 	}
-	.discussion { width:345px;
+	.TimeString { display: block; }
+	
+	.Input { margin-top:-2px; }
+	.Checkbox { margin-top:1px; }
+	.Value, .RadioButtons { margin-top: 25px; }
+	
+	.description { display: block; }
+	
+	.discussion { width:345px; display: block; background: none; border: none;
 		
 		.Button { position:relative; left:266px; bottom:23px; }
 		.UserIcon img { margin:1px 8px 0 0; }

@@ -19,6 +19,7 @@ exports = Class(fan.views.Value, function(supr){
 	this._onDateChange = function(mutation, newValue) {
 		if (!this._timeString) { 
 			this._timeString = new fan.time.TimeString(newValue)
+				.addClassName('content')
 				.appendTo(this._element)
 		}
 		this._timestamp = newValue
@@ -72,22 +73,19 @@ exports = Class(fan.views.Value, function(supr){
 			firstDay = fan.time.firstDayOfMonth(currentDate),
 			cell, cells = this._picker.getElementsByTagName('td')
 		
-		currentDate.setHours(0)
-		currentDate.setMinutes(0)
-		currentDate.setSeconds(0)
+		currentDate.setHours(23)
+		currentDate.setMinutes(59)
+		currentDate.setSeconds(59)
 		for (var date=1; date <= daysInMonth; date++) {
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date
 			currentDate.setDate(date)
 			cell.delegateId = currentDate.getTime()
-			var startOfDay = currentDate.getTime(),
-				endOfDay = startOfDay + fan.time.days
+			var endOfDay = currentDate.getTime(),
+				startOfDay = endOfDay - fan.time.days + fan.time.seconds
 			
-			this.toggleClassName(cell, 'selected', startOfDay <= selected && selected < endOfDay)
-			this.toggleClassName(cell, 'today', startOfDay <= now && now < endOfDay)
-			if (startOfDay <= now && now < endOfDay) {
-				console.log(new Date(startOfDay), new Date(now), new Date(endOfDay))
-			}
+			this.toggleClassName(cell, 'selected', startOfDay <= selected && selected <= endOfDay)
+			this.toggleClassName(cell, 'today', startOfDay <= now && now <= endOfDay)
 		}
 	}
 	

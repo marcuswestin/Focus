@@ -65,6 +65,7 @@ time.TimeString = Class(fan.ui.Component, function(supr) {
 	this._update = function() {
 		if (!this._timestamp) {
 			this._element.innerHTML = 'Date not set'
+			this.release()
 			return
 		}
 		var now = fin.now(),

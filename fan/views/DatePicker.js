@@ -43,10 +43,14 @@ exports = Class(fan.views.Value, function(supr){
 	this._getPicker = function() {
 		if (this._picker) { return this._picker }
 		var picker = this._create({ className: 'DatePickerBody' }),
+			header = this._create({ className: 'header', parent: picker }),
+			clearBtn = this._create({ className: 'clearButton', parent: header, text: 'clear' }),
 			table = this._create({ tag: 'table', parent: picker }),
 			body = this._create({ tag: 'tbody', parent: table }),
 			days = this._days,
 			row, rowsCount = 5
+		
+		this._on(header, 'click', bind(fin, 'set', this._itemId, this._property, null))
 		
 		row = this._create({ tag: 'tr', parent: body }),
 		forEach(days, bind(this, function(day) {

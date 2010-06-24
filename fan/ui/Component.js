@@ -9,6 +9,11 @@ exports = Class(shared.Publisher, function(supr) {
 	this._domType = null
 	this._className = null
 	
+	this.init = function() {
+		supr(this, 'init')
+		this._finSubs = {}
+	}
+	
 	this.getElement = function() {
 		if (!this._element) { 
 			this._element = document.createElement(this._domTag)
@@ -158,6 +163,39 @@ exports = Class(shared.Publisher, function(supr) {
 			element = this._element
 		}
 		return !!this._element.className.match(' ' + className + ' ');
+	}
+
+/*************************
+ * fin data observations *
+ *************************/
+	this._observe = function(itemId, propName, handler) {
+		var id = '_fan::' + itemId + '::' + propName,
+			subs = this._finSubs
+		
+		if (this._finSubs[id]) {
+			throw logger.error("Attempted to observe same item/prop twice", itemId, propName)
+		}
+		this._finSubs[id] = fin.observe(itemId, propName, handler)
+		return this
+	}
+	this._release = function(itemId, propName) {
+		var id = '_fan::' + itemId + '::' + propName,
+			subs = this._finSubs
+		
+		if (!subs[id]) {
+			throw logger.error("Attempted to release unobserved item/prop", itemId, propName)
+		}
+		fin.release(subs[id])
+		delete subs[id]
+		return this
+	}
+	this.release = function() {
+		var id, subs = this._finSubs
+		for (id in subs) {
+			fin.release(subs[id])
+			delete subs[id]
+		}
+		return this
 	}
 	
 /**********

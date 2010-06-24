@@ -48,15 +48,18 @@ exports = Class(fan.ui.Component, function(supr){
 			for (var j=0, item; item = this._items[j]; j++) {
 				var itemId = this._getItemId(item)
 				if (itemId != removeItemId) { continue }
-				this._items.splice(j, 1)
-				delete this._itemsById[itemId]
-				if (!this._cells[itemId]) { break }
-				this.remove(this._cells[itemId])
-				delete this._cells[itemId]
+				this._removeItem(itemId, j);
 				break
 			}
 		}
 		this._render()
+	}
+
+	this._removeItem = function(itemId, itemsIndex) {
+		this._items.splice(itemsIndex, 1)
+		delete this._itemsById[itemId]
+		if (this._cells[itemId]) { this.remove(this._cells[itemId]) }
+		delete this._cells[itemId]
 	}
 	
 	this.append = function(items) {

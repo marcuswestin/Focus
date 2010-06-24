@@ -49,14 +49,20 @@ exports = Class(fan.ui.lists.List, function(supr){
 	this._addItem = function(itemId) {
 		var item = new SortableItem(itemId)
 		if (this._sortBy) {
-			fin.observe(itemId, this._sortBy, bind(this, '_onSortPropChange', itemId))
+			this._observe(itemId, this._sortBy, bind(this, '_onSortPropChange', itemId))
 		}
 		if (this._groupBy) {
-			fin.observe(itemId, this._groupBy, bind(this, '_onGroupPropChange', itemId))
+			this._observe(itemId, this._groupBy, bind(this, '_onGroupPropChange', itemId))
 		}
 		this._items.push(item)
 		this._itemsById[itemId] = item
 		return item
+	}
+	
+	this._removeItem = function(itemId, itemsIndex) {
+		supr(this, '_removeItem', arguments)
+		if (this._sortBy) { this._release(itemId, this._sortBy) }
+		if (this._groupBy) { this._release(itemId, this._groupBy) }
 	}
 	
 	this._onSortPropChange = function(itemId, op, value) {

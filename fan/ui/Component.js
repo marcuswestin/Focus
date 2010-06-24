@@ -93,7 +93,7 @@ exports = Class(shared.Publisher, function(supr) {
  ***************************/
 	// UI Components need to be made focusable for fan.tasks.KeyboardFocus to find them
 	this._makeFocusable = function(el) {
-		if (!el) { el = this._element}
+		if (!el) { el = this._element }
 		var focusableId = el['fan-focusableId'] = fin.unique()
 		_focusables[focusableId] = this
 		this.addClassName(el, 'fan-focusable')

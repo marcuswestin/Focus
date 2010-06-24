@@ -20,11 +20,13 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		keyMap[keys['k']] = keyMap[keys['w']] = keyMap[keys['up arrow']] = bind(this, '_moveFocus', -1) 
 		keyMap[keys['j']] = keyMap[keys['s']] = keyMap[keys['down arrow']] = bind(this, '_moveFocus', 1) 
-		keyMap[keys['`']] = keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
-		keyMap[keys['tab']] = keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
+		keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
+		keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
 		
 		keyMap[keys['c']] = bind(gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
+		
+		keyMap[keys['tab']] = bind(this, '_tabMovePanel')
 	}
 	
 	this.shiftIsDown = function() { return this._shiftIsDown }
@@ -58,6 +60,10 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this._onKeyUp = function(e) {
 		if (e.keyCode == this.keys['shift']) { this._shiftIsDown = false }
+	}
+	
+	this._tabMovePanel = function() {
+		this._movePanel(this._shiftIsDown ? -1 : 1)
 	}
 	
 	this._movePanel = function(steps) {

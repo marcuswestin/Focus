@@ -249,10 +249,16 @@ body {
 .DatePicker { cursor:pointer; }
 .DatePickerBody { .rounded(4px); padding:0 5px 1px;
 	
-	th { text-align:center; }
-	th label { display:block; width:19px; padding:2px; }
-	td { text-align:center; cursor:pointer; font-size:13px; padding:3px; .rounded(3px); }
-	td.selected { background-color:#B5D4F3; }
-	td.today { font-weight:bold; }
-	td:hover { background-color:#BFDFFF; }
+	.header { height: 15px;
+		
+		.clearButton { float: right; cursor: pointer; text-decoration: underline; }
+	}
+	table {
+		th { text-align:center; }
+		th label { display:block; width:19px; padding:2px; }
+		td { text-align:center; cursor:pointer; font-size:13px; padding:3px; .rounded(3px); }
+		td.selected { background-color:#B5D4F3; }
+		td.today { font-weight:bold; }
+		td:hover { background-color:#BFDFFF; }
+	}
 }

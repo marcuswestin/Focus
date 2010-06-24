@@ -41,7 +41,13 @@ time.firstDayOfMonth = function (date) {
 	date.setDate(1)
 	return date.getDay()
 }
-
+time.endOfDay = function(date) {
+	if (typeof date == 'number') { date = new Date(date) }
+	date.setHours(23)
+	date.setMinutes(59)
+	date.setSeconds(59)
+	return date
+}
 
 time.TimeString = Class(fan.ui.Component, function(supr) {
 	

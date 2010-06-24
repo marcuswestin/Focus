@@ -39,6 +39,7 @@ jsio('import fan.tasks.panels.ListPanel')
 jsio('import fan.tasks.panels.ItemPanel')
 jsio('import fan.ui.overlay')
 jsio('import fan.ui.resizeManager')
+jsio('import fan.time')
 
 jsio('import client.xhr')
 
@@ -67,6 +68,7 @@ gUtil = {
 		params.user = gUserId
 		params.done = false
 		params.title = params.title || 'I need to...'
+		params.date = fan.time.endOfDay(fin.now()).getTime()
 		fin.create(params, callback)
 	},
 	createNewProject: function(callback) {

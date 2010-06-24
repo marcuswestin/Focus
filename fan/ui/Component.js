@@ -56,7 +56,7 @@ exports = Class(shared.Publisher, function(supr) {
 		}
 		
 		var childNodes = this._element.childNodes,
-			nextItem = childNodes[position + 1]
+			nextItem = childNodes[position]
 		
 		if (nextItem) {
 			parentElement.insertBefore(insertItem, nextItem)

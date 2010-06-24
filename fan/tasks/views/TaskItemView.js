@@ -3,6 +3,11 @@ jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
 
+jsio('import fan.views.Editable')
+jsio('import fan.views.ItemSetSelect')
+jsio('import fan.views.DatePicker')
+jsio('import fan.views.Discussion')
+
 exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._className += ' TaskItemView'
@@ -17,24 +22,46 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this.getTaskId = function() { return this._itemId }
 	
-	// this._buildHeader = function() {
-	// 	new fan.ui.RadioButtons()
-	// 		.addButton({ text: 'Normal', payload: 'normal' })
-	// 		.addButton({ text: 'Crucial', payload: 'crucial' })
-	// 		.addButton({ text: 'Backlog', payload: 'backlog' })
-	// 		.addButton({ text: 'Done', payload: 'done' })
-	// 		.subscribe('Click', this, '_toggleTaskState')
-	// 		.appendTo(this._header)
-	// }
-	
 	this._buildBody = function() {
-		gUtil.withTemplate('task-panel', bind(this, function(template) {
-			this._body.innerHTML = ''
-			this._body.appendChild(fin.applyTemplate(template, this._itemId))
-		}))
-	}
-	
-	this._toggleTaskState = function(newState) {
-		console.log("TOGGLE STATE", newState)
+		var leftColumn = this._create({ className: 'left-column', parent: this._body }),
+			rightColumn = this._create({ className: 'right-column', parent: this._body })
+		
+		this._titleView = new fan.views.Editable([this._itemId, 'title'])
+			.addClassName('title')
+			.createLabel('Task')
+			.appendTo(leftColumn)
+		
+		this._statusButtons = new fan.ui.RadioButtons()
+			.addButton({ text: 'Normal', payload: 'normal' })
+			.addButton({ text: 'Urgent', payload: 'urgent' })
+			.addButton({ text: 'Backlog', payload: 'backlog' })
+			.addButton({ text: 'Done', payload: 'done' })
+			.subscribe('Click', this, '_toggleTaskState')
+			.createLabel('Status')
+			.appendTo(leftColumn)
+		
+		this._userSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'user', 'email'])
+			.addClassName('user')
+			.createLabel('Owner')
+			.appendTo(leftColumn)
+		
+		this._projectSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'project', 'title'])
+			.addClassName('project')
+			.createLabel('Project')
+			.appendTo(leftColumn)
+		
+		this._datePicker = new fan.views.DatePicker([this._itemId, 'date'])
+			.addClassName('date')
+			.createLabel('Due date')
+			.appendTo(leftColumn)
+		
+		this._descriptionView = new fan.views.Editable([this._itemId, 'description'])
+			.addClassName('description')
+			.createLabel('Description')
+			.appendTo(leftColumn)
+		
+		this._discussion = new fan.views.Discussion([this._itemId, 'comments'])
+			.addClassName('discussion')
+			.appendTo(rightColumn)
 	}
 })

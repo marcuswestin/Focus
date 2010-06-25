@@ -124,6 +124,10 @@ function openApp() {
 	
 	gListPanel.appendTo(gBody)
 	
+	if (fan.query.getHash()) {
+		gItemPanel.viewTask(fan.query.getHash())
+	}
+	
 	;(function initMeebo(q) {
 		return
 		var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');

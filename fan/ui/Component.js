@@ -1,5 +1,5 @@
-jsio('from shared.javascript import Class');
-jsio('import shared.Publisher');
+jsio('from shared.javascript import Class')
+jsio('import shared.Publisher')
 
 _focusables = {}
 
@@ -71,16 +71,16 @@ exports = Class(shared.Publisher, function(supr) {
 	}
 	
 	this._create = function(params) {
-		var el = document.createElement(params.tag || 'div');
-		if (params.className) { el.className = params.className; }
-		if (params.html) { el.innerHTML = params.html; }
-		if (params.src) { el.src = params.src; }
-		if (params.href) { el.href = params.href; }
-		if (params.text) { el.appendChild(document.createTextNode(params.text)); }
-		if (params.type) { el.type = params.type; }
-		if (params.style) { this.setStyle(el, params.style); }
-		if (params.parent) { params.parent.appendChild(el); }
-		return el;
+		var el = document.createElement(params.tag || 'div')
+		if (params.className) { el.className = params.className }
+		if (params.html) { el.innerHTML = params.html }
+		if (params.src) { el.src = params.src }
+		if (params.href) { el.href = params.href }
+		if (params.text) { el.appendChild(document.createTextNode(params.text)) }
+		if (params.type) { el.type = params.type }
+		if (params.style) { this.setStyle(el, params.style) }
+		if (params.parent) { params.parent.appendChild(el) }
+		return el
 	}
 	
 	this.setStyle = function(el, styleProps) {
@@ -125,7 +125,7 @@ exports = Class(shared.Publisher, function(supr) {
 			element = this.getElement()
 		}
 		if (!(' ' + element.className + ' ').match(' ' + className + ' ')) {
-			element.className += ' ' + className + ' ';
+			element.className += ' ' + className + ' '
 		}
 		return this
 	}
@@ -136,11 +136,11 @@ exports = Class(shared.Publisher, function(supr) {
 			element = this.getElement()
 		}
 		if (element.className) {
-			className += ' ';
-			var current = element.className;
-			var index = current.indexOf(className);
+			className += ' '
+			var current = element.className
+			var index = current.indexOf(className)
 			if (index != -1) {
-				element.className = current.slice(0, index) + current.slice(index + className.length);
+				element.className = current.slice(0, index) + current.slice(index + className.length)
 			}
 		}
 		return this
@@ -162,7 +162,7 @@ exports = Class(shared.Publisher, function(supr) {
 			className = element
 			element = this._element
 		}
-		return !!this._element.className.match(' ' + className + ' ');
+		return !!this._element.className.match(' ' + className + ' ')
 	}
 
 /*************************
@@ -280,9 +280,9 @@ exports = Class(shared.Publisher, function(supr) {
 			element = this._element
 		}
 		if (element.currentStyle) {
-			return element.currentStyle[styleProp];
+			return element.currentStyle[styleProp]
 		} else if (window.getComputedStyle) {
-			return document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
+			return document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProp)
 		}
 	}
 

@@ -47,7 +47,7 @@ exports = Singleton(function(){
 		el.style.fontStyle = 'Italic'
 		el.style.position = 'absolute'
 		el.innerHTML = "Don't Panic"
-		el.className = 'fan-unselectable'
+		el.className = 'unselectable'
 		this.addDependant(function(winSize) {
 			var width = el.offsetWidth
 			var height = el.offsetHeight

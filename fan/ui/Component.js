@@ -111,7 +111,7 @@ exports = Class(shared.Publisher, function(supr) {
  * Unselectable UI Components *
  ******************************/
 	this._makeUnselectable = function(el) {
-		this.addClassName(el || this.getElement(), 'fan-unselectable')
+		this.addClassName(el || this.getElement(), 'unselectable')
 		return this
 	}
 

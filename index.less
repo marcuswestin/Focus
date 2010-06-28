@@ -32,6 +32,7 @@ table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
 .unselectable {
 	-moz-user-select:none;
 	-webkit-user-select:none;
+	cursor:default;
 }
 
 /********************************
@@ -56,10 +57,7 @@ body {
 /***************
  * UIComponent *
  ***************/
-.fan-unselectable {
-	cursor:default;
-	.unselectable;
-}
+.fan-unselectable { .unselectable; }
 
 /*******************
  * Editable values *

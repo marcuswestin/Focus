@@ -77,7 +77,7 @@ exports = Class(fan.views.Value, function(supr){
 			firstDay = fan.time.firstDayOfMonth(currentDate),
 			cell, cells = this._picker.getElementsByTagName('td')
 		
-		currentDate = fam.time.endOfDay(currentDate)
+		currentDate = fan.time.endOfDay(currentDate)
 		for (var date=1; date <= daysInMonth; date++) {
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date

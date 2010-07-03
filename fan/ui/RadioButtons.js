@@ -8,6 +8,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._createContent = function() {
 		this._delegateOn('click', bind(this, '_onDelegateClick'))
 		this._payloads = {}
+		this._payloadIndex = {}
 		this._buttons = []
 	}
 	
@@ -19,6 +20,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		
 		this._makeUnselectable(el)
 		this._payloads[delegateId] = props.payload
+		this._payloadIndex[props.payload] = buttons.length
 		el.delegateId = delegateId
 		buttons.push(el)
 		buttons[delegateId] = el
@@ -36,12 +38,22 @@ exports = Class(fan.ui.Component, function(supr) {
 		return this
 	}
 	
-	this.select = function(index) {
-		this._onDelegateClick(this._buttons[index].delegateId)
+	this.select = function(index, silent) {
+		this._onDelegateClick(this._buttons[index].delegateId, null, silent)
 		return this
 	}
 	
-	this._onDelegateClick = function(delegateId) {
+	this.reflect = function(itemId, property) {
+		fin.observe(itemId, property, bind(this, function(op, value) {
+			this.select(this._payloadIndex[value], true)
+		}))
+		this.subscribe('Click', this, function(value) {
+			fin.set(itemId, property, value)
+		})
+		return this
+	}
+	
+	this._onDelegateClick = function(delegateId, e, silent) {
 		var currSelected = this._selected,
 			newSelected = this._buttons[delegateId]
 		
@@ -49,6 +61,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		this.addClassName(newSelected, 'down')
 		this._selected = newSelected
 		
-		this._publish('Click', this._payloads[delegateId])
+		if (!silent) { this._publish('Click', this._payloads[delegateId]) }
 	}
 })

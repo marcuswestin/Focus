@@ -27,16 +27,14 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this._buildBody = function() {
 		var body = this._body,
 			template = '<div class="title">Project - (( Editable title ))</div>'
-				+ '<div class="status">Completed(( Checkbox done ))</div>'
-				+ '<div class="remaining"><br />Remaining Tasks:</div>'
 		
 		body.innerHTML = ''
 		body.appendChild(fin.applyTemplate(template, this._itemId))
 
-		var query = { type: 'task', done: false, project: this._itemId }
+		var query = { type: 'task', status: null, project: this._itemId }
 		new fan.ui.lists.SortedList(bind(this, '_createCell'))
 			.query(query)
-			.sortBy('crucial')
+			// TODO .sortBy('priority')
 			.subscribe('Click', gItemPanel, 'viewTask')
 			.appendTo(body)
 	}

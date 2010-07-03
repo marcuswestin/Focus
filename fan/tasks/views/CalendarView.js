@@ -33,7 +33,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		}))
 	}
 	this._buildBody = function() {
-		var myTasksQuery = { done: false, backlog: false, type: 'task', user: gUserId },
+		var myTasksQuery = { type: 'task', status: {op: '!=', value: 'done'}, user: gUserId },
 			list = this._list,
 			groups = this._groups
 

@@ -11,8 +11,8 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._buildHeader = function() {
 		new fan.ui.RadioButtons()
-			.addButton({ text: 'Projects', payload: { done: false, type: 'project' } })
-			.addButton({ text: 'Completed', payload: { done: true, type: 'project' } })
+			.addButton({ text: 'Projects', payload: { type: 'project', status: null } })
+			.addButton({ text: 'Completed', payload: { type: 'project', status: 'done' } })
 			.subscribe('Click', this, 'loadQuery')
 			.appendTo(this._header)
 			.select(0)

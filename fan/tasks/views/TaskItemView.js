@@ -32,11 +32,11 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.appendTo(leftColumn)
 		
 		this._statusButtons = new fan.ui.RadioButtons()
-			.addButton({ text: 'Normal', payload: 'normal' })
+			.addButton({ text: 'Normal', payload: null })
 			.addButton({ text: 'Urgent', payload: 'urgent' })
 			.addButton({ text: 'Backlog', payload: 'backlog' })
 			.addButton({ text: 'Done', payload: 'done' })
-			.subscribe('Click', this, '_toggleTaskState')
+			.reflect(this._itemId, 'status')
 			.createLabel('Status')
 			.appendTo(leftColumn)
 		
@@ -63,15 +63,5 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		this._discussion = new fan.views.Discussion([this._itemId, 'comments'])
 			.addClassName('discussion')
 			.appendTo(rightColumn)
-	}
-	
-	this._toggleTaskState = function(status) {
-		var states = { crucial: false, done: false, backlog: false }
-		if (status != 'normal') {
-			states[status] = true;
-		}
-		for (var prop in states) {
-			fin.set(this._itemId, prop, states[prop]);
-		}
 	}
 })

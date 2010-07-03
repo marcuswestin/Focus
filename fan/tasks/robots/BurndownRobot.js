@@ -9,15 +9,12 @@ exports = Class(function() {
 	
 	this._onProjectsChange = function(mutation) {
 		var projectId = (mutation.sadd || mutation.srem),
-			query = { type: 'task', done: false, project: projectId }
+			query = { type: 'task', status: {op: '!=', value: 'done'}, project: projectId }
 
 		if (mutation.sadd) {
 			this._subs[projectId] = fin.sum(query, bind(this, '_onRemainingTimeChange'))
 		}
 		if (mutation.srem) {
-			var projectId = mutation.srem,
-				query = { type: 'task', done: false, project: projectId }
-			
 			fin.release(this._subs[projectId])
 		}
 	}

@@ -29,7 +29,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		this._body.innerHTML = ''
 		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'))
 			.query(query)
-			.sortBy('crucial')
+			// TODO .sortBy('crucial')
 			.groupBy('project', 'title')
 			.addClassName('TaskList')
 			.subscribe('Click', gItemPanel, 'viewTask')
@@ -43,7 +43,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		cell.delegateId = itemId
 		
 		gUtil.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
-		fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
+		// TODO fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
 		
 		return cell
 	}
@@ -52,7 +52,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		cell.appendChild(fin.applyTemplate(template, itemId))
 	}
 	
-	this._onCellCriticalChange = function(cell, mutation, isCritical) {
-		this.toggleClassName(cell, 'crucial', isCritical)
-	}
+	// this._onCellCriticalChange = function(cell, mutation, isCritical) {
+	// 	this.toggleClassName(cell, 'crucial', isCritical)
+	// }
 })

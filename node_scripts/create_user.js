@@ -2,10 +2,10 @@
 
 require('../lib/fin/lib/js.io/packages/jsio')
 
-jsio.path.shared = '../lib/fin/js/'
-jsio.path.server = '../lib/fin/js/'
-jsio.path.client = '../lib/fin/js/'
-jsio.path.fan = '../'
+jsio.path.shared = './lib/fin/js/'
+jsio.path.server = './lib/fin/js/'
+jsio.path.client = './lib/fin/js/'
+jsio.path.fan = '.'
 
 jsio('import client.fin') // makes fin globally accesible
 jsio('import fan.sha1')

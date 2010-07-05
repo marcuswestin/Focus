@@ -34,12 +34,18 @@ jsio('import fan.tasks.LoginManager')
 jsio('import fan.tasks.KeyboardFocus')
 jsio('import fan.tasks.panels.ListPanel')
 jsio('import fan.tasks.panels.ItemPanel')
+jsio('import fan.ui.info')
 jsio('import fan.ui.overlay')
 jsio('import fan.ui.resizeManager')
 jsio('import fan.query')
 jsio('import fan.time')
 
 jsio('import client.xhr')
+
+if (fan.ui.info.isTouch) {
+	jsio('import fan.ui.touch')
+	new fan.ui.touch.Body()
+}
 
 gUtil = {
 	_templates: {},

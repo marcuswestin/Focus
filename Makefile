@@ -29,7 +29,7 @@ clean:
 	touch lib/empty.txt
 
 lib/fin:
-	git clone git://github.com/marcuswestin/fin.git lib/
+	git clone git://github.com/marcuswestin/fin.git lib/fin
 	cd lib/fin; make
 
 lib/less.js:

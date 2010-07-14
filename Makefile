@@ -1,5 +1,7 @@
+all: lib/fin lib/less.js
+
 ############
-### Apps ###
+### Cmds ###
 ############
 
 .PHONY: run
@@ -20,9 +22,6 @@ restart: stop run
 ### Dependencies ###
 ####################
 
-.PHONY: deps
-deps: lib/fin lib/less.js
-
 .PHONY: clean
 clean:
 	rm run-*.out
@@ -30,9 +29,8 @@ clean:
 	touch lib/empty.txt
 
 lib/fin:
-	git clone git://github.com/marcuswestin/fin.git
-	mv ./fin lib/
-	cd lib/fin; make download-dependencies
+	git clone git://github.com/marcuswestin/fin.git lib/
+	cd lib/fin; make
 
 lib/less.js:
 	curl http://lesscss.googlecode.com/files/less-1.0.18.min.js > lib/less.js

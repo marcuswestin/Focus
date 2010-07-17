@@ -93,6 +93,6 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._onPickerClick = function(timestamp) {
 		fin.set(this._itemId, this._property, timestamp)
-		// fan.ui.overlay.hide()
+		fan.ui.overlay.hide()
 	}
 })

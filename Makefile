@@ -10,12 +10,12 @@ run: lib/fin
 	cd lib/fin/; node run_query_observer.js &> ../../run-node-query-observer.out &
 	node node_scripts/run_server.js &> run-node-server.out &
 
-.PHONY: stop-tasks
+.PHONY: stop
 stop:
 	killall node
 	killall redis-server
 
-.PHONY: restart-tasks
+.PHONY: restart
 restart: stop run
 
 ####################

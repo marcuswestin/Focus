@@ -1,4 +1,5 @@
 all: lib/fin lib/less.js
+	cd lib/fin; make all
 
 ############
 ### Cmds ###

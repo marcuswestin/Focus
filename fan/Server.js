@@ -2,6 +2,7 @@ jsio('from shared.javascript import bind')
 jsio('import server.Server')
 jsio('import fan.sha1 as sha1')
 jsio('import fan.keys')
+jsio('import shared.keys')
 
 exports = Class(server.Server, function(supr) {
 	
@@ -37,9 +38,10 @@ exports = Class(server.Server, function(supr) {
 		this._redisClient.get(userIdKey, bind(this, function(err, userIdBytes) {
 			if (err) { throw logger.error('Could not retrieve id for key', userIdKey, err) }
 			if (!userIdBytes) { return callback(null, 'We couldn\'t find that email in our db') }
-			var userId = userIdBytes.toString()
+			var userId = userIdBytes.toString(),
+				key = shared.keys.getItemPropertyKey(userId, 'password_hash')
 			
-			this.getItemProperty(userId, 'password_hash', bind(this, function(passwordHash, key) {
+			this._retrieveBytes(key, bind(this, function(passwordHash, key) {
 				var response = (passwordHash == JSON.stringify(inputPasswordHash)) ? userId : null
 				callback(response, 'That\'s not the right password')
 			}))

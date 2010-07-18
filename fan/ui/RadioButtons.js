@@ -44,7 +44,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	}
 	
 	this.reflect = function(itemId, property) {
-		fin.observe(itemId, property, bind(this, function(op, value) {
+		fin.observe(itemId, property, bind(this, function(mutation, value) {
 			this.select(this._payloadIndex[value], true)
 		}))
 		this.subscribe('Click', this, function(value) {

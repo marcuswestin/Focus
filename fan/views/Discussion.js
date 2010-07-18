@@ -54,12 +54,13 @@ exports = Class(fan.views.Value, function(supr){
 		this._input.clear()
 	}
 	
-	this._onListMutation = function(operation, items) {
-		switch(operation) {
-			case 'append':
+	this._onListMutation = function(mutation) {
+		var items = mutation.args
+		switch(mutation.op) {
+			case 'listAppend':
 				this._list.append(items)
 				break
-			case 'splice':
+			case 'listInsert':
 				this._list.prepend(items)
 				break
 		}

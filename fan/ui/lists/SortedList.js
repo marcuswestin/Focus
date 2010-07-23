@@ -70,8 +70,9 @@ exports = Class(fan.ui.lists.List, function(supr){
 		this._render()
 	}
 	
-	this._getParentFor = function(itemId) {
-		var group = this._groupsById && this._groupsById[itemId] || this._defaultGroup
+	this._getParentFor = function(item) {
+		var itemID = this._getItemId(item),
+			group = this._groupsById && this._groupsById[itemID] || this._defaultGroup
 		return group.childNodes[1]
 	}
 	

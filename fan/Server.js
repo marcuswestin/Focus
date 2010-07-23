@@ -6,12 +6,6 @@ jsio('import shared.keys')
 
 exports = Class(server.Server, function(supr) {
 	
-	// Stamp all mutations with the user who originated it
-	this.mutateItem = function(mutation, origConnection) {
-		mutation._user = origConnection.getUser()
-		supr(this, 'mutateItem', arguments)
-	}
-	
 	this.createUser = function(inputEmail, inputPasswordHash, origConnection, callback) {
 		var emailToIdKey = fan.keys.userEmailToId(inputEmail)
 		this._redisClient.setnx(emailToIdKey, '__fan_tmp_holder', bind(this, function(err, wasCreated) {

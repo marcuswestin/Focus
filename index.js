@@ -33,8 +33,10 @@ jsio('import fan.tasks.panels.ItemPanel')
 jsio('import fan.ui.info')
 jsio('import fan.ui.overlay')
 jsio('import fan.ui.resizeManager')
+
 jsio('import fan.query')
 jsio('import fan.time')
+jsio('import fan.keys')
 
 jsio('import client.xhr')
 

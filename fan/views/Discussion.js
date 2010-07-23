@@ -50,7 +50,7 @@ exports = Class(fan.views.Value, function(supr){
 	this._submit = function() {
 		var message = this._input.getValue()
 		if (!message) { return }
-		fin.append(this._itemId, this._property, { message: message, user: gUserId, timestamp: fin.now() })
+		fin.prependToList(this._itemId, this._property, { message: message, user: gUserId, timestamp: fin.now() })
 		this._input.clear()
 	}
 	
@@ -60,7 +60,7 @@ exports = Class(fan.views.Value, function(supr){
 			case 'listAppend':
 				this._list.append(items)
 				break
-			case 'listInsert':
+			case 'listPrepend':
 				this._list.prepend(items)
 				break
 		}

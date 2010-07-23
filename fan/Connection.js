@@ -1,4 +1,7 @@
 jsio('import server.Connection')
+jsio('import shared.keys')
+jsio('import fan.time')
+jsio('import fan.keys')
 
 exports = Class(server.Connection, function(supr) {
 
@@ -37,6 +40,42 @@ exports = Class(server.Connection, function(supr) {
 		}
 	}
 	
-	this.getUser = function() { return this._authenticatedUser }
+	this._subscriptionTimeouts = {}
+	this._handleMutationRequest = function(mutation) {
+		mutation.user = this._authenticatedUser
+		supr(this, '_handleMutationRequest', arguments)
+		var key = mutation.id,
+			subscriptionTimeouts = this._subscriptionTimeouts,
+			blockTime = 5 * fan.time.minutes
+		
+		if (!subscriptionTimeouts[key]) {
+			subscriptionTimeouts[key] = setTimeout(function() { delete subscriptionTimeouts[key] }, blockTime)
+			
+			var keyInfo = shared.keys.getKeyInfo(key),
+				itemId = keyInfo.id,
+				mutatedProperty = keyInfo.property,
+				subscribersKey = shared.keys.getItemPropertyKey(itemId, fan.keys.subscribers)
+			
+			this.server.retrieveSet(subscribersKey, bind(this, function(subscribers) {
+				var notificationJSON = JSON.stringify({
+					user: mutation.user,
+					id: itemId,
+					property: mutatedProperty,
+					time: mutation.time,
+					guid: itemId + mutatedProperty + mutation.time
+				})
+				var notificationMutation = {
+					user: 'system',
+					op: 'listAppend',
+					time: mutation.time, 
+					args: [notificationJSON]
+				}
+				logger.info("Send notification mutation to", notificationMutation, subscribers)
+				for (var i=0, userID; userID = subscribers[i]; i++) {
+					notificationMutation.id = shared.keys.getItemPropertyKey(userID, fan.keys.notifications)
+					this.server.mutateItem(notificationMutation, this)
+				}
+			}))
+		}
+	}
 })
-

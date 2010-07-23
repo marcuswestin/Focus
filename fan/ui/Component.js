@@ -9,8 +9,9 @@ exports = Class(shared.Publisher, function(supr) {
 	this._domType = null
 	this._className = null
 	
-	this.init = function() {
+	this.init = function(domTag) {
 		supr(this, 'init')
+		if (domTag) { this._domTag = domTag }
 		this._finSubs = {}
 	}
 	
@@ -23,6 +24,7 @@ exports = Class(shared.Publisher, function(supr) {
 		}
 		return this._element
 	}
+	this._createContent = function() {}
 	
 	this.show = function() {
 		this.getElement().style.display = 'block'

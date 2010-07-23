@@ -7,7 +7,7 @@ jsio('import fan.ui.Button')
 jsio('import fan.tasks.views.TasksListView')
 jsio('import fan.tasks.views.ProjectsListView')
 jsio('import fan.tasks.views.CalendarView')
-// jsio('import fan.tasks.views.ChangesView')
+jsio('import fan.tasks.views.NewsView')
 // jsio('import fan.tasks.views.CoworkersView')
 // jsio('import fan.tasks.views.AccomplishmentsView')
 
@@ -17,9 +17,9 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 	
 	this._viewCtors = {
 		'tasks': fan.tasks.views.TasksListView,
-		'projects': fan.tasks.views.ProjectsListView,
-		'calendar': fan.tasks.views.CalendarView
-		// 'changes': fan.tasks.views.ChangesView,
+		// 'projects': fan.tasks.views.ProjectsListView,
+		'calendar': fan.tasks.views.CalendarView,
+		'news': fan.tasks.views.NewsView,
 		// 'coworkers': fan.tasks.views.CoworkersView,
 		// 'accomplishments': fan.tasks.views.AccomplishmentsView
 	}
@@ -34,7 +34,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 			.addButton(this._getButton('tasks'))
 			.addButton(this._getButton('calendar'))
 			// .addButton(this._getButton('projects'))
-			// .addButton(this._getButton('changes'))
+			.addButton(this._getButton('news'))
 			// .addButton(this._getButton('coworkers'))
 			// .addButton(this._getButton('accomplishments'))
 			.addClassName('AppsTabs')

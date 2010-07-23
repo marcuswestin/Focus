@@ -1,4 +1,7 @@
 jsio('from shared.javascript import Class')
+
+jsio('import fan.keys')
+
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.ui.BooleanButton')
 jsio('import fan.tasks.views.View')
@@ -41,7 +44,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.appendTo(leftColumn)
 		
 		this._notifyMe = new fan.ui.BooleanButton("Notify me", "Don't bother")
-			.reflectSetMembership(this._itemId, 'subscribers', gUserId)
+			.reflectSetMembership(this._itemId, fan.keys.subscribers, gUserId)
 			.createLabel('When changes are made')
 			.appendTo(leftColumn)
 		

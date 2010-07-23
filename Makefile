@@ -6,15 +6,17 @@ all: lib/fin lib/less.js
 ############
 
 .PHONY: run
-run: lib/fin
+run: all
 	redis-server redis.conf &> run-redis-server.out &
 	cd lib/fin/; node run_query_observer.js &> ../../run-node-query-observer.out &
 	node node_scripts/run_server.js &> run-node-server.out &
+	echo "\nFin server running"
 
 .PHONY: stop
 stop:
 	killall node
 	killall redis-server
+	echo "\nFin server stopped"
 
 .PHONY: restart
 restart: stop run
@@ -25,7 +27,7 @@ restart: stop run
 
 .PHONY: clean
 clean:
-	rm run-*.out
+	rm -f run-*.out
 	rm -rf lib/*
 	touch lib/empty.txt
 

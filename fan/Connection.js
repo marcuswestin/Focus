@@ -14,7 +14,7 @@ exports = Class(server.Connection, function(supr) {
 	
 	this._sendAuthenticationResponse = function(userId, reason) {
 		var response = { authenticated: !!userId }
-		if (userId) { this._authenticatedUser = response.id = userId }
+		if (userId) { this._authenticatedUser = response.id = parseInt(userId) }
 		else { response.reason = reason }
 		this.sendFrame('FAN_AUTHENTICATION_RESPONSE', response)
 	}

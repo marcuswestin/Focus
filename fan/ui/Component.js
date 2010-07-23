@@ -189,6 +189,12 @@ exports = Class(shared.Publisher, function(supr) {
 		delete subs[id]
 		return this
 	}
+	this.reflect = function(itemID, property) {
+		this._observe(itemID, property, bind(this, function(mutation, value) {
+			this._element.innerHTML = value
+		}))
+		return this
+	}
 	this.release = function() {
 		var id, subs = this._finSubs
 		for (id in subs) {

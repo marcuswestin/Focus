@@ -21,6 +21,7 @@ exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._addItem = function(itemId) {
 		this._items.push(itemId)
+		this._itemsById[itemId] = itemId
 		fin.observe(itemId, 'date', bind(this, '_onDateChange', itemId));
 		return itemId
 	}

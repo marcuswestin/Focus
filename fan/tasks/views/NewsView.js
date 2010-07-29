@@ -4,6 +4,8 @@ jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
 jsio('import fan.ui.lists.List')
 jsio('import fan.ui.Component')
+jsio('import fan.ui.UserIcon')
+
 
 jsio('import fan.keys')
 jsio('import fan.time')
@@ -44,21 +46,25 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._getCellFor = function(notification) {
 		var cell = this._create({ className: 'cell' })
+
+		new fan.ui.UserIcon(notification.user)
+			.appendTo(cell)
 		
+		new fan.time.TimeString(notification.time)
+			.appendTo(cell)
+
 		new fan.ui.Component('span')
-			.reflect(notification.user, 'email')
+			.reflect(notification.user, 'name', { pre: ' ' })
 			.appendTo(cell)
 		
 		this._create({ tag: 'span', text: ' changed the ' + notification.property + ' of ', parent: cell })
 		
 		new fan.ui.Component('span')
-			.reflect(notification.id, 'title')
+			.addClassName('title')
+			.reflect(notification.id, 'title', { pre: '&quot;', post: '&quot;' })
 			.appendTo(cell)
 		
 		this._create({ tag: 'br', parent: cell })
-		
-		new fan.time.TimeString(notification.time)
-			.appendTo(cell)
 		
 		return cell
 	}

@@ -6,19 +6,25 @@ jsio('import shared.keys')
 
 exports = Class(server.Server, function(supr) {
 	
-	this.createUser = function(inputEmail, inputPasswordHash, origConnection, callback) {
-		var emailToIdKey = fan.keys.userEmailToId(inputEmail)
-		this._redisClient.setnx(emailToIdKey, '__fan_tmp_holder', bind(this, function(err, wasCreated) {
-			if (err) { throw logger.error('Could not create user email to id ', inputEmail, emailToIdKey, err) }
+	this.createUser = function(args, origConnection, callback) {
+		var name = args.name,
+			facebookID = args.facebookID,
+			passwordHash = args.password_hash,
+			idToKey = fan.keys.userEmailToId(facebookID)
+		
+		this._redisClient.setnx(idToKey, '__fan_tmp_holder', bind(this, function(err, wasCreated) {
+			if (err) { throw logger.error('Could not create user email to id ', facebookID, idToKey, err) }
 			if (!wasCreated) { 
-				callback(null, 'user with email exists') 
+				callback(null, 'user with id ' + facebookID + ' already exists') 
 				return
 			}
-			var userProps = { 'password_hash': inputPasswordHash, 'email': inputEmail, type: 'user' }
+			var userProps = { 'password_hash': passwordHash, 'facebookID': facebookID, 
+				type: 'user', iconUrl: '//graph.facebook.com/' + facebookID + '/picture', name: name || facebookID }
+			
 			logger.log("Create user with items", userProps)
 			this.createItem(userProps, origConnection, bind(this, function(newItemId) {
-				this._redisClient.set(emailToIdKey, newItemId, bind(this, function(err) {
-					if (err) { throw logger.error('Could not update user email to id', emailToIdKey, newItemId, err) }
+				this._redisClient.set(idToKey, newItemId, bind(this, function(err) {
+					if (err) { throw logger.error('Could not update user email to id', idToKey, newItemId, err) }
 					callback(newItemId)
 				}))
 			}))

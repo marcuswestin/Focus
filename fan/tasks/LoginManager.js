@@ -12,7 +12,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	this._createContent = function() {
 		var inputsEl = this._create({ className: 'inputs', parent: this._element })
 		
-		this._email = new fan.ui.Input("What's your email?")
+		this._email = new fan.ui.Input("What's your user name?")
 			.addClassName('email')
 			.appendTo(inputsEl)
 			.subscribe('Submit', this, '_submit')

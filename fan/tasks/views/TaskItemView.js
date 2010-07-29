@@ -48,7 +48,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.createLabel('When changes are made')
 			.appendTo(leftColumn)
 		
-		this._userSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'user', 'email'])
+		this._userSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'user', 'name'])
 			.addClassName('user')
 			.createLabel('Owner')
 			.appendTo(leftColumn)

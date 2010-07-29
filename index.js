@@ -82,10 +82,10 @@ window.gLoginManager = new fan.tasks.LoginManager()
 
 fin.registerEventHandler('FAN_AUTHENTICATION_DEMAND', function() {
 	fan.ui.overlay.show(gLoginManager.getElement())
-	gLoginManager.focus()
 })
 
 fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
+	gLoginManager.enable()
 	if (response.authenticated) {
 		gUserId = response.id
 		fin.observe(gUserId, 'iconUrl', function(op, iconUrl) { gUserIconUrl = iconUrl })
@@ -96,6 +96,7 @@ fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
 })
 
 gLoginManager.subscribe('Login', this, function(email, passwordHash) {
+	gLoginManager.disable()
 	fin.send('FAN_AUTHENTICATION_REQUEST', { email: email, password_hash: passwordHash })
 })
 

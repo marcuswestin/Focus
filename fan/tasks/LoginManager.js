@@ -25,13 +25,16 @@ exports = Class(fan.ui.Component, function(supr) {
 		new fan.ui.Button("Login")
 			.appendTo(this._element)
 			.subscribe('Click', this, '_submit')
-		
-		// // while developing
-		this._email._element.value = 'marcus@meebo-inc.com'
-		this._password._element.value = '123123'
 	}
 	
-	this.focus = function() { this._email.focus() }
+	this.disable = function() {
+		this._email.disable()
+		this._password.disable()
+	}
+	this.enable = function() {
+		this._email.enable()
+		this._password.enable()
+	}
 	
 	this._submit = function() {
 		this._password.blur()
@@ -40,8 +43,6 @@ exports = Class(fan.ui.Component, function(supr) {
 		var email = this._email.getValue(),
 			passwordHash = fan.sha1(this._password.getValue())
 		
-		this._email.disable()
-		this._password.disable()
 		this._publish('Login', email, passwordHash)
 	}
 })

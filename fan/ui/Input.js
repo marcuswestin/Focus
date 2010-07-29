@@ -28,6 +28,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	this.getValue = function() { return this._element.value }
 	this.focus = function() { this._element.focus() }
 	this.disable = function() { this._element.disabled = true }
+	this.enable = function() { this._element.disabled = false }
 	this.clear = function() { setTimeout(bind(this._element, function(){ this.value = '' })) }
 	this.blur = function() { this._element.blur() }
 	

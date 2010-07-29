@@ -56,6 +56,9 @@ exports = Class(server.Connection, function(supr) {
 				mutatedProperty = keyInfo.property,
 				subscribersKey = shared.keys.getItemPropertyKey(itemId, fan.keys.subscribers)
 			
+			// Don't create notifications for hidden properties
+			if (mutatedProperty[0] == '_') { return }
+			
 			this.server.retrieveSet(subscribersKey, bind(this, function(subscribers) {
 				var notificationJSON = JSON.stringify({
 					user: mutation.user,

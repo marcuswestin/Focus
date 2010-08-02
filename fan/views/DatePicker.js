@@ -7,6 +7,7 @@ exports = Class(fan.views.Value, function(supr){
 	
 	this._className += ' DatePicker'
 	this._days = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa']
+	this._monthOffset = 0
 	
 	this._createContent = function() {
 		this._on('click', bind(this, '_showPicker'))
@@ -44,13 +45,19 @@ exports = Class(fan.views.Value, function(supr){
 		if (this._picker) { return this._picker }
 		var picker = this._create({ className: 'DatePickerBody' }),
 			header = this._create({ className: 'header', parent: picker }),
-			clearBtn = this._create({ className: 'clearButton', parent: header, text: 'clear' }),
+			prevMonth = this._create({ text: '<-', parent: header, className: 'prevMonth' }),
+			clearMonth = this._create({ text: '...', parent: header, className: 'thisMonth' }),
+			nextMonth = this._create({ text: '->', parent: header, className: 'nextMonth' }),
+			clearBtn = this._create({ text: 'clear', parent: header, className: 'clearButton' }),
 			table = this._create({ tag: 'table', parent: picker }),
 			body = this._create({ tag: 'tbody', parent: table }),
 			days = this._days,
 			row, rowsCount = 5
 		
-		this._on(header, 'click', bind(fin, 'set', this._itemId, this._property, null))
+		this._on(prevMonth, 'click', bind(this, '_changeMonthOffset', -1))
+		this._on(nextMonth, 'click', bind(this, '_changeMonthOffset', 1))
+		this._on(clearMonth, 'click', bind(this, '_clearMonthOffset'))
+		this._on(clearBtn, 'click', bind(fin, 'set', this._itemId, this._property, null))
 		
 		row = this._create({ tag: 'tr', parent: body }),
 		forEach(days, bind(this, function(day) {
@@ -68,17 +75,37 @@ exports = Class(fan.views.Value, function(supr){
 		return this._picker = picker
 	}
 	
+	this._changeMonthOffset = function(deltaOffset) {
+		this._monthOffset += deltaOffset
+		this._updatePicker()
+	}
+	
+	this._clearMonthOffset = function() {
+		this._monthOffset = 0
+		this._updatePicker()
+	}
+	
 	this._updatePicker = function() {
 		if (!this._picker) { return }
 		var selected = this._timestamp,
 			now = fin.now(),
-			currentDate = new Date(selected || now),
-			daysInMonth = fan.time.daysInMonth(currentDate),
+			currentDate = new Date(selected || now)
+		
+		currentDate.setMonth(currentDate.getMonth() + this._monthOffset)
+		
+		var daysInMonth = fan.time.daysInMonth(currentDate),
 			firstDay = fan.time.firstDayOfMonth(currentDate),
 			cell, cells = this._picker.getElementsByTagName('td')
 		
+		for (var i=0; cell = cells[i]; i++) {
+			cell.innerHTML = ''
+			this
+				.removeClassName(cell, 'selected')
+				.removeClassName(cell, 'today')
+		}
+		
 		currentDate = fan.time.endOfDay(currentDate)
-		for (var date=1; date <= daysInMonth; date++) {
+		for (var date=1; date <= daysInMonth - firstDay; date++) {
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date
 			currentDate.setDate(date)

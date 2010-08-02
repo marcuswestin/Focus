@@ -33,3 +33,29 @@ util.createNewTask = function(params, callback) {
 util.createNewProject = function(callback) {
 	fin.create({ type: 'project', done: false, }, callback)
 }
+
+var notifyNode,
+	notifyInterval,
+	notifyTimeout,
+	notifyOpacity
+util.notify = function(node) {
+	clearInterval(notifyInterval)
+	clearTimeout(notifyTimeout)
+	
+	if (!notifyNode) { 
+		notifyNode = document.body.appendChild(document.createElement('div'))
+		notifyNode.id = 'notifyNode'
+	}
+	notifyNode.innerHTML = ''
+	notifyNode.style.opacity = 1
+	notifyNode.appendChild(node)
+	
+	notifyTimeout = setTimeout(function() {
+		notifyInterval = setInterval(function() {
+			notifyNode.style.opacity -= .025
+			if (notifyNode.style.opacity <= 0) {
+				clearInterval(notifyInterval)
+			}
+		}, 50)
+	}, 10000)
+}

@@ -1,5 +1,7 @@
 jsio('from shared.javascript import Class, bind')
 jsio('import fan.views.Value')
+jsio('import fan.ui.Component')
+jsio('import fan.util')
 
 exports = Class(fan.views.Value, function(supr) {
 	
@@ -34,20 +36,33 @@ exports = Class(fan.views.Value, function(supr) {
 		inputEl.style.fontWeight = this.getStyle('font-weight');
 		inputEl.style.lineHeight = this.getStyle('line-height');
 		
-		fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
+		this._releaseFocus = fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
 		this._resizeInput()
-
+		
 		input
 			.subscribe('Blur', this, '_onBlur')
 			.appendTo(document.body)
 			.focus()
 	}
-
-	this.createDelayedMethod('_onBlur', function() {
+	
+	this._onBlur = function(focusInfo) {
+		this._releaseFocus()
 		this._input
 			.remove()
 			.release()
-	})
+		
+		if (focusInfo && focusInfo.user) {
+			var text = 'The focus of the property "' + this._property + '" was taken by another user, ',
+				style = { marginRight: '4px' },
+				msgNode = this._create({ text: text, style: style })
+			
+			new fan.ui.Component('span')
+				.reflect(focusInfo.user, 'name', { pre: ' ' })
+				.appendTo(msgNode)
+			
+			fan.util.notify(msgNode)
+		}
+	}
 	
 	this.setValue = function(value) {
 		supr(this, 'setValue', arguments)

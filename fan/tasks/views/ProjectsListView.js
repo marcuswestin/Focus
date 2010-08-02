@@ -1,4 +1,6 @@
 jsio('from shared.javascript import Class')
+
+jsio('import fan.util')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
@@ -20,7 +22,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New Project')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', gUtil, 'createNewProject', bind(this, '_selectProject'))
+			.subscribe('Click', fan.util, 'createNewProject', bind(this, '_selectProject'))
 	}
 	
 	this.loadQuery = function(query) {

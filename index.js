@@ -45,39 +45,6 @@ if (fan.ui.info.isTouch) {
 	new fan.ui.touch.Body()
 }
 
-gUtil = {
-	_templates: {},
-	_templateQueue: {},
-	withTemplate: function(templateName, callback) {
-		var path = 'templates/' + templateName + '.html'
-		if (gUtil._templates[path]) { 
-			callback(gUtil._templates[path])
-		} else if (gUtil._templateQueue[path]) {
-			gUtil._templateQueue[path].push(callback)
-		} else {
-			gUtil._templateQueue[path] = [callback]
-			client.xhr.get(path, function(template) {
-				gUtil._templates[path] = template
-				var cbs = gUtil._templateQueue[path]
-				for (var i=0, cb; cb = cbs[i]; i++) {
-					cb(template)
-				}
-			})
-		}
-	},
-	createNewTask: function(params, callback) {
-		params.type = 'task'
-		params.user = gUserId
-		params.done = false
-		params.title = params.title || 'I need to...'
-		params.date = fan.time.endOfDay(fin.now()).getTime()
-		fin.create(params, callback)
-	},
-	createNewProject: function(callback) {
-		fin.create({ type: 'project', done: false, }, callback)
-	}
-}
-
 window.gLoginManager = new fan.tasks.LoginManager()
 
 fin.registerEventHandler('FAN_AUTHENTICATION_DEMAND', function() {

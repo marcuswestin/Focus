@@ -1,5 +1,7 @@
 jsio('from shared.javascript import Class')
 
+jsio('import fan.util')
+
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.ui.lists.SortedList')
@@ -21,7 +23,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New Task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', gUtil, 'createNewTask', { project: this._itemId }, function(){})
+			.subscribe('Click', fan.util, 'createNewTask', { project: this._itemId }, function(){})
 	}
 	
 	this._buildBody = function() {
@@ -44,7 +46,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			cell = this._create({ className: 'cell' })
 		
 		cell.delegateId = itemId
-		gUtil.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
+		fan.util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
 		return cell
 	}
 	

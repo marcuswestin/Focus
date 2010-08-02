@@ -29,7 +29,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		// new fan.ui.Button('New task')
 		// 	.addClassName('createButton')
 		// 	.appendTo(this._header)
-		// 	.subscribe('Click', gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
+		// 	.subscribe('Click', fan.util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 	}
 	
 	this._buildBody = function() {

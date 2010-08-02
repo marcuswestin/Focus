@@ -1,4 +1,5 @@
 jsio('from shared.javascript import Class')
+jsio('import fan.util')
 jsio('import fan.ui.Button')
 jsio('import fan.ui.RadioButtons')
 jsio('import fan.tasks.views.View')
@@ -23,7 +24,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		new fan.ui.Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', gUtil, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
+			.subscribe('Click', fan.util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 	}
 	
 	this.loadQuery = function(query) {
@@ -44,7 +45,7 @@ exports = Class(fan.tasks.views.View, function(supr) {
 		
 		cell.delegateId = itemId
 		
-		gUtil.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
+		fan.util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
 		// TODO fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
 		
 		return cell

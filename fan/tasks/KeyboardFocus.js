@@ -41,7 +41,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	
 	this._createContent = function() {
 		var borderWidth = this._borderWidth
-
+		
 		this._top = this._create({ className: 'piece top', parent: this._element })
 		this._left = this._create({ className: 'piece left', parent: this._element })
 		this._right = this._create({ className: 'piece right', parent: this._element })

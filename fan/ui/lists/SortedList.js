@@ -63,6 +63,7 @@ exports = Class(fan.ui.lists.List, function(supr){
 		supr(this, '_removeItem', arguments)
 		if (this._sortBy) { this._release(itemId, this._sortBy) }
 		if (this._groupBy) { this._release(itemId, this._groupBy) }
+		this._removeCellFromGroup(itemId)
 	}
 	
 	this._onSortPropChange = function(itemId, op, value) {
@@ -81,17 +82,25 @@ exports = Class(fan.ui.lists.List, function(supr){
 		supr(this, '_render')
 	})
 	
+	this._removeCellFromGroup = function(itemID) {
+		var group = this._groupsById[itemID],
+			cell = this._cells[itemID]
+		
+		if (!group || !cell) { return }
+		
+		var holder = group.childNodes[1]
+		holder.removeChild(cell)
+		if (!holder.childNodes.length) {
+			group.style.display = 'none'
+		}
+	}
+	
 	this._onGroupPropChange = function(itemId, op, itemGroup) {
 		var groups = this._groupsByValue,
 			currentGroup = this._groupsById[itemId],
 			newGroup
 		
-		if (currentGroup) { // should we hide current group?
-			var holder = currentGroup.childNodes[1]
-			if (holder.childNodes.length == 1) {
-				currentGroup.style.display = 'none'
-			}
-		}
+		this._removeCellFromGroup(itemId)
 		
 		newGroup = groups[itemGroup]
 		if (!itemGroup) { // was the item removed from a group?

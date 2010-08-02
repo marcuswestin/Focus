@@ -18,8 +18,8 @@ exports = Class(fan.ui.Component, function(supr) {
 		var keys = this.keys,
 			keyMap = this._keyMap
 		
-		keyMap[keys['k']] = keyMap[keys['w']] = keyMap[keys['up arrow']] = bind(this, '_moveFocus', -1) 
-		keyMap[keys['j']] = keyMap[keys['s']] = keyMap[keys['down arrow']] = bind(this, '_moveFocus', 1) 
+		keyMap[keys['k']] = keyMap[keys['up arrow']] = bind(this, '_moveFocus', -1) 
+		keyMap[keys['j']] = keyMap[keys['down arrow']] = bind(this, '_moveFocus', 1) 
 		keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
 		keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
 		

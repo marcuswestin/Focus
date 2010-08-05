@@ -47,4 +47,35 @@ exports = Class(server.Server, function(supr) {
 			}))
 		}))
 	}
+	
+	this.notifySubscribers = function(mutation) {
+		var key = mutation.id,
+			keyInfo = shared.keys.getKeyInfo(key),
+			itemId = keyInfo.id,
+			mutatedProperty = keyInfo.property,
+			subscribersKey = shared.keys.getItemPropertyKey(itemId, fan.keys.subscribers)
+		
+		// Don't create notifications for hidden properties
+		if (mutatedProperty[0] == '_') { return }
+		
+		this.retrieveSet(subscribersKey, bind(this, function(subscribers) {
+			var notificationJSON = JSON.stringify({
+				user: mutation.user,
+				id: itemId,
+				property: mutatedProperty,
+				time: mutation.time,
+				guid: itemId + mutatedProperty + mutation.time
+			})
+			var notificationMutation = {
+				op: 'listAppend',
+				time: mutation.time, 
+				args: [notificationJSON]
+			}
+			logger.info("Send notification mutation to", notificationMutation, subscribers)
+			for (var i=0, userID; userID = subscribers[i]; i++) {
+				notificationMutation.id = shared.keys.getItemPropertyKey(userID, fan.keys.notifications)
+				this.mutateItem(notificationMutation)
+			}
+		}))
+	}
 })

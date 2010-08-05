@@ -27,7 +27,10 @@ util.createNewTask = function(params, callback) {
 	params.done = false
 	params.title = params.title || 'I need to...'
 	params.date = fan.time.endOfDay(fin.now()).getTime()
-	fin.create(params, callback)
+	fin.create(params, function(itemId) {
+		fin.addToSet(itemId, fan.keys.subscribers, gUserId)
+		callback(itemId)
+	})
 }
 
 util.createNewProject = function(callback) {

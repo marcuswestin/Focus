@@ -2,7 +2,7 @@ var sys = require('sys')
 var http = require('http')
 require('../lib/fin/fin')
 
-jsio.path.fan = '.'
+jsio.addPath('.', 'fan')
 
 jsio('import fan.sha1')
 

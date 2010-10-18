@@ -1,4 +1,4 @@
-jsio.path.fan = '.'
+jsio.addPath('./', 'fan')
 
 Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
 Meebo('domReady')

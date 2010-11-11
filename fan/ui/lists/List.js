@@ -16,7 +16,7 @@ exports = Class(fan.ui.Component, function(supr){
 	
 	this.reflectList = function(itemId, propertyName, reverse) {
 		fin.observeList(itemId, propertyName, bind(this, function(mutation) {
-			if (mutation.op == 'listAppend' || mutation.op == 'listPrepend') {
+			if (mutation.op == 'push' || mutation.op == 'unshift') {
 				this.addItems(mutation.args, reverse)
 			}
 		}))

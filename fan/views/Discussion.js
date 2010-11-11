@@ -57,10 +57,10 @@ exports = Class(fan.views.Value, function(supr){
 	this._onListMutation = function(mutation) {
 		var items = mutation.args
 		switch(mutation.op) {
-			case 'listAppend':
+			case 'push':
 				this._list.append(items)
 				break
-			case 'listPrepend':
+			case 'unshift':
 				this._list.prepend(items)
 				break
 		}

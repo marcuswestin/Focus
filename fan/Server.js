@@ -67,7 +67,7 @@ exports = Class(server.Server, function(supr) {
 				guid: itemId + mutatedProperty + mutation.time
 			})
 			var notificationMutation = {
-				op: 'listAppend',
+				op: 'push',
 				time: mutation.time, 
 				args: [notificationJSON]
 			}

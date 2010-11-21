@@ -7,7 +7,7 @@ jsio.addPath('.', 'fan')
 jsio('import fan.Server')
 jsio('import fan.Connection')
 
-var redisEngine = require('../lib/fin/engines/redis')
+var redisEngine = require('../lib/fin/engines/node')
 var fanServer = new fan.Server(fan.Connection, redisEngine)
 
 fanServer.listen('csp', { port: 5555 }) // for browser clients

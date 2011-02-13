@@ -5,9 +5,62 @@
 	<link rel="stylesheet/less" href="index.less" type="text/css" />
 </head>
 <body>
+<script>
+window.bind = function (context, method/*, args... */) {
+	if (!context || !method || (typeof method == 'string' && !context[method])) { throw "bad bind arguments" }
+	var curryArgs = Array.prototype.slice.call(arguments, 2)
+	return function() {
+		fn = (typeof method == 'string' ? context[method] : method)
+		return fn.apply(context, curryArgs.concat(Array.prototype.slice.call(arguments, 0)))
+	}
+}
+
+window.Class = function(parent, proto) {
+	if(!proto) { proto = parent }
+	proto.prototype = parent.prototype
+	
+	var cls = function() { if(this.init) { this.init.apply(this, arguments) }}
+	cls.prototype = new proto(function(context, method, args) {
+		var target = parent
+		while(target = target.prototype) {
+			if(target[method]) {
+				return target[method].apply(context, args || [])
+			}
+		}
+		throw new Error('supr: parent method ' + method + ' does not exist')
+	})
+	
+	// Sometimes you want a method that renders UI to only execute once if it's called 
+	// multiple times within a short time period. Delayed methods do just that
+	cls.prototype.createDelayedMethod = function(methodName, fn) {
+		// "this" is the class
+		this[methodName] = function() {
+			// now "this" is the instance. Each instance gets its own function
+			var executionTimeout
+			this[methodName] = bind(this, function() {
+				clearTimeout(executionTimeout)
+				executionTimeout = setTimeout(bind(fn, 'apply', this, arguments), 10)
+			})
+			this[methodName].apply(this, arguments)
+		}
+	}
+	
+	cls.prototype.constructor = cls
+	return cls
+}
+
+Class.Singleton = function(parent, proto) {
+	return new (Class(parent, proto))()
+}
+
+;(function(){
+	__unique = 1
+	window.unique = function() { return __unique++ }
+})()
+
+</script>
 <script src="./lib/less.js"></script>
-<script src="./lib/fin/fin.js"></script>
-<script src="./index.js"></script>
+<script src="./lib/fin/lib/browser-require/require.js" main="index" id="browser-require"></script>
 <body>
 </body>
 </html>

@@ -20,6 +20,6 @@ var _handleDisconnect = function(client) {
 }
 
 var _handleLogin = function(client, message) {
-	console.log('_handleLogin')
+	console.log('todo: actually _handleLogin')
 	client.send({ event:'authentication', data:{uid:1} })
 }

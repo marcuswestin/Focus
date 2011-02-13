@@ -1,4 +1,4 @@
-window.fin = require('./lib/fin/fin')
+window.fin = require('./lib/fin/api/client')
 
 var views = {
 	Value: require('./fan/views/Value'),

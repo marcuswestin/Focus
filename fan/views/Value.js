@@ -1,8 +1,6 @@
-var util = require('../../lib/fin/js/shared/util'),
-	bind = util.bind,
-	Component = require('../ui/Component')
+var Component = require('../ui/Component')
 
-module.exports = util.Class(Component, function(supr){
+module.exports = Class(Component, function(supr){
 	
 	this._className = 'Value'
 	

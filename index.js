@@ -91,20 +91,5 @@ function openApp() {
 	if (query.getHash()) {
 		gItemPanel.viewTask(query.getHash())
 	}
-	
-	;(function initMeebo(q) {
-		return
-		var d=document,b=d.body,m=b.insertBefore(d.createElement('div'),b.firstChild),s=d.createElement('script');
-		m.id='meebo';m.style.display='none';m.innerHTML='<iframe id="meebo-iframe"></iframe>';
-		s.src='http'+(q.https?'s':'')+'://'+(q.stage?'stage-':'')+'cim.meebo.com/cim/cim.php?network='+q.network;
-		b.insertBefore(s,b.firstChild);
-	})({ network:'everywhere',stage:false })
-	
-	var items = [{ value: 'task', label: 'Create new Task' }, { value: 'project', label: 'Create new Project'}]
-	Meebo('addButton', { type: 'menu', label: 'Create new ...', items: items, onSelect: function(value) {
-		fin.create({ type: value }, function(item) {
-			gItemPanel.setItem(item)
-		})
-	}})
 }
 

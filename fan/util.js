@@ -4,7 +4,7 @@ var _templates = {},
 	_templateQueue = {}
 
 util.withTemplate = function(templateName, callback) {
-	var path = 'templates/' + templateName + '.html'
+	var path = 'fan/templates/' + templateName + '.html'
 	if (_templates[path]) { 
 		callback(_templates[path])
 	} else if (_templateQueue[path]) {

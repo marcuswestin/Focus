@@ -1,8 +1,7 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.Component')
+var Component = require('./Component')
 
 // Do something like http://sexybuttons.googlecode.com/svn/trunk/index.html#
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Link'
 	

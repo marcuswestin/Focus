@@ -2,7 +2,7 @@ jsio('from shared.javascript import Class, bind')
 jsio('import fan.ui.Component')
 
 // Do something like http://sexybuttons.googlecode.com/svn/trunk/index.html#
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(fan.ui.Component, function(supr) {
 	
 	this._className = 'UserIcon'
 	this._domTag = 'span'

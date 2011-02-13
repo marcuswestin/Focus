@@ -1,9 +1,8 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.views.Value')
-jsio('import fan.ui.Component')
-jsio('import fan.util')
+var Class = require('../Class'),
+	ValueView = require('./Value'),
+	Component = require('../ui/Component')
 
-exports = Class(fan.views.Value, function(supr) {
+module.exports = Class(ValueView, function(supr) {
 	
 	this._className += ' Editable'
 	this._padding = 4
@@ -56,7 +55,7 @@ exports = Class(fan.views.Value, function(supr) {
 				style = { marginRight: '4px' },
 				msgNode = this._create({ text: text, style: style })
 			
-			new fan.ui.Component('span')
+			new Component('span')
 				.reflect(focusInfo.user, 'name', { pre: ' ' })
 				.appendTo(msgNode)
 			

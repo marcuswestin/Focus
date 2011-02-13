@@ -1,8 +1,7 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import client.caret')
-jsio('import fan.views.Value')
+var Class = require('../Class'),
+	ValueView = require('./Value')
 
-exports = Class(fan.views.Value, function(supr){
+module.exports = Class(ValueView, function(supr){
 	
 	this._domTag = 'textarea'
 	this.className += ' Input'

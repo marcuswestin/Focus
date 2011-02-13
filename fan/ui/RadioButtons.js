@@ -1,7 +1,6 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.Component')
+var Component = require('./Component')
 
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._className = 'RadioButtons'
 	
@@ -15,7 +14,7 @@ exports = Class(fan.ui.Component, function(supr) {
 	this.addButton = function(props) {
 		var className = 'Button ' + (props.className ? ' ' + props.className : '')
 			el = this._create({ className: className, text: props.text, parent: this.getElement() }),
-			delegateId = fin.unique(),
+			delegateId = unique(),
 			buttons = this._buttons
 		
 		this._makeUnselectable(el)

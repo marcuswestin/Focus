@@ -7,7 +7,7 @@ jsio('import fan.tasks.views.View')
 jsio('import fan.tasks.views.ProjectItemView')
 jsio('import fan.ui.lists.SortedList')
 
-exports = Class(fan.tasks.views.View, function(supr) {
+module.exports = Class(fan.tasks.views.View, function(supr) {
 	
 	this._className += ' ProjectsView'
 	

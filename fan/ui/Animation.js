@@ -1,6 +1,6 @@
 jsio('from shared.javascript import Class, bind');
 
-exports = Class(function(){
+module.exports = Class(function(){
 	
 	this.init = function(animateFn, duration) {
 		this._animateFn = animateFn;

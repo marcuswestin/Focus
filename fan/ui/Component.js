@@ -1,9 +1,9 @@
-jsio('from shared.javascript import Class')
-jsio('import shared.Publisher')
+var Class = require('../Class'),
+	Publisher = require('../Publisher')
 
 _focusables = {}
 
-exports = Class(shared.Publisher, function(supr) {
+module.exports = Class(Publisher, function(supr) {
 	
 	this._domTag = 'div'
 	this._domType = null
@@ -101,7 +101,7 @@ exports = Class(shared.Publisher, function(supr) {
 	// UI Components need to be made focusable for fan.tasks.KeyboardFocus to find them
 	this._makeFocusable = function(el) {
 		if (!el) { el = this._element }
-		var focusableId = el['fan-focusableId'] = fin.unique()
+		var focusableId = el['fan-focusableId'] = unique()
 		_focusables[focusableId] = this
 		this.addClassName(el, 'fan-focusable')
 	}

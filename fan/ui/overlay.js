@@ -1,8 +1,8 @@
-jsio('from shared.javascript import Singleton, bind')
-jsio('import fan.ui.resizeManager')
-jsio('import fan.ui.Component')
+var Singleton = require('../Class').Singleton,
+	Component = require('./Component'),
+	resizeManager = require('./resizeManager')
 
-exports = Singleton(fan.ui.Component, function(supr) {
+module.exports = Singleton(Component, function(supr) {
 	
 	this._className = 'Overlay'
 	
@@ -27,7 +27,7 @@ exports = Singleton(fan.ui.Component, function(supr) {
 		
 		underlay.style.opacity = dontLightbox ? .15 : .89;
 		document.body.appendChild(el)
-		fan.ui.resizeManager.addDependant(this._resizeCallback)
+		resizeManager.addDependant(this._resizeCallback)
 		if (dontLightbox) { this._on(underlay, 'click', bind(this, 'hide')) }
 	}
 	

@@ -1,8 +1,6 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.Component')
-jsio('import fan.ui.resizeManager')
+var Component = require('../../ui/Component')
 
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._className = 'View'
 	this._headerHeight = 40

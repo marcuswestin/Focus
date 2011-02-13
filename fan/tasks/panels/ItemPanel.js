@@ -1,16 +1,15 @@
-jsio('from shared.javascript import Class, capitalize')
-jsio('import fan.tasks.panels.Panel')
-jsio('import fan.tasks.views.TaskItemView')
-jsio('import fan.query')
+var Panel = require('./Panel'),
+	query = require('../../query'),
+	TaskItemView = require('../views/TaskItemView')
 
-exports = Class(fan.tasks.panels.Panel, function(supr) {
+module.exports = Class(Panel, function(supr) {
 	
 	this._className += ' ItemPanel'
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
 		this.position(this._lastLeft, this._lastMaxWidth)
-		fan.query.subscribe('HashChanged', this, '_onHashChanged')
+		query.subscribe('HashChanged', this, '_onHashChanged')
 	}
 	
 	this._onHashChanged = function(newItemId) {
@@ -36,8 +35,8 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 			currentTaskId = currentView && currentView.getTaskId && currentView.getTaskId()
 		
 		if (currentTaskId == taskItemId) { return }
-		var view = new fan.tasks.views.TaskItemView(taskItemId)
+		var view = new TaskItemView(taskItemId)
 		this.setView(view)
-		fan.query.setHash(taskItemId)
+		query.setHash(taskItemId)
 	}
 })

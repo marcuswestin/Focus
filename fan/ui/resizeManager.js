@@ -1,6 +1,4 @@
-jsio('from shared.javascript import Singleton, bind')
-
-exports = Singleton(function(){
+module.exports = Class.Singleton(function(){
 	
 	this.init = function() {
 		this._resizeCallbacks = []

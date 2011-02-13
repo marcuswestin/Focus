@@ -1,7 +1,6 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.RadioButtons')
+var RadioButtons = require('./RadioButtons')
 
-exports = Class(fan.ui.RadioButtons, function(supr) {
+module.exports = Class(RadioButtons, function(supr) {
 	
 	this.init = function(trueLabel, falseLabel) {
 		supr(this, 'init')

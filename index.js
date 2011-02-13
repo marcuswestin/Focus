@@ -1,87 +1,81 @@
-jsio.addPath('./', 'fan')
+window.fin = require('./lib/fin/fin')
 
-Meebo=function(){(Meebo._=Meebo._||[]).push(arguments)};
-Meebo('domReady')
+var views = {
+	Value: require('./fan/views/Value'),
+	Input: require('./fan/views/Input'),
+	Checkbox: require('./fan/views/Checkbox'),
+	Conditional: require('./fan/views/Conditional'),
+	Editable: require('./fan/views/Editable'),
+	ItemSetSelect: require('./fan/views/ItemSetSelect'),
+	DatePicker: require('./fan/views/DatePicker'),
+	Discussion: require('./fan/views/Discussion')
+}
+
+var ViewFactory = require('./fan/ViewFactory')
+
+ViewFactory.registerView('Value', views.Value)
+ViewFactory.registerView('Number', views.Value) // TODO Create number view that only accepts number input
+ViewFactory.registerView('Conditional', views.Conditional)
+ViewFactory.registerView('Input', views.Input)
+ViewFactory.registerView('Checkbox', views.Checkbox)
+ViewFactory.registerView('Editable', views.Editable)
+ViewFactory.registerView('ItemSetSelect', views.ItemSetSelect)
+ViewFactory.registerView('DatePicker', views.DatePicker)
+ViewFactory.registerView('Discussion', views.Discussion)
+
+var LoginManager = require('./fan/tasks/LoginManager'),
+	KeyboardFocus = require('./fan/tasks/KeyboardFocus'),
+	ListPanel = require('./fan/tasks/panels/ListPanel'),
+	ItemPanel = require('./fan/tasks/panels/ItemPanel'),
+	info = require('./fan/ui/info'),
+	overlay = require('./fan/ui/overlay'),
+	resizeManager = require('./fan/ui/resizeManager')
+
+var query = require('./fan/query')
+	time = require('./fan/time'),
+	keys = require('./fan/keys')
 
 window.gBody = document.body
 window.gUserId = null
 window.gUserIconUrl = null
 
-jsio('import fan.views.Value')
-jsio('import fan.views.Input')
-jsio('import fan.views.Checkbox')
-jsio('import fan.views.Conditional')
-jsio('import fan.views.Editable')
-jsio('import fan.views.ItemSetSelect')
-jsio('import fan.views.DatePicker')
-jsio('import fan.views.Discussion')
+// if (fan.ui.info.isTouch) {
+// 	jsio('import fan.ui.touch')
+// 	new fan.ui.touch.Body()
+// }
 
-fin.registerView('Value', fan.views.Value)
-fin.registerView('Number', fan.views.Value) // TODO Create number view that only accepts number input
-fin.registerView('Conditional', fan.views.Conditional)
-fin.registerView('Input', fan.views.Input)
-fin.registerView('Checkbox', fan.views.Checkbox)
-fin.registerView('Editable', fan.views.Editable)
-fin.registerView('ItemSetSelect', fan.views.ItemSetSelect)
-fin.registerView('DatePicker', fan.views.DatePicker)
-fin.registerView('Discussion', fan.views.Discussion)
+window.gLoginManager = new LoginManager()
 
-jsio('import fan.tasks.LoginManager')
-jsio('import fan.tasks.KeyboardFocus')
-jsio('import fan.tasks.panels.ListPanel')
-jsio('import fan.tasks.panels.ItemPanel')
-jsio('import fan.ui.info')
-jsio('import fan.ui.overlay')
-jsio('import fan.ui.resizeManager')
-
-jsio('import fan.query')
-jsio('import fan.time')
-jsio('import fan.keys')
-
-jsio('import client.xhr')
-
-if (fan.ui.info.isTouch) {
-	jsio('import fan.ui.touch')
-	new fan.ui.touch.Body()
-}
-
-window.gLoginManager = new fan.tasks.LoginManager()
-
-fin.registerEventHandler('FAN_AUTHENTICATION_DEMAND', function() {
-	fan.ui.overlay.show(gLoginManager.getElement())
+fin.handle('authenticate', function() {
+	overlay.show(gLoginManager.getElement())
+	fin.request('login', { uid:'marcus' })
 })
 
-fin.registerEventHandler('FAN_AUTHENTICATION_RESPONSE', function(response) {
-	gLoginManager.enable()
-	if (response.authenticated) {
-		gUserId = response.id
+fin.handle('authentication', function(data) {
+	if (data.uid) {
+		gUserId = data.uid
 		fin.observe(gUserId, 'iconUrl', function(op, iconUrl) { gUserIconUrl = iconUrl })
 		openApp()
 	} else {
-		alert("That didn't work.\n\n" + response.reason)
+		alert('could not log in')
 	}
 })
 
-gLoginManager.subscribe('Login', this, function(email, passwordHash) {
-	gLoginManager.disable()
-	fin.send('FAN_AUTHENTICATION_REQUEST', { email: email, password_hash: passwordHash })
-})
-
 fin.connect(function(){
-	window.gListPanel = new fan.tasks.panels.ListPanel()
-	window.gItemPanel = new fan.tasks.panels.ItemPanel()
+	window.gListPanel = new ListPanel()
+	window.gItemPanel = new ItemPanel()
 	window.gPanels = [gListPanel, gItemPanel]
-	window.gKeyboardFocus = new fan.tasks.KeyboardFocus()
+	window.gKeyboardFocus = new KeyboardFocus()
 	
 	gListPanel.subscribe('Resize', this, function(takenWidth) {
-		var winSize = fan.ui.resizeManager.getWindowSize()
+		var winSize = resizeManager.getWindowSize()
 		takenWidth += 50
 		gItemPanel.position(takenWidth, winSize.w - takenWidth)
 	})
 })
 
 function openApp() {
-	fan.ui.overlay.remove()
+	overlay.remove()
 
 	if (openApp.initialized) { return }
 	openApp.initialized = true
@@ -94,8 +88,8 @@ function openApp() {
 	
 	gListPanel.appendTo(gBody)
 	
-	if (fan.query.getHash()) {
-		gItemPanel.viewTask(fan.query.getHash())
+	if (query.getHash()) {
+		gItemPanel.viewTask(query.getHash())
 	}
 	
 	;(function initMeebo(q) {

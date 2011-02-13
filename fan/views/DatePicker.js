@@ -1,9 +1,7 @@
-jsio('from shared.javascript import Class, bind, forEach')
-jsio('import fan.views.Value')
-jsio('import fan.time')
-jsio('import fan.ui.overlay')
+var Class = require('../Class'),
+	ValueView = require('./Value')
 
-exports = Class(fan.views.Value, function(supr){
+module.exports = Class(ValueView, function(supr){
 	
 	this._className += ' DatePicker'
 	this._days = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa']

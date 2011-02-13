@@ -1,7 +1,7 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.views.Value')
-
-exports = Class(fan.views.Value, function(supr){
+var Class = require('../Class'),
+	ValueView = require('./Value')
+	
+module.exports = Class(ValueView, function(supr){
 	
 	this._domTag = 'input'
 	this._domType = 'checkbox'

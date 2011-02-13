@@ -1,7 +1,6 @@
-jsio('from shared.javascript import bind, Singleton')
-jsio('import shared.Publisher')
+var Publisher = require('./Publisher')
 
-var query = exports = new shared.Publisher(),
+var query = module.exports = new Publisher(),
 	_location = window.location
 
 query.getHash = function() { return _location.hash.substr(1) }

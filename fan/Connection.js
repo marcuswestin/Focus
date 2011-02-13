@@ -3,7 +3,7 @@ jsio('import shared.keys')
 jsio('import fan.time')
 jsio('import fan.keys')
 
-exports = Class(server.Connection, function(supr) {
+module.exports = Class(server.Connection, function(supr) {
 
 	this.init = function() {
 		supr(this, 'init', arguments)

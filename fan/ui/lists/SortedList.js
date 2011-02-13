@@ -1,5 +1,4 @@
-jsio('from shared.javascript import Class, bind, delayedFunction')
-jsio('import fan.ui.lists.List')
+var List = require('./List')
 
 var SortableItem = Class(function() {
 	this.init = function(id) { this._id = id }
@@ -12,7 +11,7 @@ var SortableItem = Class(function() {
 })
 
 // TODO Move all the methods of this SortedList into List
-exports = Class(fan.ui.lists.List, function(supr){
+module.exports = Class(List, function(supr){
 	
 	this._className += ' SortedList'
 	

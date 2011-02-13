@@ -1,17 +1,15 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.util')
-jsio('import fan.ui.Button')
-jsio('import fan.ui.RadioButtons')
-jsio('import fan.tasks.views.View')
-jsio('import fan.ui.lists.SortedList')
+var View = require('./View'),
+	RadioButtons = require('../../ui/RadioButtons'),
+	Button = require('../../ui/Button'),
+	SortedList = require('../../ui/lists/SortedList'),
+	util = require('../../util')
 
-
-exports = Class(fan.tasks.views.View, function(supr) {
+module.exports = Class(View, function(supr) {
 	
 	this._className += ' TasksListView'
 	
 	this._buildHeader = function() {
-		new fan.ui.RadioButtons()
+		new RadioButtons()
 			.addButton({ text: 'Tasks', payload: { status: {op:'!=', value:'done'}, type: 'task', user: gUserId } })
 			// .addButton({ text: 'Today' })
 			// .addButton({ text: 'Crucial' })
@@ -21,16 +19,16 @@ exports = Class(fan.tasks.views.View, function(supr) {
 			.appendTo(this._header)
 			.select(0)
 		
-		new fan.ui.Button('New task')
+		new Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
-			.subscribe('Click', fan.util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
+			.subscribe('Click', util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 	}
 	
 	this.loadQuery = function(query) {
 		if (this._listView) { logger.log("TODO Release view!") }
 		this._body.innerHTML = ''
-		this._listView = new fan.ui.lists.SortedList(bind(this, '_getCellFor'))
+		this._listView = new SortedList(bind(this, '_getCellFor'))
 			.query(query)
 			// TODO .sortBy('crucial')
 			.groupBy('project', 'title')

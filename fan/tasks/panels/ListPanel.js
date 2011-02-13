@@ -1,25 +1,18 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.resizeManager')
-jsio('import fan.tasks.panels.Panel')
-jsio('import fan.ui.RadioButtons')
-jsio('import fan.ui.Button')
+var Panel = require('./Panel'),
+	TasksListView = require('../views/TasksListView'),
+	CalendarView = require('../views/CalendarView'),
+	NewsView = require('../views/NewsView'),
+	RadioButtons = require('../../ui/RadioButtons')
 
-jsio('import fan.tasks.views.TasksListView')
-jsio('import fan.tasks.views.ProjectsListView')
-jsio('import fan.tasks.views.CalendarView')
-jsio('import fan.tasks.views.NewsView')
-// jsio('import fan.tasks.views.CoworkersView')
-// jsio('import fan.tasks.views.AccomplishmentsView')
-
-exports = Class(fan.tasks.panels.Panel, function(supr) {
+module.exports = Class(Panel, function(supr) {
 
 	this._className += ' ListPanel'
 	
 	this._viewCtors = {
-		'tasks': fan.tasks.views.TasksListView,
+		'tasks': TasksListView,
 		// 'projects': fan.tasks.views.ProjectsListView,
-		'calendar': fan.tasks.views.CalendarView,
-		'news': fan.tasks.views.NewsView,
+		'calendar': CalendarView,
+		'news': NewsView,
 		// 'coworkers': fan.tasks.views.CoworkersView,
 		// 'accomplishments': fan.tasks.views.AccomplishmentsView
 	}
@@ -30,7 +23,7 @@ exports = Class(fan.tasks.panels.Panel, function(supr) {
 		
 		this._views = {}
 		
-		this._apps = new fan.ui.RadioButtons()
+		this._apps = new RadioButtons()
 			.addButton(this._getButton('tasks'))
 			.addButton(this._getButton('calendar'))
 			// .addButton(this._getButton('projects'))

@@ -1,17 +1,12 @@
-jsio('from shared.javascript import Class')
+var RadioButtons = require('../../ui/RadioButtons'),
+	BooleanButton = require('../../ui/BooleanButton')
+	View = require('../../views/Value'),
+	Editable = require('../../views/Editable'),
+	ItemSetSelect = require('../../views/ItemSetSelect'),
+	DatePicker = require('../../views/DatePicker'),
+	Discussion = require('../../views/Discussion')
 
-jsio('import fan.keys')
-
-jsio('import fan.ui.RadioButtons')
-jsio('import fan.ui.BooleanButton')
-jsio('import fan.tasks.views.View')
-
-jsio('import fan.views.Editable')
-jsio('import fan.views.ItemSetSelect')
-jsio('import fan.views.DatePicker')
-jsio('import fan.views.Discussion')
-
-exports = Class(fan.tasks.views.View, function(supr) {
+module.exports = Class(View, function(supr) {
 	
 	this._className += ' TaskItemView'
 	this._minWidth = 390

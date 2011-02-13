@@ -2,7 +2,7 @@ jsio('from shared.javascript import Class, bind, recall')
 jsio('import fan.ui.lists.List')
 jsio('import fan.time')
 
-exports = Class(fan.ui.lists.List, function(supr){
+module.exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._className += ' CalendarList'
 	

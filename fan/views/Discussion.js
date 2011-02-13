@@ -1,13 +1,7 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.views.Value')
-jsio('import fan.ui.lists.List')
-jsio('import fan.ui.Button')
-jsio('import fan.ui.Component')
-jsio('import fan.ui.Input')
-jsio('import fan.ui.UserIcon')
-jsio('import fan.time')
+var Class = require('../Class'),
+	ValueView = require('./Value')
 
-exports = Class(fan.views.Value, function(supr){
+module.exports = Class(ValueView, function(supr){
 	
 	this._createContent = function() {
 		this._createMessageBox()

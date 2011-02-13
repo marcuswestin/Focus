@@ -1,7 +1,7 @@
-jsio('from shared.javascript import Class, bind, forEach')
-jsio('import fan.views.Value')
+var Class = require('../Class'),
+	ValueView = require('./Value')
 
-exports = Class(fan.views.Value, function(supr){
+module.exports = Class(ValueView, function(supr){
 	
 	this._className += ' ItemSetSelect'
 	

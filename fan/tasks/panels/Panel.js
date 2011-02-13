@@ -1,14 +1,13 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.Component')
-jsio('import fan.ui.resizeManager')
+var Component = require('../../ui/Component'),
+	resizeManager = require('../../ui/resizeManager')
 
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Panel'
 	this._width = null // override
 	
 	this._createContent = function() {
-		fan.ui.resizeManager.addDependant(bind(this, '_onWindowResize'))
+		resizeManager.addDependant(bind(this, '_onWindowResize'))
 	}
 	
 	this._onWindowResize = function(winSize) {

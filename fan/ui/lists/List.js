@@ -1,7 +1,6 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.ui.Component')
+var Component = require('../Component')
 
-exports = Class(fan.ui.Component, function(supr){
+module.exports = Class(Component, function(supr){
 	
 	this._className = 'List'
 	

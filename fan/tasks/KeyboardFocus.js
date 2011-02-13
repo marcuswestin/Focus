@@ -1,9 +1,7 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.util')
-jsio('import fan.ui.Component')
+var Component = require('../ui/Component'),
+	util = require('../util')
 
-
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._className = 'KeyboardFocus'
 	this._borderWidth = 7
@@ -25,7 +23,7 @@ exports = Class(fan.ui.Component, function(supr) {
 		keyMap[keys['a']] = keyMap[keys['left arrow']] = bind(this, '_movePanel', -1)
 		keyMap[keys['d']] = keyMap[keys['right arrow']] = bind(this, '_movePanel', 1)
 		
-		keyMap[keys['c']] = bind(fan.util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
+		keyMap[keys['c']] = bind(util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
 		keyMap[keys['enter']] = bind(this, '_selectFocusedItem')
 		
 		keyMap[keys['tab']] = bind(this, '_tabMovePanel')

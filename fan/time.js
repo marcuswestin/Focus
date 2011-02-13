@@ -1,7 +1,6 @@
-jsio('from shared.javascript import Class, bind')
-jsio('import fan.ui.Component')
+var time = module.exports = {}
 
-var time = exports
+var Component = require('./ui/Component')
 
 time.seconds = 1000
 time.minutes = time.seconds * 60
@@ -26,7 +25,7 @@ time.getDayOffset = function(timestamp, callback, clearTimeoutId) {
 		updateIn = normalizedTomorrow.getTime() - now.getTime()
 	
 	callback(days)
-	if (!clearTimeoutId) { clearTimeoutId = fin.unique() }
+	if (!clearTimeoutId) { clearTimeoutId = unique() }
 	offsetTimeouts[clearTimeoutId] = setTimeout(bind(time, 'getDayOffset', timestamp, callback, clearTimeoutId), updateIn)
 	
 	return function() { clearTimeout(offsetTimeouts[clearTimeoutId]) }
@@ -49,7 +48,7 @@ time.endOfDay = function(date) {
 	return date
 }
 
-time.TimeString = Class(fan.ui.Component, function(supr) {
+time.TimeString = Class(Component, function(supr) {
 	
 	this._className = 'TimeString'
 	this._domTag = 'span'

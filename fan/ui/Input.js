@@ -1,8 +1,6 @@
-jsio('from shared.javascript import Class');
+var Component = require('./Component')
 
-jsio('import fan.ui.Component');
-
-exports = Class(fan.ui.Component, function(supr) {
+module.exports = Class(Component, function(supr) {
 	
 	this._domTag = 'textarea'
 	this._className = 'Input'

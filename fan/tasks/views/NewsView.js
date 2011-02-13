@@ -1,17 +1,6 @@
-jsio('from shared.javascript import Class')
-jsio('import fan.ui.Button')
-jsio('import fan.ui.RadioButtons')
-jsio('import fan.tasks.views.View')
-jsio('import fan.ui.lists.List')
-jsio('import fan.ui.Component')
-jsio('import fan.ui.UserIcon')
+var View = require('./View')
 
-
-jsio('import fan.keys')
-jsio('import fan.time')
-
-
-exports = Class(fan.tasks.views.View, function(supr) {
+module.exports = Class(View, function(supr) {
 	
 	this._className += ' NewsView'
 	

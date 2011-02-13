@@ -1,12 +1,8 @@
-jsio('from shared.javascript import Class, forEach')
-// jsio('import fan.ui.Button')
-// jsio('import fan.ui.RadioButtons')
-jsio('import fan.tasks.views.View')
-jsio('import fan.ui.lists.CalendarList')
+var View = require('./View')
 
-fin.date = {}
+var date = {}
 
-exports = Class(fan.tasks.views.View, function(supr) {
+module.exports = Class(View, function(supr) {
 	
 	this._className += ' CalendarView'
 	
@@ -14,11 +10,11 @@ exports = Class(fan.tasks.views.View, function(supr) {
 	this._maxWidth = 800
 	
 	this._groups = {
-		'Overdue': fin.date.BeforeToday,
-		'Today': fin.date.Today,
-		'Tomorrow': fin.date.Tomorrow,
-		'Even later': fin.date.AfterTomorrow,
-		'Unscheduled': fin.date.None
+		'Overdue': date.BeforeToday,
+		'Today': date.Today,
+		'Tomorrow': date.Tomorrow,
+		'Even later': date.AfterTomorrow,
+		'Unscheduled': date.None
 	}
 	
 	this.init = function() {

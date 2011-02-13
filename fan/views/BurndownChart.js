@@ -1,7 +1,7 @@
 jsio('from shared.javascript import Class, bind')
 jsio('import fan.views.Value')
 
-exports = Class(fan.views.Value, function(supr) {
+module.exports = Class(fan.views.Value, function(supr) {
 	
 	this._className += ' BurndownChart'
 	

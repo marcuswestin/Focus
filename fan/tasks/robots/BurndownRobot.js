@@ -1,6 +1,6 @@
 jsio('from shared.javascript import Class, bind, forEach')
 
-exports = Class(function() {
+module.exports = Class(function() {
 	
 	this.init = function() {
 		fin.query({ type: 'project' }, bind(this, '_onProjectsChange'))

@@ -33,7 +33,7 @@ clean:
 
 lib/fin:
 	git clone git://github.com/marcuswestin/fin.git lib/fin
-	cd lib/fin; make
+	cd lib/fin; git checkout 095eaca5cac1d63fbbbef138812e5e930e8b0942; make
 
 lib/less.js:
 	curl http://lesscss.googlecode.com/files/less-1.0.18.min.js > lib/less.js

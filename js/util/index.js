@@ -3,7 +3,7 @@ var keys = require('./keys')
 var util = module.exports = {
 	time: require('./time'),
 	sha1: require('./sha1'),
-	Publisher = require('./Publisher')
+	Publisher: require('./Publisher')
 }
 
 var _templates = {},

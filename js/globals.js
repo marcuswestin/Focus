@@ -1,4 +1,16 @@
-var Class = module.exports = function(parent, proto) {
+// Knowingly expose all of these globally...
+global.fin = require('../lib/fin/api/client')
+
+global.bind = function (context, method/*, args... */) {
+	if (!context || !method || (typeof method == 'string' && !context[method])) { throw "bad bind arguments" }
+	var curryArgs = Array.prototype.slice.call(arguments, 2)
+	return function() {
+		fn = (typeof method == 'string' ? context[method] : method)
+		return fn.apply(context, curryArgs.concat(Array.prototype.slice.call(arguments, 0)))
+	}
+}
+
+global.Class = function(parent, proto) {
 	if(!proto) { proto = parent }
 	proto.prototype = parent.prototype
 	
@@ -35,3 +47,8 @@ var Class = module.exports = function(parent, proto) {
 Class.Singleton = function(parent, proto) {
 	return new (Class(parent, proto))()
 }
+
+;(function(){
+	__unique = 1
+	global.unique = function() { return __unique++ }
+})()

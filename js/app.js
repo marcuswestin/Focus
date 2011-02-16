@@ -1,4 +1,4 @@
-window.fin = require('../lib/fin/api/client')
+require('./globals')
 
 var views = {
 	Value: require('./views/Value'),

@@ -1,17 +1,17 @@
-window.fin = require('./lib/fin/api/client')
+window.fin = require('../lib/fin/api/client')
 
 var views = {
-	Value: require('./fan/views/Value'),
-	Input: require('./fan/views/Input'),
-	Checkbox: require('./fan/views/Checkbox'),
-	Conditional: require('./fan/views/Conditional'),
-	Editable: require('./fan/views/Editable'),
-	ItemSetSelect: require('./fan/views/ItemSetSelect'),
-	DatePicker: require('./fan/views/DatePicker'),
-	Discussion: require('./fan/views/Discussion')
+	Value: require('./views/Value'),
+	Input: require('./views/Input'),
+	Checkbox: require('./views/Checkbox'),
+	Conditional: require('./views/Conditional'),
+	Editable: require('./views/Editable'),
+	ItemSetSelect: require('./views/ItemSetSelect'),
+	DatePicker: require('./views/DatePicker'),
+	Discussion: require('./views/Discussion')
 }
 
-var ViewFactory = require('./fan/ViewFactory')
+var ViewFactory = require('./ViewFactory')
 
 ViewFactory.registerView('Value', views.Value)
 ViewFactory.registerView('Number', views.Value) // TODO Create number view that only accepts number input
@@ -23,17 +23,17 @@ ViewFactory.registerView('ItemSetSelect', views.ItemSetSelect)
 ViewFactory.registerView('DatePicker', views.DatePicker)
 ViewFactory.registerView('Discussion', views.Discussion)
 
-var LoginManager = require('./fan/tasks/LoginManager'),
-	KeyboardFocus = require('./fan/tasks/KeyboardFocus'),
-	ListPanel = require('./fan/tasks/panels/ListPanel'),
-	ItemPanel = require('./fan/tasks/panels/ItemPanel'),
-	info = require('./fan/ui/info'),
-	overlay = require('./fan/ui/overlay'),
-	resizeManager = require('./fan/ui/resizeManager')
+var LoginManager = require('./tasks/LoginManager'),
+	KeyboardFocus = require('./tasks/KeyboardFocus'),
+	ListPanel = require('./tasks/panels/ListPanel'),
+	ItemPanel = require('./tasks/panels/ItemPanel'),
+	info = require('./ui/info'),
+	overlay = require('./ui/overlay'),
+	resizeManager = require('./ui/resizeManager')
 
-var query = require('./fan/query')
-	time = require('./fan/time'),
-	keys = require('./fan/keys')
+var query = require('./query')
+	time = require('./time'),
+	keys = require('./keys')
 
 window.gBody = document.body
 window.gUserID = null

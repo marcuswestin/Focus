@@ -25,12 +25,12 @@ module.exports = Class(View, function(supr) {
 		var leftColumn = this._create({ className: 'left-column', parent: this._body }),
 			rightColumn = this._create({ className: 'right-column', parent: this._body })
 		
-		this._titleView = new fan.views.Editable([this._itemId, 'title'])
+		this._titleView = new Editable([this._itemId, 'title'])
 			.addClassName('title')
 			.createLabel('Task')
 			.appendTo(leftColumn)
 		
-		this._statusButtons = new fan.ui.RadioButtons()
+		this._statusButtons = new RadioButtons()
 			.addButton({ text: 'Normal', payload: null })
 			.addButton({ text: 'Urgent', payload: 'urgent' })
 			.addButton({ text: 'Backlog', payload: 'backlog' })
@@ -39,33 +39,33 @@ module.exports = Class(View, function(supr) {
 			.createLabel('Status')
 			.appendTo(leftColumn)
 		
-		this._notifyMe = new fan.ui.BooleanButton("Notify me", "Don't bother")
-			.reflectSetMembership(this._itemId, fan.keys.subscribers, gUserId)
+		this._notifyMe = new BooleanButton("Notify me", "Don't bother")
+			.reflectSetMembership(this._itemId, 'users', gUserID)
 			.createLabel('When changes are made')
 			.appendTo(leftColumn)
 		
-		this._userSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'user', 'name'])
-			.addClassName('user')
-			.createLabel('Owner')
-			.appendTo(leftColumn)
+		// this._userSelect = new ItemSetSelect([this._itemId, 'type', 'user', 'name'])
+		// 	.addClassName('user')
+		// 	.createLabel('Owner')
+		// 	.appendTo(leftColumn)
+		// 
+		// this._projectSelect = new ItemSetSelect([this._itemId, 'type', 'project', 'title'])
+		// 	.addClassName('project')
+		// 	.createLabel('Project')
+		// 	.appendTo(leftColumn)
 		
-		this._projectSelect = new fan.views.ItemSetSelect([this._itemId, 'type', 'project', 'title'])
-			.addClassName('project')
-			.createLabel('Project')
-			.appendTo(leftColumn)
-		
-		this._datePicker = new fan.views.DatePicker([this._itemId, 'date'])
+		this._datePicker = new DatePicker([this._itemId, 'date'])
 			.addClassName('date')
 			.createLabel('Due date')
 			.appendTo(leftColumn)
 		
-		this._descriptionView = new fan.views.Editable([this._itemId, 'description'])
+		this._descriptionView = new Editable([this._itemId, 'description'])
 			.addClassName('description')
 			.createLabel('Description')
 			.appendTo(leftColumn)
 		
-		this._discussion = new fan.views.Discussion([this._itemId, 'comments'])
-			.addClassName('discussion')
-			.appendTo(rightColumn)
+		// this._discussion = new Discussion([this._itemId, 'comments'])
+		// 	.addClassName('discussion')
+		// 	.appendTo(rightColumn)
 	}
 })

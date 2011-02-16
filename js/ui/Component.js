@@ -1,5 +1,5 @@
 var Class = require('../Class'),
-	Publisher = require('../Publisher')
+	Publisher = require('../util').Publisher
 
 _focusables = {}
 

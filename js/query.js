@@ -1,4 +1,4 @@
-var Publisher = require('./Publisher')
+var Publisher = require('./util').Publisher
 
 var query = module.exports = new Publisher(),
 	_location = window.location

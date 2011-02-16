@@ -89,7 +89,7 @@ function openApp() {
 	gListPanel.appendTo(gBody)
 	
 	if (query.getHash()) {
-		gItemPanel.viewTask(query.getHash())
+		gItemPanel.viewTask(parseInt(query.getHash()))
 	}
 }
 

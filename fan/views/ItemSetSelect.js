@@ -50,7 +50,7 @@ module.exports = Class(ValueView, function(supr){
 				for (var i=0, option; option = selectEl.options[i]; i++) {
 					if (option.value != itemId) { continue }
 					selectEl.remove(i)
-					logger.warn("TODO Remove dependant from item for title")
+					console.warn("TODO Remove dependant from item for title")
 					break
 				}
 				delete this._options[itemId]

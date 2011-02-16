@@ -27,7 +27,7 @@ module.exports = Class(ValueView, function(supr){
 			.appendTo(messageBox)
 			.subscribe('Submit', this, '_submit')
 		
-		new fan.ui.UserIcon(gUserId)
+		new fan.ui.UserIcon(gUserID)
 			.appendTo(messageBox)
 		
 		new fan.ui.Button("Comment")
@@ -44,7 +44,7 @@ module.exports = Class(ValueView, function(supr){
 	this._submit = function() {
 		var message = this._input.getValue()
 		if (!message) { return }
-		fin.prependToList(this._itemId, this._property, { message: message, user: gUserId, timestamp: fin.now() })
+		fin.prependToList(this._itemId, this._property, { message: message, user: gUserID, timestamp: fin.now() })
 		this._input.clear()
 	}
 	

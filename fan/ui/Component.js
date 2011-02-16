@@ -94,7 +94,6 @@ module.exports = Class(Publisher, function(supr) {
 		for (var key in styleProps) { elStyle[key] = styleProps[key] }
 		return this
 	}
-	
 /***************************
  * Focusable UI Components *
  ***************************/

@@ -35,7 +35,7 @@ module.exports = Class(fan.tasks.views.View, function(supr) {
 
 		var query = { type: 'task', status: null, project: this._itemId }
 		new fan.ui.lists.SortedList(bind(this, '_createCell'))
-			.query(query)
+			.reflectSortedSet(query)
 			// TODO .sortBy('priority')
 			.subscribe('Click', gItemPanel, 'viewTask')
 			.appendTo(body)
@@ -46,11 +46,7 @@ module.exports = Class(fan.tasks.views.View, function(supr) {
 			cell = this._create({ className: 'cell' })
 		
 		cell.delegateId = itemId
-		fan.util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
+		// fan.util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
 		return cell
-	}
-	
-	this._applyTemplate = function(cell, itemId, template) {
-		cell.appendChild(fin.applyTemplate(template, itemId))
 	}
 })

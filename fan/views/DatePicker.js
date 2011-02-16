@@ -1,5 +1,8 @@
 var Class = require('../Class'),
-	ValueView = require('./Value')
+	ValueView = require('./Value'),
+	time = require('../time'),
+	util = require('../util'),
+	overlay = require('../ui/overlay')
 
 module.exports = Class(ValueView, function(supr){
 	
@@ -17,7 +20,7 @@ module.exports = Class(ValueView, function(supr){
 	
 	this._onDateChange = function(mutation, newValue) {
 		if (!this._timeString) { 
-			this._timeString = new fan.time.TimeString(newValue)
+			this._timeString = new time.TimeString(newValue)
 				.addClassName('content')
 				.appendTo(this._element)
 		}
@@ -36,7 +39,7 @@ module.exports = Class(ValueView, function(supr){
 			.layout(picker, { x: layout.x, y: layout.y + layout.h })
 			._updatePicker()
 		
-		fan.ui.overlay.show(picker, true)
+		overlay.show(picker, true)
 	}
 	
 	this._getPicker = function() {
@@ -57,17 +60,17 @@ module.exports = Class(ValueView, function(supr){
 		this._on(clearMonth, 'click', bind(this, '_clearMonthOffset'))
 		this._on(clearBtn, 'click', bind(fin, 'set', this._itemId, this._property, null))
 		
-		row = this._create({ tag: 'tr', parent: body }),
-		forEach(days, bind(this, function(day) {
+		var row = this._create({ tag: 'tr', parent: body })
+		for (var i=0, day; day = days[i]; i++) {
 			var th = this._create({ tag: 'th', parent: row })
 			this._create({ tag: 'label', parent: th, text: day })
-		}))
+		}
 		
 		while (rowsCount-- > 0) {
 			row = this._create({ tag: 'tr', parent: body })
-			forEach(days, bind(this, function(day) {
+			for (var i=0, day; day = days[i]; i++) {
 				this._create({ tag: 'td', parent: row })
-			}))
+			}
 		}
 		this._delegateOn(picker, 'click', bind(this, '_onPickerClick'))
 		return this._picker = picker
@@ -91,8 +94,8 @@ module.exports = Class(ValueView, function(supr){
 		
 		currentDate.setMonth(currentDate.getMonth() + this._monthOffset)
 		
-		var daysInMonth = fan.time.daysInMonth(currentDate),
-			firstDay = fan.time.firstDayOfMonth(currentDate),
+		var daysInMonth = time.daysInMonth(currentDate),
+			firstDay = time.firstDayOfMonth(currentDate),
 			cell, cells = this._picker.getElementsByTagName('td')
 		
 		for (var i=0; cell = cells[i]; i++) {
@@ -102,14 +105,14 @@ module.exports = Class(ValueView, function(supr){
 				.removeClassName(cell, 'today')
 		}
 		
-		currentDate = fan.time.endOfDay(currentDate)
+		currentDate = time.endOfDay(currentDate)
 		for (var date=1; date <= daysInMonth - firstDay; date++) {
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date
 			currentDate.setDate(date)
 			cell.delegateId = currentDate.getTime()
 			var endOfDay = currentDate.getTime(),
-				startOfDay = endOfDay - fan.time.days + fan.time.seconds
+				startOfDay = endOfDay - time.days + time.seconds
 			
 			this.toggleClassName(cell, 'selected', startOfDay <= selected && selected <= endOfDay)
 			this.toggleClassName(cell, 'today', startOfDay <= now && now <= endOfDay)
@@ -118,6 +121,6 @@ module.exports = Class(ValueView, function(supr){
 	
 	this._onPickerClick = function(timestamp) {
 		fin.set(this._itemId, this._property, timestamp)
-		fan.ui.overlay.hide()
+		overlay.hide()
 	}
 })

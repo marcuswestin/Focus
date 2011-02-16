@@ -15,13 +15,9 @@ module.exports = Class(List, function(supr){
 	
 	this._className += ' SortedList'
 	
-	this.query = function(query) {
-		this._query = query
-		return this
-	}
-	
-	this.sortBy = function(sortBy) {
-		this._sortBy = sortBy
+	this.reflectSortedSet = function(itemID, setPropertyName) {
+		this._itemID = itemID
+		this._propertyName = setPropertyName
 		return this
 	}
 	
@@ -37,10 +33,11 @@ module.exports = Class(List, function(supr){
 		supr(this, '_createContent')
 		this._defaultGroup = this._createGroup()
 		this.addClassName(this._defaultGroup, 'default')
-		this._queryId = fin.query(this._query, bind(this, '_onQueryUpdated'))
+		
+		this._queryId = fin.observeSet(this._itemID, this._propertyName, bind(this, '_onSetUpdated'))
 	}
 	
-	this._onQueryUpdated = function(mutation) { 
+	this._onSetUpdated = function(mutation) {
 		if (mutation.op == 'sadd') { this.addItems(mutation.args) }
 		if (mutation.op == 'srem') { this.removeItems(mutation.args) }
 	}

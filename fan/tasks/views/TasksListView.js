@@ -10,26 +10,28 @@ module.exports = Class(View, function(supr) {
 	
 	this._buildHeader = function() {
 		new RadioButtons()
-			.addButton({ text: 'Tasks', payload: { status: {op:'!=', value:'done'}, type: 'task', user: gUserId } })
+			// .addButton({ text: 'Tasks', payload: { status: {op:'!=', value:'done'}, type: 'task', user: gUserID } })
 			// .addButton({ text: 'Today' })
 			// .addButton({ text: 'Crucial' })
-			.addButton({ text: 'Backlog', payload: { status: 'backlog', type: 'task', user: gUserId } })
-			.addButton({ text: 'Done', payload: { status: 'done', type: 'task', user: gUserId } })
-			.subscribe('Click', this, 'loadQuery')
-			.appendTo(this._header)
-			.select(0)
+			// .addButton({ text: 'Backlog', payload: { status: 'backlog', type: 'task', user: gUserID } })
+			// .addButton({ text: 'Done', payload: { status: 'done', type: 'task', user: gUserID } })
+			// .subscribe('Click', this, 'loadQuery')
+			// .appendTo(this._header)
+			// .select(0)
 		
 		new Button('New task')
 			.addClassName('createButton')
 			.appendTo(this._header)
 			.subscribe('Click', util, 'createNewTask', {}, bind(gItemPanel, 'viewTask'))
+			
+		this.loadList()
 	}
 	
-	this.loadQuery = function(query) {
-		if (this._listView) { logger.log("TODO Release view!") }
+	this.loadList = function() {
+		if (this._listView) { console.log("TODO Release view!") }
 		this._body.innerHTML = ''
 		this._listView = new SortedList(bind(this, '_getCellFor'))
-			.query(query)
+			.reflectSortedSet(gUserID, 'tasks')
 			// TODO .sortBy('crucial')
 			.groupBy('project', 'title')
 			.addClassName('TaskList')
@@ -38,19 +40,19 @@ module.exports = Class(View, function(supr) {
 	}
 	
 	this._getCellFor = function(item) {
-		var itemId = item.getId(),
+		var itemID = item.getId(),
 			cell = this._create({ className: 'cell' })
 		
-		cell.delegateId = itemId
+		cell.delegateId = itemID
 		
-		fan.util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemId))
-		// TODO fin.observe(itemId, 'crucial', bind(this, '_onCellCriticalChange', cell))
+		fin.observe(itemID, 'title', function(mutation, value) {
+			cell.innerHTML = value
+		})
+		
+		// util.withTemplate('task-list', bind(this, '_applyTemplate', cell, itemID))
+		// TODO fin.observe(itemID, 'crucial', bind(this, '_onCellCriticalChange', cell))
 		
 		return cell
-	}
-	
-	this._applyTemplate = function(cell, itemId, template) {
-		cell.appendChild(fin.applyTemplate(template, itemId))
 	}
 	
 	// this._onCellCriticalChange = function(cell, mutation, isCritical) {

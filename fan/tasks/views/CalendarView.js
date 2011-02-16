@@ -29,7 +29,7 @@ module.exports = Class(View, function(supr) {
 		}))
 	}
 	this._buildBody = function() {
-		var myTasksQuery = { type: 'task', status: {op: '!=', value: 'done'}, user: gUserId },
+		var myTasksQuery = { type: 'task', status: {op: '!=', value: 'done'}, user: gUserID },
 			list = this._list,
 			groups = this._groups
 

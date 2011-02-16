@@ -1,6 +1,5 @@
-exports.userEmailToId = function(email) {
-	return '_fan:userId:' + email
+module.exports = {
+	user: 'user',
+	tasks: 'tasks',
+	users: 'users'
 }
-
-exports.subscribers = '_fan:subscribers'
-exports.notifications = '_fan:notifications'

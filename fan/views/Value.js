@@ -33,6 +33,6 @@ module.exports = Class(Component, function(supr){
 	}
 	
 	this.release = function() {
-		logger.warn("TODO implement release of views")
+		console.warn("TODO implement release of views")
 	}
 })

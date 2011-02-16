@@ -36,7 +36,7 @@ var query = require('./fan/query')
 	keys = require('./fan/keys')
 
 window.gBody = document.body
-window.gUserId = null
+window.gUserID = null
 window.gUserIconUrl = null
 
 // if (fan.ui.info.isTouch) {
@@ -53,8 +53,8 @@ fin.handle('authenticate', function() {
 
 fin.handle('authentication', function(data) {
 	if (data.uid) {
-		gUserId = data.uid
-		fin.observe(gUserId, 'iconUrl', function(op, iconUrl) { gUserIconUrl = iconUrl })
+		gUserID = data.uid
+		fin.observe(gUserID, 'iconUrl', function(op, iconUrl) { gUserIconUrl = iconUrl })
 		openApp()
 	} else {
 		alert('could not log in')

@@ -33,7 +33,7 @@ module.exports = Singleton(Component, function(supr) {
 	
 	this.hide = function(unhookClick) {
 		this.remove()
-		fan.ui.resizeManager.removeDependant(this._resizeCallback)
+		resizeManager.removeDependant(this._resizeCallback)
 	}
 	
 	this._onWindowResize = function(size) {

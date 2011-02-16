@@ -1,6 +1,7 @@
 var Class = require('../Class'),
 	ValueView = require('./Value'),
-	Component = require('../ui/Component')
+	Component = require('../ui/Component'),
+	ViewFactory = require('../ViewFactory')
 
 module.exports = Class(ValueView, function(supr) {
 	
@@ -22,7 +23,7 @@ module.exports = Class(ValueView, function(supr) {
 	}
 	
 	this._onClick = function() {
-		var input = this._input = fin.createView('Input', this._itemId, this._property),
+		var input = this._input = ViewFactory.createView('Input', [this._itemId, this._property]),
 			inputEl = input.getElement()
 		
 		inputEl.style.position = 'absolute'
@@ -35,7 +36,7 @@ module.exports = Class(ValueView, function(supr) {
 		inputEl.style.fontWeight = this.getStyle('font-weight');
 		inputEl.style.lineHeight = this.getStyle('line-height');
 		
-		this._releaseFocus = fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
+		// this._releaseFocus = fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
 		this._resizeInput()
 		
 		input
@@ -45,7 +46,7 @@ module.exports = Class(ValueView, function(supr) {
 	}
 	
 	this._onBlur = function(focusInfo) {
-		this._releaseFocus()
+		// this._releaseFocus()
 		this._input
 			.remove()
 			.release()

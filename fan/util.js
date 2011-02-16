@@ -1,4 +1,7 @@
-var util = exports
+var time = require('./time'),
+	keys = require('./keys')
+
+var util = module.exports
 
 var _templates = {},
 	_templateQueue = {}
@@ -23,13 +26,12 @@ util.withTemplate = function(templateName, callback) {
 
 util.createNewTask = function(params, callback) {
 	params.type = 'task'
-	params.user = gUserId
 	params.done = false
 	params.title = params.title || 'I need to...'
-	params.date = fan.time.endOfDay(fin.now()).getTime()
-	fin.create(params, function(itemId) {
-		fin.addToSet(itemId, fan.keys.subscribers, gUserId)
-		callback(itemId)
+	params.date = time.endOfDay(fin.now()).getTime()
+	fin.create(params, function(itemID) {
+		fin.addToSet(gUserID, keys.tasks, itemID)
+		callback(itemID)
 	})
 }
 

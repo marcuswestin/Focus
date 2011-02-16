@@ -6,11 +6,11 @@ module.exports = Class(View, function(supr) {
 	
 	this._buildHeader = function() {
 		// new fan.ui.RadioButtons()
-		// 	.addButton({ text: 'Tasks', payload: { status: {op:'!=', value:'done'}, type: 'task', user: gUserId } })
+		// 	.addButton({ text: 'Tasks', payload: { status: {op:'!=', value:'done'}, type: 'task', user: gUserID } })
 		// 	// .addButton({ text: 'Today' })
 		// 	// .addButton({ text: 'Crucial' })
-		// 	.addButton({ text: 'Backlog', payload: { status: 'backlog', type: 'task', user: gUserId } })
-		// 	.addButton({ text: 'Done', payload: { status: 'done', type: 'task', user: gUserId } })
+		// 	.addButton({ text: 'Backlog', payload: { status: 'backlog', type: 'task', user: gUserID } })
+		// 	.addButton({ text: 'Done', payload: { status: 'done', type: 'task', user: gUserID } })
 		// 	.subscribe('Click', this, 'loadQuery')
 		// 	.appendTo(this._header)
 		// 	.select(0)
@@ -23,7 +23,7 @@ module.exports = Class(View, function(supr) {
 	
 	this._buildBody = function() {
 		this._listView = new fan.ui.lists.List(bind(this, '_getCellFor'))
-			.reflectList(gUserId, fan.keys.notifications, true)
+			.reflectList(gUserID, fan.keys.notifications, true)
 			.addClassName('NewList')
 			.subscribe('Click', this, '_onNewsClick')
 			.appendTo(this._body)
@@ -56,10 +56,6 @@ module.exports = Class(View, function(supr) {
 		this._create({ tag: 'br', parent: cell })
 		
 		return cell
-	}
-	
-	this._applyTemplate = function(cell, itemId, template) {
-		cell.appendChild(fin.applyTemplate(template, itemId))
 	}
 })
 

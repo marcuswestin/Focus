@@ -1,8 +1,7 @@
-var Singleton = require('../Class').Singleton,
-	Component = require('./Component'),
+var Component = require('./Component'),
 	resizeManager = require('./resizeManager')
 
-module.exports = Singleton(Component, function(supr) {
+module.exports = Class.Singleton(Component, function(supr) {
 	
 	this._className = 'Overlay'
 	

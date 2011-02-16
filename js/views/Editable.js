@@ -24,7 +24,7 @@ module.exports = Class(ValueView, function(supr) {
 	this._onClick = function() {
 		this._input = new Input(this._itemId, this._property)
 			.style({ position:'absolute', overflow:'hidden', padding:this._padding,
-			 	paddingRight:0 // so that the text inside the input box doesn't wrap around by hitting the end of the input box
+			 	paddingRight:0, // so that the text inside the input box doesn't wrap around by hitting the end of the input box
 				fontSize: this.getStyle('font-size'), fontFamily: this.getStyle('font-family'),
 				fontWeight: this.getStyle('font-weight'), lineHeight: this.getStyle('line-height') })
 		

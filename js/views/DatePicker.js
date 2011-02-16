@@ -1,7 +1,6 @@
 var Class = require('../Class'),
 	ValueView = require('./Value'),
-	time = require('../time'),
-	util = require('../util'),
+	time = require('../util').time,
 	overlay = require('../ui/overlay')
 
 module.exports = Class(ValueView, function(supr){

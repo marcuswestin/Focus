@@ -2,7 +2,7 @@ var Component = require('../ui/Component'),
 	Input = require('../ui/Input'),
 	Button = require('../ui/Button'),
 	Link = require('../ui/Link'),
-	sha1 = require('../sha1')
+	sha1 = require('../util').sha1
 
 module.exports = Class(Component, function(supr) {
 	

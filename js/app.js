@@ -32,7 +32,6 @@ var LoginManager = require('./tasks/LoginManager'),
 	resizeManager = require('./ui/resizeManager')
 
 var query = require('./query')
-	time = require('./time'),
 	keys = require('./keys')
 
 window.gBody = document.body

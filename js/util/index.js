@@ -1,7 +1,9 @@
-var time = require('./time'),
-	keys = require('./keys')
+var keys = require('./keys')
 
-var util = module.exports
+var util = module.exports = {
+	time: require('./time'),
+	sha1: require('./sha1')
+}
 
 var _templates = {},
 	_templateQueue = {}
@@ -28,7 +30,7 @@ util.createNewTask = function(params, callback) {
 	params.type = 'task'
 	params.done = false
 	params.title = params.title || 'I need to...'
-	params.date = time.endOfDay(fin.now()).getTime()
+	params.date = util.time.endOfDay(fin.now()).getTime()
 	fin.create(params, function(itemID) {
 		fin.addToSet(gUserID, keys.tasks, itemID)
 		callback(itemID)

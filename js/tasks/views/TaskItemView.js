@@ -5,7 +5,7 @@ var RadioButtons = require('../../ui/RadioButtons'),
 	ItemSetSelect = require('../../views/ItemSetSelect'),
 	DatePicker = require('../../views/DatePicker'),
 	Discussion = require('../../views/Discussion'),
-	keys = require('../../keys')
+	keys = require('../../util').keys
 
 module.exports = Class(View, function(supr) {
 	

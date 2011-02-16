@@ -9,7 +9,7 @@ var LoginManager = require('./tasks/LoginManager'),
 	resizeManager = require('./ui/resizeManager')
 
 var query = require('./query')
-	keys = require('./keys')
+	keys = require('./util').keys
 
 window.gBody = document.body
 window.gUserID = null

@@ -1,9 +1,8 @@
-var keys = require('./keys')
-
 var util = module.exports = {
 	time: require('./time'),
 	sha1: require('./sha1'),
-	Publisher: require('./Publisher')
+	Publisher: require('./Publisher'),
+	keys: require('./keys')
 }
 
 var _templates = {},

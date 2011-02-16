@@ -11,18 +11,6 @@ var views = {
 	Discussion: require('./views/Discussion')
 }
 
-var ViewFactory = require('./ViewFactory')
-
-ViewFactory.registerView('Value', views.Value)
-ViewFactory.registerView('Number', views.Value) // TODO Create number view that only accepts number input
-ViewFactory.registerView('Conditional', views.Conditional)
-ViewFactory.registerView('Input', views.Input)
-ViewFactory.registerView('Checkbox', views.Checkbox)
-ViewFactory.registerView('Editable', views.Editable)
-ViewFactory.registerView('ItemSetSelect', views.ItemSetSelect)
-ViewFactory.registerView('DatePicker', views.DatePicker)
-ViewFactory.registerView('Discussion', views.Discussion)
-
 var LoginManager = require('./tasks/LoginManager'),
 	KeyboardFocus = require('./tasks/KeyboardFocus'),
 	ListPanel = require('./tasks/panels/ListPanel'),

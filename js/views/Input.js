@@ -1,7 +1,7 @@
 var Class = require('../Class'),
-	ValueView = require('./Value')
+	Value = require('./Value')
 
-module.exports = Class(ValueView, function(supr){
+module.exports = Class(Value, function(supr){
 	
 	this._domTag = 'textarea'
 	this.className += ' Input'

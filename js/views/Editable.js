@@ -1,8 +1,8 @@
 var Class = require('../Class'),
 	ValueView = require('./Value'),
 	Component = require('../ui/Component'),
-	ViewFactory = require('../ViewFactory')
-
+	Input = require('./Input')
+	
 module.exports = Class(ValueView, function(supr) {
 	
 	this._className += ' Editable'
@@ -23,23 +23,16 @@ module.exports = Class(ValueView, function(supr) {
 	}
 	
 	this._onClick = function() {
-		var input = this._input = ViewFactory.createView('Input', [this._itemId, this._property]),
-			inputEl = input.getElement()
-		
-		inputEl.style.position = 'absolute'
-		inputEl.style.overflow = 'hidden'
-		inputEl.style.padding = this._padding + 'px'
-		inputEl.style.paddingRight = 0 // so that the text inside the input box doesn't wrap around by hitting the end of the input box
-		
-		inputEl.style.fontSize = this.getStyle('font-size');
-		inputEl.style.fontFamily = this.getStyle('font-family');
-		inputEl.style.fontWeight = this.getStyle('font-weight');
-		inputEl.style.lineHeight = this.getStyle('line-height');
+		this._input = new Input(this._itemId, this._property)
+			.style({ position:'absolute', overflow:'hidden', padding:this._padding,
+			 	paddingRight:0 // so that the text inside the input box doesn't wrap around by hitting the end of the input box
+				fontSize: this.getStyle('font-size'), fontFamily: this.getStyle('font-family'),
+				fontWeight: this.getStyle('font-weight'), lineHeight: this.getStyle('line-height') })
 		
 		// this._releaseFocus = fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
 		this._resizeInput()
 		
-		input
+		this._input
 			.subscribe('Blur', this, '_onBlur')
 			.appendTo(document.body)
 			.focus()

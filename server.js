@@ -1,11 +1,18 @@
-var engines = {
-	development: './lib/fin/engines/development',
-	redis: './lib/fin/engines/redis'
-}
 var finServer = require('./lib/fin/api/server'),
-	authentication = require('./fan/authentication'),
-	engine = require(engines['development'])
+	engine = require('./lib/fin/engines/development')
 
-authentication.observe(finServer)
+finServer
+	.on('client_connect', _handleConnect)
+	.on('client_disconnect', _handleDisconnect)
+	.handleRequest('login', _handleLogin)
+
+function _handleConnect(client) {
+	client.send({ event: 'authenticate' })
+}
+function _handleDisconnect(client) {}
+function _handleLogin(client, message) {
+	console.log('todo: actually _handleLogin')
+	client.send({ event:'authentication', data:{uid:1} })
+}
 
 return finServer.start(engine)

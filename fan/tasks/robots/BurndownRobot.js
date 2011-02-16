@@ -20,7 +20,6 @@ module.exports = Class(function() {
 	}
 	
 	this._onRemainingTimeChange = function(projectId, mutation, newTimeRemaining) {
-		logger.log("Remaining time changed", projectId, newTimeRemaining)
 		var newHistoryItem = { timestamp: new Date().getTime(), remaining_time: newTimeRemaining }
 		fin.mutate(projectId, { property: 'burndown_history', rpush: newHistoryItem })
 		fin.getItem(projectId).mutate()

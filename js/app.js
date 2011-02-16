@@ -1,16 +1,5 @@
 require('./globals')
 
-var views = {
-	Value: require('./views/Value'),
-	Input: require('./views/Input'),
-	Checkbox: require('./views/Checkbox'),
-	Conditional: require('./views/Conditional'),
-	Editable: require('./views/Editable'),
-	ItemSetSelect: require('./views/ItemSetSelect'),
-	DatePicker: require('./views/DatePicker'),
-	Discussion: require('./views/Discussion')
-}
-
 var LoginManager = require('./tasks/LoginManager'),
 	KeyboardFocus = require('./tasks/KeyboardFocus'),
 	ListPanel = require('./tasks/panels/ListPanel'),

@@ -1,6 +1,6 @@
 var time = module.exports = {}
 
-var Component = require('./ui/Component')
+var Component = require('../ui/Component')
 
 time.seconds = 1000
 time.minutes = time.seconds * 60

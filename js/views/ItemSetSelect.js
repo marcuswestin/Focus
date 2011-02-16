@@ -1,5 +1,4 @@
-var Class = require('../Class'),
-	ValueView = require('./Value')
+var ValueView = require('./Value')
 
 module.exports = Class(ValueView, function(supr){
 	

@@ -1,5 +1,4 @@
-var Class = require('../Class'),
-	ValueView = require('./Value'),
+var ValueView = require('./Value'),
 	time = require('../util').time,
 	overlay = require('../ui/overlay')
 

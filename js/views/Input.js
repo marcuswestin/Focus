@@ -1,5 +1,4 @@
-var Class = require('../Class'),
-	Value = require('./Value')
+var Value = require('./Value')
 
 module.exports = Class(Value, function(supr){
 	

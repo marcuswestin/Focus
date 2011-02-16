@@ -1,5 +1,4 @@
-var Class = require('../Class'),
-	ValueView = require('./Value'),
+var ValueView = require('./Value'),
 	Component = require('../ui/Component'),
 	Input = require('./Input')
 	

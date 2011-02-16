@@ -1,10 +1,11 @@
 var RadioButtons = require('../../ui/RadioButtons'),
 	BooleanButton = require('../../ui/BooleanButton')
-	View = require('../../views/Value'),
+	View = require('./View'),
 	Editable = require('../../views/Editable'),
 	ItemSetSelect = require('../../views/ItemSetSelect'),
 	DatePicker = require('../../views/DatePicker'),
-	Discussion = require('../../views/Discussion')
+	Discussion = require('../../views/Discussion'),
+	keys = require('../../keys')
 
 module.exports = Class(View, function(supr) {
 	

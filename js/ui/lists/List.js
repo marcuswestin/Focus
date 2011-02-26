@@ -13,10 +13,13 @@ module.exports = Class(Component, function(supr){
 		this._itemsById = {}
 	}
 	
-	this.reflectList = function(itemId, propertyName, reverse) {
-		fin.observeList(itemId, propertyName, bind(this, function(mutation) {
-			if (mutation.op == 'push' || mutation.op == 'unshift') {
-				this.addItems(mutation.args, reverse)
+	this.reflect = function(property) {
+		property.observe(bind(this, function(item, op) {
+			switch(op) {
+				case 'push':    this.addItem(item)
+				case 'unshift': this.addItem(item, true)
+				case 'sadd':    this.addItem(item)
+				case 'srem':    this.removeItem
 			}
 		}))
 		return this
@@ -41,29 +44,19 @@ module.exports = Class(Component, function(supr){
 		}
 	}
 	
-	this.addItems = function(items, reverse) {
-		var byID = this._itemsById
-		for (var i=0, item; item = items[i]; i++) {
-			var itemID = this._getItemId(item)
-			if (byID[itemID]) { continue }
-			this._addItem(itemID, item, reverse)
-		}
-		this._render()
-	}
-	
-	this._addItem = function(itemID, item, reverse) {
-		if (reverse) { this._items.unshift(item) }
+	this.addItem = function(item, onTop) {
+		var itemID = this._getID(item)
+		if (onTop) { this._items.unshift(item) }
 		else { this._items.push(item) }
 		this._itemsById[itemID] = item
-		return item
+		this._render()
+		return this
 	}
 	
-	this._getItemId = function(item) {
-		return item.guid ? item.guid
-				: item.getId ? item.getId()
-				: item.id ? item.id
-				: item.timestamp ? item.timestamp
-				: item
+	this._getID = function(item) {
+		return item.getID ? item.getID()
+			: item._id ? item._id
+			: item
 	}
 	
 	this.removeItems = function(removeItemIds) {
@@ -71,20 +64,20 @@ module.exports = Class(Component, function(supr){
 		for (var i=0, removeItemId; removeItemId = removeItemIds[i]; i++) {
 			if (!this._itemsById[removeItemId]) { continue }
 			for (var j=0, item; item = this._items[j]; j++) {
-				var itemId = this._getItemId(item)
-				if (itemId != removeItemId) { continue }
-				this._removeItem(itemId, j);
+				var itemID = this._getID(item)
+				if (itemID != removeItemId) { continue }
+				this._removeItem(itemID, j);
 				break
 			}
 		}
-		this._render()
 	}
 
-	this._removeItem = function(itemId, itemsIndex) {
+	this._removeItem = function(itemID, itemsIndex) {
 		this._items.splice(itemsIndex, 1)
-		delete this._itemsById[itemId]
-		if (this._cells[itemId]) { this.remove(this._cells[itemId]) }
-		delete this._cells[itemId]
+		delete this._itemsById[itemID]
+		if (this._cells[itemID]) { this.remove(this._cells[itemID]) }
+		delete this._cells[itemID]
+		this._render()
 	}
 	
 	this.append = function(items) {
@@ -103,12 +96,13 @@ module.exports = Class(Component, function(supr){
 		if (!this._element || !items) { return }
 
 		for (var i=0, item; item = items[i]; i++) {
-			var itemId = this._getItemId(item),
-				cell = cells[itemId]
+			var itemID = this._getID(item),
+				cell = cells[itemID]
 			
 			if (!cell) {
-				cell = cells[itemId] = this._makeCellFn(item)
-				cell.delegateId = itemId
+				cell = cells[itemID] = this._makeCellFn(item)
+				this.addClassName(cell, 'cell')
+				cell.delegateID = itemID
 				this._makeFocusable(cell)
 			}
 			var parent = this._getParentFor(item)

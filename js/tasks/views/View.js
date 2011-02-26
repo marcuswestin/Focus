@@ -44,7 +44,7 @@ module.exports = Class(Component, function(supr) {
 	
 	this._buildHeader = function() {}
 	this._buildBody = function() {}
-	this.release = function() { console.warn("TODO: Implement View#release") }
+	this.release = function() { log("TODO: Implement View#release") }
 	
 	this.handleKeyboardFocus = function(el) {
 		var body = this._body,

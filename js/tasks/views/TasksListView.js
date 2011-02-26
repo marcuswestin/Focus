@@ -28,7 +28,7 @@ module.exports = Class(View, function(supr) {
 	}
 	
 	this.loadList = function() {
-		if (this._listView) { console.log("TODO Release view!") }
+		if (this._listView) { log("TODO Release view!") }
 		this._body.innerHTML = ''
 		this._listView = new SortedList(bind(this, '_getCellFor'))
 			.reflectSortedSet(gUserID, 'tasks')

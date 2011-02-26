@@ -26,7 +26,7 @@ module.exports = Class(fan.tasks.views.View, function(supr) {
 	}
 	
 	this.loadQuery = function(query) {
-		if (this._listView) { console.log("TODO Release view!") }
+		if (this._listView) { log("TODO Release view!") }
 		this._body.innerHTML = ''
 		
 		this._listView = new fan.ui.lists.SortedList(bind(this, '_createCell'))

@@ -22,7 +22,7 @@ module.exports = Class(Component, function(supr){
 	}
 	
 	this.release = function() {
-		console.warn("TODO implement release of views")
+		log("TODO implement release of views")
 		return this
 	}
 })

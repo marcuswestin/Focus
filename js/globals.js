@@ -1,6 +1,8 @@
 // Knowingly expose all of these globally...
 global.fin = require('../lib/fin/api/client')
 
+global.models = require('../lib/fin/api/models')
+
 global.bind = function (context, method/*, args... */) {
 	if (!context || !method || (typeof method == 'string' && !context[method])) { throw "bad bind arguments" }
 	var curryArgs = Array.prototype.slice.call(arguments, 2)

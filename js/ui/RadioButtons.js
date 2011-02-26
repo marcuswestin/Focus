@@ -14,15 +14,15 @@ module.exports = Class(Component, function(supr) {
 	this.addButton = function(props) {
 		var className = 'Button ' + (props.className ? ' ' + props.className : '')
 			el = this._create({ className: className, text: props.text, parent: this.getElement() }),
-			delegateId = unique(),
+			delegateID = unique(),
 			buttons = this._buttons
 		
 		this._makeUnselectable(el)
-		this._payloads[delegateId] = props.payload
+		this._payloads[delegateID] = props.payload
 		this._payloadIndex[props.payload] = buttons.length
-		el.delegateId = delegateId
+		el.delegateID = delegateID
 		buttons.push(el)
-		buttons[delegateId] = el
+		buttons[delegateID] = el
 		
 		if (!this._leftButton) {
 			this._leftButton = el
@@ -38,7 +38,7 @@ module.exports = Class(Component, function(supr) {
 	}
 	
 	this.select = function(index, silent) {
-		this._onDelegateClick(this._buttons[index].delegateId, null, silent)
+		this._onDelegateClick(this._buttons[index].delegateID, null, silent)
 		return this
 	}
 	
@@ -52,14 +52,14 @@ module.exports = Class(Component, function(supr) {
 		return this
 	}
 	
-	this._onDelegateClick = function(delegateId, e, silent) {
+	this._onDelegateClick = function(delegateID, e, silent) {
 		var currSelected = this._selected,
-			newSelected = this._buttons[delegateId]
+			newSelected = this._buttons[delegateID]
 		
 		if (currSelected) { this.removeClassName(currSelected, 'down') }
 		this.addClassName(newSelected, 'down')
 		this._selected = newSelected
 		
-		if (!silent) { this._publish('Click', this._payloads[delegateId]) }
+		if (!silent) { this._publish('Click', this._payloads[delegateID]) }
 	}
 })

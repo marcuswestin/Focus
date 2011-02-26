@@ -271,11 +271,11 @@ module.exports = Class(Publisher, function(supr) {
 	this._onDelegatedEvent = function(handler, e) {
 		var target = e.target
 		while(target) {
-			if (!target.delegateId) {
+			if (!target.delegateID) {
 				target = target.parentNode
 				continue
 			}
-			handler(target.delegateId, target)
+			handler(target.delegateID, target)
 			return
 		}
 	}

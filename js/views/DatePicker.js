@@ -108,7 +108,7 @@ module.exports = Class(ValueView, function(supr){
 			cell = cells[firstDay + date - 1]
 			cell.innerHTML = date
 			currentDate.setDate(date)
-			cell.delegateId = currentDate.getTime()
+			cell.delegateID = currentDate.getTime()
 			var endOfDay = currentDate.getTime(),
 				startOfDay = endOfDay - time.days + time.seconds
 			

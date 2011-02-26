@@ -57,7 +57,7 @@ module.exports = Class(fan.ui.lists.List, function(supr){
 		var cell = this._create({ className: 'cell' }),
 			template = '<div class="title">(( Value title ))</div>'
 		
-		cell.delegateId = itemId
+		cell.delegateID = itemId
 		cell.appendChild(fin.applyTemplate(template, itemId))
 		return cell
 	}

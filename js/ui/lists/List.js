@@ -119,6 +119,6 @@ module.exports = Class(Component, function(supr){
 	this._getParentFor = function() { return this._element }
 	
 	this.handleKeyboardSelect = function(cell) {
-		this._onClick(cell['delegateId'], cell)
+		this._onClick(cell['delegateID'], cell)
 	}
 })

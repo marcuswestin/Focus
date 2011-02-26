@@ -30,14 +30,14 @@ module.exports = Class(RadioButtons, function(supr) {
 		return this
 	}
 	
-	this._onDelegateClick = function(delegateId, e, silent) {
+	this._onDelegateClick = function(delegateID, e, silent) {
 		var currSelected = this._selected,
-			newSelected = this._buttons[delegateId]
+			newSelected = this._buttons[delegateID]
 		
 		if (currSelected) { this.removeClassName(currSelected, 'down') }
 		this.addClassName(newSelected, 'down')
 		this._selected = newSelected
 		
-		if (!silent) { this._publish('Click', this._payloads[delegateId]) }
+		if (!silent) { this._publish('Click', this._payloads[delegateID]) }
 	}
 })

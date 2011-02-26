@@ -1,0 +1,54 @@
+/* Reset 
+ *******/
+body, html { font-family:tahoma,sans-serif; overflow:hidden; color:#333; font-size:13px; }
+table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
+
+body { .gradient(#fff, #d5d5d5); height:100%; }
+
+.unselectable { -moz-user-select:none; -webkit-user-select:none; cursor:default; }
+
+/* Less functions
+ ****************/
+.rounded(@radius:0) { border-radius:@radius; -moz-border-radius:@radius; -webkit-border-radius:@radius; }
+
+.rounded4(@top_left:0, @top_right:0, @bottom_right:0, @bottom_left:0) { border-radius:@top_left @top_right @bottom_right @bottom_left;
+	-moz-border-radius:@top_left @top_right @bottom_right @bottom_left; -webkit-border-top-left-radius:@top_left;
+	-webkit-border-top-right-radius:@top_right; -webkit-border-bottom-left-radius:@bottom_left; -webkit-border-bottom-right-radius:@bottom_right; }
+
+.gradient(@from, @to) { background:-moz-linear-gradient(top, @from, @to);
+	background:-webkit-gradient(linear, left top, left bottom, from(@from), to(@to)); }
+
+.shadow(@h_offset, @v_offset, @blur, @color) { box-shadow:@h_offset @v_offset @blur @color;
+	-moz-box-shadow:@h_offset @v_offset @blur @color; -webkit-box-shadow:@h_offset @v_offset @blur @color; }
+
+.opacity(@opacity) { opacity:@opacity; }
+
+/* Lists
+ *******/
+.List { margin:5px 0;
+	.cell { cursor:pointer; padding:4px 6px; font-size:12px; min-height:18px; }
+	.cell .title { font-size:12px; }
+	.cell:nth-child(odd) { background-color:#eef; }
+	.cell.selected { border-color:#abd; }
+	.cell .fin-Template { padding:0px; }
+	.group .header { display:inline-block; margin:6px 0 0 6px; padding:2px 5px; position:static;
+		border:1px solid #999; border-bottom:none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
+	.group .holder { border:1px solid #999; margin:-1px 6px 0; .rounded(0, 3px, 3px, 0); }
+	.group.default { display:none; } /* will be overridden by js */
+	.group.default .header { display:none; }
+	.group.default .holder { border-style:dotted; }
+}
+
+/* Buttons
+ *********/
+.Button { font-size:12px; padding:3px 10px 5px 10px; border:1px solid #666;
+	display:inline-block; cursor:pointer; .rounded(5px); .gradient(#fff, #ddd); }
+.Button.down { .gradient(#ddd, #fff); }
+
+/* TextView, TextInput, TextEditable
+ ***********************************/
+.TextInput { padding:2px 3px; height:25px; font-family:arial,sans-serif; font-size:13px; }
+.TextInput.defaultValue { font-style:italic; color:#555; }
+.TextEditable { cursor:pointer; }
+.TextEditable.hot {}
+.TextEditable.defaultValue { font-style:italic; color:#444; }

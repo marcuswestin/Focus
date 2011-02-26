@@ -46,6 +46,7 @@ fin.handle('authentication', function(data) {
 	var taskList = new List(createTaskCell)
 		.reflect(global.user.tasks)
 		.appendTo(document.body)
+		.setStyle({ width: 300 })
 })
 
 fin.connect()

@@ -1,35 +1,3 @@
-/*********
- * Reset *
- *********/
-body, html { font-family:tahoma,sans-serif; overflow:hidden; color:#333; font-size:13px; }
-table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
-
-/******************
- * Less functions *
- ******************/
-.rounded(@radius:0) {
-	border-radius:@radius;
-	-moz-border-radius:@radius;
-	-webkit-border-radius:@radius;
-}
-.rounded4(@top_left:0, @top_right:0, @bottom_right:0, @bottom_left:0) {
-	border-radius:@top_left @top_right @bottom_right @bottom_left;
-	-moz-border-radius:@top_left @top_right @bottom_right @bottom_left;
-	-webkit-border-top-left-radius:@top_left;
-	-webkit-border-top-right-radius:@top_right;
-	-webkit-border-bottom-left-radius:@bottom_left;
-	-webkit-border-bottom-right-radius:@bottom_right;
-}
-.gradient(@from, @to) {
-	background:-moz-linear-gradient(top, @from, @to);
-	background:-webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
-}
-.shadow(@h_offset, @v_offset, @blur, @color) {
-	box-shadow:@h_offset @v_offset @blur @color;
-	-moz-box-shadow:@h_offset @v_offset @blur @color;
-	-webkit-box-shadow:@h_offset @v_offset @blur @color;
-}
-
 /********************************
  * Misc UI Components & globals *
  ********************************/
@@ -46,26 +14,6 @@ table, tr, td, th { border-collapse:collapse; margin:0; padding:0; }
 		padding: 2px 4px; }
 }
 
-body {
-	.gradient(#fff, #d5d5d5);
-	height:100%;
-}
-
-/***************
- * UIComponent *
- ***************/
-.unselectable {
-	-moz-user-select:none;
-	-webkit-user-select:none;
-	cursor:default;
-}
-
-/*******************
- * Editable values *
- *******************/
-.Editable { cursor:pointer; }
-.Editable.hot { background-color:#e6ffff; }
-.Editable.defaultValue { font-style:italic; color:#444; }
 
 /*****************************
  * Keyboard controlled focus *
@@ -81,12 +29,6 @@ body {
  *********/
 .Link { color:#559; text-decoration:underline; font-size:12px; cursor:pointer; }
 
-/**********
- * Inputs *
- **********/
-.Input { padding:2px 3px; height:25px; font-family:arial,sans-serif; font-size:13px; }
-.Input.defaultValue { font-style:italic; color:#555; }
-
 /***********
  * Overlay *
  ***********/
@@ -96,13 +38,6 @@ body {
 	.content { position:absolute; top:0px; left:0px; }
 }
 .Overlay.lightbox .content { .rounded(10px); border:8px solid #ddd; background-color:#ddd; }
-
-/***********
- * Buttons *
- ***********/
-.Button { font-size:12px; padding:3px 10px 5px 10px; border:1px solid #666;
-	display:inline-block; cursor:pointer; .rounded(5px); .gradient(#fff, #ddd); }
-.Button.down { .gradient(#ddd, #fff); }
 
 /*****************
  * Radio Buttons *
@@ -211,27 +146,6 @@ body {
 			}
 		}
 	}
-}
-
-/*********
- * Lists *
- *********/
-.List { margin:5px 0;
-	
-	.cell { cursor:pointer; padding:4px 6px; font-size:12px; min-height:18px; }
-	.cell .title { font-size:12px; }
-	.cell:nth-child(odd) { background-color:#e5e4fc; }
-/*	.cell.crucial { background-color:#fcfcee; }
-	.cell.crucial:nth-child(odd) { background-color:#fbebdd; }
-	.cell.crucial .title { color:#222; } */
-	.cell.selected { border-color:#abd; }
-	.cell .fin-Template { padding:0px; }
-	.group .header { display:inline-block; margin:6px 0 0 6px; padding:2px 5px; position:static;
-		border:1px solid #999; border-bottom:none; .rounded4(4px, 4px, 0, 0); .gradient(#fff, #e5e5e5); }
-	.group .holder { border:1px solid #999; margin:-1px 6px 0; .rounded(0, 3px, 3px, 0); }
-	.group.default { display:none; } /* will be overridden by js */
-	.group.default .header { display:none; }
-	.group.default .holder { border-style:dotted; }
 }
 
 /*****************

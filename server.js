@@ -12,7 +12,7 @@ function _handleConnect(client) {
 function _handleDisconnect(client) {}
 function _handleLogin(client, message) {
 	console.log('todo: actually _handleLogin')
-	client.send({ event:'authentication', data:{uid:1} })
+	client.send({ event:'authentication', data:{uid:-2} })
 }
 
 return finServer.start(engine)

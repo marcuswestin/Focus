@@ -28,16 +28,15 @@ fin.handle('authenticate', function() {
 	new Button('create new task')
 		.appendTo(document.body)
 		.subscribe('Click', this, function() {
-			var task = new models.Task({ title:"Task", owner:gUser }).create()
-			gUser.tasks.add(task)
+			var task = new models.Task({ title:"Task", owner:global.user }).create()
+			global.user.tasks.add(task)
 		})
 })
 
 fin.handle('authentication', function(data) {
 	if (!data.uid) { throw 'could not log in' }
-	gUser = new models.User(data.uid)
-	gUser.tasks.on('sadd', function(task) {
-		console.log('new task!', task)
+	global.user = new models.User(data.uid)
+	global.user.tasks.on('sadd', function(task) {
 		task.owner.name.observe(function(name) { console.log('owner is', name) })
 	})
 })

@@ -1,6 +1,8 @@
 require('./globals')
 
-var Button = require('./ui/Button')
+var Button = require('./ui/Button'),
+	List = require('./ui/lists/List'),
+	TextEditable = require('./ui/TextEditable')
 
 models.process({
 	"User": {
@@ -36,9 +38,14 @@ fin.handle('authenticate', function() {
 fin.handle('authentication', function(data) {
 	if (!data.uid) { throw 'could not log in' }
 	global.user = new models.User(data.uid)
-	global.user.tasks.on('sadd', function(task) {
-		task.owner.name.observe(function(name) { console.log('owner is', name) })
-	})
+	
+	function createTaskCell(task) {
+		return new TextEditable(task.title).getElement()
+	}
+	
+	var taskList = new List(createTaskCell)
+		.reflect(global.user.tasks)
+		.appendTo(document.body)
 })
 
 fin.connect()

@@ -1,10 +1,10 @@
-var ValueView = require('./Value'),
-	Component = require('../ui/Component'),
-	Input = require('./Input')
+var TextView = require('./TextView'),
+	Component = require('./Component'),
+	TextInput = require('./TextInput')
 	
-module.exports = Class(ValueView, function(supr) {
+module.exports = Class(TextView, function(supr) {
 	
-	this._className += ' Editable'
+	this._className += ' TextEditable'
 	this._padding = 4
 	this._border = 2
 	
@@ -14,46 +14,24 @@ module.exports = Class(ValueView, function(supr) {
 		this._on('click', bind(this, '_onClick'))
 		this._on('mouseover', bind(this, 'addClassName', 'hot'))
 		this._on('mouseout', bind(this, 'removeClassName', 'hot'))
-		this._makeFocusable()
-	}
-	
-	this.handleKeyboardSelect = function() {
-		this._onClick()
 	}
 	
 	this._onClick = function() {
-		this._input = new Input(this._itemId, this._property)
-			.style({ position:'absolute', overflow:'hidden', padding:this._padding,
+		this._input = new TextInput(this._property)
+			.appendTo(document.body)
+			.subscribe('Blur', this, '_onBlur')
+			.setStyle({ position:'absolute', overflow:'hidden', padding:this._padding,
 			 	paddingRight:0, // so that the text inside the input box doesn't wrap around by hitting the end of the input box
 				fontSize: this.getStyle('font-size'), fontFamily: this.getStyle('font-family'),
 				fontWeight: this.getStyle('font-weight'), lineHeight: this.getStyle('line-height') })
 		
-		// this._releaseFocus = fin.focus(this._itemId, this._property, bind(this, '_onBlur'))
 		this._resizeInput()
 		
-		this._input
-			.subscribe('Blur', this, '_onBlur')
-			.appendTo(document.body)
-			.focus()
+		this._input.focus()
 	}
 	
-	this._onBlur = function(focusInfo) {
-		// this._releaseFocus()
-		this._input
-			.remove()
-			.release()
-		
-		if (focusInfo && focusInfo.user) {
-			var text = 'The focus of the property "' + this._property + '" was taken by another user, ',
-				style = { marginRight: '4px' },
-				msgNode = this._create({ text: text, style: style })
-			
-			new Component('span')
-				.reflect(focusInfo.user, 'name', { pre: ' ' })
-				.appendTo(msgNode)
-			
-			fan.util.notify(msgNode)
-		}
+	this._onBlur = function() {
+		this._input.release().remove()
 	}
 	
 	this.setValue = function(value) {
@@ -82,6 +60,5 @@ module.exports = Class(ValueView, function(supr) {
 		layout.w += padding * 2 + border * 2 + 5
 		
 		this._input.layout(layout)
-		gKeyboardFocus.updatePosition(false)
 	}
 })

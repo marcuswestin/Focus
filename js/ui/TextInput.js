@@ -1,9 +1,9 @@
-var Value = require('./Value')
+var TextView = require('./TextView')
 
-module.exports = Class(Value, function(supr){
+module.exports = Class(TextView, function(supr){
 	
 	this._domTag = 'textarea'
-	this.className += ' Input'
+	this.className += ' TextInput'
 	
 	this._createContent = function() {
 		supr(this, '_createContent')
@@ -24,13 +24,11 @@ module.exports = Class(Value, function(supr){
 	}
 	
 	this._onFocus = function(e) { 
-		gKeyboardFocus.grabFocus(this)
 		this._focused = true
 		if (this._element.value == this._property) { this._element.value = '' }
 	}
 	
 	this._onBlur = function() {
-		gKeyboardFocus.releaseFocus(this)
 		this._focused = false 
 		if (this._element.value == '') { this._element.value = this._property }
 		this._publish('Blur')
@@ -44,7 +42,7 @@ module.exports = Class(Value, function(supr){
 		// var selectionLength = position.end - position.start
 		// var mutation = { position: position.caret - selectionLength }
 		
-		if (e.keyCode == this.keys['escape'] || (e.keyCode == this.keys['enter'] && !gKeyboardFocus.shiftIsDown())) {
+		if (e.keyCode == this.keys['escape'] || (e.keyCode == this.keys['enter'] /*&& !shiftIsDown*/)) {
 			this._element.blur()
 			e.cancel()
 			return
@@ -72,7 +70,7 @@ module.exports = Class(Value, function(supr){
 		
 		setTimeout(bind(this, function(){ 
 			if (this._value == this._element.value) { return }
-			fin.set(this._itemId, this._property, this._element.value)
+			this._property.set(this._element.value)
 		}))
 	}
 	

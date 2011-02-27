@@ -71,13 +71,15 @@ body { .gradient(#fff, #e9e9f9); height:100%; }
 /* Panels
  ********/
 .Panel {
-	position:absolute; border:1px solid #aaa; top:10px;
-	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888);
-	.View { overflow:hidden;
-		.header { position:absolute; background-color:#fff; border:1px solid #aaa; .rounded4(6px, 6px, 0, 0);
+	background:#ddd;
+	position:absolute; top:10px;
+	/* border:1px solid #aaa; .rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888); */
+	.View { position:absolute; overflow:hidden;
+		/* .body, .header { border:1px solid #aaa; }*/
+		.header { position:absolute; background-color:#fff; .rounded4(6px, 6px, 0, 0);
 			.title { margin:3px 0 0 7px; font-size:13px; font-weight:bold; color:#666; }
 		}
-		.body { position:absolute; border:1px solid #aaa; background:#fff; overflow-y:auto; overflow-x:hidden; .rounded4(0, 0, 6px, 6px);
+		.body { position:absolute; background:#fff; overflow-y:auto; overflow-x:hidden; .rounded4(0, 0, 6px, 6px);
 			.left-column { float:left; width:340px; margin-bottom:10px; padding: 0 0 10px 10px; }
 			.right-column { float: right; padding: 0 10px 10px 0; }
 		}
@@ -89,6 +91,12 @@ body { .gradient(#fff, #e9e9f9); height:100%; }
 	.View.narrow .body .right-column { float:none; padding-left: 10px; }
 }
 
+/* Left Panel */
 .LeftPanel {
 	.ViewsToggle .Button { margin:5px 0 4px 5px; padding:5px 8px; .rounded(5px); border-right-style:solid; }
+}
+
+/* Center Panel */
+.TaskDetailView {
+	.TextEditable { margin-left:8px; margin-right:8px; }
 }

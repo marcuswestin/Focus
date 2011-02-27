@@ -4,6 +4,7 @@ var Component = require('../../ui/Component'),
 module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Panel'
+	this._headerHeight = 40
 	
 	this.init = function() {
 		supr(this, 'init')
@@ -12,7 +13,8 @@ module.exports = Class(Component, function(supr) {
 	
 	this.resize = function(availableWidth, height) {
 		if (!this._view) { return 0 }
-		var takenWidth = this._view.resize(availableWidth, height)
+		this._view.setStyle({ top:this._headerHeight })
+		var takenWidth = this._view.resize(availableWidth, height - this._headerHeight)
 		this.setStyle({ width:takenWidth, height:height })
 		return takenWidth
 	}

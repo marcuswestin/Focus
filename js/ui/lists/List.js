@@ -100,7 +100,9 @@ module.exports = Class(Component, function(supr){
 				cell = cells[itemID]
 			
 			if (!cell) {
-				cell = cells[itemID] = this._makeCellFn(item)
+				cell = this._makeCellFn(item)
+				if (cell.getElement) { cell = cell.getElement() }
+				cells[itemID] = cell
 				this.addClassName(cell, 'cell')
 				cell.delegateID = itemID
 				this._makeFocusable(cell)

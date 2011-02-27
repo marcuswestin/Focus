@@ -3,7 +3,7 @@ jsio('import fan.ui.Component')
 
 exports.Body = Class(fan.ui.Component, function(supr) {
 	
-	this.init = function() {
+	this._initialize = function() {
 		this._element = document.body
 		this._on('touchmove', bind(this, '_onTouchMove'))
 	}

@@ -53,8 +53,8 @@ time.TimeString = Class(Component, function(supr) {
 	this._className = 'TimeString'
 	this._domTag = 'span'
 	
-	this.init = function(timestamp) {
-		supr(this, 'init')
+	this._initialize = function(timestamp) {
+		supr(this, '_initialize')
 		this._timestamp = timestamp
 	}
 	

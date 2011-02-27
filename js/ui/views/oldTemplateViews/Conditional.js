@@ -4,8 +4,8 @@ module.exports = Class(ValueView, function(supr){
 	
 	this._className += ' Conditional'
 	
-	this.init = function(args) {
-		supr(this, 'init', arguments)
+	this._initialize = function(args) {
+		supr(this, '_initialize', arguments)
 		
 		this._ifTrue = args[2]
 		this._ifFalse = args[3]

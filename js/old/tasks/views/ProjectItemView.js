@@ -14,8 +14,8 @@ module.exports = Class(fan.tasks.views.View, function(supr) {
 	this._minWidth = 350
 	this._maxWidth = 350
 	
-	this.init = function(itemId) {
-		supr(this, 'init')
+	this._initialize = function(itemId) {
+		supr(this, '_initialize')
 		this._itemId = itemId
 	}
 	

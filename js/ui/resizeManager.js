@@ -1,6 +1,6 @@
 module.exports = Class.Singleton(function(){
 	
-	this.init = function() {
+	this._initialize = function() {
 		this._resizeCallbacks = []
 		window.onresize = bind(this, '_onResize')
 		

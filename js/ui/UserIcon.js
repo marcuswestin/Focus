@@ -7,8 +7,8 @@ module.exports = Class(fan.ui.Component, function(supr) {
 	this._className = 'UserIcon'
 	this._domTag = 'span'
 	
-	this.init = function(userId) {
-		supr(this, 'init')
+	this._initialize = function(userId) {
+		supr(this, '_initialize')
 		this._userId = userId
 	}
 	

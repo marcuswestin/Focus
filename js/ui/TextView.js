@@ -4,8 +4,8 @@ module.exports = Class(Component, function(supr){
 	
 	this._className = 'TextView'
 	
-	this.init = function(property) {
-		supr(this, 'init')
+	this._initialize = function(property) {
+		supr(this, '_initialize')
 		this._property = property
 	}
 	

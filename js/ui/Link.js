@@ -5,8 +5,8 @@ module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Link'
 	
-	this.init = function(text) {
-		supr(this, 'init')
+	this._initialize = function(text) {
+		supr(this, '_initialize')
 		this._text = text
 	}
 	

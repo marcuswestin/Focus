@@ -6,8 +6,8 @@ module.exports = Class(Component, function(supr) {
 	this._className = 'Panel'
 	this._headerHeight = 40
 	
-	this.init = function() {
-		supr(this, 'init')
+	this._initialize = function() {
+		supr(this, '_initialize')
 		this._views = {}
 	}
 	

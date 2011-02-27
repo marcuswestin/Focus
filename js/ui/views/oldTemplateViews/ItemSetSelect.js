@@ -5,8 +5,8 @@ module.exports = Class(ValueView, function(supr){
 	this._className += ' ItemSetSelect'
 	
 	// (( ItemSetSelect type project title )) -> list of all items of type project, displayed by title
-	this.init = function(args) {
-		supr(this, 'init', [args])
+	this._initialize = function(args) {
+		supr(this, '_initialize', [args])
 		
 		var propertyValue = args[2],
 			displayProperty = args[3]

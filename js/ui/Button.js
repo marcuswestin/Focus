@@ -6,8 +6,8 @@ module.exports = Class(Component, function(supr) {
 	this._className = 'Button'
 	this._text = ''
 	
-	this.init = function(text, iconURL) {
-		supr(this, 'init')
+	this._initialize = function(text, iconURL) {
+		supr(this, '_initialize')
 		this.setText(text)
 		this.setIcon(iconURL)
 	}

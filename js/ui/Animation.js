@@ -2,7 +2,7 @@ jsio('from shared.javascript import Class, bind');
 
 module.exports = Class(function(){
 	
-	this.init = function(animateFn, duration) {
+	this._initialize = function(animateFn, duration) {
 		this._animateFn = animateFn;
 		this._delta = 30;
 		this._duration = duration || 500;

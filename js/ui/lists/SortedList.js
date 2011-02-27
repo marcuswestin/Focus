@@ -1,7 +1,7 @@
 var List = require('./List')
 
 var SortableItem = Class(function() {
-	this.init = function(id) { this._id = id }
+	this._initialize = function(id) { this._id = id }
 	this.getId = function() { return this._id }
 	this.toString = function() { 
 		var sortValue = (this._sortValue ? this._sortValue : 'zzz') + ':' + this._id // zzz is there to come last

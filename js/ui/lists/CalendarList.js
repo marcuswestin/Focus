@@ -6,8 +6,8 @@ module.exports = Class(fan.ui.lists.List, function(supr){
 	
 	this._className += ' CalendarList'
 	
-	this.init = function() {
-		supr(this, 'init', [bind(this, '_makeCell')])
+	this._initialize = function() {
+		supr(this, '_initialize', [bind(this, '_makeCell')])
 		this._groupsById = {}
 		this._groupByLabel = []
 		this._dateReleaseFn = {}

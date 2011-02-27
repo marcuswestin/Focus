@@ -5,8 +5,8 @@ module.exports = Class(Component, function(supr) {
 	this._domTag = 'textarea'
 	this._className = 'Input'
 	
-	this.init = function(defaultText, isPassword) {
-		supr(this, 'init')
+	this._initialize = function(defaultText, isPassword) {
+		supr(this, '_initialize')
 		this.setText(defaultText)
 		this._isPassword = isPassword
 		if (this._isPassword) {

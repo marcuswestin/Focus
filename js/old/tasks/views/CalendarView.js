@@ -17,8 +17,8 @@ module.exports = Class(View, function(supr) {
 		'Unscheduled': date.None
 	}
 	
-	this.init = function() {
-		supr(this, 'init')
+	this._initialize = function() {
+		supr(this, '_initialize')
 		this._list = new fan.ui.lists.CalendarList()
 			.subscribe('Click', gItemPanel, 'viewTask')
 	}

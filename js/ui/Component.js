@@ -8,8 +8,8 @@ module.exports = Class(Publisher, function(supr) {
 	this._domType = null
 	this._className = null
 	
-	this.init = function(domTag) {
-		supr(this, 'init')
+	this._initialize = function(domTag) {
+		supr(this, '_initialize')
 		if (domTag) { this._domTag = domTag }
 		this._finSubs = {}
 	}

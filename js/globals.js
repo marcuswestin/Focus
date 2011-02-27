@@ -20,7 +20,7 @@ global.Class = function(parent, proto) {
 	if(!proto) { proto = parent }
 	proto.prototype = parent.prototype
 	
-	var cls = function() { if(this.init) { this.init.apply(this, arguments) }}
+	var cls = function() { if(this._initialize) { this._initialize.apply(this, arguments) }}
 	cls.prototype = new proto(function(context, method, args) {
 		var target = parent
 		while(target = target.prototype) {

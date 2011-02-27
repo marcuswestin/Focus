@@ -14,8 +14,8 @@ module.exports = Class(View, function(supr) {
 	this._maxWidth = 740
 	this._headerHeight = 0
 	
-	this.init = function(itemId) {
-		supr(this, 'init')
+	this._initialize = function(itemId) {
+		supr(this, '_initialize')
 		this._itemId = itemId
 	}
 	

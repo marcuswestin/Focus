@@ -6,8 +6,8 @@ module.exports = Class(Component, function(supr) {
 	this._className = 'KeyboardFocus'
 	this._borderWidth = 7
 	
-	this.init = function() {
-		supr(this, 'init')
+	this._initialize = function() {
+		supr(this, '_initialize')
 		this._on(document, 'keydown', bind(this, '_onKeyDown'))
 		this._on(document, 'keyup', bind(this, '_onKeyUp'))
 		

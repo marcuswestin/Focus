@@ -4,8 +4,8 @@ module.exports = Class(Component, function(supr){
 	
 	this._className = 'List'
 	
-	this.init = function(makeCellFn) {
-		supr(this, 'init')
+	this._initialize = function(makeCellFn) {
+		supr(this, '_initialize')
 
 		this._makeCellFn = makeCellFn
 		this._cells = {}

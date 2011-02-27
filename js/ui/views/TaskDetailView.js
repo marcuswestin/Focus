@@ -6,8 +6,8 @@ module.exports = Class(View, function(supr) {
 	this._className += ' TaskDetailView'
 	this._headerHeight = 0
 	
-	this.init = function(task) {
-		supr(this, 'init')
+	this._initialize = function(task) {
+		supr(this, '_initialize')
 		this._task = task
 	}
 	

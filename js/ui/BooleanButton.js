@@ -2,8 +2,8 @@ var RadioButtons = require('./RadioButtons')
 
 module.exports = Class(RadioButtons, function(supr) {
 	
-	this.init = function(trueLabel, falseLabel) {
-		supr(this, 'init')
+	this._initialize = function(trueLabel, falseLabel) {
+		supr(this, '_initialize')
 		this._trueLabel = trueLabel
 		this._falseLabel = falseLabel
 	}

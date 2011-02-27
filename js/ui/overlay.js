@@ -5,8 +5,8 @@ module.exports = Class.Singleton(Component, function(supr) {
 	
 	this._className = 'Overlay'
 	
-	this.init = function() {
-		supr(this, 'init');
+	this._initialize = function() {
+		supr(this, '_initialize');
 		this._resizeCallback = bind(this, '_onWindowResize');
 	}
 	

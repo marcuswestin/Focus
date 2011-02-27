@@ -35,7 +35,7 @@ module.exports = Class(Component, function(supr){
 		this.unselect()
 		this._selectedElement = element
 		this.addClassName(this._selectedElement, 'selected')
-		this._publish('Click', item, element, delegateID)
+		this._publish('Select', item, element, delegateID)
 	}
 	
 	this.unselect = function() {

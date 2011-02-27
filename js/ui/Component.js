@@ -91,7 +91,11 @@ module.exports = Class(Publisher, function(supr) {
 			el = this.getElement()
 		}
 		var elStyle = el.style
-		for (var key in styleProps) { elStyle[key] = styleProps[key] }
+		for (var key in styleProps) {
+			var value = styleProps[key]
+			if (typeof value == 'number') { value += 'px' }
+			elStyle[key] = value
+		}
 		return this
 	}
 /***************************

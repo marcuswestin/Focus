@@ -15,7 +15,6 @@ fin.handle('authentication', function(data) {
 	reflectCurrentTaskInHash()
 	createPanels()
 	resizeManager.onResize(layoutPanels)
-	models.local.currentTaskID.observe(layoutPanels)
 })
 
 fin.connect()
@@ -28,7 +27,10 @@ function createPanels() {
 		center: new panels.CenterPanel(),
 		right: new panels.RightPanel()
 	}
-	util.each(global.panels, function(panel) { panel.appendTo(document.body) })
+	util.each(global.panels, function(panel) {
+		panel.appendTo(document.body)
+		panel.subscribe('NewView', this, layoutPanels)
+	})
 }
 
 function layoutPanels() {

@@ -31,5 +31,6 @@ module.exports = Class(Component, function(supr) {
 		var viewEl = view.getElement() // force _createContent
 		this._element.appendChild(viewEl) // TODO fade in
 		this._view = view
+		this._publish("NewView")
 	}
 })

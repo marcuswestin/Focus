@@ -5,15 +5,6 @@
 	.rounded4(0, 0, 0, 7); padding:2px 5px 3px; z-index:2; border:solid #d5d585; border-width:0 0 1px 1px; }
 .UserIcon img { background:url("img/user_icon.gif"); width:50px; height:50px; }
 .TimeString { font-size:12px; color:#666; }
-.withLabel { padding: 2px; position: relative; .gradient(#f4f4f4, #e4e4e4); 
-	.rounded4(0, 5px, 5px, 5px); border: 1px solid #ccc;
-		
-	label { position: absolute; top: -16px; left: -1px; .rounded4(3px, 3px, 0, 0); font-size: 11px;
-		border: 1px solid #ccc; border-bottom: none; .gradient(#ffffff, #f4f4f4); padding: 0 5px; }
-	.content { background: #fff; border: 1px solid #ccc; rounded: 3px;
-		padding: 2px 4px; }
-}
-
 
 /*****************************
  * Keyboard controlled focus *
@@ -50,32 +41,6 @@
 	}
 	.Button { position:absolute; bottom:3px; right:24px; }
 	.Link { position:absolute; bottom:8px; left:5px; }
-}
-
-/**********
- * Panels *
- **********/
-.Panel {
-	position:absolute; border:1px solid #aaa; top:10px;
-	.rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888);
-	
-	.View { overflow:hidden;
-		
-		.header { position:absolute; background-color:#fff; border:1px solid #aaa; .rounded4(6px, 6px, 0, 0);
-			
-			.title { margin:3px 0 0 7px; font-size:13px; font-weight:bold; color:#666; }
-		}
-		.body { position:absolute; border:1px solid #aaa; background:#fff; overflow-y:auto; overflow-x:hidden; .rounded4(0, 0, 6px, 6px);
-			
-			.left-column { float:left; width:340px; margin-bottom:10px; padding: 0 0 10px 10px; }
-			.right-column { float: right; padding: 0 10px 10px 0; }
-		}
-	}
-	.View.noHeader {
-		.header { display: none; }
-		.body { .rounded(6px); }
-	}
-	.View.narrow .body .right-column { float:none; padding-left: 10px; }
 }
 
 /*********************

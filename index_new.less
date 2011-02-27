@@ -35,7 +35,8 @@ body { .gradient(#fff, @backgroundGradient); height:100%; }
 /* Component
  ***********/
 .withLabel { padding: 2px; position: relative; .gradient(@labelGradient2, @labelGradient3); .rounded4(0, 5px, 5px, 5px); border: 1px solid #ccc; margin-top:18px;
-	label { position: absolute; top: -16px; left: -1px; .rounded4(3px, 3px, 0, 0); font-size: 11px; border: 1px solid #ccc; border-bottom: none; .gradient(@labelGradient1, @labelGradient2); padding: 0 5px; }
+	label { position: absolute; top: -14px; left: -1px; .rounded4(3px, 3px, 0, 0); font-size: 11px; border: 1px solid #ccc; border-bottom: none;
+		.gradient(@labelGradient1, @labelGradient2); padding: 0 5px; line-height:13px; }
 	.content { background: #fff; border: 1px solid #ccc; rounded: 3px; padding: 2px 4px; }
 }
 

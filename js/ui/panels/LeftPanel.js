@@ -1,28 +1,32 @@
 var Panel = require('./Panel'),
 	RadioButtons = require('../RadioButtons'),
-	_viewConstructors = {
-		"list": require('../views/TaskListView'),
-		"calendar": require('../views/View')
-	}
+	TaskListView = require('../views/TaskListView'),
+	View = require('../views/View')
 
 module.exports = Class(Panel, function(supr) {
 	
+	this._className += ' LeftPanel'
+	
 	this._createContent = function() {
-		this._apps = new RadioButtons()
-			.addButton('list')
-			.addButton('calendar')
-			// .addButton(this._getButton('projects'))
-			// .addButton(this._getButton('news'))
-			// .addButton(this._getButton('coworkers'))
-			// .addButton(this._getButton('accomplishments'))
+		function buttonInfo(name, Constructor) {
+			return { icon:'img/apps/'+name+'.png', name:name, Constructor:Constructor }
+		}
+		
+		new RadioButtons()
 			.appendTo(this)
+			.addClassName('ViewsToggle')
+			.addButton(buttonInfo('tasks', TaskListView))
+			.addButton(buttonInfo('calendar', View))
+			.addButton(buttonInfo('achievements', View))
+			.addButton(buttonInfo('coworkers', View))
 			.subscribe('Click', this, '_selectView')
 			.select(0)
 	}
 	
-	this._selectView = function(name) {
-		var views = this._views
-		if (!views[name]) { views[name] = new _viewConstructors[name]() }
+	this._selectView = function(payload) {
+		var name = payload.name,
+			views = this._views
+		if (!views[name]) { views[name] = new payload.Constructor() }
 		this._setView(views[name])
 	}
 	

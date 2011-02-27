@@ -7,19 +7,22 @@ module.exports = Class(Component, function(supr) {
 	this._createContent = function() {
 		this._delegateOn('click', bind(this, '_onDelegateClick'))
 		this._payloads = {}
-		this._payloadIndex = {}
+		// this._payloadIndex = {}
 		this._buttons = []
 	}
 	
 	this.addButton = function(props) {
 		var className = 'Button ' + (props.className ? ' ' + props.className : '')
-			el = this._create({ className:className, text:props.text || props, parent:this }),
+			el = this._create({ className:className, parent:this }),
 			delegateID = unique(),
 			buttons = this._buttons
 		
+		if (props.icon) { this._create({ tag:'img', src:props.icon, parent:el }) }
+		if (props.text) { this._create({ text:props.text, parent:el }) }
+		
 		this._makeUnselectable(el)
-		this._payloads[delegateID] = props.payload || props
-		this._payloadIndex[props.payload] = buttons.length
+		this._payloads[delegateID] = props
+		// this._payloadIndex[props.payload] = buttons.length
 		el.delegateID = delegateID
 		buttons.push(el)
 		buttons[delegateID] = el

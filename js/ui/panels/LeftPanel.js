@@ -1,6 +1,8 @@
-var Panel = require('./Panel'),
+var Component = require('../Component'),
+	Panel = require('./Panel'),
 	RadioButtons = require('../RadioButtons'),
-	TaskListView = require('../views/TaskListView'),
+	TasksListView = require('../views/TasksListView'),
+	TasksCalendarView = require('../views/TasksCalendarView'),
 	View = require('../views/View')
 
 module.exports = Class(Panel, function(supr) {
@@ -11,8 +13,8 @@ module.exports = Class(Panel, function(supr) {
 		new RadioButtons()
 			.appendTo(this)
 			.addClassName('ViewsToggle')
-			.addButton(buttonInfo('tasks', TaskListView))
-			.addButton(buttonInfo('calendar', View))
+			.addButton(buttonInfo('tasks', TasksListView))
+			.addButton(buttonInfo('calendar', TasksCalendarView))
 			.addButton(buttonInfo('news', View))
 			.addButton(buttonInfo('coworkers', View))
 			.addButton(buttonInfo('achievements', View))

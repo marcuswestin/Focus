@@ -2,6 +2,8 @@
 global.fin = require('../lib/fin/api/client')
 
 global.models = require('../lib/fin/api/models')
+var schema = require('./schema')
+global.models.process(schema)
 
 global.log = global.console ? function() { console.log.apply(console, arguments) } : function(){}
 

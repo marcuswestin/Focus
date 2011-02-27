@@ -45,6 +45,13 @@ body { .gradient(#fff, #e9e9f9); height:100%; }
 	display:inline-block; cursor:pointer; .rounded(5px); .gradient(#fff, #ddd); }
 .Button.down { .gradient(#ddd, #fff); }
 
+.RadioButtons { display:inline-block;
+	.Button { .rounded(0px); border-right-style:none; }
+	.Button.left { .rounded4(20px, 0, 0, 20px); }
+	.Button.right { .rounded4(0, 20px, 20px, 0); border-right-style:solid; }
+}
+
+
 /* TextView, TextInput, TextEditable
  ***********************************/
 .TextInput { padding:2px 3px; height:25px; font-family:arial,sans-serif; font-size:13px; }

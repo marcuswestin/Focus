@@ -10,14 +10,11 @@ module.exports = Class(Component, function(supr) {
 		this._views = {}
 	}
 	
-	this._createContent = function() {
-		resizeManager.onResize(bind(this, '_onWindowResize'))
-	}
-	
-	this._onWindowResize = function(winSize) {
-		var height = this._lastHeight = winSize.h - 25
-		this._element.style.height = height + 'px'
-		if (this._view) { this._view.setHeight(height) }
+	this.resize = function(availableWidth, height) {
+		if (!this._view) { return 0 }
+		var takenWidth = this._view.resize(availableWidth, height)
+		this.setStyle({ width:takenWidth, height:height })
+		return takenWidth
 	}
 	
 	this._setView = function(view) {
@@ -32,21 +29,7 @@ module.exports = Class(Component, function(supr) {
 			currentView.remove() // TODO fade
 		}
 		var viewEl = view.getElement() // force _createContent
-		view.setHeight(this._lastHeight)
 		this._element.appendChild(viewEl) // TODO fade in
 		this._view = view
-		this._resize()
-	}
-	
-	this._resize = function() {
-		var takenWidth = this._view.setWidth(this._lastMaxWidth)
-		this._element.style.width = takenWidth + 'px' // TODO animate resize
-		this._publish('Resize', takenWidth)
-		// gKeyboardFocus.updatePosition(false)
-	}
-	
-	this.handleKeyboardFocus = function(el) {
-		if (!this._view) { return }
-		this._view.handleKeyboardFocus(el)
 	}
 })

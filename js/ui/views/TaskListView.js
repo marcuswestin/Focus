@@ -15,7 +15,6 @@ module.exports = Class(View, function(supr) {
 		new List(function (task) { return new TextView(task.title) })
 			.reflect(global.user.tasks)
 			.appendTo(this._body)
-			.setStyle({ width: 300 })
 			.subscribe('Select', this, function(task) {
 				models.local.currentTaskID.set(task._id)
 			})

@@ -1,7 +1,18 @@
-var Panel = require('./Panel')
+var Panel = require('./Panel'),
+	TaskDetailView = require('../views/TaskDetailView')
 
 module.exports = Class(Panel, function(supr) {
 	
+	this._className += ' CenterPanel'
+	
+	this._createContent = function() {
+		models.local.currentTaskID.observe(bind(this, function(taskID) {
+			if (!taskID) { return }
+			var task = new models.Task(taskID),
+				view = new TaskDetailView(task)
+			this._setView(view)
+		}))
+	}
 })
 
 // var Panel = require('./Panel'),

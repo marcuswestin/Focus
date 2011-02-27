@@ -1,1 +1,4 @@
 TODO
+- Scroll bar. iPhone-ish. Hide on no scrolling.
+- Labels - for tasks, labels, people... Truncate text with ellipsis if > max width
+- Calendar view - 5 lists of task labels

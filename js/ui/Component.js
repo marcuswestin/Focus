@@ -35,6 +35,7 @@ module.exports = Class(Publisher, function(supr) {
 	}
 	
 	this.appendTo = function(element) {
+		if (element.getElement) { element = element.getElement() }
 		element.appendChild(this.getElement())
 		return this
 	}

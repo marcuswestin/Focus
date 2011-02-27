@@ -13,8 +13,9 @@ module.exports = Class(Panel, function(supr) {
 			.addClassName('ViewsToggle')
 			.addButton(buttonInfo('tasks', TaskListView))
 			.addButton(buttonInfo('calendar', View))
-			.addButton(buttonInfo('achievements', View))
+			.addButton(buttonInfo('news', View))
 			.addButton(buttonInfo('coworkers', View))
+			.addButton(buttonInfo('achievements', View))
 			.subscribe('Click', this, '_selectView')
 			.select(0)
 		

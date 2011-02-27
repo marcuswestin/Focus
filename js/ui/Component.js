@@ -88,7 +88,7 @@ module.exports = Class(Publisher, function(supr) {
 	this.setStyle = function(el, styleProps) {
 		if (!styleProps) {
 			styleProps = el
-			el = this._element
+			el = this.getElement()
 		}
 		var elStyle = el.style
 		for (var key in styleProps) { elStyle[key] = styleProps[key] }

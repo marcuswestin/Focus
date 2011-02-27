@@ -16,8 +16,10 @@ module.exports = Class(Component, function(supr){
 	
 	this.setValue = function(value) {
 		this._value = value || ''
-		value = value.toString().replace(/\n/g, '<br />')
-		value = value.replace(/ $/, '&nbsp;')
+		if (value) {
+			value = value.toString().replace(/\n/g, '<br />')
+			value = value.replace(/ $/, '&nbsp;')
+		}
 		this._content.innerHTML = value
 	}
 	

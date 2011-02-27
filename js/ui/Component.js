@@ -81,7 +81,7 @@ module.exports = Class(Publisher, function(supr) {
 		if (params.text) { el.appendChild(document.createTextNode(params.text)) }
 		if (params.type) { el.type = params.type }
 		if (params.style) { this.setStyle(el, params.style) }
-		if (params.parent) { params.parent.appendChild(el) }
+		if (params.parent) { (params.parent.getElement ? params.parent.getElement() : params.parent).appendChild(el) }
 		return el
 	}
 	

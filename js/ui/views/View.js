@@ -24,11 +24,14 @@ module.exports = Class(Component, function(supr) {
 	this._createContent = function() {
 		this._header = this._create({ className: 'header', parent: this._element })
 		this._body = this._create({ className: 'body', parent: this._element })
-		if (this._headerHeight) { this._buildHeader()
-		} else { this.addClassName('noHeader') }
-		this._buildBody()
-		this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition', true))
+		if (this._headerHeight) { this._createHeader() }
+		else { this.addClassName('noHeader') }
+		this._createBody()
+		// this._on(this._body, 'scroll', bind(gKeyboardFocus, 'updatePosition', true))
 	}
+	this._createHeader = function() {}
+	this._createBody = function() {}
+	
 	
 	this._resize = function() {
 		var border2 = this._border * (this._headerHeight ? 2 : 1),
@@ -42,8 +45,6 @@ module.exports = Class(Component, function(supr) {
 		this.layout(this._body, { y: top, x: this._padding, h: contentHeight, w: contentWidth })
 	}
 	
-	this._buildHeader = function() {}
-	this._buildBody = function() {}
 	this.release = function() { log("TODO: Implement View#release") }
 	
 	this.handleKeyboardFocus = function(el) {

@@ -1,8 +1,8 @@
 require('./globals')
 
-var Button = require('./ui/Button'),
-	List = require('./ui/lists/List'),
-	TextEditable = require('./ui/TextEditable')
+var util = require('../lib/fin/api/fin/util')
+
+var panels = require('./ui/panels')
 
 models.process({
 	"User": {
@@ -26,27 +26,21 @@ models.process({
 
 fin.handle('authenticate', function() {
 	fin.request('login', { uid:'marcus' })
-	
-	new Button('create new task')
-		.appendTo(document.body)
-		.subscribe('Click', this, function() {
-			var task = new models.Task({ title:"Task", owner:global.user }).create()
-			global.user.tasks.add(task)
-		})
 })
 
 fin.handle('authentication', function(data) {
 	if (!data.uid) { throw 'could not log in' }
 	global.user = new models.User(data.uid)
 	
-	function createTaskCell(task) {
-		return new TextEditable(task.title).getElement()
+	global.panels = {
+		left: new panels.LeftPanel(),
+		center: new panels.CenterPanel(),
+		right: new panels.RightPanel()
 	}
 	
-	var taskList = new List(createTaskCell)
-		.reflect(global.user.tasks)
-		.appendTo(document.body)
-		.setStyle({ width: 300 })
+	util.each(global.panels, function(panel) {
+		panel.appendTo(document.body);
+	})
 })
 
 fin.connect()

@@ -4,16 +4,20 @@ var Component = require('../../ui/Component'),
 module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Panel'
-	this._width = null // override
+	
+	this.init = function() {
+		supr(this, 'init')
+		this._views = {}
+	}
 	
 	this._createContent = function() {
-		resizeManager.addDependant(bind(this, '_onWindowResize'))
+		resizeManager.onResize(bind(this, '_onWindowResize'))
 	}
 	
 	this._onWindowResize = function(winSize) {
 		var height = this._lastHeight = winSize.h - 25
 		this._element.style.height = height + 'px'
-		if (this._currentView) { this._currentView.setHeight(height) }
+		if (this._view) { this._view.setHeight(height) }
 	}
 	
 	this._setView = function(view) {
@@ -22,7 +26,7 @@ module.exports = Class(Component, function(supr) {
 		// resize to new width
 		// 		remove current view
 		//		fade in new view
-		var currentView = this._currentView
+		var currentView = this._view
 		if (currentView) {
 			currentView.release()
 			currentView.remove() // TODO fade
@@ -30,19 +34,19 @@ module.exports = Class(Component, function(supr) {
 		var viewEl = view.getElement() // force _createContent
 		view.setHeight(this._lastHeight)
 		this._element.appendChild(viewEl) // TODO fade in
-		this._currentView = view
+		this._view = view
 		this._resize()
 	}
 	
 	this._resize = function() {
-		var takenWidth = this._currentView.setWidth(this._lastMaxWidth)
+		var takenWidth = this._view.setWidth(this._lastMaxWidth)
 		this._element.style.width = takenWidth + 'px' // TODO animate resize
 		this._publish('Resize', takenWidth)
-		gKeyboardFocus.updatePosition(false)
+		// gKeyboardFocus.updatePosition(false)
 	}
 	
 	this.handleKeyboardFocus = function(el) {
-		if (!this._currentView) { return }
-		this._currentView.handleKeyboardFocus(el)
+		if (!this._view) { return }
+		this._view.handleKeyboardFocus(el)
 	}
 })

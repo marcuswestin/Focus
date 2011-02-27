@@ -8,10 +8,6 @@ module.exports = Class(Panel, function(supr) {
 	this._className += ' LeftPanel'
 	
 	this._createContent = function() {
-		function buttonInfo(name, Constructor) {
-			return { icon:'img/apps/'+name+'.png', name:name, Constructor:Constructor }
-		}
-		
 		new RadioButtons()
 			.appendTo(this)
 			.addClassName('ViewsToggle')
@@ -21,6 +17,10 @@ module.exports = Class(Panel, function(supr) {
 			.addButton(buttonInfo('coworkers', View))
 			.subscribe('Click', this, '_selectView')
 			.select(0)
+		
+		function buttonInfo(name, Constructor) {
+			return { icon:'img/apps/'+name+'.png', name:name, Constructor:Constructor }
+		}
 	}
 	
 	this._selectView = function(payload) {

@@ -38,7 +38,7 @@ module.exports = Class(TextView, function(supr) {
 		supr(this, 'setValue', arguments)
 		
 		if (!value) {
-			this._content.innerHTML = 'Click to edit ' + this._property
+			this._content.innerHTML = 'Click to edit'
 			this.addClassName('defaultValue')
 		} else {
 			this.removeClassName('defaultValue')

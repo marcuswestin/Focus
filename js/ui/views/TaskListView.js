@@ -19,5 +19,9 @@ module.exports = Class(View, function(supr) {
 				models.local.currentTaskID.set(task._id)
 			})
 	}
-
+	
+	this._createTask = function() {
+		var task = new models.Task({ title:"I need to...", owner:global.user }).create()
+		global.user.tasks.add(task)
+	}
 })

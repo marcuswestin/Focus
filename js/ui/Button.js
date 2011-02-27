@@ -4,21 +4,35 @@ var Component = require('./Component')
 module.exports = Class(Component, function(supr) {
 	
 	this._className = 'Button'
+	this._text = ''
 	
-	this.init = function(text) {
+	this.init = function(text, iconURL) {
 		supr(this, 'init')
 		this.setText(text)
+		this.setIcon(iconURL)
 	}
 	
 	this.setText = function(text) {
 		this._text = text || this._text
-		if (this._element) { this._element.innerHTML = this._text }
+		if (!this._element) { return this }
+		if (!this._label) { this._label = this._create({ parent:this }) }
+		this._label.innerHTML = this._text
+		return this
+	}
+	
+	this.setIcon = function(iconURL) {
+		this._iconURL = iconURL || this._iconURL
+		if (!this._element) { return this }
+		if (!this._iconURL) { this.remove(this._icon) }
+		else if (this._icon) { this._icon.src = iconURL }
+		else { this._icon = this._create({ tag:'img', src:this._iconURL, parent:this }) }
 		return this
 	}
 	
 	this._createContent = function() {
 		this
 			.setText()
+			.setIcon()
 			._makeUnselectable()
 			._on('mousedown', bind(this, '_onMouseDown'))
 			._on('mouseup', bind(this, '_onMouseUp'))

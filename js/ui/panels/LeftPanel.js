@@ -7,10 +7,6 @@ module.exports = Class(Panel, function(supr) {
 	
 	this._className += ' LeftPanel'
 	
-	this.resize = function(availableWidth, height) {
-		return supr(this, 'resize', [availableWidth, height - this._headerHeight])
-	}
-	
 	this._createContent = function() {
 		new RadioButtons()
 			.appendTo(this)

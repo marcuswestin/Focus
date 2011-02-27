@@ -13,12 +13,12 @@ module.exports = Class(Component, function(supr) {
 	
 	this.addButton = function(props) {
 		var className = 'Button ' + (props.className ? ' ' + props.className : '')
-			el = this._create({ className: className, text: props.text, parent: this.getElement() }),
+			el = this._create({ className:className, text:props.text || props, parent:this }),
 			delegateID = unique(),
 			buttons = this._buttons
 		
 		this._makeUnselectable(el)
-		this._payloads[delegateID] = props.payload
+		this._payloads[delegateID] = props.payload || props
 		this._payloadIndex[props.payload] = buttons.length
 		el.delegateID = delegateID
 		buttons.push(el)

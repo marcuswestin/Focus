@@ -15,7 +15,7 @@ module.exports = Class.Singleton(function(){
 		}
 	}
 	
-	this.addDependant = function(callback) {
+	this.onResize = function(callback) {
 		this._resizeCallbacks.push(callback)
 		callback(this.getWindowSize())
 	}
@@ -46,7 +46,7 @@ module.exports = Class.Singleton(function(){
 		el.style.position = 'absolute'
 		el.innerHTML = "Don't Panic"
 		el.className = 'unselectable'
-		this.addDependant(function(winSize) {
+		this.onResize(function(winSize) {
 			var width = el.offsetWidth
 			var height = el.offsetHeight
 			el.style.right = ((winSize.w - 500) / 2) - (width / 2) + 'px' // in the middle on the right off of the panels

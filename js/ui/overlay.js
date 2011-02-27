@@ -26,7 +26,7 @@ module.exports = Class.Singleton(Component, function(supr) {
 		
 		underlay.style.opacity = dontLightbox ? .15 : .89;
 		document.body.appendChild(el)
-		resizeManager.addDependant(this._resizeCallback)
+		resizeManager.onResize(this._resizeCallback)
 		if (dontLightbox) { this._on(underlay, 'click', bind(this, 'hide')) }
 	}
 	

@@ -1,7 +1,7 @@
 @textColor: #333;
 @backgroundGradient: #e9e9f9;
 @labelGradient1: #fff; @labelGradient2: #f4f4f4; @labelGradient3: #e4e4e8;
-@panelBackground: #efefef;
+@panelGradient1: #fff; @panelGradient2: #ddd;
 @buttonColor:#fff; @buttonGradientUp:#dddddf; @buttonGradientDown: #d8d8dd;
 
 /* Reset 
@@ -80,11 +80,10 @@ body { .gradient(#fff, @backgroundGradient); height:100%; }
 /* Panels
  ********/
 .Panel {
-	background:@panelBackground;
 	position:absolute; top:10px;
-	/* border:1px solid #aaa; .rounded(10px); .gradient(#bbb, #ddd); .shadow(3px, 7px, 10px, #888); */
+	border:1px solid #aaa; .rounded(10px); .gradient(@panelGradient1, @panelGradient2); .shadow(3px, 7px, 10px, #888);
 	.View { position:absolute; overflow:hidden;
-		/* .body, .header { border:1px solid #aaa; }*/
+		 .body, .header { border:1px solid #aaa; }
 		.header { position:absolute; background-color:#fff; .rounded4(6px, 6px, 0, 0);
 			.title { margin:3px 0 0 7px; font-size:13px; font-weight:bold; color:#666; }
 		}

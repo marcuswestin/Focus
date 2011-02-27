@@ -35,7 +35,7 @@ function createPanels() {
 
 function layoutPanels() {
 	var winSize = resizeManager.getWindowSize(),
-		margin = 1,
+		margin = 10,
 		left = margin
 	util.each(global.panels, function(panel) {
 		panel.setStyle({ left:left, top:margin })

@@ -1,7 +1,7 @@
 var View = require('./View'),
 	Button = require('../Button'),
 	RadioButtons = require('../RadioButtons'),
-	List = require('../lists/List'),
+	SortedList = require('../lists/SortedList'),
 	TextView = require('../TextView')
 
 module.exports = Class(View, function(supr) {
@@ -9,8 +9,8 @@ module.exports = Class(View, function(supr) {
 	this._createHeader = function() {
 		new RadioButtons()
 			.addClassName('orderToggle')
-			.addButton({ text:'by date' })
 			.addButton({ text:'by project' })
+			.addButton({ text:'by date' })
 			.subscribe('Select', this, '_selectOrder')
 			.appendTo(this._header)
 			.select(0)
@@ -22,7 +22,7 @@ module.exports = Class(View, function(supr) {
 	}
 	
 	this._createBody = function() {
-		new List(function (task) { return new TextView(task.title) })
+		new SortedList(function (task) { return new TextView(task.title) })
 			.reflect(global.user.tasks)
 			.appendTo(this._body)
 			.subscribe('Select', this, function(task) {

@@ -15,17 +15,15 @@ module.exports = Class(List, function(supr){
 	
 	this._className += ' SortedList'
 	
-	this.reflectSortedSet = function(itemID, setPropertyName) {
-		this._itemID = itemID
-		this._propertyName = setPropertyName
-		return this
+	this._initialize = function() {
+		supr(this, '_initialize', arguments)
+		this._groupsById = {}
+		this._groupsByValue = {}
 	}
 	
 	this.groupBy = function(groupBy, displayProp) {
 		this._groupBy = groupBy
 		this._groupDisplayProp = displayProp
-		this._groupsById = {}
-		this._groupsByValue = {}
 		return this
 	}
 	
@@ -33,43 +31,29 @@ module.exports = Class(List, function(supr){
 		supr(this, '_createContent')
 		this._defaultGroup = this._createGroup()
 		this.addClassName(this._defaultGroup, 'default')
-		
-		this._queryId = fin.observeSet(this._itemID, this._propertyName, bind(this, '_onSetUpdated'))
 	}
 	
-	this._onSetUpdated = function(mutation) {
-		if (mutation.op == 'sadd') { this.addItems(mutation.args) }
-		if (mutation.op == 'srem') { this.removeItems(mutation.args) }
+	this._addItem = function(item) {
+		var sortableItem = new SortableItem(item._id)
+		if (this._sortBy) { item[this._sortBy].observe(bind(this, '_onSortPropChange', sortableItem)) }
+		if (this._groupBy) { item[this._sortBy].observe(bind(this, '_onGroupPropChange', sortableItem)) }
+		this._items.push(sortableItem)
 	}
 	
-	this._addItem = function(itemId) {
-		var item = new SortableItem(itemId)
-		if (this._sortBy) {
-			this._observe(itemId, this._sortBy, bind(this, '_onSortPropChange', itemId))
-		}
-		if (this._groupBy) {
-			this._observe(itemId, this._groupBy, bind(this, '_onGroupPropChange', itemId))
-		}
-		this._items.push(item)
-		this._itemsById[itemId] = item
-		return item
-	}
-	
-	this._removeItem = function(itemId, itemsIndex) {
+	this._removeItem = function(item, itemsIndex) {
 		supr(this, '_removeItem', arguments)
 		if (this._sortBy) { this._release(itemId, this._sortBy) }
 		if (this._groupBy) { this._release(itemId, this._groupBy) }
-		this._removeCellFromGroup(itemId)
+		this._removeCellFromGroup(item)
 	}
 	
-	this._onSortPropChange = function(itemId, op, value) {
-		this._itemsById[itemId].setSortValue(value)
+	this._onSortPropChange = function(sortableItem, value) {
+		sortableItem.setSortValue(value)
 		this._render()
 	}
 	
 	this._getParentFor = function(item) {
-		var itemID = this._getItemId(item),
-			group = this._groupsById && this._groupsById[itemID] || this._defaultGroup
+		var group = this._groupsById[item._id] || this._defaultGroup
 		return group.childNodes[1]
 	}
 	
@@ -78,9 +62,9 @@ module.exports = Class(List, function(supr){
 		supr(this, '_render')
 	})
 	
-	this._removeCellFromGroup = function(itemID) {
-		var group = this._groupsById[itemID],
-			cell = this._cells[itemID]
+	this._removeCellFromGroup = function(item) {
+		var group = this._groupsById[item._id],
+			cell = this._cells[item._id]
 		
 		if (!group || !cell) { return }
 		
@@ -91,12 +75,12 @@ module.exports = Class(List, function(supr){
 		}
 	}
 	
-	this._onGroupPropChange = function(itemId, op, itemGroup) {
+	this._onGroupPropChange = function(item, value) {
 		var groups = this._groupsByValue,
-			currentGroup = this._groupsById[itemId],
+			currentGroup = this._groupsById[item._id],
 			newGroup
 		
-		this._removeCellFromGroup(itemId)
+		this._removeCellFromGroup(item)
 		
 		newGroup = groups[itemGroup]
 		if (!itemGroup) { // was the item removed from a group?
@@ -111,7 +95,7 @@ module.exports = Class(List, function(supr){
 		
 		newGroup.style.display = 'block' // make sure we're showing current group
 		
-		this._groupsById[itemId] = newGroup
+		this._groupsById[item._id] = newGroup
 		this._render()
 	}
 	

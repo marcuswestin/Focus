@@ -49,7 +49,7 @@ module.exports = Class(Component, function(supr) {
 		fin.observe(itemId, property, bind(this, function(mutation, value) {
 			this.select(this._payloadIndex[value], true)
 		}))
-		this.subscribe('Click', this, function(value) {
+		this.subscribe('Select', this, function(value) {
 			fin.set(itemId, property, value)
 		})
 		return this
@@ -63,6 +63,6 @@ module.exports = Class(Component, function(supr) {
 		this.addClassName(newSelected, 'down')
 		this._selected = newSelected
 		
-		if (!silent) { this._publish('Click', this._payloads[delegateID]) }
+		if (!silent) { this._publish('Select', this._payloads[delegateID]) }
 	}
 })

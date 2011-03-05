@@ -1,12 +1,22 @@
 var View = require('./View'),
 	Button = require('../Button'),
+	RadioButtons = require('../RadioButtons'),
 	List = require('../lists/List'),
 	TextView = require('../TextView')
 
 module.exports = Class(View, function(supr) {
 	
 	this._createHeader = function() {
+		new RadioButtons()
+			.addClassName('orderToggle')
+			.addButton({ text:'by date' })
+			.addButton({ text:'by project' })
+			.subscribe('Select', this, '_selectOrder')
+			.appendTo(this._header)
+			.select(0)
+		
 		new Button('New Task')
+			.addClassName('createTaskButton')
 			.appendTo(this._header)
 			.subscribe('Click', this, '_createTask')
 	}
@@ -18,6 +28,10 @@ module.exports = Class(View, function(supr) {
 			.subscribe('Select', this, function(task) {
 				models.local.currentTaskID.set(task._id)
 			})
+	}
+	
+	this._selectOrder = function(order) {
+		console.log('_selectOrder', order)
 	}
 	
 	this._createTask = function() {

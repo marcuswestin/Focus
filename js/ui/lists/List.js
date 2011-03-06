@@ -16,10 +16,10 @@ module.exports = Class(Component, function(supr){
 	this.reflect = function(property) {
 		property.observe(bind(this, function(item, op) {
 			switch(op) {
-				case 'push':    this.addItem(item)
-				case 'unshift': this.addItem(item, true)
-				case 'sadd':    this.addItem(item)
-				case 'srem':    this.removeItem
+				case 'push':    this.addItem(item)       ;break
+				case 'unshift': this.addItem(item, true) ;break
+				case 'sadd':    this.addItem(item)       ;break
+				case 'srem':    this.removeItem(item)    ;break
 			}
 		}))
 		return this
